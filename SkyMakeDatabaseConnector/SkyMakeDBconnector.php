@@ -16,7 +16,7 @@ else {
     die("SKYMAKE-HANDLECONFCONNERROR \n deducated Corporation and Skyfallen \n All Rights Reserved \n Build Info:SkyMakeTWENTY20PreviewEditionBuild-127.0.0.1-HOSTAME:YIGIT'S MACBOOKPRO-SM6-MACHKERNEL-APPLEKERNELDETECTED!-MACOS LOCAL DEVELOPMENT-THROWN WHILE SkyMakeDatabaseConnector for MySQL Enchanced MySQLi WAS HANDLING SkyMake Database Connection-Config Connection Check failed-CHMOD PARENTDIR FAILED");
 }}
  if($connok){
-     $conn = mysqli_connect(dbHost, dbUser, dbPassword);
+     $conn = mysqli_connect(dbHost, dbUser, dbPassword, dbName;
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }

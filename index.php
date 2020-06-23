@@ -1,20 +1,30 @@
 <?php
-//(C) 2020 The Skyfallen Productions Company
+// (C) 2020 The Skyfallen Productions Company
 // SkyMake 2020 Edition Preview 1
 // Code By Yigit Kerem Oktay
 // June 20 Saturday 2020
 // 21.00
-// Source Code for SkyMake 2020 Edition Preview 1 : Begin
-// Initial Commit.
-// June 21 Sunday 2020
-// HTML Login Complete
-// Php starting to roll out.
+// Source Code for SkyMake 2020 Edition Preview 1 : Code Begins Here
+// Please Do not edit SkyMake Core Files
+// SkyMake Version 4
+// Intended to run on Apache 2.4
+// Code Syntax Checked
+
+
 if($_POST["skymake-un"] and $_POST["skymake-pw"]){
 include_once "SkyMakeDatabaseConnector/SkyMakeDBconnector.php";
     $username = $_POST["skymake-un"];
     $password = $_POST["skymake-pw"];
     $hashedpassword = password_hash($password, PASSWORD_DEFAULT);
-    SkyMakeDBExecute("INSERT INTO `SkyMake_noprfx_SysLog` (`LogID`, `LogApplication`, `LogApplicationDescription`, `LogData`) VALUES (NULL, 'SkyMakeLogin', 'SkyMakeLoginPasswordHasher-ServerTime-12.40-22June2020', 'PaswordHashingComplete')");
+    echo "Executing Query : "."INSERT INTO SkyMake_".dbPrefix."SysLog (`LogID`, `LogApplication`, `LogApplicationDescription`, `LogData`) VALUES (NULL, 'SkyMakeLogin', 'SkyMakeLoginPasswordHasher-ServerTime-12.40-22June2020', 'PaswordHashingComplete')";
+    if (mysqli_query($conn, "INSERT INTO SkyMake_".dbPrefix."SysLog (`LogID`, `LogApplication`, `LogApplicationDescription`, `LogData`) VALUES (NULL, 'SkyMakeLogin', 'SkyMakeLoginPasswordHasher-ServerTime-12.40-22June2020', 'PaswordHashingComplete')")) {
+        die("OK");
+    } else {
+        die("Error".mysqli_error($conn));
+        return "Error creating database: " . mysqli_error($conn);
+    }
+
+    mysqli_close($conn);
 }
 ?>
 <html>
