@@ -3,17 +3,6 @@ include_once "SkyMakeDBconfig.php";
 include_once "SkyMakeConfiguration.php";
 $connok = false;
 global $conn;
-function SkyMakeDBExecute($sqlstatement){
-    if ($sqlout = mysqli_query($conn, $sqlstatement)) {
-        die("OK");
-        return $sqlout;
-    } else {
-        die(mysqli_error($conn));
-        return "Error creating database: " . mysqli_error($conn);
-    }
-
-    mysqli_close($conn);
-}
 
 if(SkyMakeOnConfigConnect=="CONFCONNOK" and SkyMakeOnDBConfigConnect=="DBCONFCONNOK"){
     $connok = true;
@@ -32,3 +21,13 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
  }
+function SkyMakeDBExecute($sqlstatement){
+         if (mysqli_query($conn, $sqlstatement)) {
+             die("OK");
+         } else {
+             die("Error".mysqli_error($conn));
+             return "Error creating database: " . mysqli_error($conn);
+         }
+
+         mysqli_close($conn);
+}
