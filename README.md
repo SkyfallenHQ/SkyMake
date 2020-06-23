@@ -6,6 +6,10 @@ Other SkyMake Versions Available at thesf.me/l/SkyMake3/ /-/ theskyfallen.com/Sk
 Commits Till Now(Committed Daily):
 -Initial Release
 -Tuesday June 23rd
+
+# What is SkyMake?
+SkyMake is free and Open-Source Learning Management System that includes a Online Examination System, a Live Lesson System and many more features!
+
 # Legal Info
 The Skyfallen Foundation and The Skyfallen Company - (C) All Rights Reserved
 
