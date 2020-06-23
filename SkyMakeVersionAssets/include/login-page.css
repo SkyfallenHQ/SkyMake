@@ -1,0 +1,90 @@
+.footer{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background: lightgray;
+    text-align: left;
+    color: black;
+    width: 100%;
+    font-family: Helvetica;
+}
+.footer-logocontainer{
+    text-align: right;
+    animation: fadeInLogo ease 2s;
+}
+body {
+    background: black;
+}
+.loginform{
+    animation: fadeIn ease 2s;
+    color:whitesmoke;
+    margin: auto;
+    width: 300px;
+    background-color: #5e5e5e;
+    text-align: center;
+    border: 0.1px solid white;
+    border-radius: 15px;
+    font-family: Helvetica;
+    margin-top: 200px;
+}
+@keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+}
+@keyframes fadeInLogo {
+    0% {opacity:0; padding-right: 50px;}
+    100% {opacity:1; padding-right: 0px;}
+}
+@keyframes fadeInInput1 {
+    0% {opacity:0;}
+    75% {opacity:0;margin-top: 0px;}
+    100% {opacity:1; margin-top: 10px;}
+}
+@keyframes fadeInInput2 {
+    0% {opacity:0;}
+    75% {opacity:0;margin-top: 0px;}
+    100% {opacity:1; margin-top: 10px;}
+}
+@keyframes fadeInButton1 {
+    0% {opacity:0;}
+    80% {opacity:0;margin-top: 0px;}
+    100% {opacity:1; margin-top: 10px;}
+}
+.loginform-username{
+    animation: fadeInInput1 ease 3s;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 30px;
+    width:250px;
+    font-size: 20px;
+    border: 1px solid white;
+    border-radius: 15px;
+    padding-left: 6px;
+}
+.loginform-password{
+    animation: fadeInInput2 ease 4s;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    height: 30px;
+    width:250px;
+    font-size: 20px;
+    border: 1px solid white;
+    border-radius: 15px;
+    padding-left: 6px;
+}
+.loginform-submit{
+    animation: fadeInButton1 ease 5s;
+    color:whitesmoke;
+    background-color: black;
+    margin-top: 10px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border: 2px solid darkgray;
+    border-radius: 4px 4px 4px 4px;
+}
+.background-div{
+    width: 100%;
+    height: 100%;
+}
