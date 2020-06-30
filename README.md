@@ -32,10 +32,11 @@ Your Privacy is important to us: All Applications Subject to The Skyfallen Priva
 Skyfallen Common Frameworks and Common Code : commoncode.theskyfallen.com/SkyMake/v4/Beta/frameworks/
 
 # Open Source @ Skyfallen
-theskyfallen.com/opensource/ref/skymakegithubrepo
+https://opensource.theskyfallen.com/
+
 
 # Skyfallen Open Source Licence
-thesf.me/licence/skymake/
+https://opensource.theskyfallen.com/licence
 
 # Compiled on:
 i5-7200U - 4GB Ram - Hackintosh 10.15
