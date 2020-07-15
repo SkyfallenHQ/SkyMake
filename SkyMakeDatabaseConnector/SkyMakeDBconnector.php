@@ -1,4 +1,6 @@
 <?php
+die("This file is deprecated. Please check documentation at opensource.theskyfallen.com/skymake/v4/docs");
+//this file is deprecated.
 include_once "SkyMakeDBconfig.php";
 include_once "SkyMakeConfiguration.php";
 $connok = false;

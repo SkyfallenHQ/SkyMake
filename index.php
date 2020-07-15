@@ -10,27 +10,210 @@
 // Intended to run on Apache 2.4
 // Code Syntax Checked
 
-
-if($_POST["skymake-un"] and $_POST["skymake-pw"]){
-include_once "SkyMakeDatabaseConnector/SkyMakeDBconnector.php";
-    $username = $_POST["skymake-un"];
-    $password = $_POST["skymake-pw"];
-    $hashedpassword = password_hash($password, PASSWORD_DEFAULT);
-    echo "Executing Query : "."INSERT INTO SkyMake_".dbPrefix."SysLog (`LogID`, `LogApplication`, `LogApplicationDescription`, `LogData`) VALUES (NULL, 'SkyMakeLogin', 'SkyMakeLoginPasswordHasher-ServerTime-12.40-22June2020', 'PaswordHashingComplete')";
-    if (mysqli_query($conn, "INSERT INTO SkyMake_".dbPrefix."SysLog (`LogID`, `LogApplication`, `LogApplicationDescription`, `LogData`) VALUES (NULL, 'SkyMakeLogin', 'SkyMakeLoginPasswordHasher-ServerTime-12.40-22June2020', 'PaswordHashingComplete')")) {
-        die("OK");
-    } else {
-        die("Error".mysqli_error($conn));
-        return "Error creating database: " . mysqli_error($conn);
+//Include config file
+include_once "SkyMakeDatabaseConnector/SkyMakeDBconfig.php";
+// Check if act is equal to signup
+if($_GET["act"] == "signup"){
+    //if so set optget to signup
+    $optget = "signup";
+}else{
+  $optget = "signin";
+}
+// Initialize the session
+session_start();
+// check if this is sign in
+if($optget =! "signup") {
+// Check if the user is already logged in, if yes then redirect him to user page
+    if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
+        //this is not yet ready
+        die("Already logged in.");
     }
 
-    mysqli_close($conn);
+// Define variables and initialize with empty values
+    $username = $password = "";
+    $username_err = $password_err = "";
+
+// Processing form data when form is submitted
+// Any post request will trigger including ones that does not carry our password and username
+// Will be changed in future builds
+// check if this is sign in
+    if ($optget = !"signup") {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+            // Check if username is empty
+            if (empty(trim($_POST["skymake-un"]))) {
+                // Add this error under username box.
+                $username_err = "Please enter username.";
+            } else {
+                $username = trim($_POST["skymake-un"]);
+            }
+
+            // Check if password is empty
+            if (empty(trim($_POST["skymake-pw"]))) {
+                // Add this error under password.
+                $password_err = "Please enter your password.";
+            } else {
+                $password = trim($_POST["skymake-pw"]);
+            }
+
+            // Validate credentials
+            if (empty($username_err) && empty($password_err)) {
+                // Prepare a select statement
+                $sql = "SELECT id, username, password FROM skymake_users WHERE username = ?";
+
+                if ($stmt = mysqli_prepare($link, $sql)) {
+                    // Bind variables to the prepared statement as parameters
+                    mysqli_stmt_bind_param($stmt, "s", $param_username);
+
+                    // Set parameters
+                    $param_username = $username;
+
+                    // Attempt to execute the prepared statement
+                    if (mysqli_stmt_execute($stmt)) {
+                        // Store result
+                        mysqli_stmt_store_result($stmt);
+
+                        // Check if username exists, if yes then verify password
+                        if (mysqli_stmt_num_rows($stmt) == 1) {
+                            // Bind result variables
+                            mysqli_stmt_bind_result($stmt, $id, $username, $hashed_password);
+                            if (mysqli_stmt_fetch($stmt)) {
+                                if (password_verify($password, $hashed_password)) {
+                                    // Password is correct, so start a new session
+                                    session_start();
+
+                                    // Store data in session variables
+                                    $_SESSION["loggedin"] = true;
+                                    $_SESSION["id"] = $id;
+                                    $_SESSION["username"] = $username;
+
+                                    // Redirect user to welcome page
+                                    // Not yet ready
+                                    // Logged in successfully.
+                                    die("Logged in successfully.");
+                                } else {
+                                    // Display an error message if password is not valid
+                                    $password_err = "The password you entered was not valid.";
+                                }
+                            }
+                        } else {
+                            // Display an error message if username doesn't exist
+                            $username_err = "No account found with that username.";
+                        }
+                    } else {
+                        // ANY OTHER ERROR - Will need an update in a future build.
+                        echo "Oops! Something went wrong. Please try again later.";
+                    }
+
+                    // Close statement
+                    mysqli_stmt_close($stmt);
+                }
+            }
+
+            // Close connection
+            mysqli_close($link);
+        }
+    } else {
+        // Define variables and initialize with empty values
+        $username = $password = $confirm_password = "";
+        $username_err = $password_err = $confirm_password_err = "";
+
+// Processing form data when form is submitted
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+            // Validate username
+            if (empty(trim($_POST["skymake-un"]))) {
+                $username_err = "Please enter a username.";
+            } else {
+                // Prepare a select statement
+                $sql = "SELECT id FROM skymake_users WHERE username = ?";
+
+                if ($stmt = mysqli_prepare($link, $sql)) {
+                    // Bind variables to the prepared statement as parameters
+                    mysqli_stmt_bind_param($stmt, "s", $param_username);
+
+                    // Set parameters
+                    $param_username = trim($_POST["skymake-un"]);
+
+                    // Attempt to execute the prepared statement
+                    if (mysqli_stmt_execute($stmt)) {
+                        /* store result */
+                        mysqli_stmt_store_result($stmt);
+
+                        if (mysqli_stmt_num_rows($stmt) == 1) {
+                            $username_err = "This username is already taken.";
+                        } else {
+                            $username = trim($_POST["skymake-un"]);
+                        }
+                    } else {
+                        echo "Oops! Something went wrong. Please try again later.";
+                    }
+
+                    // Close statement
+                    mysqli_stmt_close($stmt);
+                }
+            }
+
+            // Validate password
+            if (empty(trim($_POST["skymake-pw"]))) {
+                $password_err = "Please enter a password.";
+            } elseif (strlen(trim($_POST["skymake-pw"])) < 6) {
+                $password_err = "Password must have atleast 6 characters.";
+            } else {
+                $password = trim($_POST["skymake-pw"]);
+            }
+
+            // Validate confirm password
+            if (empty(trim($_POST["skymake-pwconfirm"]))) {
+                $confirm_password_err = "Please confirm password.";
+            } else {
+                $confirm_password = trim($_POST["skymake-pwconfirm"]);
+                if (empty($password_err) && ($password != $confirm_password)) {
+                    $confirm_password_err = "Password did not match.";
+                }
+            }
+
+            // Check input errors before inserting in database
+            if (empty($username_err) && empty($password_err) && empty($confirm_password_err)) {
+
+                // Prepare an insert statement
+                $sql = "INSERT INTO skymake_users (username, password) VALUES (?, ?)";
+
+                if ($stmt = mysqli_prepare($link, $sql)) {
+                    // Bind variables to the prepared statement as parameters
+                    mysqli_stmt_bind_param($stmt, "ss", $param_username, $param_password);
+
+                    // Set parameters
+                    $param_username = $username;
+                    $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
+
+                    // Attempt to execute the prepared statement
+                    if (mysqli_stmt_execute($stmt)) {
+                        // Redirect to login page
+                        header("location: /?act=signin");
+                    } else {
+                        echo "Something went wrong. Please try again later.";
+                    }
+
+                    // Close statement
+                    mysqli_stmt_close($stmt);
+                }
+            }
+
+            // Close connection
+            mysqli_close($link);
+        }
+    }
 }
 ?>
 <html>
 <head>
     <link type="text/css" rel="stylesheet" href="SkyMakeVersionAssets/include/login-page.css">
-    <title>Sign in - Skyfallen:SkyMake</title>
+    <title><?php if($optget == "signin"){
+        echo "Sign in";
+        } else {
+        echo "Sign up";
+        }?> - Skyfallen:SkyMake</title>
 </head>
 <body style="background-image: url('/SkyMakeVersionAssets/include/img/loginbackground.jpg')">
 <div class="background-div">
@@ -38,13 +221,22 @@ include_once "SkyMakeDatabaseConnector/SkyMakeDBconnector.php";
     <form method="post">
         <h3>Sign in to SkyMake</h3>
         <input class="loginform-username" name="skymake-un" placeholder="Username"><br>
+        <?php echo $username_err;?><br>
         <input class="loginform-password" type="password" name="skymake-pw" placeholder="Password"><br>
-        <input class="loginform-submit" style="margin-bottom: 20px;" type="submit" value="Sign in">
+        <?php echo $password_err;?><br>
+        <?php if($optget == "signup"){
+            echo "<input class=\"loginform-password\" type=\"password\" name=\"skymake-pwconfirm\" placeholder=\"Confirm Password\"><br>";
+        } echo $confirm_password_err;?><br>
+        <input class="loginform-submit" style="margin-bottom: 20px;" type="submit" value="<?php if($optget == "signin"){
+            echo "Sign in";
+        } else {
+            echo "Sign up";
+        }?>">
     </form>
 </div>
     <div class="footer">
         <div class="footer-logocontainer">
-            <img src="SkyMakeVersionAssets/logo/SkyMakeLogo.png" height="30" style="padding-top: 5px; padding-bottom: 5px;">
+            <img src="SkyMakeVersionAssets/logo/SkyfallenLogoRB.png" height="30" style="padding-top: 5px; padding-bottom: 5px;">
         </div>
     </div>
 </div>
