@@ -1,5 +1,5 @@
 <?php 
-function singlewidget($lesson,$teacher,$time,$topic,$unit,$backgorundimage){
+function singlewidget($lesson,$teacher,$time,$topic,$unit,$backgorundimage,$lessonid){
 return "<!--End single SkyMake Widget-->
 <div class=\"container centered-container\">
   <div class=\"row\">
@@ -31,7 +31,7 @@ return "<!--End single SkyMake Widget-->
 			  <li>
 				<span class=\"date\">".$topic."</span>
 				<span class=\"lnr lnr-cloud condition\">
-				  <span class=\"temp\">Unit <span class=\"temp-type\">".$unit."</span></span>
+				  <span class=\"temp\"><a href='/lesson/".$lessonid."'>Visit lesson</a></span>
 				</span>
 			  </li>
 			</ul>
@@ -43,7 +43,7 @@ return "<!--End single SkyMake Widget-->
 </div>
 <!--End single SkyMake Widget-->";
 }
-function doublewidget($lesson,$teacher,$time,$topic,$unit,$backgorundimage,$lesson1,$teacher1,$time1,$topic1,$unit1,$backgorundimage1){
+function doublewidget($lesson,$teacher,$time,$topic,$unit,$backgorundimage,$lessonid,$lesson1,$teacher1,$time1,$topic1,$unit1,$backgorundimage1,$lessonid1){
  return "<!--Begin double SkyMake Widgets-->
  <div class=\"container\">
 	 <div class=\"row\">
@@ -75,7 +75,7 @@ function doublewidget($lesson,$teacher,$time,$topic,$unit,$backgorundimage,$less
 							 <li>
 								 <span class=\"date\">".$topic."</span>
 								 <span class=\"lnr lnr-cloud condition\">
-									 <span class=\"temp\">Unit <span class=\"temp-type\">".$unit."</span></span>
+									 <span class=\"temp\"><a href='/lesson/".$lessonid."'>Visit lesson</a></span>
 								 </span>
 							 </li>
 						 </ul>
@@ -111,13 +111,16 @@ function doublewidget($lesson,$teacher,$time,$topic,$unit,$backgorundimage,$less
 							 <li>
 								 <span class=\"date\">".$topic1."</span>
 								 <span class=\"lnr lnr-cloud condition\">
-									 <span class=\"temp\">Unit <span class=\"temp-type\">".$unit1."</span></span>
+									 <span class=\"temp\"><a href='/lesson/".$lessonid1."'>Visit lesson</a></span>
 								 </span>
 								 </li>
 							 </ul>
 						 </div>
-					 </div>
-				 </div>
+		               </div>
+	                 </div>
+	               </div>
+                  </div>
+                 </div>
 		   <!--End double SkyMake Widgets-->";
 }
 ?>
@@ -128,11 +131,11 @@ function doublewidget($lesson,$teacher,$time,$topic,$unit,$backgorundimage,$less
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Skyfallen:SkyMake - Platform</title>
-    <link rel="stylesheet" href="nps/widgets/assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="nps/widgets/assets/fonts/font-awesome.min.css">
-    <link rel="stylesheet" href="nps/widgets/assets/css/Animated-Type-Heading.css">
-    <link rel="stylesheet" href="nps/widgets/assets/css/styles.css">
-    <link rel="stylesheet" href="nps/widgets/assets/css/Widgets.css">
+    <link rel="stylesheet" href="/nps/widgets/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/nps/widgets/assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="/nps/widgets/assets/css/Animated-Type-Heading.css">
+    <link rel="stylesheet" href="/nps/widgets/assets/css/styles.css">
+    <link rel="stylesheet" href="/nps/widgets/assets/css/Widgets.css">
 </head>
 
 <body>
@@ -140,7 +143,7 @@ function doublewidget($lesson,$teacher,$time,$topic,$unit,$backgorundimage,$less
         <div class="container"><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="nav navbar-nav flex-grow-1 justify-content-between">
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="#"><img src="nps/widgets/assets/img/SkyfallenLogoSmallWhiteOnly.png" height="20"></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="#"><img src="/nps/widgets/assets/img/SkyfallenLogoSmallWhiteOnly.png" height="20"></a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/course">Courses</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/dash">Dashboard</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/oes">Online Examination</a></li>
@@ -153,16 +156,7 @@ function doublewidget($lesson,$teacher,$time,$topic,$unit,$backgorundimage,$less
                 </ul>
             </div>
         </div>
-    </nav>				<div class="caption v-middle text-center">
-					<h1 class="cd-headline clip">
-			            <span class="blc">Welcome to the new dashboard, <?php echo($_SESSION["username"]);?></span><br>
-			            <span class="cd-words-wrapper">
-			              <b class="is-visible">Here are your courses.</b>
-			              <b>Here are your grades.</b>
-			              <b>Here are your online exams.</b>
-			            </span>
-	          		</h1>
-				</div>
+    </nav>			
 				  <?php  //echo(doublewidget("Geography","The Teacher","18.00","Earth","9","https://kaleela.com/wp-content/uploads/2019/08/Geography-Terms-In-Arabic-Language.jpg","Maths","Your Teacher","19.00","Multiplication","5","https://d2r55xnwy6nx47.cloudfront.net/uploads/2019/09/Multiplication_1200_Social.jpg"));
 				  ?>
 				  <?php  //echo(singlewidget("Maths","Your Teacher","19.00","Multiplication","5","https://d2r55xnwy6nx47.cloudfront.net/uploads/2019/09/Multiplication_1200_Social.jpg"));

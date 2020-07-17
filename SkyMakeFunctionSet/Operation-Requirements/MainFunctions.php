@@ -14,6 +14,14 @@ function SkyMakePOSTrequest($url,$key1,$value1,$key2,$value2){
 
     var_dump($result);
 }
+function is_odd($number){ 
+    if($number % 2 == 0){ 
+        return false;  
+    } 
+    else{ 
+        return true; 
+    } 
+} 
 function getassignedlessons($link){
     $sql = "SELECT * FROM skymake_assignments WHERE studentusername='".$_SESSION["username"]."'";
     if($result = mysqli_query($link, $sql)){
@@ -121,6 +129,26 @@ function getassignedbgurls($link){
             $retarr = array();
             while($row = mysqli_fetch_array($result)){
                 array_push( $retarr,$row['bgurl']);
+            }
+            mysqli_free_result($result);
+        } else{
+            return "none";
+        }
+    } else{
+        echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+    }
+
+// Close connection
+    return $retarr;
+    mysqli_close($link);
+}
+function getassignedids($link){
+    $sql = "SELECT * FROM skymake_assignments WHERE studentusername='".$_SESSION["username"]."'";
+    if($result = mysqli_query($link, $sql)){
+        if(mysqli_num_rows($result) > 0){
+            $retarr = array();
+            while($row = mysqli_fetch_array($result)){
+                array_push( $retarr,$row['lessonid']);
             }
             mysqli_free_result($result);
         } else{
