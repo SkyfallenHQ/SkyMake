@@ -167,9 +167,3 @@ function doublewidget($lesson,$teacher,$time,$topic,$unit,$backgorundimage,$less
 				  ?>
 				  <?php  //echo(singlewidget("Maths","Your Teacher","19.00","Multiplication","5","https://d2r55xnwy6nx47.cloudfront.net/uploads/2019/09/Multiplication_1200_Social.jpg"));
 				  ?>
-    <script src="nps/widgets/assets/js/jquery.min.js"></script>
-    <script src="nps/widgets/assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="nps/widgets/assets/js/Animated-Type-Heading.js"></script>
-</body>
-
-</html>
