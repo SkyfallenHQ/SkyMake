@@ -88,3 +88,10 @@ body {
     width: 100%;
     height: 100%;
 }
+.actswitch{
+    animation: fadeInButton1 ease 5s;
+    color: black;
+}
+.actswitch:hover{
+    color:darkgray;
+}

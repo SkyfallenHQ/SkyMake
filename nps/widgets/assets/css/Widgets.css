@@ -1,0 +1,172 @@
+.lesson-card {
+  margin: 60px auto;
+  height: 740px;
+  width: 450px;
+  background: #fff;
+  box-shadow: 0 1px 38px rgba(0, 0, 0, 0.15), 0 5px 12px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+
+.lesson-card .top {
+  position: relative;
+  height: 570px;
+  width: 100%;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center center;
+  text-align: center;
+}
+
+.lesson-card .top .wrapper {
+  padding: 30px;
+  position: relative;
+  z-index: 1;
+}
+
+.lesson .top .wrapper .mynav {
+  height: 20px;
+}
+
+.lesson-card .top .wrapper .mynav .lnr {
+  color: #fff;
+  font-size: 20px;
+}
+
+.lesson-card .top .wrapper .mynav .lnr-chevron-left {
+  display: inline-block;
+  float: left;
+}
+
+.lesson-card .top .wrapper .mynav .lnr-cog {
+  display: inline-block;
+  float: right;
+}
+
+.lesson-card .top .wrapper .heading {
+  margin-top: 20px;
+  font-size: 35px;
+  font-weight: 400;
+  color: #fff;
+}
+
+.lesson-card .top .wrapper .location {
+  margin-top: 20px;
+  font-size: 21px;
+  font-weight: 400;
+  color: #fff;
+}
+
+.lesson-card .top .wrapper .temp {
+  margin-top: 20px;
+}
+
+.lesson-card .top .wrapper .temp a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.lesson-card .top .wrapper .temp a .temp-type {
+  font-size: 85px;
+}
+
+.lesson-card .top .wrapper .temp .temp-value {
+  display: inline-block;
+  font-size: 85px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.lesson-card .top .wrapper .temp .deg {
+  display: inline-block;
+  font-size: 35px;
+  font-weight: 600;
+  color: #fff;
+  vertical-align: top;
+  margin-top: 10px;
+}
+
+.lesson-card .top:after {
+  content: "";
+  height: 100%;
+  width: 100%;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.lesson-card .bottom {
+  padding: 0 30px;
+  background: #fff;
+}
+
+.lesson-card .bottom .wrapper .forecast {
+  overflow: hidden;
+  margin: 0;
+  font-size: 0;
+  padding: 0;
+  padding-top: 20px;
+  max-height: 155px;
+}
+
+.lesson-card .bottom .wrapper .forecast a {
+  text-decoration: none;
+  color: #000;
+}
+
+.lesson-card .bottom .wrapper .forecast .go-up {
+  text-align: center;
+  display: block;
+  font-size: 25px;
+  margin-bottom: 10px;
+}
+
+.lesson-card .bottom .wrapper .forecast li {
+  display: block;
+  font-size: 25px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.25);
+  line-height: 1em;
+  margin-bottom: 30px;
+}
+
+.lesson-card .bottom .wrapper .forecast li .date {
+  display: inline-block;
+}
+
+.lesson-card .bottom .wrapper .forecast li .condition {
+  display: inline-block;
+  vertical-align: middle;
+  float: right;
+  font-size: 25px;
+}
+
+.lesson-card .bottom .wrapper .forecast li .condition .temp {
+  display: inline-block;
+  vertical-align: top;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  padding-top: 2px;
+}
+
+.lesson-card .bottom .wrapper .forecast li .condition .temp .deg {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  margin-left: 3px;
+  vertical-align: top;
+}
+
+.lesson-card .bottom .wrapper .forecast li .condition .temp .temp-type {
+  font-size: 20px;
+}
+
+.weather-card .bottom .wrapper .forecast li.active {
+  color: rgba(0, 0, 0, 0.8);
+}
+.centered-container{
+  margin-left: auto;
+  margin-right: auto;
+}

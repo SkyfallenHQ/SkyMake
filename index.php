@@ -7,8 +7,8 @@
 // Source Code for SkyMake 2020 Edition Preview 1 : Code Begins Here
 // Please Do not edit SkyMake Core Files
 // SkyMake Version 4
-// Intended to run on Apache 2.4
-// Code Syntax Checked
+// Intended to run on Apache 2 with PHP 7 and above.
+// No deprecated functions are used so it will probably be compatible with a few next major release of PHP.
 
 //Include config file
 include_once "SkyMakeDatabaseConnector/SkyMakeDBconfig.php";
@@ -22,13 +22,13 @@ if($_GET["act"] == "signup"){
 // Initialize the session
 session_start();
 // check if this is sign in
-if($optget =! "signup") {
+if($optget != "signup") {
 // Check if the user is already logged in, if yes then redirect him to user page
     if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
         //this is not yet ready
-        die("Already logged in.");
+        header("Location: /home");
     }
-
+    $confirm_password_err = "";
 // Define variables and initialize with empty values
     $username = $password = "";
     $username_err = $password_err = "";
@@ -37,7 +37,7 @@ if($optget =! "signup") {
 // Any post request will trigger including ones that does not carry our password and username
 // Will be changed in future builds
 // check if this is sign in
-    if ($optget = !"signup") {
+    if ($optget != "signup") {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             // Check if username is empty
@@ -88,9 +88,8 @@ if($optget =! "signup") {
                                     $_SESSION["username"] = $username;
 
                                     // Redirect user to welcome page
-                                    // Not yet ready
                                     // Logged in successfully.
-                                    die("Logged in successfully.");
+                                    header("Location: /home");
                                 } else {
                                     // Display an error message if password is not valid
                                     $password_err = "The password you entered was not valid.";
@@ -102,7 +101,7 @@ if($optget =! "signup") {
                         }
                     } else {
                         // ANY OTHER ERROR - Will need an update in a future build.
-                        echo "Oops! Something went wrong. Please try again later.";
+                        die("Oops! Something went wrong. Please try again later.");
                     }
 
                     // Close statement
@@ -113,7 +112,9 @@ if($optget =! "signup") {
             // Close connection
             mysqli_close($link);
         }
-    } else {
+    }
+}
+    if($optget == "signup"){
         // Define variables and initialize with empty values
         $username = $password = $confirm_password = "";
         $username_err = $password_err = $confirm_password_err = "";
@@ -137,7 +138,7 @@ if($optget =! "signup") {
 
                     // Attempt to execute the prepared statement
                     if (mysqli_stmt_execute($stmt)) {
-                        /* store result */
+                        // store result
                         mysqli_stmt_store_result($stmt);
 
                         if (mysqli_stmt_num_rows($stmt) == 1) {
@@ -146,7 +147,7 @@ if($optget =! "signup") {
                             $username = trim($_POST["skymake-un"]);
                         }
                     } else {
-                        echo "Oops! Something went wrong. Please try again later.";
+                        die("Oops! Something went wrong. Please try again later.");
                     }
 
                     // Close statement
@@ -192,7 +193,7 @@ if($optget =! "signup") {
                         // Redirect to login page
                         header("location: /?act=signin");
                     } else {
-                        echo "Something went wrong. Please try again later.";
+                        die("Something went wrong. Please try again later.");
                     }
 
                     // Close statement
@@ -204,7 +205,7 @@ if($optget =! "signup") {
             mysqli_close($link);
         }
     }
-}
+
 ?>
 <html>
 <head>
@@ -213,25 +214,34 @@ if($optget =! "signup") {
         echo "Sign in";
         } else {
         echo "Sign up";
-        }?> - Skyfallen:SkyMake</title>
+        } ?> - Skyfallen:SkyMake</title>
 </head>
 <body style="background-image: url('/SkyMakeVersionAssets/include/img/loginbackground.jpg')">
 <div class="background-div">
 <div class="loginform">
     <form method="post">
-        <h3>Sign in to SkyMake</h3>
+        <h3><?php if($optget == "signin"){
+                echo "Sign in";
+            } else {
+                echo "Sign up";
+            } ?> to SkyMake</h3>
         <input class="loginform-username" name="skymake-un" placeholder="Username"><br>
-        <?php echo $username_err;?><br>
+        <?php echo $username_err; ?><br>
         <input class="loginform-password" type="password" name="skymake-pw" placeholder="Password"><br>
-        <?php echo $password_err;?><br>
+        <?php echo $password_err; ?><br>
         <?php if($optget == "signup"){
             echo "<input class=\"loginform-password\" type=\"password\" name=\"skymake-pwconfirm\" placeholder=\"Confirm Password\"><br>";
-        } echo $confirm_password_err;?><br>
+        } echo $confirm_password_err; ?><br>
         <input class="loginform-submit" style="margin-bottom: 20px;" type="submit" value="<?php if($optget == "signin"){
             echo "Sign in";
         } else {
             echo "Sign up";
-        }?>">
+        } ?>">
+        <?php if($optget == "signin"){
+            echo "<a href='/?act=signup' class='actswitch'>Don't have an account?</a>";
+        } else {
+            echo "<a href='/?act=signin' class='actswitch'>Have an account?</a>";
+        } ?>
     </form>
 </div>
     <div class="footer">
