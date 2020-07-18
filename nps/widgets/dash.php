@@ -1,4 +1,4 @@
-<?php 
+<?php
 function singlewidget($lesson,$teacher,$time,$topic,$unit,$backgorundimage,$lessonid){
 return "<!--Begin single SkyMake Widget-->
 <div class=\"container centered-container\">
@@ -190,7 +190,24 @@ function doublewidget($lesson,$teacher,$time,$topic,$unit,$backgorundimage,$less
                 </ul>
             </div>
         </div>
-    </nav>			
+    </nav>
+    <style>.lesson-content{
+            border:1px solid gray;
+            border-radius: 5px;
+            padding:8px;
+            text-align:center;
+        }
+        .footercustom{
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: lightgray;
+            color: white;
+            text-align: center;
+            padding: 3px;
+        }
+    </style>
 				  <?php  //echo(doublewidget("Geography","The Teacher","18.00","Earth","9","https://kaleela.com/wp-content/uploads/2019/08/Geography-Terms-In-Arabic-Language.jpg","Maths","Your Teacher","19.00","Multiplication","5","https://d2r55xnwy6nx47.cloudfront.net/uploads/2019/09/Multiplication_1200_Social.jpg"));
 				  ?>
 				  <?php  //echo(singlewidget("Maths","Your Teacher","19.00","Multiplication","5","https://d2r55xnwy6nx47.cloudfront.net/uploads/2019/09/Multiplication_1200_Social.jpg"));

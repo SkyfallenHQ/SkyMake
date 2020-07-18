@@ -182,3 +182,43 @@ function getassignedids($link){
     return $retarr;
     mysqli_close($link);
 }
+function getsetting($link,$setting){
+    $sql = "SELECT * FROM skymake_operationvalues WHERE setting='".$setting."'";
+    if($result = mysqli_query($link, $sql)){
+        if(mysqli_num_rows($result) == 1){
+            while($row = mysqli_fetch_array($result)){
+                $retvalue = $row['value'];
+            }
+            mysqli_free_result($result);
+        } else{
+            return "errorundefined";
+        }
+    } else{
+        echo "ERROR: CANNOT GET SETTINGS -- Could not able to execute $sql. " . mysqli_error($link);
+    }
+
+// Close connection
+    return $retvalue;
+    mysqli_close($link);
+}
+function getlessoncontents($link,$lessonid){
+    $sql = "SELECT * FROM skymake_lessoncontent WHERE lessonid='".$lessonid."'";
+    if($result = mysqli_query($link, $sql)){
+        if(mysqli_num_rows($result) > 0){
+            while($row = mysqli_fetch_array($result)){
+                $ret = $ret."<a href='".$row['content-link']."'><p class='lesson-content'>" . $row['content-type']."  (";
+                $ret = $ret.$row['content-id'] . ")</p</a><br>";
+            }
+            // Free result set
+            mysqli_free_result($result);
+            return $ret;
+        } else{
+            return "No lesson content was added.";
+        }
+    } else{
+        return "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+    }
+
+// Close connection
+    mysqli_close($link);
+}

@@ -12,6 +12,8 @@
 
 //Include config file
 include_once "SkyMakeDatabaseConnector/SkyMakeDBconfig.php";
+include_once "SkyMakeFunctionSet/Operation-Requirements/MainFunctions.php";
+$l = getsetting($link,"link");
 // Check if act is equal to signup
 if($_GET["act"] == "signup"){
     //if so set optget to signup
@@ -89,7 +91,7 @@ if($optget != "signup") {
 
                                     // Redirect user to welcome page
                                     // Logged in successfully.
-                                    header("Location: /home");
+                                    header("Location: ".$l."/home");
                                 } else {
                                     // Display an error message if password is not valid
                                     $password_err = "The password you entered was not valid.";
@@ -191,7 +193,7 @@ if($optget != "signup") {
                     // Attempt to execute the prepared statement
                     if (mysqli_stmt_execute($stmt)) {
                         // Redirect to login page
-                        header("location: /?act=signin");
+                        header("location: ".$l."/?act=signin");
                     } else {
                         die("Something went wrong. Please try again later.");
                     }
@@ -238,9 +240,9 @@ if($optget != "signup") {
             echo "Sign up";
         } ?>">
         <?php if($optget == "signin"){
-            echo "<a href='/?act=signup' class='actswitch'>Don't have an account?</a>";
+            echo "<a href='".$l."/?act=signup' class='actswitch'>Don't have an account?</a>";
         } else {
-            echo "<a href='/?act=signin' class='actswitch'>Have an account?</a>";
+            echo "<a href='".$l."/?act=signin' class='actswitch'>Have an account?</a>";
         } ?>
     </form>
 </div>

@@ -4,6 +4,7 @@ $requestsuccess = false;
 include "SkyMakeFunctionSet/Operation-Requirements/MainFunctions.php";
 include "SkyMakeDatabaseConnector/SkyMakeDBconfig.php";
 session_start();
+$_SESSION["sfl"] = getsetting($link,"link");
 if(!$_SESSION["loggedin"]){
     header("Location: /?act=signin");
 }
@@ -17,7 +18,7 @@ if(substr( $request, 0, 7 ) === "lesson/") {
     if (!($lessonname == "n")) {
         echo("<div class='text-center'><h1>Lesson Details | " . $lessonname . "</h1></div>");
         $n = getassignedlessonquery($link, $cenroller);
-        echo(overview(getassignedlessons($link)[$n], getassignedteachers($link)[$n], getassignedtimes($link)[$n], getassignedtopics($link)[$n], getassignedunits($link)[$n], getassignedbgurls($link)[$n],getassignedids($link)[$n],"<p>No content can be assigned as it is not supported by this version of SkyMake 4 Beta.</p>"));
+        echo(overview(getassignedlessons($link)[$n], getassignedteachers($link)[$n], getassignedtimes($link)[$n], getassignedtopics($link)[$n], getassignedunits($link)[$n], getassignedbgurls($link)[$n],getassignedids($link)[$n],getlessoncontents($link,$cenroller)));
     }else {
         echo("<div class='text-center'><h1>This lesson does not exist. Please access your course by dashbboard.</h1></div>");
     }
@@ -85,5 +86,7 @@ if($requestsuccess == false){
 <script src="nps/widgets/assets/bootstrap/js/bootstrap.min.js"></script>
 <script src="nps/widgets/assets/js/Animated-Type-Heading.js"></script>
 </body>
-
+<footer>
+    <div class="footercustom">SkyMake Version 4 - Developed by Skyfallen | This is a beta and must not be used for production. | © 2016-2020 Skyfallen © 2017-2020 SkyMake © 2020 Skyfallen Open Source</div>
+</footer>
 </html>
