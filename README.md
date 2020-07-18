@@ -10,23 +10,18 @@ Commits Till Now(Committed Daily):
 
 # What is SkyMake?
 SkyMake is free and Open-Source Learning Management System that includes a Online Examination System, a Live Lesson System and many more features!
-[The Skyfallen Website](https://www.theskyfallen.com)
 
 # Prequisites
 SkyMake Requires an Apache Server , a MySQL Server , and a server running SkyMake Server-Side Software
-[Skyfallen Open Source](https://opensource.theskyfallen.com)
 
 # Supported OS for SkyMake Server-Side Software
 SkyMake Server-Side Software can run on Mach based XNU kernel !-! Important this does not mean macOS straight since as of macOS 11.0, macOS can run on ARM-Based Macs -- So please check your system info // WindowsNT from versions 6.2-10.X (Windows 7 - 8 - 8.1 - 10)(Windows Server 2007-2012-2019) both Intel and Advanced Micro Devices CPUs // Supports Linux Kernel for x86 based Intel Xeon Processor --only using SkyLinux by Skyfallen--
-[Skyfallen Help Center](https://help.theskyfallen.com)
 
 # What does SkyMake Server-Side Do?
 It includes Apache Web Server, a MySQL Server, Skyfallen Common Code Archive to Include All Skyfallen Frameworks, SkyLive SkyMake Build for live lessons, SkyMake 4 itself, and a Control Panel.
-[Bug Report](https://help.theskyfallen.com/index.php?category=15&a=add)
 
 # Where Can I Get SkyMake Server-Side Software?
 theskyfallen.com/SkyMake/serversidesoftware/ When first beta release is ready.
-[Requesting your data](https://help.theskyfallen.com/knowledgebase.php?article=3)
 
 # Legal Info
 The Skyfallen Foundation and The Skyfallen Company - (C) All Rights Reserved
@@ -46,8 +41,7 @@ https://opensource.theskyfallen.com/
 https://opensource.theskyfallen.com/licence
 
 # Compiled on:
-i5-7200U - 4GB Ram - Hackintosh 10.15
-
+i5-7200U - 4GB Ram - Ubuntu Linux
 # Software Used:
 PhpStorm by JetBrains // jetbrains.com/phpstorm
 
@@ -55,6 +49,7 @@ PhpStorm by JetBrains // jetbrains.com/phpstorm
 contribute.theskyfallen.com/skymake/
 
 # SkyMake Version 4 Links
+[The Skyfallen Productions Company](https://www.theskyfallen.company)
 
 [The Skyfallen Website](https://www.theskyfallen.com)
 
