@@ -1,6 +1,6 @@
 <?php 
 function singlewidget($lesson,$teacher,$time,$topic,$unit,$backgorundimage,$lessonid){
-return "<!--End single SkyMake Widget-->
+return "<!--Begin single SkyMake Widget-->
 <div class=\"container centered-container\">
   <div class=\"row\">
 	<div class=\"col\">
@@ -37,6 +37,40 @@ return "<!--End single SkyMake Widget-->
 			</ul>
 		  </div>
 		</div>
+	  </div>
+	</div>
+  </div>
+</div>
+<!--End single SkyMake Widget-->";
+}
+function overview($lesson,$teacher,$time,$topic,$unit,$backgorundimage,$lessonid,$content){
+    return "<!--End single SkyMake Widget-->
+<div class=\"container centered-container\">
+  <div class=\"row\">
+	<div class=\"col\">
+	  <div class=\"lesson-card\" style=\" background: url('".$backgorundimage."') no-repeat;\">
+	  </div>
+	</div>
+	<div class=\"col\">
+	  <div class=\"lesson-card\" style='background-color: white;'>
+	  <div style='margin: 35px;'>
+			<h1>".$lesson."</h1>
+			<h3>".$teacher."</h3>
+			<h4>".$time."</h4>
+	  </div>
+		<div class=\"bottom\">
+		  <div class=\"wrapper\">
+			<ul class=\"forecast\">
+			  <a href=\"javascript:;\"><span class=\"lnr lnr-chevron-up go-up\"></span></a>
+			  <li>
+				<span class=\"date\">".$topic."</span>
+			  </li>
+			</ul>
+		  </div>
+		</div>
+		<div style='margin: 35px;'>
+			    ".$content."
+        </div>
 	  </div>
 	</div>
   </div>

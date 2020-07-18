@@ -42,6 +42,26 @@ function getassignedlessons($link){
     return $retarr;
     mysqli_close($link);
 }
+function getassignedlessonquery($link,$coursenroller){
+    $sql = "SELECT * FROM skymake_assignments WHERE lessonid='".$coursenroller."' and studentusername='".$_SESSION["username"]."'";
+    if($result = mysqli_query($link, $sql)){
+        if(mysqli_num_rows($result) == 1){
+            $retarr = array();
+            while($row = mysqli_fetch_array($result)){
+                $retvalue = $row['uniqueline'] - 1;
+            }
+            mysqli_free_result($result);
+        } else{
+            return "errorundefined";
+        }
+    } else{
+        echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+    }
+
+// Close connection
+    return $retvalue;
+    mysqli_close($link);
+}
 function getassignedteachers($link){
     $sql = "SELECT * FROM skymake_assignments WHERE studentusername='".$_SESSION["username"]."'";
     if($result = mysqli_query($link, $sql)){
