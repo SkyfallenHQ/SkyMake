@@ -91,7 +91,7 @@ if($optget != "signup") {
 
                                     // Redirect user to welcome page
                                     // Logged in successfully.
-                                    header("Location: ".$l."/home");
+                                    header("Location: /home");
                                 } else {
                                     // Display an error message if password is not valid
                                     $password_err = "The password you entered was not valid.";
@@ -193,7 +193,7 @@ if($optget != "signup") {
                     // Attempt to execute the prepared statement
                     if (mysqli_stmt_execute($stmt)) {
                         // Redirect to login page
-                        header("location: ".$l."/?act=signin");
+                        header("location: /?act=signin");
                     } else {
                         die("Something went wrong. Please try again later.");
                     }
@@ -240,9 +240,9 @@ if($optget != "signup") {
             echo "Sign up";
         } ?>">
         <?php if($optget == "signin"){
-            echo "<a href='".$l."/?act=signup' class='actswitch'>Don't have an account?</a>";
+            echo "<a href='/?act=signup' class='actswitch'>Don't have an account?</a>";
         } else {
-            echo "<a href='".$l."/?act=signin' class='actswitch'>Have an account?</a>";
+            echo "<a href='/?act=signin' class='actswitch'>Have an account?</a>";
         } ?>
     </form>
 </div>
