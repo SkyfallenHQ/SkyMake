@@ -9,7 +9,6 @@ define("dbName","theskyfallen_skymake-preproduction");
 define("dbUser","theskyfallen_pp");
 define("dbPassword","Pre2020**");
 //stop editing
-define("dbPrefix","noprfx"); // not yet supported. SkyMake is just using SkyMake_ as database prefix.
 //Only MySQL is supported
 //SkyMake4 uses MySQLi (MySQL Enchanced)
 /* Attempt to connect to MySQL database */
