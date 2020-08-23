@@ -1,6 +1,9 @@
 <?php
 $request = $_GET["request"];
 $requestsuccess = false;
+if(substr($request ,0 ,1)=="/"){
+ $request = substr($request,1,strlen($request)-1);
+}
 include "SkyMakeFunctionSet/Operation-Requirements/MainFunctions.php";
 include "SkyMakeDatabaseConnector/SkyMakeDBconfig.php";
 include "classes/user.php";

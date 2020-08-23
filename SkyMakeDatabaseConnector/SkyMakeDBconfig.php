@@ -4,7 +4,7 @@
 // this value is checked in order to make sure we have access to this file
 define("SkyMakeOnDBConfigConnect", "DBCONFCONNOK");
 //begin editing
-define("dbHost","www.theskyfallen.com");
+define("dbHost","localhost");
 define("dbName","theskyfallen_skymake-preproduction");
 define("dbUser","theskyfallen_pp");
 define("dbPassword","Pre2020**");
