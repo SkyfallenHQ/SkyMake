@@ -51,6 +51,9 @@ if($request == "home" or $request == "dash" or $request == "course" or $request 
     include "nps/widgets/dash.php";
     echo("<div class=\"caption v-middle text-center\"><h1 class=\"cd-headline clip\"><span class=\"blc\">Welcome to the new dashboard.</span><br><span class=\"cd-words-wrapper\"><b class=\"is-visible\">Here are your courses.</b><b>Here are your grades.</b><b>Here are your online exams.</b></span></h1> </div>");
     $lessoncount = count(getassignedlessons($link));
+    if($link === false){
+        die("ERROR: Could not connect. " . mysqli_connect_error());
+    }
     if(getassignedlessons($link)[0]!= "n"){
         if(is_odd($lessoncount)){
             $completed_jobs = array();
