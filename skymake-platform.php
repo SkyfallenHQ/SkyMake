@@ -7,7 +7,7 @@ if(substr($request ,0 ,1)=="/"){
 include "SkyMakeFunctionSet/Operation-Requirements/MainFunctions.php";
 include "SkyMakeDatabaseConnector/SkyMakeDBconfig.php";
 include "classes/user.php";
-//include "SkyMakeDatabaseConnector/db-class.php";
+include "SkyMakeDatabaseConnector/db-class.php";
 $userclass = new SMUserClass();
 session_start();
 //$_SESSION["sfl"] = getsetting($link,"link");
@@ -16,7 +16,7 @@ if(!$_SESSION["loggedin"]){
 }
 //$_SESSION["classid"] = $userclass->getStudentClassID($link,$_SESSION["username"]);
 $_SESSION["classid"] = 1;
-/* if(substr( $request, 0, 7 ) === "lesson/") {
+if(substr( $request, 0, 7 ) === "lesson/") {
     $requestsuccess = true;
     include "nps/widgets/dash.php";
     $ce_len = strlen($request);
@@ -43,18 +43,17 @@ if($request == "logout" or $request == "logout/"){
     session_destroy();
     header("Location: /");
 }
-*/
+
 if($request == "home" or $request == "dash" or $request == "course" or $request == "oes" or $request == "liveclass" or $request == "grades" or $request == "home/" or $request == "dash/" or $request == "course/" or $request == "oes/" or $request == "liveclass/" or $request == "grades/"){
     if(!($request == "dash" or $request == "dash/")){
         header("Location: /dash");
         exit;
     }
     $requestsuccess = true;
-    print_r(getassignedlessons($link));
-    //include "nps/widgets/dash.php";
-    //echo("<div class=\"caption v-middle text-center\"><h1 class=\"cd-headline clip\"><span class=\"blc\">Welcome to the new dashboard.</span><br><span class=\"cd-words-wrapper\"><b class=\"is-visible\">Here are your courses.</b><b>Here are your grades.</b><b>Here are your online exams.</b></span></h1> </div>");
-    //$lessoncount = count(getassignedlessons($link));
-    /*if(getassignedlessons($link)[0]!= "n"){
+    include "nps/widgets/dash.php";
+    echo("<div class=\"caption v-middle text-center\"><h1 class=\"cd-headline clip\"><span class=\"blc\">Welcome to the new dashboard.</span><br><span class=\"cd-words-wrapper\"><b class=\"is-visible\">Here are your courses.</b><b>Here are your grades.</b><b>Here are your online exams.</b></span></h1> </div>");
+    $lessoncount = count(getassignedlessons($link));
+    if(getassignedlessons($link)[0]!= "n"){
         if(is_odd($lessoncount)){
             $completed_jobs = array();
             for($n = 0; $n < $lessoncount and $n+1 != $lessoncount; $n = $n+2){
@@ -74,9 +73,9 @@ if($request == "home" or $request == "dash" or $request == "course" or $request 
     }else{
         echo("<div class=\"text-center\"><h1>You have no active courses.</h1></div>");
     }
-    */
+
 }
-/* if($request == "dash/mobile" or $request == "dash/mobile/") {
+if($request == "dash/mobile" or $request == "dash/mobile/") {
     $requestsuccess = true;
     include "nps/widgets/dash.php";
     echo("<div class=\"text-center\"><h1>Welcome,".$_SESSION["username"]."</h1></div>");
