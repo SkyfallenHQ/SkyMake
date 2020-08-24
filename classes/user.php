@@ -57,7 +57,7 @@ class SMUserClass
             }
     }
     function getStudentClassID($link,$student){
-        $sql = "SELECT classid FROM skymake_class_assigned WHERE username=\"".$student."\";";
+        $sql = "SELECT classid FROM skymake_class_assigned WHERE username='".$student."'";
         if($result = mysqli_query($link, $sql)){
             if(mysqli_num_rows($result) == 1){
                 while($row = mysqli_fetch_array($result)){
