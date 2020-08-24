@@ -23,7 +23,7 @@ function is_odd($number){
     }
 }
 function getassignedlessons($link){
-    $sql = "SELECT * FROM skymake_assignments WHERE classid='".$_SESSION["classid"]."'";
+    $sql = "SELECT lesson FROM skymake_assignments WHERE classid='".$_SESSION["classid"]."'";
     if($result = mysqli_query($link, $sql)){
         if(mysqli_num_rows($result) > 0){
             $retarr = array();
@@ -43,7 +43,7 @@ function getassignedlessons($link){
     mysqli_close($link);
 }
 function getassignedlessonquery($link,$coursenroller){
-    $sql = "SELECT * FROM skymake_assignments WHERE lessonid='".$coursenroller."' and classid='".$_SESSION["classid"]."'";
+    $sql = "SELECT uniqueline FROM skymake_assignments WHERE lessonid='".$coursenroller."' and classid='".$_SESSION["classid"]."'";
     if($result = mysqli_query($link, $sql)){
         if(mysqli_num_rows($result) == 1){
             $retarr = array();
@@ -63,7 +63,7 @@ function getassignedlessonquery($link,$coursenroller){
     mysqli_close($link);
 }
 function getassignedteachers($link){
-    $sql = "SELECT * FROM skymake_assignments WHERE classid='".$_SESSION["classid"]."'";
+    $sql = "SELECT teacher FROM skymake_assignments WHERE classid='".$_SESSION["classid"]."'";
     if($result = mysqli_query($link, $sql)){
         if(mysqli_num_rows($result) > 0){
             $retarr = array();
@@ -83,7 +83,7 @@ function getassignedteachers($link){
     mysqli_close($link);
 }
 function getassignedtimes($link){
-    $sql = "SELECT * FROM skymake_assignments WHERE classid='".$_SESSION["classid"]."'";
+    $sql = "SELECT time FROM skymake_assignments WHERE classid='".$_SESSION["classid"]."'";
     if($result = mysqli_query($link, $sql)){
         if(mysqli_num_rows($result) > 0){
             $retarr = array();
@@ -103,7 +103,7 @@ function getassignedtimes($link){
     mysqli_close($link);
 }
 function getassignedtopics($link){
-    $sql = "SELECT * FROM skymake_assignments WHERE classid='".$_SESSION["classid"]."'";
+    $sql = "SELECT topic FROM skymake_assignments WHERE classid='".$_SESSION["classid"]."'";
     if($result = mysqli_query($link, $sql)){
         if(mysqli_num_rows($result) > 0){
             $retarr = array();
@@ -123,7 +123,7 @@ function getassignedtopics($link){
     mysqli_close($link);
 }
 function getassignedunits($link){
-    $sql = "SELECT * FROM skymake_assignments WHERE classid='".$_SESSION["classid"]."'";
+    $sql = "SELECT unit FROM skymake_assignments WHERE classid='".$_SESSION["classid"]."'";
     if($result = mysqli_query($link, $sql)){
         if(mysqli_num_rows($result) > 0){
             $retarr = array();
@@ -143,7 +143,7 @@ function getassignedunits($link){
     mysqli_close($link);
 }
 function getassignedbgurls($link){
-    $sql = "SELECT * FROM skymake_assignments WHERE classid='".$_SESSION["classid"]."'";
+    $sql = "SELECT bgurl FROM skymake_assignments WHERE classid='".$_SESSION["classid"]."'";
     if($result = mysqli_query($link, $sql)){
         if(mysqli_num_rows($result) > 0){
             $retarr = array();
@@ -163,7 +163,7 @@ function getassignedbgurls($link){
     mysqli_close($link);
 }
 function getassignedids($link){
-    $sql = "SELECT * FROM skymake_assignments WHERE classid='".$_SESSION["classid"]."'";
+    $sql = "SELECT lessonid FROM skymake_assignments WHERE classid='".$_SESSION["classid"]."'";
     if($result = mysqli_query($link, $sql)){
         if(mysqli_num_rows($result) > 0){
             $retarr = array();
@@ -183,7 +183,7 @@ function getassignedids($link){
     mysqli_close($link);
 }
 function getsetting($link,$setting){
-    $sql = "SELECT * FROM skymake_operationvalues WHERE setting='".$setting."'";
+    $sql = "SELECT value FROM skymake_operationvalues WHERE setting='".$setting."'";
     if($result = mysqli_query($link, $sql)){
         if(mysqli_num_rows($result) == 1){
             while($row = mysqli_fetch_array($result)){
@@ -203,7 +203,7 @@ function getsetting($link,$setting){
 }
 function getlessoncontents($link,$lessonid){
     $ret = "none";
-    $sql = "SELECT * FROM skymake_lessoncontent WHERE lessonid='".$lessonid."'";
+    $sql = "SELECT content-type FROM skymake_lessoncontent WHERE lessonid='".$lessonid."'";
     if($result = mysqli_query($link, $sql)){
         if(mysqli_num_rows($result) > 0){
             while($row = mysqli_fetch_array($result)){
