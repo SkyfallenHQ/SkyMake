@@ -5,7 +5,7 @@ if(substr($request ,0 ,1)=="/"){
  $request = substr($request,1,strlen($request)-1);
 }
 include "SkyMakeFunctionSet/Operation-Requirements/MainFunctions.php";
-include_once "SkyMakeDatabaseConnector/SkyMakeDBconfig.php";
+include "SkyMakeDatabaseConnector/SkyMakeDBconfig.php";
 include "classes/user.php";
 //include "SkyMakeDatabaseConnector/db-class.php";
 $userclass = new SMUserClass();
