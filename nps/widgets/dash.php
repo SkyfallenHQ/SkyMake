@@ -183,7 +183,7 @@ function doublewidget($lesson,$teacher,$time,$topic,$unit,$backgorundimage,$less
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/oes">Online Examination</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/liveclass">Live Class</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/grades">My Grades</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="/report">Report</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" ><?php echo "Logged in as a "$_SESSION["user_role"]; ?></a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/profile">My Profile</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/search"><i class="fa fa-search"></i></a></li>
                     <li class="nav-item" role="presentation"></li>
