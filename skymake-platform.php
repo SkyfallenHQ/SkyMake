@@ -9,12 +9,10 @@ include "SkyMakeDatabaseConnector/SkyMakeDBconfig.php";
 include "classes/user.php";
 include "SkyMakeDatabaseConnector/db-class.php";
 session_start();
-$_SESSION["sfl"] = SMDB::getSetting($link,"link");
 if(!$_SESSION["loggedin"]){
     header("Location: /?act=signin");
 }
-//$_SESSION["classid"] = $userclass->getStudentClassID($link,$_SESSION["username"]);
-$_SESSION["classid"] = 1;
+$_SESSION["classid"] = SMUserClass::getStudentClassID($link,$_SESSION["username"]);
 if(substr( $request, 0, 7 ) === "lesson/") {
     $requestsuccess = true;
     include "nps/widgets/dash.php";
