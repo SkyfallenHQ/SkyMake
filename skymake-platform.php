@@ -5,9 +5,30 @@ if(substr($request ,0 ,1)=="/"){
  $request = substr($request,1,strlen($request)-1);
 }
 include "SkyMakeFunctionSet/Operation-Requirements/MainFunctions.php";
-include "SkyMakeDatabaseConnector/SkyMakeDBconfig.php";
+//include "SkyMakeDatabaseConnector/SkyMakeDBconfig.php";
 include "classes/user.php";
 include "SkyMakeDatabaseConnector/db-class.php";
+// Will be removed
+// do not edit after this line
+// this function is deprecated
+// this value is checked in order to make sure we have access to this file
+define("SkyMakeOnDBConfigConnect", "DBCONFCONNOK");
+//begin editing
+define("dbHost","localhost");
+define("dbName","theskyfallen_skymake-preproduction");
+define("dbUser","theskyfallen_pp");
+define("dbPassword","Pre2020**");
+//stop editing
+//Only MySQL is supported
+//SkyMake4 uses MySQLi (MySQL Enchanced)
+/* Attempt to connect to MySQL database */
+$link = mysqli_connect(dbHost, dbUser, dbPassword, dbName);
+
+// Check connection
+if($link === false){
+    die("ERROR: Could not connect. " . mysqli_connect_error());
+}
+// End of Will be removed
 $userclass = new SMUserClass();
 session_start();
 //$_SESSION["sfl"] = getsetting($link,"link");
