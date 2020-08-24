@@ -10,7 +10,8 @@ include "classes/user.php";
 include "SkyMakeDatabaseConnector/db-class.php";
 $userclass = new SMUserClass();
 session_start();
-$_SESSION["sfl"] = getsetting($link,"link");
+$db = new SMDB();
+$_SESSION["sfl"] = $db->getSetting($link,"link");
 if(!$_SESSION["loggedin"]){
     header("Location: /?act=signin");
 }
