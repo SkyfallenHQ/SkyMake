@@ -5,7 +5,7 @@ if(substr($request ,0 ,1)=="/"){
  $request = substr($request,1,strlen($request)-1);
 }
 include "SkyMakeFunctionSet/Operation-Requirements/MainFunctions.php";
-include "SkyMakeDatabaseConnector/SkyMakeDBconfig.php";
+include_once "SkyMakeDatabaseConnector/SkyMakeDBconfig.php";
 include "classes/user.php";
 //include "SkyMakeDatabaseConnector/db-class.php";
 $userclass = new SMUserClass();
@@ -14,7 +14,8 @@ session_start();
 if(!$_SESSION["loggedin"]){
     header("Location: /?act=signin");
 }
-$_SESSION["classid"] = $userclass->getStudentClassID($link,$_SESSION["username"]);
+//$_SESSION["classid"] = $userclass->getStudentClassID($link,$_SESSION["username"]);
+$_SESSION["classid"] = 1;
 /* if(substr( $request, 0, 7 ) === "lesson/") {
     $requestsuccess = true;
     include "nps/widgets/dash.php";
