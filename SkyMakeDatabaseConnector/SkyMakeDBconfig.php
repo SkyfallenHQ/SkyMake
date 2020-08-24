@@ -1,6 +1,4 @@
 <?php
-// do not edit after this line
-// this function is deprecated
 // this value is checked in order to make sure we have access to this file
 define("SkyMakeOnDBConfigConnect", "DBCONFCONNOK");
 //begin editing

@@ -15,7 +15,7 @@ if(!$_SESSION["loggedin"]){
     header("Location: /?act=signin");
 }
 $_SESSION["classid"] = $userclass->getStudentClassID($link,$_SESSION["username"]);
-if(substr( $request, 0, 7 ) === "lesson/") {
+/* if(substr( $request, 0, 7 ) === "lesson/") {
     $requestsuccess = true;
     include "nps/widgets/dash.php";
     $ce_len = strlen($request);
@@ -42,6 +42,7 @@ if($request == "logout" or $request == "logout/"){
     session_destroy();
     header("Location: /");
 }
+*/
 if($request == "home" or $request == "dash" or $request == "course" or $request == "oes" or $request == "liveclass" or $request == "grades" or $request == "home/" or $request == "dash/" or $request == "course/" or $request == "oes/" or $request == "liveclass/" or $request == "grades/"){
     if(!($request == "dash" or $request == "dash/")){
         header("Location: /dash");
