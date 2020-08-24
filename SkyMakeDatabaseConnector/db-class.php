@@ -3,14 +3,14 @@
 
 class SMDB
 {
-    function execute($link,$sql){
+    public static function execute($link,$sql){
         if ($result = mysqli_query($link, $sql)) {
             return true;
         } else {
             die("SQL Failure.Traceback:" . $sql . " Detailed info:" . mysqli_error($link));
         }
     }
-    function getSetting($link,$setting){
+    public static function getSetting($link,$setting){
         $sql = "SELECT value FROM skymake_operationvalues WHERE setting=\"".$setting."\";";
         if($result = mysqli_query($link, $sql)){
             if(mysqli_num_rows($result) == 1){
@@ -23,7 +23,7 @@ class SMDB
             }
         }
     }
-    function setSetting($link,$settingname,$settingvalue){
+    public static function setSetting($link,$settingname,$settingvalue){
         $sql = "INSERT INTO skymake_operationvalues (setting,value) VALUES ('".$settingname."','".$settingvalue."');";
         if ($result = mysqli_query($link, $sql)) {
             return true;
@@ -31,7 +31,7 @@ class SMDB
             die("SQL Failure.Traceback:" . $sql . " Detailed info:" . mysqli_error($link));
         }
     }
-    function deleteSetting($link,$settingname){
+    public static function deleteSetting($link,$settingname){
         $sql = "DELETE FROM skymake_operationvalues WHERE setting=\"".$settingname."\";";
         if ($result = mysqli_query($link, $sql)) {
             return true;

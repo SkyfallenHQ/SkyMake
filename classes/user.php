@@ -3,7 +3,7 @@
 
 class SMUserClass
 {
-    function getRole($link,$username){
+    public static function getRole($link,$username){
         $sql = "SELECT role FROM skymake_roles WHERE username=\"".$username."\";";
         if($result = mysqli_query($link, $sql)){
             if(mysqli_num_rows($result) == 1){
@@ -22,7 +22,7 @@ class SMUserClass
         mysqli_close($link);
         return $role;
     }
-    function setRole($link,$username,$newrole){
+    public static function setRole($link,$username,$newrole){
         $isroleadded = false;
         $sql = "SELECT role FROM skymake_roles WHERE username=\"".$username."\";";
         if($result = mysqli_query($link, $sql)){
@@ -56,7 +56,7 @@ class SMUserClass
                 die("SQL Failure.Traceback:" . $sql . " Detailed info:" . mysqli_error($link));
             }
     }
-    function getStudentClassID($link,$student){
+    public static function getStudentClassID($link,$student){
         $sql = "SELECT classid FROM skymake_class_assigned WHERE username='".$student."'";
         if($result = mysqli_query($link, $sql)){
             if(mysqli_num_rows($result) == 1){
