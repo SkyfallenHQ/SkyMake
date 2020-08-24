@@ -23,7 +23,7 @@ function is_odd($number){
     }
 }
 function getassignedlessons($link){
-    $sql = "SELECT lesson FROM skymake_assignments WHERE classid='".$_SESSION["classid"]."'";
+    $sql = "SELECT lesson FROM skymake_assignments WHERE classid='".$_SESSION["classid"]."';";
     if($result = mysqli_query($link, $sql)){
         if(mysqli_num_rows($result) > 0){
             $retarr = array();
