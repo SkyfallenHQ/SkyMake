@@ -203,7 +203,7 @@ function getsetting($link,$setting){
 }
 function getlessoncontents($link,$lessonid){
     $ret = "none";
-    $sql = "SELECT content-type FROM skymake_lessoncontent WHERE lessonid='".$lessonid."'";
+    $sql = "SELECT * FROM skymake_lessoncontent WHERE lessonid='".$lessonid."'";
     if($result = mysqli_query($link, $sql)){
         if(mysqli_num_rows($result) > 0){
             while($row = mysqli_fetch_array($result)){
