@@ -23,6 +23,7 @@ if($_GET["act"] == "signup"){
   $optget = "signin";
 }
 // Initialize the session
+session_name('SkyMakeSessionStorage');
 session_start();
 // check if this is sign in
 if($optget != "signup") {
@@ -90,7 +91,7 @@ if($optget != "signup") {
                                     $_SESSION["id"] = $id;
                                     $_SESSION["username"] = $username;
                                     $_SESSION["classid"] = getStudentClassID($link,$_SESSION["username"]);
-                                    $_SESSION["user_role"] = getRole($link,"username");
+                                    $_SESSION["user_role"] = getRole($link,$_SESSION["username"]);
                                     // Redirect user to welcome page
                                     // Logged in successfully.
                                     header("Location: /home");
