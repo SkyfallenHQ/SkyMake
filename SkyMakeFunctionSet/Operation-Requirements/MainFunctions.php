@@ -249,6 +249,7 @@ function getLiveClassToken($link,$contentid,$classid)
             }
             mysqli_free_result($result);
         } else {
+            die($sql);
             return false;
         }
     }
