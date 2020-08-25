@@ -90,7 +90,7 @@ if($optget != "signup") {
                                     $_SESSION["id"] = $id;
                                     $_SESSION["username"] = $username;
                                     $_SESSION["classid"] = getStudentClassID($link,$_SESSION["username"]);
-                                    $_SESSION["user_role"] = getRole($link,$username);
+                                    $_SESSION["user_role"] = getRole($link,"username");
                                     // Redirect user to welcome page
                                     // Logged in successfully.
                                     header("Location: /home");
