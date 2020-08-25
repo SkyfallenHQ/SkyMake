@@ -38,13 +38,14 @@ if(substr( $request, 0, 10 ) === "liveclass/") {
     $ce_len = strlen($request);
     $cenroller = substr($request, 10, $ce_len);
     $cenroller = str_replace("/","",$cenroller);
-    if (isContentValid($link,$cenroller) == true) {
+    $lctoken = getLiveClassToken($link,$cenroller,$_SESSION["classid"])
+    if (isContentValid($link,$cenroller) == true $lctoken != false) {
         echo("<div class='text-center'><h1>Live Class | SkyfallenLiveConnect ID:" . $cenroller . "</h1></div><br><div class='meet'></div>");
         echo("<script src='https://muzlupasta.theskyfallen.com/external_api.js'></script>
         <script>
         const domain = 'muzlupasta.theskyfallen.com';
         const options = {
-            roomName: 'SkyMake4/LiveClasses/".$cenroller."',
+            roomName: 'SkyMake4/LiveClasses/".$cenroller."/".."',
             width: self.innerWidth,
             height: self.innerHeight,
             parentNode: undefined
