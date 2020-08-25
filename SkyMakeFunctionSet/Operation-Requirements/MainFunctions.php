@@ -228,8 +228,10 @@ function isContentValid($link,$contentid){
     if($result = mysqli_query($link, $sql)){
         if(mysqli_num_rows($result) == 1){
             mysqli_free_result($result);
+            echo "True -- This content is valid";
             return true;
         } else{
+            echo "False -- This content is invalid";
             return false;
         }
     } else{
