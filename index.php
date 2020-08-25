@@ -90,7 +90,23 @@ if($optget != "signup") {
                                     $_SESSION["id"] = $id;
                                     $_SESSION["username"] = $username;
                                     $_SESSION["classid"] = getStudentClassID($link,$_SESSION["username"]);
-                                    $_SESSION["user_role"] = getRole($link,$username);
+                                    $sql = "SELECT role FROM skymake_roles WHERE username='".$username."'";
+                                    if($result = mysqli_query($link, $sql)){
+                                        if(mysqli_num_rows($result) == 1){
+                                            while($row = mysqli_fetch_array($result)){
+                                                $role = $row['role'];
+                                                mysqli_free_result($result);
+                                            }
+                                        }
+                                        else {
+                                            $role = "unverified";
+                                        }
+                                    }
+                                    else{
+                                        die("ERROR: Could not able to execute $sql. " . mysqli_error($link));
+                                    }
+                                    mysqli_close($link);
+                                    $_SESSION["user_role"] = $role;
                                     // Redirect user to welcome page
                                     // Logged in successfully.
                                     header("Location: /home");
