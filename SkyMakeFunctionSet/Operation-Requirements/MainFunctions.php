@@ -257,7 +257,7 @@ function getLiveClassToken($link,$contentid,$classid)
         } else {
             echo "ERROR: Could not able to execute" . $sql . "." . mysqli_error($link);
         }
-
+        die("We are here!");
 // Close connection
         mysqli_close($link);
     }
