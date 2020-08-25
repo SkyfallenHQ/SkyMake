@@ -89,7 +89,7 @@ if($optget != "signup") {
                                     $_SESSION["loggedin"] = true;
                                     $_SESSION["id"] = $id;
                                     $_SESSION["username"] = $username;
-                                    $_SESSION["classid"] = SMUserClass::getStudentClassID($link,$_SESSION["username"]);
+                                    //$_SESSION["classid"] = SMUserClass::getStudentClassID($link,$_SESSION["username"]);
                                     $_SESSION["user_role"] = SMUserClass::getRole($link,$username);
                                     // Redirect user to welcome page
                                     // Logged in successfully.
