@@ -237,6 +237,5 @@ function isContentValid($link,$contentid){
     }
 
 // Close connection
-    return $retarr;
     mysqli_close($link);
 }
