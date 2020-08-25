@@ -13,7 +13,10 @@ session_start();
 if(!$_SESSION["loggedin"]){
     header("Location: /?act=signin");
 }
-if($_SESSION["user_role"] == "unverified"){
+//get user role
+$_SESSION["user_role"] = $user_role = getRole($link,$_SESSION["username"]);
+
+if($user_role == "unverified"){
     include "nps/widgets/dash.php";
     include "nps/errors/notapproved.html";
     die();
