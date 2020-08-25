@@ -182,6 +182,26 @@ function getassignedids($link){
     return $retarr;
     mysqli_close($link);
 }
+function getassignedidsteacher($link){
+    $sql = "SELECT lessonid FROM skymake_assignments WHERE teacheruser='".$_SESSION["teacheruser"]."'";
+    if($result = mysqli_query($link, $sql)){
+        if(mysqli_num_rows($result) > 0){
+            $retarr = array();
+            while($row = mysqli_fetch_array($result)){
+                array_push( $retarr,$row['lessonid']);
+            }
+            mysqli_free_result($result);
+        } else{
+            return "none";
+        }
+    } else{
+        echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+    }
+
+// Close connection
+    return $retarr;
+    mysqli_close($link);
+}
 function getsetting($link,$setting){
     $sql = "SELECT value FROM skymake_operationvalues WHERE setting='".$setting."'";
     if($result = mysqli_query($link, $sql)){
@@ -257,4 +277,143 @@ function getLiveClassToken($link,$contentid,$classid)
     }
     mysqli_close($link);
 }
+function setLiveClassToken($link,$contentid,$classid,$token)
+{
+    $sql = "INSERT INTO skymake_lctokens(classid,token,contentid) VALUES ('".$classid."','".$token."','".$contentid."')";
+    if ($result = mysqli_query($link, $sql)) {
+        if (mysqli_num_rows($result) == 1) {
+            while ($row = mysqli_fetch_array($result)) {
+                return $row['token'];
+            }
+            mysqli_free_result($result);
+        } else {
+            return false;
+        }
+    }
+    else {
+        echo "ERROR: Could not able to execute" . $sql . "." . mysqli_error($link);
+    }
+    mysqli_close($link);
+}
 
+
+function getassignedlessonsteacher($link){
+    $sql = "SELECT lesson FROM skymake_assignments WHERE teacheruser='".$_SESSION["teacheruser"]."'";
+    if($result = mysqli_query($link, $sql)){
+        if(mysqli_num_rows($result) > 0){
+            $retarr = array();
+            while($row = mysqli_fetch_array($result)){
+                array_push( $retarr,$row['lesson']);
+            }
+            mysqli_free_result($result);
+        } else{
+            return "none";
+        }
+    } else{
+        echo "ERROR: Could not able to execute".$sql.".". mysqli_error($link);
+    }
+
+// Close connection
+    return $retarr;
+    mysqli_close($link);
+}
+function getassignedlessonqueryteacher($link,$coursenroller){
+    $sql = "SELECT uniqueline FROM skymake_assignments WHERE lessonid='".$coursenroller."' and teacheruser='".$_SESSION["teacheruser"]."'";
+    if($result = mysqli_query($link, $sql)){
+        if(mysqli_num_rows($result) == 1){
+            $retarr = array();
+            while($row = mysqli_fetch_array($result)){
+                $retvalue = $row['uniqueline'] - 1;
+            }
+            mysqli_free_result($result);
+        } else{
+            return "errorundefined";
+        }
+    } else{
+        echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+    }
+
+// Close connection
+    return $retvalue;
+    mysqli_close($link);
+}
+function getassignedtimesteacher($link){
+    $sql = "SELECT time FROM skymake_assignments WHERE teacheruser='".$_SESSION["teacheruser"]."'";
+    if($result = mysqli_query($link, $sql)){
+        if(mysqli_num_rows($result) > 0){
+            $retarr = array();
+            while($row = mysqli_fetch_array($result)){
+                array_push( $retarr,$row['time']);
+            }
+            mysqli_free_result($result);
+        } else{
+            return "none";
+        }
+    } else{
+        echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+    }
+
+// Close connection
+    return $retarr;
+    mysqli_close($link);
+}
+function getassignedtopicsteacher($link){
+    $sql = "SELECT topic FROM skymake_assignments WHERE teacheruser='".$_SESSION["teacheruser"]."'";
+    if($result = mysqli_query($link, $sql)){
+        if(mysqli_num_rows($result) > 0){
+            $retarr = array();
+            while($row = mysqli_fetch_array($result)){
+                array_push( $retarr,$row['topic']);
+            }
+            mysqli_free_result($result);
+        } else{
+            return "none";
+        }
+    } else{
+        echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+    }
+
+// Close connection
+    return $retarr;
+    mysqli_close($link);
+}
+function getassignedunitsteacher($link){
+    $sql = "SELECT unit FROM skymake_assignments WHERE teacheruser='".$_SESSION["teacheruser"]."'";
+    if($result = mysqli_query($link, $sql)){
+        if(mysqli_num_rows($result) > 0){
+            $retarr = array();
+            while($row = mysqli_fetch_array($result)){
+                array_push( $retarr,$row['unit']);
+            }
+            mysqli_free_result($result);
+        } else{
+            return "none";
+        }
+    } else{
+        echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+    }
+
+// Close connection
+    return $retarr;
+    mysqli_close($link);
+}
+function getassignedbgurlsteacher($link){
+    $sql = "SELECT bgurl FROM skymake_assignments WHERE teacheruser='".$_SESSION["teacheruser"]."'";
+    if($result = mysqli_query($link, $sql)){
+        if(mysqli_num_rows($result) > 0){
+            $retarr = array();
+            while($row = mysqli_fetch_array($result)){
+                array_push( $retarr,$row['bgurl']);
+            }
+            mysqli_free_result($result);
+        } else{
+            return "none";
+        }
+    } else{
+        echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+    }
+
+// Close connection
+    return $retarr;
+    mysqli_close($link);
+}
