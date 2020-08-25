@@ -245,6 +245,7 @@ function getLiveClassToken($link,$contentid,$classid)
     if ($result = mysqli_query($link, $sql)) {
         if (mysqli_num_rows($result) == 1) {
             while ($row = mysqli_fetch_array($result)) {
+                die($row['token']);
                 return $row['token'];
             }
             mysqli_free_result($result);
