@@ -223,3 +223,20 @@ function getlessoncontents($link,$lessonid){
 // Close connection
     mysqli_close($link);
 }
+function isContentValid($link,$contentid){
+    $sql = "SELECT * FROM skymake_assignments WHERE content-id='".$contentid."'";
+    if($result = mysqli_query($link, $sql)){
+        if(mysqli_num_rows($result) == 0){
+            mysqli_free_result($result);
+            return true;
+        } else{
+            return false;
+        }
+    } else{
+        echo "ERROR: Could not able to execute".$sql.".". mysqli_error($link);
+    }
+
+// Close connection
+    return $retarr;
+    mysqli_close($link);
+}

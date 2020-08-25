@@ -32,6 +32,29 @@ if(substr( $request, 0, 7 ) === "lesson/") {
         echo("<div class='text-center'><h1>This lesson does not exist. Please access your course by dashbboard.</h1></div>");
     }
 }
+if(substr( $request, 0, 10 ) === "liveclass/") {
+    $requestsuccess = true;
+    include "nps/widgets/dash.php";
+    $ce_len = strlen($request);
+    $cenroller = substr($request, 10, $ce_len);
+    $cenroller = str_replace("/","",$cenroller);
+    if (isContentValid($link,$cenroller)) {
+        echo("<div class='text-center'><h1>Live Class | SkyfallenLiveConnect ID:" . $cenroller . "</h1></div>");
+        echo("<script src='https://muzlupasta.theskyfallen.com/external_api.js'></script>
+        <script>
+        const domain = 'muzlupasta.theskyfallen.com';
+        const options = {
+            roomName: 'SkyMake4/LiveClasses/".$cenroller."',
+            width: self.innerWidth,
+            height: self.innerHeight,
+            parentNode: document.querySelector('#meet')
+        };
+        const api = new JitsiMeetExternalAPI(domain, options);
+        </script>");
+    }else {
+        echo("<div class='text-center'><h1>This lesson does not exist. Please access your course by dashbboard.</h1></div>");
+    }
+}
 if($request == "profile" or $request == "profile/"){
     $requestsuccess = true;
     include "nps/widgets/dash.php";
