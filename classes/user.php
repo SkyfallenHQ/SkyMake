@@ -1,4 +1,3 @@
-
 <?php
 
 
@@ -18,7 +17,7 @@ class SMUserClass
             }
         }
         else{
-            echo("ERROR: Could not able to execute $sql. " . mysqli_error($link));
+            die("ERROR: Could not able to execute $sql. " . mysqli_error($link));
         }
         mysqli_close($link);
         return $role;

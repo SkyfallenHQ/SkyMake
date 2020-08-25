@@ -1,5 +1,4 @@
 <?php
-
 $request = $_GET["request"];
 $requestsuccess = false;
 if(substr($request ,0 ,1)=="/"){
