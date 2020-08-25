@@ -244,16 +244,17 @@ function getLiveClassToken($link,$contentid,$classid)
     $sql = "SELECT token FROM  WHERE contentid='" . $contentid . "' and classid='" . $classid . "'";
     if ($result = mysqli_query($link, $sql)) {
         if (mysqli_num_rows($result) == 1) {
-                while ($row = mysqli_fetch_array($result)) {
-                    return $row['token'];
-                }
-                mysqli_free_result($result);
-            } else {
-                return false;
+            while ($row = mysqli_fetch_array($result)) {
+                return $row['token'];
+            }
+            mysqli_free_result($result);
         } else {
-            echo "ERROR: Could not able to execute" . $sql . "." . mysqli_error($link);
+            return false;
         }
-// Close connection
-        mysqli_close($link);
     }
+    else {
+            echo "ERROR: Could not able to execute" . $sql . "." . mysqli_error($link);
+    }
+    mysqli_close($link);
 }
+
