@@ -13,6 +13,7 @@
 //Include config file
 include_once "SkyMakeDatabaseConnector/SkyMakeDBconfig.php";
 include_once "SkyMakeFunctionSet/Operation-Requirements/MainFunctions.php";
+include "classes/user.php";
 $l = getsetting($link,"link");
 // Check if act is equal to signup
 if($_GET["act"] == "signup"){
@@ -88,7 +89,7 @@ if($optget != "signup") {
                                     $_SESSION["loggedin"] = true;
                                     $_SESSION["id"] = $id;
                                     $_SESSION["username"] = $username;
-
+                                    $_SESSION["classid"] = SMUserClass::getStudentClassID($link,$_SESSION["username"]);
                                     // Redirect user to welcome page
                                     // Logged in successfully.
                                     header("Location: /home");
