@@ -39,7 +39,7 @@ if(substr( $request, 0, 10 ) === "liveclass/") {
     $cenroller = substr($request, 10, $ce_len);
     $cenroller = str_replace("/","",$cenroller);
     if (isContentValid($link,$cenroller)) {
-        echo("<div class='text-center'><h1>Live Class | SkyfallenLiveConnect ID:" . $cenroller . "</h1></div><br><div class='meet'></div>>");
+        echo("<div class='text-center'><h1>Live Class | SkyfallenLiveConnect ID:" . $cenroller . "</h1></div><br><div class='meet'></div>");
         echo("<script src='https://muzlupasta.theskyfallen.com/external_api.js'></script>
         <script>
         const domain = 'muzlupasta.theskyfallen.com';
@@ -47,7 +47,7 @@ if(substr( $request, 0, 10 ) === "liveclass/") {
             roomName: 'SkyMake4/LiveClasses/".$cenroller."',
             width: self.innerWidth,
             height: self.innerHeight,
-            parentNode: document.querySelector('#meet')
+            parentNode: undefined
         };
         const api = new JitsiMeetExternalAPI(domain, options);
         </script>");
