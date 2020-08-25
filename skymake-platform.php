@@ -12,8 +12,7 @@ session_start();
 if(!$_SESSION["loggedin"]){
     header("Location: /?act=signin");
 }
-$_SESSION["classid"] = 1;
-//SMUserClass::getStudentClassID($link,$_SESSION["username"]);
+$_SESSION["classid"] = SMUserClass::getStudentClassID($link,$_SESSION["username"]);
 if(substr( $request, 0, 7 ) === "lesson/") {
     $requestsuccess = true;
     include "nps/widgets/dash.php";
