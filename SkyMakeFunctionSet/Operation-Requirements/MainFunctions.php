@@ -241,7 +241,7 @@ function isContentValid($link,$contentid){
 }
 function getLiveClassToken($link,$contentid,$classid)
 {
-    $sql = "SELECT token FROM  WHERE contentid='" . $contentid . "' and classid='" . $classid . "'";
+    $sql = "SELECT token FROM skymake_lctokens WHERE contentid='" . $contentid . "' and classid='" . $classid . "'";
     if ($result = mysqli_query($link, $sql)) {
         if (mysqli_num_rows($result) == 1) {
             while ($row = mysqli_fetch_array($result)) {
