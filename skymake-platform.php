@@ -38,7 +38,7 @@ if(substr( $request, 0, 10 ) === "liveclass/") {
     $ce_len = strlen($request);
     $cenroller = substr($request, 10, $ce_len);
     $cenroller = str_replace("/","",$cenroller);
-    if (isContentValid($link,$cenroller)) {
+    if (isContentValid($link,$cenroller) == true) {
         echo("<div class='text-center'><h1>Live Class | SkyfallenLiveConnect ID:" . $cenroller . "</h1></div><br><div class='meet'></div>");
         echo("<script src='https://muzlupasta.theskyfallen.com/external_api.js'></script>
         <script>
