@@ -53,11 +53,11 @@ if(substr( $request, 0, 10 ) === "liveclass/") {
         const api = new JitsiMeetExternalAPI(domain, options);
         </script>");
     } else {
-        if(!isContentValid($link,$cenroller)) {
+        /*if(!isContentValid($link,$cenroller)) {
             echo("<div class='text-center'><h1>This lesson does not exist. Please access your course by your own dashboard.</h1></div>");
         } else {
             echo("<div class='text-center'><h1>This meeting has not started.</h1></div>");
-        }
+        }*/
     }
 }
 if($request == "profile" or $request == "profile/"){
