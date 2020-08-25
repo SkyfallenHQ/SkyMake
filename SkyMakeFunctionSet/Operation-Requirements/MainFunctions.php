@@ -231,7 +231,7 @@ function isContentValid($link,$contentid){
             echo "True -- This content is valid";
             return true;
         } else{
-            echo "False -- This content is invalid";
+            echo "False -- This content is invalid SQL Tried: ".$sql;
             return false;
         }
     } else{
