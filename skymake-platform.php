@@ -39,8 +39,9 @@ if(substr( $request, 0, 10 ) === "liveclass/") {
     $cenroller = substr($request, 10, $ce_len);
     $cenroller = str_replace("/","",$cenroller);
     $lctoken = getLiveClassToken($link,$cenroller,$_SESSION["classid"]);
+    die(isContentValid($link,$cenroller) == true);
     if (isContentValid($link,$cenroller) == true) {
-        echo("<div class='text-center'><h1>Live Class | SkyfallenLiveConnect ID:" . $cenroller . "</h1></div><br><p>".$lctoken."</p>");
+        echo("<div class='text-center'><h1>Live Class | SkyfallenLiveConnect ID:" . $cenroller . "</h1></div>");
         echo("<script src='https://muzlupasta.theskyfallen.com/external_api.js'></script>
         <script>
         const domain = 'muzlupasta.theskyfallen.com';
