@@ -12,6 +12,11 @@ session_start();
 if(!$_SESSION["loggedin"]){
     header("Location: /?act=signin");
 }
+if($_SESSION["user_role"] == "unverified"){
+    include "nps/widgets/dash.php";
+    include "nps/errors/notapproved.html";
+    die();
+}
 if(substr( $request, 0, 7 ) === "lesson/") {
     $requestsuccess = true;
     include "nps/widgets/dash.php";
