@@ -239,22 +239,24 @@ function isContentValid($link,$contentid){
 // Close connection
     mysqli_close($link);
 }
-function getLiveClassToken($link,$contentid,$classid){
-    $sql = "SELECT token FROM  WHERE 'contentid'='".$contentid."' and classid='".$classid."'";
-    if($result = mysqli_query($link, $sql)){
-        if(mysqli_num_rows($result) == 1){
-            if(mysqli_num_rows($result) > 0){
-                while($row = mysqli_fetch_array($result)){
+function getLiveClassToken($link,$contentid,$classid)
+{
+    $sql = "SELECT token FROM  WHERE 'contentid'='" . $contentid . "' and classid='" . $classid . "'";
+    if ($result = mysqli_query($link, $sql)) {
+        if (mysqli_num_rows($result) == 1) {
+            if (mysqli_num_rows($result) > 0) {
+                while ($row = mysqli_fetch_array($result)) {
                     return $row['token'];
                 }
-            mysqli_free_result($result);
-        } else{
-            return false;
+                mysqli_free_result($result);
+            } else {
+                return false;
+            }
+        } else {
+            echo "ERROR: Could not able to execute" . $sql . "." . mysqli_error($link);
         }
-    } else{
-        echo "ERROR: Could not able to execute".$sql.".". mysqli_error($link);
-    }
 
 // Close connection
-    mysqli_close($link);
+        mysqli_close($link);
+    }
 }
