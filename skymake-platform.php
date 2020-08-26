@@ -202,8 +202,9 @@ if($user_role == "teacher") {
                 }
             }
             $exitret = false;
+            $newtoken = md5(uniqid(rand(), true));
             foreach ($includedgroups as $oneofgroups){
-                $ret = setLiveClassToken($linktwo, $cenroller, $oneofgroups, md5(uniqid(rand(), true)));
+                $ret = setLiveClassToken($linktwo, $cenroller, $oneofgroups, $newtoken);
                 if(!$ret){
                     die("An error occured.");
                 } if($ret) {
