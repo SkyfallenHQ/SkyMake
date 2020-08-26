@@ -54,9 +54,6 @@ if($user_role == "student") {
             width: self.innerWidth,
             height: self.innerHeight,
             parentNode: undefined
-                userInfo: {
-                    displayName: '".$_SESSION["username"]."'
-            }
         };
         const api = new JitsiMeetExternalAPI(domain, options);
         </script>");
@@ -161,9 +158,6 @@ if($user_role == "teacher") {
             width: self.innerWidth,
             height: self.innerHeight,
             parentNode: undefined
-            userInfo: {
-                    displayName: '".$_SESSION["username"]."'
-            }
         };
         const api = new JitsiMeetExternalAPI(domain, options);
         </script>");
