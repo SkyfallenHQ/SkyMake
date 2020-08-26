@@ -261,15 +261,12 @@ function isContentValid($link,$contentid){
 }
 function getLiveClassToken($link,$contentid,$classid)
 {
-    $_SESSION["tokenreturned"] = "false";
+    $ret = array();
     $sql = "SELECT token FROM skymake_lctokens WHERE contentid='" . $contentid . "' and classid='" . $classid . "'";
     if ($result = mysqli_query($link, $sql)) {
         if (mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_array($result)) {
-                if($_SESSION["tokenreturned"] == "false") {
-                    $_SESSION["tokenreturned"] = "true";
-                    $ret = $row['token'];
-                }
+                array_push($ret,$row["token"]);
             }
             mysqli_free_result($result);
         } else {

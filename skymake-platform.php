@@ -148,7 +148,6 @@ if($user_role == "teacher") {
         $cenroller = substr($request, 10, $ce_len);
         $cenroller = str_replace("/", "", $cenroller);
         $lctoken = getLiveClassToken($link, $cenroller, $_SESSION["classid"]);
-        die($lctoken);
         if (isContentValid($link, $cenroller) == true and !($lctoken == false)) {
             echo("<div class='text-center'><h1>Live Class | SkyfallenLiveConnect ID:" . $cenroller . "</h1></div>");
             echo("<script src='https://muzlupasta.theskyfallen.com/external_api.js'></script>
