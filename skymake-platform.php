@@ -178,13 +178,13 @@ if($user_role == "teacher") {
                         die("This content was not assigned to any course!");
                     }
                 } else{
-                    die("ERROR: Could not able to execute $sql. " . mysqli_error($link));
+                    die("ERROR: Could not able to execute for course  $sql. " . mysqli_error($link));
                 }
                 // Close connection
                 mysqli_close($link);
                 $includedgroups = array();
                 foreach($includedcourses as $oneofcourses) {
-                    $sql = "SELECT * FROM skymake_assignments WHERE lessonid='".$oneofcourses."'";
+                    $sql = "SELECT classid FROM skymake_assignments WHERE lessonid='".$oneofcourses."'";
                     if($result = mysqli_query($link, $sql)){
                         if(mysqli_num_rows($result) > 0){
                             while($row = mysqli_fetch_array($result)){
