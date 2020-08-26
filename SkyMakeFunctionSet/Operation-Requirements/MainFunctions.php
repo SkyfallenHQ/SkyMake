@@ -61,8 +61,7 @@ function getassignedlessonquery($link,$coursenroller){
     // Close connection
     mysqli_close($link);
     print_r($assignmentsarray);
-    echo array_search($assignmentsarray,$coursenroller);
-    return array_search($assignmentsarray,$coursenroller);
+    return array_search($coursenroller,$assignmentsarray);
 }
 function getassignedteachers($link){
     $sql = "SELECT teacher FROM skymake_assignments WHERE classid='".$_SESSION["classid"]."'";
