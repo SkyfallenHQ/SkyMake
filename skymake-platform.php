@@ -187,8 +187,8 @@ if($user_role == "teacher") {
                 sleep(1);
                 $includedgroups = array();
                 foreach($includedcourses as $oneofcourses) {
-                    $sql = "SELEXT classid FROM skymake_assignments WHERE lessonid='".$oneofcourses."'";
-                    if($result = mysqli_query($link, $sql)){
+                    $sql = "SELECT classid FROM skymake_assignments WHERE lessonid='".$oneofcourses."'";
+                    if($result = mysqli_query($linktwo, $sql)){
                         echo "SQL Query made:".$sql;
                         if(mysqli_num_rows($result) > 0){
                             while($row = mysqli_fetch_array($result)){
@@ -201,7 +201,7 @@ if($user_role == "teacher") {
                             die("This content was not assigned to any course!");
                         }
                     } else{
-                        die("ERROR: Could not able to execute $sql. " . mysqli_error($link));
+                        die("ERROR: Could not able to execute $sql. " . mysqli_error($linktwo));
                     }
                 }
             }

@@ -16,4 +16,10 @@ $link = mysqli_connect(dbHost, dbUser, dbPassword, dbName);
 if($link === false){
     die("ERROR: Could not connect. " . mysqli_connect_error());
 }
+$linktwo = mysqli_connect(dbHost, dbUser, dbPassword, dbName);
+
+// Check connection
+if($linktwo === false){
+    die("ERROR: Could not create backup link. " . mysqli_connect_error());
+}
 ?>
