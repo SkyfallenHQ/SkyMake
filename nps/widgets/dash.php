@@ -185,6 +185,7 @@ function doublewidget($lesson,$teacher,$time,$topic,$unit,$backgorundimage,$less
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/grades">My Grades</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/report">Report</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/profile">My Profile</a></li>
+                    <?php if($_SESSION["user_role"] == "teacher"){ ?> <li class="nav-item" role="presentation"><a class="nav-link" href="/mystudents">My Students</a></li> <?php } ?>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/search"><i class="fa fa-search"></i></a></li>
                     <li class="nav-item" role="presentation"></li>
                 </ul>
