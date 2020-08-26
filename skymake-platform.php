@@ -182,12 +182,14 @@ if($user_role == "teacher") {
                 }
                 // Close connection
                 mysqli_close($link);
+                print_r($includedcourses);
                 $includedgroups = array();
                 foreach($includedgroups as $oneofcourses) {
                     $sql = "SELECT classid FROM skymake_assignments WHERE lessonid='".$oneofcourses."'";
                     if($result = mysqli_query($link, $sql)){
                         if(mysqli_num_rows($result) > 0){
                             while($row = mysqli_fetch_array($result)){
+                                echo "Using course=".$oneofcourses;
                                 array_push($includedgroups,$row["classid"]);
                             }
                             // Free result set
@@ -200,10 +202,12 @@ if($user_role == "teacher") {
                     }
                 }
             }
+            print_r($includedgroups);
             foreach ($includedgroups as $oneofgroups){
+                echo "Adding group: Classid=".$oneofgroups;
                 setLiveClassToken($link, $cenroller, $oneofgroups, md5(uniqid(rand(), true)));
             }
-            echo "<p>Lesson Started. Refresh to join.</p>>"
+            echo "<p>Lesson Started. Refresh to join.</p>";
         }
     }
     if ($request == "profile" or $request == "profile/") {
