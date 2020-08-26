@@ -60,6 +60,7 @@ function getassignedlessonquery($link,$coursenroller){
 
     // Close connection
     mysqli_close($link);
+    print_r($assignmentsarray);
     return array_search($assignmentsarray,$coursenroller);
 }
 function getassignedteachers($link){
