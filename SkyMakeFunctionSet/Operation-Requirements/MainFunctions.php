@@ -259,15 +259,19 @@ function isContentValid($link,$contentid){
 // Close connection
     mysqli_close($link);
 }
-function getLiveClassToken($link,$contentid,$classid)
+function getLiveClassToken($link,$contentid,$classid,$check_class = true)
 {
     $ret = array();
-    $sql = "SELECT token FROM skymake_lctokens WHERE contentid='" . $contentid . "' and classid='" . $classid . "'";
+    if($check_class) {
+        $sql = "SELECT token FROM skymake_lctokens WHERE contentid='" . $contentid . "' and classid='" . $classid . "'";
+    } else{
+        $sql = "SELECT token FROM skymake_lctokens WHERE contentid='" . $contentid . "'";
+    }
     if ($result = mysqli_query($link, $sql)) {
         if (mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_array($result)) {
                 array_push($ret,$row["token"]);
-                die("We got a token");
+                die("We got a token".$row["token"]);
             }
             mysqli_free_result($result);
         } else {

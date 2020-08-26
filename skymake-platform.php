@@ -147,7 +147,7 @@ if($user_role == "teacher") {
         $ce_len = strlen($request);
         $cenroller = substr($request, 10, $ce_len);
         $cenroller = str_replace("/", "", $cenroller);
-        $lctoken = getLiveClassToken($link, $cenroller, $_SESSION["classid"]);
+        $lctoken = getLiveClassToken($link, $cenroller, $_SESSION["classid"],false);
         /*
         if (isContentValid($link, $cenroller) == true and !($lctoken == false)) {
             echo("<div class='text-center'><h1>Live Class | SkyfallenLiveConnect ID:" . $cenroller . "</h1></div>");
