@@ -182,7 +182,6 @@ if($user_role == "teacher") {
                 }
                 // Close connection
                 mysqli_close($link);
-                print_r($includedcourses);
                 sleep(1);
                 $includedgroups = array();
                 foreach($includedcourses as $oneofcourses) {
