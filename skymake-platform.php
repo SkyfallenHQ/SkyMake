@@ -125,8 +125,8 @@ if($user_role == "student") {
     }
 }
 if($user_role == "teacher") {
+    $_SESSION["teacheruser"] = $_SESSION["username"];
     if (substr($request, 0, 7) === "lesson/") {
-        $_SESSION["teacheruser"] = $_SESSION["username"];
         $requestsuccess = true;
         include "nps/widgets/dash.php";
         $ce_len = strlen($request);
