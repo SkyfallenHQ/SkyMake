@@ -207,7 +207,7 @@ if($user_role == "teacher") {
                 $ret = setLiveClassToken($linktwo, $cenroller, $oneofgroups, md5(uniqid(rand(), true)));
                 if(!$ret){
                     die("An error occured.");
-                } else {
+                } if($ret) {
                     $exitret = true;
                 }
             }
