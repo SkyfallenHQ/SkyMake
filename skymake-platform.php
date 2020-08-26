@@ -31,8 +31,7 @@ if($user_role == "student") {
         $n = getassignedlessonquery($linktwo, $cenroller);
         $lessonname = getassignedlessons($link)[$n];
         if (!($lessonname == "n")) {
-            echo("<div class='text-center'><h1>Lesson Details | " . $lessonname .$cenroller. "</h1></div>");
-            echo $n;
+            echo("<div class='text-center'><h1>Lesson Details | " . $lessonname . "</h1></div>");
             echo(overview(getassignedlessons($link)[$n], getassignedteachers($link)[$n], getassignedtimes($link)[$n], getassignedtopics($link)[$n], getassignedunits($link)[$n], getassignedbgurls($link)[$n], getassignedids($link)[$n], getlessoncontents($link, $cenroller)));
         } else {
             echo("<div class='text-center'><h1>This lesson does not exist. Please access your course by dashbboard.</h1></div>");
@@ -133,10 +132,10 @@ if($user_role == "teacher") {
         $ce_len = strlen($request);
         $cenroller = substr($request, 7, $ce_len);
         $cenroller = str_replace("/", "", $cenroller);
-        $lessonname = getassignedlessonsteacher($link)[getassignedlessonqueryteacher($link, $cenroller)];
+        $n = getassignedlessonqueryteacher($linktwo, $cenroller);
+        $lessonname = getassignedlessonsteacher($linktwo)[$n];
         if (!($lessonname == "n")) {
             echo("<div class='text-center'><h1>Lesson Details | " . $lessonname . "</h1></div>");
-            $n = getassignedlessonqueryteacher($link, $cenroller);
             echo(overview(getassignedlessonsteacher($link)[$n], "Assigned to me", getassignedtimesteacher($link)[$n], getassignedtopicsteacher($link)[$n], getassignedunitsteacher($link)[$n], getassignedbgurlsteacher($link)[$n], getassignedidsteacher($link)[$n], getlessoncontents($link, $cenroller)));
         } else {
             echo("<div class='text-center'><h1>This lesson does not exist. Please access your course by dashbboard.</h1></div>");

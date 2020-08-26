@@ -60,7 +60,6 @@ function getassignedlessonquery($link,$coursenroller){
 
     // Close connection
     mysqli_close($link);
-    print_r($assignmentsarray);
     return array_search($coursenroller,$assignmentsarray);
 }
 function getassignedteachers($link){
@@ -319,24 +318,24 @@ function getassignedlessonsteacher($link){
     mysqli_close($link);
 }
 function getassignedlessonqueryteacher($link,$coursenroller){
-    $sql = "SELECT uniqueline FROM skymake_assignments WHERE lessonid='".$coursenroller."' and teacheruser='".$_SESSION["teacheruser"]."'";
+    $assignmentsarray = array();
+    $sql = "SELECT lessonid FROM skymake_assignments WHERE teacheruser='".$_SESSION["teacheruser"]."'";
     if($result = mysqli_query($link, $sql)){
-        if(mysqli_num_rows($result) == 1){
-            $retarr = array();
+        if(mysqli_num_rows($result) > 0){
             while($row = mysqli_fetch_array($result)){
-                $retvalue = $row['uniqueline'] - 1;
+                array_push($assignmentsarray,$row["lessonid"]);
             }
             mysqli_free_result($result);
         } else{
-            return "errorundefined";
+            return;
         }
     } else{
         echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
     }
 
-// Close connection
-    return $retvalue;
+    // Close connection
     mysqli_close($link);
+    return array_search($coursenroller,$assignmentsarray);
 }
 function getassignedtimesteacher($link){
     $sql = "SELECT time FROM skymake_assignments WHERE teacheruser='".$_SESSION["teacheruser"]."'";
