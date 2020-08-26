@@ -281,17 +281,11 @@ function setLiveClassToken($link,$contentid,$classid,$token)
 {
     $sql = "INSERT INTO skymake_lctokens(classid,token,contentid) VALUES ('".$classid."','".$token."','".$contentid."')";
     if ($result = mysqli_query($link, $sql)) {
-        if (mysqli_num_rows($result) == 1) {
-            while ($row = mysqli_fetch_array($result)) {
-                return true;
-            }
-            mysqli_free_result($result);
-        } else {
-            return false;
-        }
+        return true;
     }
     else {
         echo "ERROR: Could not able to execute" . $sql . "." . mysqli_error($link);
+        return false;
     }
     mysqli_close($link);
 }
