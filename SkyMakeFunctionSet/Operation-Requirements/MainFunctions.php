@@ -46,7 +46,7 @@ function getassignedlessonquery($link,$coursenroller){
     $assignmentsarray = array();
     $sql = "SELECT lessonid FROM skymake_assignments WHERE classid='".$_SESSION["classid"]."'";
     if($result = mysqli_query($link, $sql)){
-        if(mysqli_num_rows($result) == 1){
+        if(mysqli_num_rows($result) > 0){
             while($row = mysqli_fetch_array($result)){
                 array_push($assignmentsarray,$row["lessonid"]);
             }
