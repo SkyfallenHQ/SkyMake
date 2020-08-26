@@ -271,7 +271,4 @@ if($requestsuccess == false){
 <script src="nps/widgets/assets/bootstrap/js/bootstrap.min.js"></script>
 <script src="nps/widgets/assets/js/Animated-Type-Heading.js"></script>
 </body>
-<footer>
-    <div class="footercustom">SkyMake Version 4 - Developed by Skyfallen | This is a beta and must not be used for production. | © 2016-2020 Skyfallen © 2017-2020 SkyMake © 2020 Skyfallen Open Source</div>
-</footer>
 </html>
