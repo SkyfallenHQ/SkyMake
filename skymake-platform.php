@@ -246,7 +246,7 @@ if($user_role == "teacher") {
                 }
             }
         } else {
-            echo("<div class=\"text-center\"><h1>You have no active courses.</h1></div>");
+            echo("<div class=\"text-center\"><h1>You are free for now.</h1></div>");
         }
 
     }
