@@ -31,7 +31,7 @@ if($user_role == "student") {
         $lessonname = getassignedlessons($link)[getassignedlessonquery($linktwo, $cenroller)];
         if (!($lessonname == "n")) {
             echo("<div class='text-center'><h1>Lesson Details | " . $lessonname .$cenroller. "</h1></div>");
-            $n = getassignedlessonquery($linktwo, $cenroller);
+            $n = getassignedlessonquery($link, $cenroller);
             echo $n;
             echo(overview(getassignedlessons($link)[$n], getassignedteachers($link)[$n], getassignedtimes($link)[$n], getassignedtopics($link)[$n], getassignedunits($link)[$n], getassignedbgurls($link)[$n], getassignedids($link)[$n], getlessoncontents($link, $cenroller)));
         } else {
