@@ -212,7 +212,7 @@ if($user_role == "teacher") {
                 }
             }
             if($exitret){
-                header("refresh=0");
+                header("Refresh:0");
             }
 
         }
