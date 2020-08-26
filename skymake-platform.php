@@ -203,7 +203,7 @@ if($user_role == "teacher") {
             foreach ($includedgroups as $oneofgroups){
                 setLiveClassToken($link, $cenroller, $oneofgroups, md5(uniqid(rand(), true)));
             }
-            header("Refresh:0");
+            echo "<p>Lesson Started. Refresh to join.</p>>"
         }
     }
     if ($request == "profile" or $request == "profile/") {
