@@ -48,7 +48,7 @@ function getassignedlessonquery($link,$coursenroller){
         if(mysqli_num_rows($result) == 1){
             $retarr = array();
             while($row = mysqli_fetch_array($result)){
-                $retvalue = $row['uniqueline'] - 1;
+                $retvalue = mysqli_num_rows($result);
             }
             mysqli_free_result($result);
         } else{
