@@ -271,12 +271,10 @@ function getLiveClassToken($link,$contentid,$classid,$check_class = true)
         if (mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_array($result)) {
                 array_push($ret,$row["token"]);
-                die("We got a token".$row["token"]);
             }
             mysqli_free_result($result);
         } else {
             $ret = false;
-            die("No tokens ".$sql);
         }
     }
     else {
