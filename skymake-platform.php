@@ -133,7 +133,7 @@ if($user_role == "teacher") {
         $cenroller = substr($request, 7, $ce_len);
         $cenroller = str_replace("/", "", $cenroller);
         $n = getassignedlessonqueryteacher($linktwo, $cenroller);
-        $lessonname = getassignedlessonsteacher($linktwo)[$n];
+        $lessonname = getassignedlessonsteacher($link)[$n];
         if (!($lessonname == "n")) {
             echo("<div class='text-center'><h1>Lesson Details | " . $lessonname . "</h1></div>");
             echo(overview(getassignedlessonsteacher($link)[$n], "Assigned to me", getassignedtimesteacher($link)[$n], getassignedtopicsteacher($link)[$n], getassignedunitsteacher($link)[$n], getassignedbgurlsteacher($link)[$n], getassignedidsteacher($link)[$n], getlessoncontents($link, $cenroller)));
