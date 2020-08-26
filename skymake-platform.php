@@ -170,6 +170,7 @@ if($user_role == "teacher") {
                 if($result = mysqli_query($link, $sql)){
                     if(mysqli_num_rows($result) > 0){
                         while($row = mysqli_fetch_array($result)){
+                            echo "Adding lessonid:".$row["lessonid"];
                             array_push($includedcourses,$row["lessonid"]);
                         }
                         // Free result set
@@ -187,6 +188,7 @@ if($user_role == "teacher") {
                 foreach($includedgroups as $oneofcourses) {
                     $sql = "SELECT classid FROM skymake_assignments WHERE lessonid='".$oneofcourses."'";
                     if($result = mysqli_query($link, $sql)){
+                        echo "SQL Query made:".$sql;
                         if(mysqli_num_rows($result) > 0){
                             while($row = mysqli_fetch_array($result)){
                                 echo "Using course=".$oneofcourses;
