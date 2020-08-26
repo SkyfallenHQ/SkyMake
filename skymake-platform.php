@@ -50,7 +50,7 @@ if($user_role == "student") {
         <script>
         const domain = 'muzlupasta.theskyfallen.com';
         const options = {
-            roomName: 'SkyMake4/LiveClasses/" . $cenroller . "/" . $lctoken . "',
+            roomName: 'SkyMake4/LiveClasses/" . $cenroller . "/" . $lctoken[0] . "',
             width: self.innerWidth,
             height: self.innerHeight,
             parentNode: undefined
