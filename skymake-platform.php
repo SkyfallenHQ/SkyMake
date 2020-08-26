@@ -187,7 +187,7 @@ if($user_role == "teacher") {
                 sleep(1);
                 $includedgroups = array();
                 foreach($includedcourses as $oneofcourses) {
-                    $sql = "SELECT classid FROM skymake_assignments WHERE lessonid='".$oneofcourses."'";
+                    $sql = "SELEXT classid FROM skymake_assignments WHERE lessonid='".$oneofcourses."'";
                     if($result = mysqli_query($link, $sql)){
                         echo "SQL Query made:".$sql;
                         if(mysqli_num_rows($result) > 0){
