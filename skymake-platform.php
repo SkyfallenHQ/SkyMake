@@ -184,6 +184,7 @@ if($user_role == "teacher") {
                 // Close connection
                 mysqli_close($link);
                 print_r($includedcourses);
+                sleep(1);
                 $includedgroups = array();
                 foreach($includedcourses as $oneofcourses) {
                     $sql = "SELECT classid FROM skymake_assignments WHERE lessonid='".$oneofcourses."'";
