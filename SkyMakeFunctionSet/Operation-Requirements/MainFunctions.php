@@ -268,17 +268,18 @@ function getLiveClassToken($link,$contentid,$classid)
             while ($row = mysqli_fetch_array($result)) {
                 if($_SESSION["tokenreturned"] == "false") {
                     $_SESSION["tokenreturned"] = "true";
-                    return $row['token'];
+                    $ret = $row['token'];
                 }
             }
             mysqli_free_result($result);
         } else {
-            return false;
+            $ret = false;
         }
     }
     else {
             echo "ERROR: Could not able to execute" . $sql . "." . mysqli_error($link);
     }
+    return $ret;
     mysqli_close($link);
 }
 function setLiveClassToken($link,$contentid,$classid,$token)
