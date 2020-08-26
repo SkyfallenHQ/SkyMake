@@ -28,7 +28,7 @@ if($user_role == "student") {
         $ce_len = strlen($request);
         $cenroller = substr($request, 7, $ce_len);
         $cenroller = str_replace("/", "", $cenroller);
-        $n = getassignedlessonquery($link, $cenroller);
+        $n = getassignedlessonquery($linktwo, $cenroller);
         $lessonname = getassignedlessons($link)[$n];
         if (!($lessonname == "n")) {
             echo("<div class='text-center'><h1>Lesson Details | " . $lessonname .$cenroller. "</h1></div>");
