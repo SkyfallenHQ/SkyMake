@@ -206,11 +206,19 @@ if($user_role == "teacher") {
                 }
             }
             print_r($includedgroups);
+            $exitret = false;
             foreach ($includedgroups as $oneofgroups){
-                echo "Adding group: Classid=".$oneofgroups;
-                setLiveClassToken($link, $cenroller, $oneofgroups, md5(uniqid(rand(), true)));
+                $ret = setLiveClassToken($linktwo, $cenroller, $oneofgroups, md5(uniqid(rand(), true)));
+                if(!$ret){
+                    die("An error occured.");
+                } else {
+                    $exitret = true;
+                }
             }
-            echo "<p>Lesson Started. Refresh to join.</p>";
+            if($exitret){
+                header("refresh=0");
+            }
+
         }
     }
     if ($request == "profile" or $request == "profile/") {
