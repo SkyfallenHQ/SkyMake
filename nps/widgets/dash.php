@@ -178,15 +178,12 @@ function doublewidget($lesson,$teacher,$time,$topic,$unit,$backgorundimage,$less
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="nav navbar-nav flex-grow-1 justify-content-between">
                     <li class="nav-item" role="presentation"><a class="nav-link" href="#"><img src="/nps/widgets/assets/img/SkyfallenLogoSmallWhiteOnly.png" height="20"></a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="/course">Courses</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="/dash">Dashboard</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="/oes">Online Examination</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="/liveclass">Live Class</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="/grades">My Grades</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="/report">Report</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="/dash">Courses Dashboard</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="/results">Results</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/profile">My Profile</a></li>
                     <?php if($_SESSION["user_role"] == "teacher"){ ?> <li class="nav-item" role="presentation"><a class="nav-link" href="/mystudents">My Students</a></li> <?php } ?>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="/search"><i class="fa fa-search"></i></a></li>
+                    <?php //<li class="nav-item" role="presentation"><a class="nav-link" href="/search"><i class="fa fa-search"></i></a></li>
+                    ?>
                     <li class="nav-item" role="presentation"></li>
                 </ul>
             </div>
