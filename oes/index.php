@@ -31,6 +31,21 @@ if(isset($_GET["examid"])){
         die("ERROR: Could not able to execute $sql. " . mysqli_error($link));
     }
     mysqli_close($link);
+
+$sql = "SELECT FROM skymake_qanswer (picurl) WHERE examid='".$_SESSION["examid"]."' and qn='".$_SESSION["qn"]."'";
+if($result = mysqli_query($link, $sql)){
+    if(mysqli_num_rows($result) == 1){
+        while($row = mysqli_fetch_array($result)){
+            $picurl = $row["picurl"];
+        }
+        mysqli_free_result($result);
+    } else{
+       $picurl = "https://www.theskyfallen.com/cdn/imgnone.jpg";
+    }
+} else{
+    die("ERROR: Could not able to execute $sql. " . mysqli_error($link));
+}
+mysqli_close($link);
 function getRemoteIPAddress() {
     if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
         return $_SERVER['HTTP_CLIENT_IP'];
@@ -122,22 +137,7 @@ if (isset($_POST["backbtn"])){
         <h6>From <?php echo $examdata["exam_start"]." to ".$examdata["exam_end"]; ?></h6>
     </div>
     <form method="post">
-        <img src="<?php
-        $sql = "SELECT FROM skymake_qanswer (picurl) WHERE examid='".$_SESSION["examid"]."' and qn='".$_SESSION["qn"]."'";
-        if($result = mysqli_query($link, $sql)){
-            /*if(mysqli_num_rows($result) == 1){
-                while($row = mysqli_fetch_array($result)){
-                    echo $row["picurl"];
-                }
-                mysqli_free_result($result);
-            } else{
-                echo "https://www.theskyfallen.com/cdn/imgnone.jpg";
-            }*/
-        } else{
-            die("ERROR: Could not able to execute $sql. " . mysqli_error($link));
-        }
-        mysqli_close($link);
-        ?>"><br>
+        <img src="<?php echo $picurl; ?>"><br>
      <?php echo "Question Number:".$_SESSION["qn"]." Out of: ".$examdata["exam_qcount"]; ?><br>
             <input name="backbtn" type="submit" class="btn btn-primary" value="Don't Submit and Go Back">
      Your answer:
