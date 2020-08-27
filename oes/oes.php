@@ -1,23 +1,8 @@
 <?php
-// Initialize the session
-session_start();
 require_once "config.php";
-
+session_start();
 function qninfo($finput1){
-    if($finput1 > 0 and $finput1 < 21){
-           return "Turkish";
-     } elseif($finput1 > 20 and $finput1 < 31){
-        return "History";
-     } elseif($finput1 > 30 and $finput1 < 41){
-               return "Religion";
-     } elseif($finput1 > 40 and $finput1 < 51){
-               return "English";
-     } elseif($finput1 > 50 and $finput1 < 71){
-               return "Math";
-     } elseif($finput1 > 70 and $finput1 < 91){
-                      return "Science";
-     }
-
+    return "Question Number:".$finput1;
 }
 function getRemoteIPAddress() {
     if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
@@ -66,17 +51,17 @@ VALUES ('".$_SESSION["id"]."', '".$qn_internal."', '".$_SESSION["lastanswer"]."'
     echo "SQL Query Succeeded:".$sql;
     }
         else{
-          echo "Type 2 Error: " . $sql . "<br>" . mysqli_error($conn);
+          echo "Type 2 Error: " . $sql . "<br>" . mysqli_error($link);
         }
     }
     else {
-    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    echo "Error: " . $sql . "<br>" . mysqli_error($link);
 }}
       }else {
           echo "Invalid radiobutton value:".$_SESSION["lastanswer"];
       }
 
-mysqli_close($conn);  }
+mysqli_close($link);  }
 }
 }
 if (isset($_POST["backbtn"])){
