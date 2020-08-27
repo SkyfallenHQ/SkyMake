@@ -32,7 +32,7 @@ if(isset($_GET["examid"])){
     }
     mysqli_close($link);
 
-$sql = "SELECT picurl FROM skymake_qanswer WHERE examid='".$_SESSION["examid"]."' and qn='".$_SESSION["qn"]."'";
+$sql = "SELECT picurl FROM skymake_qanswers WHERE examid='".$_SESSION["examid"]."' and qn='".$_SESSION["qn"]."'";
 if($result = mysqli_query($link, $sql)){
     if(mysqli_num_rows($result) == 1){
         while($row = mysqli_fetch_array($result)){
