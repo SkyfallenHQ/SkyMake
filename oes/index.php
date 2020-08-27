@@ -1,9 +1,36 @@
 <?php
 require_once "config.php";
 session_start();
-function qninfo($finput1){
-    return "Question Number:".$finput1;
+if(isset($_GET["examid"])){
+    $examid = $_GET["examid"];
+    $_SESSION["examid"] = $examid;
+}else {
+    if(!isset($_SESSION["examid"])){
+    echo "Exam not specified. You will be redirected in 3 seconds";
+    sleep(3);
+    header("location: /");
+    }
 }
+    $sql = "SELECT exam_name,exam_start,exam_end,exam_qcount,exam_type FROM skymake_examdata WHERE examid='".$_SESSION["examid"]."'";
+    if($result = mysqli_query($link, $sql)){
+        if(mysqli_num_rows($result) == 0){
+            while($row = mysqli_fetch_array($result)){
+               $examdata["exam_name"] = $row["exam_name"];
+               $examdata["exam_start"] = $row["exam_start"];
+               $examdata["exam_end"] = $row["exam_end"];
+               $examdata["exam_qcount"] = $row["exam_qcount"];
+               $examdata["exam_type"] = $row["exam_type"];
+            }
+            mysqli_free_result($result);
+        } else{
+                echo "Exam invalid. You will be redirected in 3 seconds";
+                sleep(3);
+                header("location: /");
+        }
+    } else{
+        echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+    }
+    mysqli_close($link);
 function getRemoteIPAddress() {
     if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
         return $_SERVER['HTTP_CLIENT_IP'];
@@ -22,7 +49,7 @@ if (isset($_POST["killsession"])){
     header("location: sessionkill.php");
 }
 if (isset($_POST["nextbtn"])){
-    if($_SESSION["qn"]!=91){
+    if($_SESSION["qn"]!=$examdata["exam_qcount"]){
  if(empty($_POST['ANSWER'])){
    echo "Please select one";
    }
@@ -34,18 +61,18 @@ if (isset($_POST["nextbtn"])){
 
    unset($_POST["nextbtn"]);
       $qn_internal=$_SESSION["qn"]-1;
-      $uniq = $_SESSION["id"]."uniq".$qn_internal;
+      $uniq = $_SESSION["id"]."uniq".$qn_internal."uniq".$_SESSION["examid"];
       if($_SESSION["lastanswer"] == "Q_A" or $_SESSION["lastanswer"] == "Q_B" or $_SESSION["lastanswer"] == "Q_C" or $_SESSION["lastanswer"] == "Q_D" or $_SESSION["lastanswer"] == "Q_EMPTY"){
-$sql = "INSERT INTO answer (id, qn, answer,uniq)
-VALUES ('".$_SESSION["id"]."', '".$qn_internal."', '".$_SESSION["lastanswer"]."','".$uniq."')";
+$sql = "INSERT INTO skymake_answer (id, qn, answer,uniq,examid)
+VALUES ('".$_SESSION["id"]."', '".$qn_internal."', '".$_SESSION["lastanswer"]."','".$uniq."','".$_SESSION["examid"]."')";
 
 if (mysqli_query($link, $sql)) {
     echo "SQL Query Succeeded:".$sql;
 } else {
-    $sql = "DELETE FROM answer WHERE uniq='".$uniq."';";
+    $sql = "DELETE FROM skymake_answer WHERE uniq='".$uniq."';";
     if (mysqli_query($link, $sql)){
- $sql = "INSERT INTO answer (id, qn, answer,uniq)
-VALUES ('".$_SESSION["id"]."', '".$qn_internal."', '".$_SESSION["lastanswer"]."','".$uniq."')";
+ $sql = "INSERT INTO skymake_answer (id, qn, answer,uniq)
+VALUES ('".$_SESSION["id"]."', '".$qn_internal."', '".$_SESSION["lastanswer"]."','".$uniq."','".$_SESSION["examid"]."')";
 
     if (mysqli_query($link, $sql)) {
     echo "SQL Query Succeeded:".$sql;
@@ -75,7 +102,7 @@ if (isset($_POST["backbtn"])){
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Deducated Online Examination System</title>
+    <title>SkyMake 4 - OE System</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
     <style type="text/css">
         body{ font: 14px sans-serif; text-align: center; }
@@ -91,10 +118,27 @@ if (isset($_POST["backbtn"])){
 </head>
 <body>
     <div class="page-header">
-        <h1>Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. Please enter your answers.</h1>
+        <h1>Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. Please enter your answers for <?php echo $examdata["exam_name"]; ?>.</h1>
+        <h6>From <?php echo $examdata["exam_start"]." to ".$examdata["exam_end"]; ?></h6>
     </div>
     <form method="post">
-     Lesson:<?php echo qninfo($_SESSION["qn"]); echo "-"; echo $_SESSION["qn"]; ?><br>
+        <img src="<?php
+        $sql = "SELECT FROM skymake_qanswer (picurl) WHERE examid='".$_SESSION["examid"]."' and qn='".$_SESSION["qn"]."'";
+        if($result = mysqli_query($link, $sql)){
+            if(mysqli_num_rows($result) == 0){
+                while($row = mysqli_fetch_array($result)){
+                    echo $row["picurl"];
+                }
+                mysqli_free_result($result);
+            } else{
+                echo "https://www.theskyfallen.com/cdn/imgnone.jpg";
+            }
+        } else{
+            die("ERROR: Could not able to execute $sql. " . mysqli_error($link));
+        }
+        mysqli_close($link);
+        ?>">
+     <?php echo "Question Number:".$finput1." Out of: ".$examdata["exam_qcount"]; ?><br>
             <input name="backbtn" type="submit" class="btn btn-primary" value="Don't Submit and Go Back">
      Your answer:
     <input type="radio" id="Q_A" name="ANSWER" value="Q_A">
@@ -111,8 +155,6 @@ if (isset($_POST["backbtn"])){
         <input name="killsession" type="submit" class="btn btn-primary" value="Kill Session"><br>
          <p id="timer" name="timer"></p>
         </form>
-        <div class="footer">
-            <p>SkyMake Version 2 Production Release - The Skyfallen Production Company</p></div>
 </body>
     <script>
     // Set the date we're counting down to
@@ -146,10 +188,10 @@ if (isset($_POST["backbtn"])){
         // If the count down is over, write some text
         if (distance < 0) {
             clearInterval(x);
-            document.getElementById("timer").innerHTML = "EXAM EXPIRED - Redirecting...";
+            document.getElementById("timer").innerHTML = "EXAM TIMEOUT";
             document.getElementById("nextbtn").disabled = true;
             setTimeout(function(){
-            window.location.href = 'https://deducated.com/examexpired';
+            window.location.href = '/';
          }, 5000);
         }
     }, 1000);
