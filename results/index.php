@@ -1,135 +1,81 @@
 <?php
-// Initialize the session
+require_once "config.php";
 session_start();
- 
-// Check if the user is already logged in, if yes then redirect him to welcome page
-if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-    header("location: result.php");
+// Check if the user is logged in, if not then redirect him to login page
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+    header("location: /");
     exit;
 }
- 
-// Include config file
-require_once "config.php";
- 
-// Define variables and initialize with empty values
-$username = $password = "";
-$username_err = $password_err = "";
- 
-// Processing form data when form is submitted
-if($_SERVER["REQUEST_METHOD"] == "POST"){
- 
-    // Check if username is empty
-    if(empty(trim($_POST["username"]))){
-        $username_err = "Please enter username.";
-    } else{
-        $username = trim($_POST["username"]);
-    }
-    
-    // Check if password is empty
-    if(empty(trim($_POST["password"]))){
-        $password_err = "Please enter your password.";
-    } else{
-        $password = trim($_POST["password"]);
-    }
-    
-    // Validate credentials
-    if(empty($username_err) && empty($password_err)){
-        // Prepare a select statement
-        $sql = "SELECT id, username, password FROM users WHERE username = ?";
-        
-        if($stmt = mysqli_prepare($link, $sql)){
-            // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "s", $param_username);
-            
-            // Set parameters
-            $param_username = $username;
-            
-            // Attempt to execute the prepared statement
-            if(mysqli_stmt_execute($stmt)){
-                // Store result
-                mysqli_stmt_store_result($stmt);
-                
-                // Check if username exists, if yes then verify password
-                if(mysqli_stmt_num_rows($stmt) == 1){                    
-                    // Bind result variables
-                    mysqli_stmt_bind_result($stmt, $id, $username, $hashed_password);
-                    if(mysqli_stmt_fetch($stmt)){
-                        if(password_verify($password, $hashed_password)){
-                            // Password is correct, so start a new session
-                            session_start();
-                            
-                            // Store data in session variables
-                            $_SESSION["loggedin"] = true;
-                            $_SESSION["id"] = $id;
-                            $_SESSION["username"] = $username;  
-                            $_SESSION["qn"]=1;
-                            
-                            // Redirect user to welcome page
-                            header("location: result.php");
-                        } else{
-                            // Display an error message if password is not valid
-                            $password_err = "The password you entered was not valid.";
+// Check connection
+$link2 = $linktwo;
+$sql = "SELECT qn,answer FROM skymake_answer WHERE id=".$_SESSION["id"].";";
+$sql2 = "SELECT answer FROM skymake_answer WHERE id=3;";
+if ($res = mysqli_query($link, $sql)) { 
+    if ($res2 = mysqli_query($link2, $sql2)) { 
+    if (mysqli_num_rows($res) == 90 and mysqli_num_rows($res2) == 90) { 
+        echo "<table>"; 
+        echo "<tr>"; 
+        echo "<th>Question Nr.</th>"; 
+        echo "<th>Your Answer</th>"; 
+        echo "<th>Right Answer</th>"; 
+        echo "</tr>"; 
+        $qn_internal = 0;
+        $m1 = 0;
+        $m2 = 0;
+        $e2 = 0;
+        $e1 = 0;
+        while ($row = mysqli_fetch_array($res)) { 
+            $row2 = mysqli_fetch_array($res2);
+            $qn_internal++;
+            echo "<tr>"; 
+            echo "<td>".$row['qn']."</td>"; 
+            echo "<td>".$row['answer']."</td>";
+            echo "<td>".$row2['answer']."</td>";
+            if($examtype="90withMSL") {
+                if ($row['answer'] != $row2['answer']) {
+                    if ($row['answer'] == "Q_EMPTY") {
+                        if (x < 51 and x > 20) {
+                            $e1++;
+                            $m1++;
+                        } else {
+                            $e2++;
+                            $m2++;
+                        }
+                    } else {
+                        if (x < 51 and x > 20) {
+                            $m1++;
+                        } else {
+                            $m2++;
                         }
                     }
-                } else{
-                    // Display an error message if username doesn't exist
-                    $username_err = "No account found with that username.";
                 }
-            } else{
-                echo "Oops! Something went wrong. Please try again later.";
+                $points = 500-($m1+($m1-$e1)/3+($m2-$e2)/3*4+$m2*4);
+            }else{
+                if ($row['answer'] != $row2['answer']) {
+                    if ($row['answer'] == "Q_EMPTY") {
+                        $points = $points;
+                    } else {
+                        $points = $points - 10;
+                    }
+                }else{
+                    $points = $points + 20;
+                }
             }
-
-            // Close statement
-            mysqli_stmt_close($stmt);
         }
+
+        echo "</table><p>".$points."</p>"; 
+                $sql = "INSERT INTO skymake_result (un, p) VALUES ('".$_SESSION["username"]."','".$points."');";
+        if (mysqli_query($link, $sql)) { 
+       echo "<p>Query Executed Successfully.</p>"; 
+       echo "<p><a href=\"ranking.php\">Show ranking.</a></p>";  
+     }else
+        {
+            echo "<p>Query failed. ECN:3</p>";
+                   echo "<p><a href=\"ranking.php\">Show ranking.</a></p>";  
+        }
+        mysqli_free_res($res); 
+        mysqli_free_res($res2); 
     }
-    
-    // Close connection
-    mysqli_close($link);
-}
-?>
- 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>deducated - Online Examination Service</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
-    <style type="text/css">
-        body{ font: 14px sans-serif; }
-        .wrapper{ width: 350px; padding: 20px; }
-        .footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  background-color: black;
-  color: white;
-  text-align: center;
-}
-    </style>
-</head>
-<body>
-    <div class="wrapper">
-        <h2>deducated - Login</h2>
-        <p>This application is not connected to the Skyfallen ID service.Please login with your app specific credidentals.</p>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-            <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
-                <label>Username</label>
-                <input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
-                <span class="help-block"><?php echo $username_err; ?></span>
-            </div>    
-            <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-                <label>Password</label>
-                <input type="password" name="password" class="form-control">
-                <span class="help-block"><?php echo $password_err; ?></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Login">
-            </div>
-        </form>
-    </div>    
-</body>
-    <div class="footer">
-        <p>Service connected to The Skyfallen Servers at Izmir TR - deducated, Inc. by The Skyfallen Company <br>Debugging Info:<br>Status Code:DDCTD-SCCS003 - Webserver connected: Izmir TR - Database Server Connected: NYC-US</p></div>
-</html>
+}}  
+mysqli_close($link); 
+?> 
