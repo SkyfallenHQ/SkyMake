@@ -123,9 +123,9 @@ if (isset($_POST["backbtn"])){
     </div>
     <form method="post">
         <img src="<?php
-        /*$sql = "SELECT FROM skymake_qanswer (picurl) WHERE examid='".$_SESSION["examid"]."' and qn='".$_SESSION["qn"]."'";
+        $sql = "SELECT FROM skymake_qanswer (picurl) WHERE examid='".$_SESSION["examid"]."' and qn='".$_SESSION["qn"]."'";
         if($result = mysqli_query($link, $sql)){
-            if(mysqli_num_rows($result) == 0){
+            if(mysqli_num_rows($result) == 1){
                 while($row = mysqli_fetch_array($result)){
                     echo $row["picurl"];
                 }
@@ -137,9 +137,7 @@ if (isset($_POST["backbtn"])){
             die("ERROR: Could not able to execute $sql. " . mysqli_error($link));
         }
         mysqli_close($link);
-        */
-        echo "test.jpg";
-        ?>">
+        ?>"><br>
      <?php echo "Question Number:".$_SESSION["qn"]." Out of: ".$examdata["exam_qcount"]; ?><br>
             <input name="backbtn" type="submit" class="btn btn-primary" value="Don't Submit and Go Back">
      Your answer:
