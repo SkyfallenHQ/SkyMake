@@ -33,7 +33,7 @@ if(isset($_GET["examid"])){
     mysqli_close($link);
 
 $sql = "SELECT picurl FROM skymake_qanswers WHERE examid='".$_SESSION["examid"]."' and qn='".$_SESSION["qn"]."'";
-if($result = mysqli_query($link, $sql)){
+if($result = mysqli_query($linktwo, $sql)){
     if(mysqli_num_rows($result) == 1){
         while($row = mysqli_fetch_array($result)){
             $picurl = $row["picurl"];
@@ -43,9 +43,9 @@ if($result = mysqli_query($link, $sql)){
        $picurl = "https://www.theskyfallen.com/cdn/imgnone.jpg";
     }
 } else{
-    die("ERROR: Could not able to execute $sql. " . mysqli_error($link));
+    die("ERROR: Could not able to execute $sql. " . mysqli_error($linktwo));
 }
-mysqli_close($link);
+mysqli_close($linktwo);
 function getRemoteIPAddress() {
     if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
         return $_SERVER['HTTP_CLIENT_IP'];
