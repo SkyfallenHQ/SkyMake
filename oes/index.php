@@ -11,27 +11,33 @@ if(isset($_GET["examid"])){
     header("location: /");
     }
 }
-    $sql = "SELECT exam_name,exam_start,exam_end,exam_qcount,exam_type FROM skymake_examdata WHERE examid='".$_SESSION["examid"]."'";
-    if($result = mysqli_query($link, $sql)){
-        if(mysqli_num_rows($result) == 1){
-            while($row = mysqli_fetch_array($result)){
-               $examdata["exam_name"] = $row["exam_name"];
-               $examdata["exam_start"] = $row["exam_start"];
-               $examdata["exam_end"] = $row["exam_end"];
-               $examdata["exam_qcount"] = $row["exam_qcount"];
-               $examdata["exam_type"] = $row["exam_type"];
-            }
-            mysqli_free_result($result);
-        } else{
-                echo "Exam invalid. You will be redirected in 3 seconds";
-                sleep(3);
-                header("location: /");
+$sql = "SELECT exam_name,exam_start,exam_end,exam_qcount,exam_type FROM skymake_examdata WHERE examid='".$_SESSION["examid"]."'";
+if($result = mysqli_query($link, $sql)){
+    if(mysqli_num_rows($result) == 1){
+        while($row = mysqli_fetch_array($result)){
+           $examdata["exam_name"] = $row["exam_name"];
+           $examdata["exam_start"] = $row["exam_start"];
+           $examdata["exam_end"] = $row["exam_end"];
+           $examdata["exam_qcount"] = $row["exam_qcount"];
+           $examdata["exam_type"] = $row["exam_type"];
         }
+        mysqli_free_result($result);
     } else{
-        die("ERROR: Could not able to execute $sql. " . mysqli_error($link));
+            echo "Exam invalid. You will be redirected in 3 seconds";
+            sleep(3);
+            header("location: /");
     }
-    mysqli_close($link);
-
+} else{
+    die("ERROR: Could not able to execute $sql. " . mysqli_error($link));
+}
+mysqli_close($link);
+if (new DateTime() > new DateTime($examdata["exam_end"])) {
+   echo "Your time is over. \n";
+   echo "Your answer was discarded.\n";
+   echo "Redirecting in 10 seconds \n";
+   sleep(10);
+   header("location: /");
+}
 $sql = "SELECT picurl FROM skymake_qanswers WHERE examid='".$_SESSION["examid"]."' and qn='".$_SESSION["qn"]."'";
 if($result = mysqli_query($linktwo, $sql)){
     if(mysqli_num_rows($result) == 1){
