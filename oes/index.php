@@ -12,7 +12,7 @@ if(isset($_GET["examid"])){
     }
 }
     $sql = "SELECT exam_name,exam_start,exam_end,exam_qcount,exam_type FROM skymake_examdata WHERE examid='".$_SESSION["examid"]."'";
-    if($result = mysqli_query($linktwo, $sql)){
+    if($result = mysqli_query($link, $sql)){
         if(mysqli_num_rows($result) == 1){
             while($row = mysqli_fetch_array($result)){
                $examdata["exam_name"] = $row["exam_name"];
