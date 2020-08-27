@@ -125,14 +125,14 @@ if (isset($_POST["backbtn"])){
         <img src="<?php
         $sql = "SELECT FROM skymake_qanswer (picurl) WHERE examid='".$_SESSION["examid"]."' and qn='".$_SESSION["qn"]."'";
         if($result = mysqli_query($link, $sql)){
-            if(mysqli_num_rows($result) == 1){
+            /*if(mysqli_num_rows($result) == 1){
                 while($row = mysqli_fetch_array($result)){
                     echo $row["picurl"];
                 }
                 mysqli_free_result($result);
             } else{
                 echo "https://www.theskyfallen.com/cdn/imgnone.jpg";
-            }
+            }*/
         } else{
             die("ERROR: Could not able to execute $sql. " . mysqli_error($link));
         }
