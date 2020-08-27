@@ -1,4 +1,4 @@
 <?php
-include_once "../SkyMakeDatabaseConnector/SkyMakeDBConfig.php";
+include_once "../SkyMakeDatabaseConnector/SkyMakeDBconfig.php";
 session_name('SkyMakeSessionStorage');
 ?>
