@@ -138,7 +138,7 @@ if (isset($_POST["backbtn"])){
         }
         mysqli_close($link);
         ?>">
-     <?php echo "Question Number:".$finput1." Out of: ".$examdata["exam_qcount"]; ?><br>
+     <?php echo "Question Number:".$_SESSION["qn"]." Out of: ".$examdata["exam_qcount"]; ?><br>
             <input name="backbtn" type="submit" class="btn btn-primary" value="Don't Submit and Go Back">
      Your answer:
     <input type="radio" id="Q_A" name="ANSWER" value="Q_A">
