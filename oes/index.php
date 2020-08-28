@@ -227,7 +227,9 @@ VALUES ('".$_SESSION["id"]."', '".$qn_internal."', '".$_SESSION["lastanswer"]."'
       }
  }
 }else {
-        $_SESSION["qn"]=$_SESSION["qn"]-1;
+        if($_SESSION["qn"] >= $examdata["exam_qcount"]) {
+            $_SESSION["qn"] = $_SESSION["qn"] - 1;
+        }
     }
 }
 if (isset($_POST["backbtn"])){
