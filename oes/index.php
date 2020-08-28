@@ -90,7 +90,7 @@ if (isset($_POST["nextbtn"])){
       if($_SESSION["lastanswer"] == "Q_A" or $_SESSION["lastanswer"] == "Q_B" or $_SESSION["lastanswer"] == "Q_C" or $_SESSION["lastanswer"] == "Q_D" or $_SESSION["lastanswer"] == "Q_EMPTY"){
 $sql = "INSERT INTO skymake_answer (id, qn, answer,uniq,examid)
 VALUES ('".$_SESSION["id"]."', '".$qn_internal."', '".$_SESSION["lastanswer"]."','".$uniq."','".$_SESSION["examid"]."')";
-
+die($sql);
 if (mysqli_query($linktwo, $sql)) {
     echo "SQL Query Succeeded:".$sql;
 } else {
