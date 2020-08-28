@@ -19,7 +19,7 @@ if(!isset($_GET["examid"])){
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">SkyMake Exam ID</span>
             </div>
-            <input name="examid" type="text" class="form-control" placeholder="Your SkyMake Exam ID including OES. Eg. OES1234" aria-label="Exam ID" aria-describedby="basic-addon1">
+            <input name="examid" type="text" class="form-control" placeholder="including OES. Eg. OES1234" aria-label="Exam ID" aria-describedby="basic-addon1">
         </div>
         <button type="submit" class="btn btn-light">Submit</button>
     </form>
