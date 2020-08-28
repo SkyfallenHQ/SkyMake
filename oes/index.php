@@ -33,7 +33,6 @@ if($result = mysqli_query($link, $sql)){
 } else{
     die("ERROR: Could not able to execute $sql. " . mysqli_error($link));
 }
-mysqli_close($link);
 if (new DateTime() > new DateTime($examdata["exam_end"])) {
    echo "Your time is over. \n";
    echo "Your answer was discarded.\n";
@@ -57,7 +56,6 @@ if($result = mysqli_query($link, $sql)){
 } else{
     die("ERROR: Could not able to execute $sql. " . mysqli_error($link));
 }
-mysqli_close($link);
 function getRemoteIPAddress() {
     if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
         return $_SERVER['HTTP_CLIENT_IP'];
@@ -112,8 +110,7 @@ VALUES ('".$_SESSION["id"]."', '".$qn_internal."', '".$_SESSION["lastanswer"]."'
       }else {
           echo "Invalid radiobutton value:".$_SESSION["lastanswer"];
       }
-
-mysqli_close($linktwo);  }
+ }
 }
 }
 if (isset($_POST["backbtn"])){
@@ -121,6 +118,8 @@ if (isset($_POST["backbtn"])){
  $_SESSION["qn"]=$_SESSION["qn"]-1;
     unset($_POST["backbtn"]);
 }}
+mysqli_close($link);
+mysqli_close($linktwo);
 ?>
     <style type="text/css">
         body{ font: 14px sans-serif; text-align: center; }
