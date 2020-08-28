@@ -123,6 +123,9 @@ if (isset($_POST["backbtn"])){
     unset($_POST["backbtn"]);
 }}
 ?>
+    <style type="text/css">
+        body{ font: 14px sans-serif; text-align: center; }
+    </style>
     <div class="page-header">
         <h1>Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. Please enter your answers for <?php echo $examdata["exam_name"]; ?>.</h1>
         <h6>From <?php echo $examdata["exam_start"]." to ".$examdata["exam_end"]; ?></h6>
