@@ -233,10 +233,9 @@ if (!empty($_POST)){
       }
 }
 if (isset($_POST["backbtn"])){
-    if($_SESSION["qn"]!=1){
- $_SESSION["qn"]=$_SESSION["qn"]-1;
+ $_SESSION["qn"]=0;
     unset($_POST["backbtn"]);
-}}
+}
 mysqli_close($link);
 mysqli_close($linktwo);
 if($_SESSION["qn"] > $examdata["exam_qcount"]) {
@@ -267,6 +266,7 @@ if($_SESSION["qn"] > $examdata["exam_qcount"]) {
     <label for="Q_D">D</label>
         <input type="radio" id="Q_EMPTY" name="ANSWER" value="Q_EMPTY">
     <label for="Q_EMPTY">Leave Empty</label>
+    <input value="Start Over" name="backbtn" class="btn btn-dark">
         </form>
 <button name="nextbtn" class="btn btn-light" onclick="submitForm()" >Submit and Continue</button>
     <script>
