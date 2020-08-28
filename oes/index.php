@@ -123,26 +123,6 @@ if (isset($_POST["backbtn"])){
     unset($_POST["backbtn"]);
 }}
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>SkyMake 4 - OE System</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
-    <style type="text/css">
-        body{ font: 14px sans-serif; text-align: center; }
-                .footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  background-color: black;
-  color: white;
-  text-align: center;
-    </style>
-</head>
-<body>
     <div class="page-header">
         <h1>Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. Please enter your answers for <?php echo $examdata["exam_name"]; ?>.</h1>
         <h6>From <?php echo $examdata["exam_start"]." to ".$examdata["exam_end"]; ?></h6>
