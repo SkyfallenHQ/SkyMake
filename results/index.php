@@ -138,7 +138,7 @@ if ($res = mysqli_query($link, $sql)) {
                 echo "<p>Sorry. We could not update the database.</p>";
         }
         }else {
-        echo "<p>You have not entered or finished this exam.</p>";
+        echo "<p>You have not entered or finished this exam. Exam Answer Key Has".mysqli_num_rows($res)." Exam Data Has ".$examdata["exam_qcount"]." And You Have ".mysqli_num_rows($res2)." Answers</p>";
         }
         mysqli_free_result($res);
         mysqli_free_result($res2);
