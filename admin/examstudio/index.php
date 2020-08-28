@@ -265,7 +265,7 @@ if($_SESSION["qn"] > $examdata["exam_qcount"]) {
             <input type="radio" id="Q_D" name="ANSWER" value="Q_D">
     <label for="Q_D">D</label>
         <br>
-    <input value="Start Over" name="backbtn" class="btn btn-dark">
+    <input type="submit" value="Start Over" name="backbtn" class="btn btn-dark">
         </form>
 <button name="nextbtn" class="btn btn-light" onclick="submitForm()" >Submit and Continue</button>
     <script>
