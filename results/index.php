@@ -9,15 +9,20 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 }
 if(!isset($_GET["examid"])){
     ?>
-    <form method="get">
+    <style>body{
+            text-align: center;
+        }</style>
+    <form method="get" width="500">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">SkyMake Exam ID</span>
             </div>
             <input name="examid" type="text" class="form-control" placeholder="Your SkyMake Exam ID" aria-label="Exam ID" aria-describedby="basic-addon1">
         </div>
+        <button type="submit" class="btn btn-light">Submit</button>
     </form>
 <?php
+    die();
 }
 $sql = "SELECT exam_name,exam_start,exam_end,exam_qcount,exam_type FROM skymake_examdata WHERE examid='".$_SESSION["examid"]."'";
 if($result = mysqli_query($link, $sql)){
