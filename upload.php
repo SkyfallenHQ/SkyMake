@@ -1,5 +1,7 @@
 <?php
 include "nps/widgets/dash.php";
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 $target_dir = "UserUploads/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
