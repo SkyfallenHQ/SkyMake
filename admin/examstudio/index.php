@@ -1,6 +1,6 @@
 <?php
 require_once "config.php";
-include_once "../nps/widgets/dash.php";
+include_once "../../nps/widgets/dash.php";
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 ini_set('file_uploads', "On");
@@ -253,7 +253,6 @@ if($_SESSION["qn"] > $examdata["exam_qcount"]) {
     <form method="post" enctype="multipart/form-data" id="form1">
     Select image to upload:
     <input type="file" name="fileToUpload" id="fileToUpload">
-    <input type="submit" value="Upload Image" name="submit">
     </form>
     <form method="post" id="form2">
      <?php echo "Question Number:".$_SESSION["qn"]." Out of: ".$examdata["exam_qcount"]; ?><br>
