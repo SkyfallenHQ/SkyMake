@@ -94,7 +94,7 @@ if (mysqli_query($linktwo, $sql)) {
 } else {
     $sql = "DELETE FROM skymake_answer WHERE uniq='".$uniq."';";
     if (mysqli_query($linktwo, $sql)){
- $sql = "INSERT INTO skymake_answer (id, qn, answer,uniq)
+ $sql = "INSERT INTO skymake_answer (id, qn, answer,uniq,examid)
 VALUES ('".$_SESSION["id"]."', '".$qn_internal."', '".$_SESSION["lastanswer"]."','".$uniq."','".$_SESSION["examid"]."')";
 
     if (mysqli_query($linktwo, $sql)) {
