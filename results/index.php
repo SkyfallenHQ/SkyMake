@@ -8,7 +8,6 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     exit;
 }
 if(!isset($_GET["examid"])){
-    header("location: /");
     ?>
     <form method="get">
         <div class="input-group mb-3">
