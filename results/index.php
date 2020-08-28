@@ -9,6 +9,16 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 }
 if(!isset($_GET["examid"])){
     header("location: /");
+    ?>
+    <form method="get">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">SkyMake Exam ID</span>
+            </div>
+            <input name="examid" type="text" class="form-control" placeholder="Your SkyMake Exam ID" aria-label="Exam ID" aria-describedby="basic-addon1">
+        </div>
+    </form>
+<?php
 }
 $sql = "SELECT exam_name,exam_start,exam_end,exam_qcount,exam_type FROM skymake_examdata WHERE examid='".$_SESSION["examid"]."'";
 if($result = mysqli_query($link, $sql)){
@@ -22,9 +32,8 @@ if($result = mysqli_query($link, $sql)){
         }
         mysqli_free_result($result);
     } else{
-        echo "Exam invalid. You will be redirected in 3 seconds";
-        sleep(3);
-        header("location: /");
+        echo "Exam invalid.";
+        die("<a href='/'>Home Page</a>");
     }
 } else{
     die("ERROR: Could not able to execute $sql. " . mysqli_error($link));
@@ -32,9 +41,7 @@ if($result = mysqli_query($link, $sql)){
 if (new DateTime() < new DateTime($examdata["exam_end"])) {
     echo "Your time is not over. \n";
     echo "Your results won't be shown..\n";
-    echo "Redirecting in 10 seconds \n";
-    sleep(10);
-    header("location: /");
+    die("<a href='/'>Home Page</a>");
 }
 $_SESSION["examid"] = $_GET["examid"];
 $link2 = $linktwo;
