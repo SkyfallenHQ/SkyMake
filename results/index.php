@@ -12,8 +12,8 @@ if(!isset($_GET["examid"])){
     <style>body{
             text-align: center;
         }</style>
-    <div style="width: 100%; text-align: center; align-content: center; padding-top: 50px; border: 2px dotted black; border-radius: 5px 5px 5px 5px;">
-    <form method="get" style="text-align: center; width: 500px;">
+    <div style="width: 100%; text-align: center; align-content: center; margin-top: 50px;">
+    <form method="get" style="text-align: center; width: 500px; border: 2px dotted black; border-radius: 5px 5px 5px 5px; margin-right: auto; margin-left: auto; display: inline-block;">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">SkyMake Exam ID</span>
