@@ -1,55 +1,52 @@
 <?php
-include "nps/widgets/dash.php";
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-ini_set("file_uploads",1);
-$target_dir = "UserUploads/";
-$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-$uploadOk = 1;
-$imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+include_once "nps/widgets/dash.php";
+// Check if the form was submitted
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+    // Check if file was uploaded without errors
+    if(isset($_FILES["photo"]) && $_FILES["photo"]["error"] == 0){
+        $allowed = array("jpg" => "image/jpg", "jpeg" => "image/jpeg", "gif" => "image/gif", "png" => "image/png");
+        $filename = $_FILES["photo"]["name"];
+        $filetype = $_FILES["photo"]["type"];
+        $filesize = $_FILES["photo"]["size"];
 
-// Check if image file is a actual image or fake image
-if (isset($_POST["submit"])) {
+        // Verify file extension
+        $ext = pathinfo($filename, PATHINFO_EXTENSION);
+        if(!array_key_exists($ext, $allowed)) die("Error: Please select a valid file format.");
 
+        // Verify file size - 5MB maximum
+        $maxsize = 5 * 1024 * 1024;
+        if($filesize > $maxsize) die("Error: File size is larger than the allowed limit.");
 
-// Check if file already exists
-    if (file_exists($target_file)) {
-        echo "Sorry, file already exists.";
-        $uploadOk = 0;
-    }
-
-// Check file size
-    if ($_FILES["fileToUpload"]["size"] > 500000) {
-        echo "Sorry, your file is too large.";
-        $uploadOk = 0;
-    }
-
-// Allow certain file formats
-    if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-        && $imageFileType != "gif" && $imageFileType != "pdf" && $imageFileType != "docx" && $imageFileType != "zip" && $imageFileType != "dmg" && $imageFileType != "iso" && $imageFileType != "exe") {
-        echo "Sorry, only JPG, JPEG, PNG & GIF, PDF ,ZIP , DOCX , DMG , ISO, EXE  files are allowed.";
-        $uploadOk = 0;
-    }
-
-// Check if $uploadOk is set to 0 by an error
-    if ($uploadOk == 0) {
-        echo "Sorry, your file was not uploaded.";
-// if everything is ok, try to upload file
-    } else {
-        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-            echo "The file " . basename($_FILES["fileToUpload"]["name"]) . " has been uploaded.";
-            echo "URL is" . $_SERVER['HTTP_HOST'] . $target_file;
-        } else {
-            echo "Sorry, there was an error uploading your file.";
+        // Verify MYME type of the file
+        if(in_array($filetype, $allowed)){
+            // Check whether file exists before uploading it
+            if(file_exists("upload/" . $filename)){
+                echo $filename . " is already exists.";
+            } else{
+                move_uploaded_file($_FILES["photo"]["tmp_name"], "upload/" . $filename);
+                echo "Your file was uploaded successfully.";
+            }
+        } else{
+            echo "Error: There was a problem uploading your file. Please try again.";
         }
+    } else{
+        echo "Error: " . $_FILES["photo"]["error"];
     }
 }
 ?>
-<form action="upload.php" method="post" enctype="multipart/form-data">
-    Select image to upload:
-    <input type="file" name="fileToUpload" id="fileToUpload" class="btn btn-dark">
-    <input type="submit" value="Upload Image" name="submit" class="btn btn-light">
-</form>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>File Upload Form</title>
+</head>
+<body>
+    <form action="upload-manager.php" method="post" enctype="multipart/form-data">
+        <h2>Upload File</h2>
+        <label for="fileSelect">Filename:</label>
+        <input type="file" name="photo" id="fileSelect">
+        <input type="submit" name="submit" value="Upload">
+        <p><strong>Note:</strong> Only .jpg, .jpeg, .gif, .png formats allowed to a max size of 5 MB.</p>
+    </form>
 </body>
 </html>
