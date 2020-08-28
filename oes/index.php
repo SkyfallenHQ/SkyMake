@@ -40,6 +40,9 @@ if (new DateTime() > new DateTime($examdata["exam_end"])) {
    sleep(10);
    header("location: /");
 }
+if(!isset($_SESSION["qn"])){
+    $_SESSION["qn"] = 1;
+}
 $sql = "SELECT picurl FROM skymake_qanswers WHERE examid='".$_SESSION["examid"]."' and qn='".$_SESSION["qn"]."'";
 if($result = mysqli_query($linktwo, $sql)){
     if(mysqli_num_rows($result) == 1){
@@ -119,9 +122,6 @@ if (isset($_POST["backbtn"])){
  $_SESSION["qn"]=$_SESSION["qn"]-1;
     unset($_POST["backbtn"]);
 }}
-if(!isset($_SESSION["qn"])){
-    $_SESSION["qn"] = 1;
-}
 ?>
 
 <!DOCTYPE html>
