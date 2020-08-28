@@ -119,6 +119,9 @@ if (isset($_POST["backbtn"])){
  $_SESSION["qn"]=$_SESSION["qn"]-1;
     unset($_POST["backbtn"]);
 }}
+if(!isset($qn)){
+    $qn = 1;
+}
 ?>
 
 <!DOCTYPE html>
