@@ -262,6 +262,11 @@ if($user_role == "teacher") {
 
     }
 }
+if($user_role == "admin") {
+   if($request == "upload"){
+      include "upload.php";
+   }
+}
 if($requestsuccess == false){
     include "nps/notfound.html";
 }

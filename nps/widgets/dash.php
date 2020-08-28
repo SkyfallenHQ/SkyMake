@@ -177,12 +177,19 @@ function doublewidget($lesson,$teacher,$time,$topic,$unit,$backgorundimage,$less
         <div class="container"><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="nav navbar-nav flex-grow-1 justify-content-between">
+                  <?php if($_SESSION["user_role"] != "admin"){
                     <li class="nav-item" role="presentation"><a class="nav-link" href="#"><img src="/nps/widgets/assets/img/SkyfallenLogoSmallWhiteOnly.png" height="20"></a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/dash">Courses Dashboard</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/results">Results</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/profile">My Profile</a></li>
-                    <?php if($_SESSION["user_role"] == "teacher"){ ?> <li class="nav-item" role="presentation"><a class="nav-link" href="/mystudents">My Students</a></li> <?php } ?>
-                    <?php //<li class="nav-item" role="presentation"><a class="nav-link" href="/search"><i class="fa fa-search"></i></a></li>
+                    <?php if($_SESSION["user_role"] == "teacher"){ ?> <li class="nav-item" role="presentation"><a class="nav-link" href="/mystudents">My Students</a></li> <?php }}else{ ?>
+                      <li class="nav-item" role="presentation"><a class="nav-link" href="#"><img src="/nps/widgets/assets/img/SkyfallenLogoSmallWhiteOnly.png" height="20"></a></li>
+                      <li class="nav-item" role="presentation"><a class="nav-link" href="/users">Users</a></li>
+                      <li class="nav-item" role="presentation"><a class="nav-link" href="/results">Results</a></li>
+                      <li class="nav-item" role="presentation"><a class="nav-link" href="/upload">Upload</a></li>
+                      <li class="nav-item" role="presentation"><a class="nav-link" href="/examcreate">Create an Exam</a></li>
+                      <li class="nav-item" role="presentation"><a class="nav-link" href="/createlc">Create a Live Class</a></li>
+                    <?php } //<li class="nav-item" role="presentation"><a class="nav-link" href="/search"><i class="fa fa-search"></i></a></li>
                     ?>
                     <li class="nav-item" role="presentation"></li>
                 </ul>
