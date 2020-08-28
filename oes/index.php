@@ -73,7 +73,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 if (isset($_POST["killsession"])){
     header("location: sessionkill.php");
 }
-if($_SESSION["qn"]==$examdata["exam_qcount"] + 1){
+if($_SESSION["qn"]==$examdata["exam_qcount"]){
     ?>
     <!-- Modal CSS -->
     <style>
@@ -174,7 +174,7 @@ if($_SESSION["qn"]==$examdata["exam_qcount"] + 1){
                 </div>
                 <div class="modal-body text-center">
                     <h4>Great!</h4>
-                    <p>This will be your last question!<br> You can change your answers until your time is over.<br></p>
+                    <p>This will be your last question!<br> You can change your answers until your time is over.<br> If this is your second time seeing this, don't panic! You answers are being saved.</p>
                     <button class="btn btn-success" data-dismiss="modal"><span>Dismiss</span> <i class="material-icons">&#xE5C8;</i></button>
                 </div>
             </div>
