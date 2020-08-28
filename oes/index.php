@@ -52,7 +52,7 @@ if($result = mysqli_query($linktwo, $sql)){
         }
         mysqli_free_result($result);
     } else{
-       $picurl = "https://www.theskyfallen.com/cdn/imgnone.jpg";
+       $picurl = "https://www.publicdomainpictures.net/pictures/280000/nahled/not-found-image-15383864787lu.jpg";
     }
 } else{
     die("ERROR: Could not able to execute $sql. " . mysqli_error($linktwo));
@@ -91,7 +91,6 @@ if (isset($_POST["nextbtn"])){
       if($_SESSION["lastanswer"] == "Q_A" or $_SESSION["lastanswer"] == "Q_B" or $_SESSION["lastanswer"] == "Q_C" or $_SESSION["lastanswer"] == "Q_D" or $_SESSION["lastanswer"] == "Q_EMPTY"){
 $sql = "INSERT INTO skymake_answer (id, qn, answer,uniq,examid)
 VALUES ('".$_SESSION["id"]."', '".$qn_internal."', '".$_SESSION["lastanswer"]."','".$uniq."','".$_SESSION["examid"]."')";
-die($sql);
 if (mysqli_query($linktwo, $sql)) {
     echo "SQL Query Succeeded:".$sql;
 } else {
