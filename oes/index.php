@@ -226,11 +226,7 @@ VALUES ('".$_SESSION["id"]."', '".$qn_internal."', '".$_SESSION["lastanswer"]."'
           echo "Invalid radiobutton value:".$_SESSION["lastanswer"];
       }
  }
-}else {
-        if($_SESSION["qn"] >= $examdata["exam_qcount"]) {
-            $_SESSION["qn"] = $_SESSION["qn"] - 1;
-        }
-    }
+}
 }
 if (isset($_POST["backbtn"])){
     if($_SESSION["qn"]!=1){
@@ -239,6 +235,9 @@ if (isset($_POST["backbtn"])){
 }}
 mysqli_close($link);
 mysqli_close($linktwo);
+if($_SESSION["qn"] > $examdata["exam_qcount"]) {
+    $_SESSION["qn"] = $_SESSION["qn"] - 1;
+}
 ?>
     <style type="text/css">
         body{ font: 14px sans-serif; text-align: center; }
