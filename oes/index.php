@@ -167,7 +167,7 @@ if (isset($_POST["backbtn"])){
     // 1. JavaScript
     // var countDownDate = new Date("Sep , 2018 15:37:25").getTime();
     // 2. PHP
-    var countDownDate = <?php echo strtotime('2020-08-27 20:00:00') ?> * 1000;
+    var countDownDate = <?php echo strtotime($examdata["exam_end"]) ?> * 1000;
     var now = <?php echo time() ?> * 1000;
 
     // Update the count down every 1 second
