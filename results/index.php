@@ -12,12 +12,14 @@ if(!isset($_GET["examid"])){
     <style>body{
             text-align: center;
         }</style>
-    <form method="get" width=500>
+    <form method="get" width="500">
+        <div class="row">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">SkyMake Exam ID</span>
             </div>
             <input name="examid" type="text" class="form-control" placeholder="Your SkyMake Exam ID" aria-label="Exam ID" aria-describedby="basic-addon1">
+        </div>
         </div>
         <button type="submit" class="btn btn-light">Submit</button>
     </form>
