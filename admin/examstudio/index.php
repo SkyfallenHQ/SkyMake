@@ -3,6 +3,7 @@ require_once "config.php";
 include_once "../nps/widgets/dash.php";
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+ini_set('file_uploads', "On");
 session_start();
 if(isset($_GET["examid"])){
     $examid = $_GET["examid"];
@@ -52,6 +53,9 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 }
 if (isset($_POST["killsession"])){
     header("location: sessionkill.php");
+}
+if (!file_exists('Q_Uploads/'.$_SESSION["examid"])) {
+    mkdir('Q_Uploads/'.$_SESSION["examid"], 0777, true);
 }
 /*if($_SESSION["qn"]==$examdata["exam_qcount"]){
     ?>
@@ -168,7 +172,7 @@ if (isset($_POST["killsession"])){
     </script>
     <?php
 }*/
-if (isset($_POST["nextbtn"])){
+if (!empty($_POST)){
     if($_SESSION["qn"]!=$examdata["exam_qcount"] + 1){
  if(empty($_POST['ANSWER'])){
    echo "Please select one";
@@ -180,18 +184,53 @@ if (isset($_POST["nextbtn"])){
 
    unset($_POST["nextbtn"]);
       $qn_internal=$_SESSION["qn"]-1;
-      $uniq = $_SESSION["id"]."uniq".$qn_internal."uniq".$_SESSION["examid"];
       if($_SESSION["lastanswer"] == "Q_A" or $_SESSION["lastanswer"] == "Q_B" or $_SESSION["lastanswer"] == "Q_C" or $_SESSION["lastanswer"] == "Q_D" or $_SESSION["lastanswer"] == "Q_EMPTY"){
-$sql = "INSERT INTO skymake_answer (id, qn, answer,uniq,examid)
-VALUES ('".$_SESSION["id"]."', '".$qn_internal."', '".$_SESSION["lastanswer"]."','".$uniq."','".$_SESSION["examid"]."')";
-if (mysqli_query($linktwo, $sql)) {
-    echo "SQL Query Succeeded:".$sql;
-} else { echo "There was an error with MySQL Server"}
-      }else {
-          echo "Invalid radiobutton value:".$_SESSION["lastanswer"];
-      }
+          $target_dir = "Q_Uploads/".$_SESSION["examid"]."/";
+          $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+          $uploadOk = 1;
+          $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+
+              $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+              if($check !== false) {
+                  echo "File is an image - " . $check["mime"] . ".";
+                  $uploadOk = 1;
+              } else {
+                  echo "File is not an image.";
+                  $uploadOk = 0;
+              }
+          }
+          if (file_exists($target_file)) {
+              echo "Sorry, file already exists.";
+              $uploadOk = 0;
+          }
+          if ($_FILES["fileToUpload"]["size"] > 500000) {
+              echo "Sorry, your file is too large.";
+              $uploadOk = 0;
+          }
+          if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+              && $imageFileType != "gif" ) {
+              echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+              $uploadOk = 0;
+          }
+          if ($uploadOk == 0) {
+              echo "Sorry, your file was not uploaded.";
+          } else {
+              if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+                  echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+                  $sql = "INSERT INTO skymake_qanswers (examid, qn, answer,picurl)
+            VALUES ('".$_SESSION["examid"]."', '".$qn_internal."', '".$_SESSION["lastanswer"]."','".$target_file."')";
+                  if (mysqli_query($linktwo, $sql)) {
+                      echo "SQL Query Succeeded:".$sql;
+                  } else {
+                      echo "There was an error with MySQL Server"; }
+              } else {
+                  echo "Sorry, there was an error uploading your file.";
+              }
+          }
+ }else {
+     echo "Invalid radiobutton value:".$_SESSION["lastanswer"];
  }
-}
+      }
 }
 if (isset($_POST["backbtn"])){
     if($_SESSION["qn"]!=1){
@@ -211,10 +250,13 @@ if($_SESSION["qn"] > $examdata["exam_qcount"]) {
         <h1>Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. Please enter your answers for <?php echo $examdata["exam_name"]; ?>.</h1>
         <h6>From <?php echo $examdata["exam_start"]." to ".$examdata["exam_end"]; ?></h6>
     </div>
-    <form method="post">
-        <img src="<?php echo $picurl; ?>"><br>
+    <form method="post" enctype="multipart/form-data" id="form1">
+    Select image to upload:
+    <input type="file" name="fileToUpload" id="fileToUpload">
+    <input type="submit" value="Upload Image" name="submit">
+    </form>
+    <form method="post" id="form2">
      <?php echo "Question Number:".$_SESSION["qn"]." Out of: ".$examdata["exam_qcount"]; ?><br>
-            <input name="backbtn" type="submit" class="btn btn-primary" value="Don't Submit and Go Back">
      Your answer:
     <input type="radio" id="Q_A" name="ANSWER" value="Q_A">
     <label for="Q_A">A</label>
@@ -226,49 +268,13 @@ if($_SESSION["qn"] > $examdata["exam_qcount"]) {
     <label for="Q_D">D</label>
         <input type="radio" id="Q_EMPTY" name="ANSWER" value="Q_EMPTY">
     <label for="Q_EMPTY">Leave Empty</label>
-    <input id="nextbtn" name="nextbtn" type="submit" class="btn btn-primary" value="Submit and Continue"><br>
-        <input name="killsession" type="submit" class="btn btn-primary" value="Kill Session"><br>
-         <p id="timer" name="timer"></p>
         </form>
-</body>
+<button name="nextbtn" class="btn btn-light" onclick="submitForm()" >Submit and Continue</button>
     <script>
-    // Set the date we're counting down to
-    // 1. JavaScript
-    // var countDownDate = new Date("Sep , 2018 15:37:25").getTime();
-    // 2. PHP
-    var countDownDate = <?php echo strtotime($examdata["exam_end"]) ?> * 1000;
-    var now = <?php echo time() ?> * 1000;
-
-    // Update the count down every 1 second
-    var x = setInterval(function() {
-
-        // Get todays date and time
-        // 1. JavaScript
-        // var now = new Date().getTime();
-        // 2. PHP
-        now = now + 1000;
-
-        // Find the distance between now an the count down date
-        var distance = countDownDate - now;
-
-        // Time calculations for days, hours, minutes and seconds
-        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        // Output the result in an element with id="demo"
-        document.getElementById("timer").innerHTML = hours + "h " +
-            minutes + "m " + seconds + "s ";
-
-        // If the count down is over, write some text
-        if (distance < 0) {
-            clearInterval(x);
-            document.getElementById("timer").innerHTML = "EXAM TIMEOUT";
-            document.getElementById("nextbtn").disabled = true;
-            setTimeout(function(){
-            window.location.href = '/';
-         }, 5000);
+        submitForm = function(){
+            document.getElementById("form1").submit();
+            document.getElementById("form2").submit();
         }
-    }, 1000);
     </script>
+</body>
 </html>
