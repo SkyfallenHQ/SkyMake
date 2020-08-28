@@ -13,12 +13,13 @@ if(!isset($_GET["examid"])){
             text-align: center;
         }</style>
     <div style="width: 100%; text-align: center; align-content: center; margin-top: 50px;">
-    <form method="get" style="text-align: center; width: 500px; border: 2px dotted black; border-radius: 5px 5px 5px 5px; margin-right: auto; margin-left: auto; display: inline-block;">
+        <h2>SkyMake Exam Results</h2>
+    <form method="get" style="text-align: center; width: 500px; margin-right: auto; margin-left: auto; display: inline-block;">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">SkyMake Exam ID</span>
             </div>
-            <input name="examid" type="text" class="form-control" placeholder="Your SkyMake Exam ID" aria-label="Exam ID" aria-describedby="basic-addon1">
+            <input name="examid" type="text" class="form-control" placeholder="Your SkyMake Exam ID including OES. Eg. OES1234" aria-label="Exam ID" aria-describedby="basic-addon1">
         </div>
         <button type="submit" class="btn btn-light">Submit</button>
     </form>
@@ -35,6 +36,12 @@ if($result = mysqli_query($link, $sql)){
             $examdata["exam_end"] = $row["exam_end"];
             $examdata["exam_qcount"] = $row["exam_qcount"];
             $examdata["exam_type"] = $row["exam_type"];
+            if($row["exam_creator"] == "no-one"){
+                $examdata["exam_creator"] = "Anonymously Created Exam";
+            } else{
+                $examdata["exam_creator"] = $row["exam_creator"];
+            }
+
         }
         mysqli_free_result($result);
     } else{
@@ -56,6 +63,12 @@ $sql2 = "SELECT answer FROM skymake_qanswers WHERE examid='".$_SESSION["examid"]
 if ($res = mysqli_query($link, $sql)) { 
     if ($res2 = mysqli_query($link2, $sql2)) { 
     if (mysqli_num_rows($res) == $examdata["exam_qcount"] and mysqli_num_rows($res2) == $examdata["exam_qcount"]) {
+        ?>
+<div style="text-align: center;">
+    <h1><?php echo $examdata["exam_name"]; ?></h1>
+    <h4><?php echo "From ".$examdata["exam_start"]." to ".$examdata["exam_end"]." ".$examdata["exam_qcount"]." Questions"; ?></h4>
+    <h6>Created by: <?php echo $examdata["creator"]; ?></h6>
+        <?php
         echo "<table class='table'>";
         echo "<thead>";
         echo "<tr>"; 
@@ -78,6 +91,7 @@ if ($res = mysqli_query($link, $sql)) {
             echo "<td>".$row['answer']."</td>";
             echo "<td>".$row2['answer']."</td>";
             echo "</tr>";
+            $examtype = $examdata["exam_type"];
             if($examtype="90withMSL") {
                 if ($row['answer'] != $row2['answer']) {
                     if ($row['answer'] == "Q_EMPTY") {
@@ -110,19 +124,25 @@ if ($res = mysqli_query($link, $sql)) {
             }
         }
         echo "</tbody>";
-        echo "</table><p>".$points."</p>"; 
-                $sql = "INSERT INTO skymake_result (un, p) VALUES ('".$_SESSION["username"]."','".$points."');";
+        echo "</table><p>".$points."</p></div>";
+                $sql = "INSERT INTO skymake_result (un, p, examid) VALUES ('".$_SESSION["username"]."','".$points."','".$_SESSION["examid"]."');";
         if (mysqli_query($link, $sql)) { 
-       echo "<p>Query Executed Successfully.</p>"; 
-       echo "<p><a href=\"ranking.php\">Show ranking.</a></p>";  
-     }else
-        {
-            echo "<p>Query failed. ECN:3</p>";
-                   echo "<p><a href=\"ranking.php\">Show ranking.</a></p>";  
+       echo "<p>We've successfully added your data to the database.</p>";
+       echo "<p><a href=\"/results/ranking\">Show ranking.</a></p>";
+     }else {
+            $sql = "INSERT INTO skymake_result (un, p, examid) VALUES ('" . $_SESSION["username"] . "','" . $points . "','" . $_SESSION["examid"] . "');";
+            if (mysqli_query($link, $sql)) {
+                echo "<p>We've updated your results in the database.</p>";
+                echo "<p><a href=\"/results/ranking/\">Show ranking.</a></p>";
+            } else
+                echo "<p>Sorry. We could not update the database.</p>";
         }
-        mysqli_free_res($res); 
-        mysqli_free_res($res2); 
+        }else {
+        echo "<p>You have not entered or finished this exam.</p>";
+        }
+        mysqli_free_result($res);
+        mysqli_free_result($res2);
     }
-}}  
+}
 mysqli_close($link); 
 ?> 
