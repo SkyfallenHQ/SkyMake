@@ -14,14 +14,14 @@ $sql = "SELECT * FROM result WHERE examid='".$_SESSION["examid"]."'";
 if($result = mysqli_query($link, $sql)){
     if(mysqli_num_rows($result) > 0){
         echo "<table id=\"table_rank\">";
-            echo "<tr>";
-                echo "<th>Points</th>";
-                echo "<th>Username</th>";
-            echo "</tr>";
+        echo "<tr>";
+        echo "<th>Points</th>";
+        echo "<th>Username</th>";
+        echo "</tr>";
         while($row = mysqli_fetch_array($result)){
             echo "<tr>";
-                echo "<td>" . $row['p'] . "</td>";
-                echo "<td>" . $row['un'] . "</td>";
+            echo "<td>" . $row['p'] . "</td>";
+            echo "<td>" . $row['un'] . "</td>";
             echo "</tr>";
         }
         echo "</table>";
@@ -70,7 +70,7 @@ function sortTable() {
 } else{
     echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
 }
- 
+
 // Close connection
 mysqli_close($link);
 ?>
