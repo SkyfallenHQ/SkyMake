@@ -251,7 +251,7 @@ if($_SESSION["qn"] > $examdata["exam_qcount"]) {
     </div>
     <form method="post" enctype="multipart/form-data" id="form1">
     Select image to upload:
-    <input type="file" name="fileToUpload" id="fileToUpload">
+    <input type="file" name="fileToUpload" id="fileToUpload" class="btn btn-outline-dark">
     </form>
     <form method="post" id="form2">
      <?php echo "Question Number:".$_SESSION["qn"]." Out of: ".$examdata["exam_qcount"]; ?><br>
@@ -264,8 +264,7 @@ if($_SESSION["qn"] > $examdata["exam_qcount"]) {
         <label for="Q_C">C</label>
             <input type="radio" id="Q_D" name="ANSWER" value="Q_D">
     <label for="Q_D">D</label>
-        <input type="radio" id="Q_EMPTY" name="ANSWER" value="Q_EMPTY">
-    <label for="Q_EMPTY">Leave Empty</label>
+        <br>
     <input value="Start Over" name="backbtn" class="btn btn-dark">
         </form>
 <button name="nextbtn" class="btn btn-light" onclick="submitForm()" >Submit and Continue</button>
