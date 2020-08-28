@@ -83,7 +83,6 @@ if (isset($_POST["nextbtn"])){
    $answer = $_POST['ANSWER'];
    $_SESSION["lastanswer"]= $answer;
    $_SESSION["qn"]=$_SESSION["qn"]+1;
-   $_SESSION["qninfo"] = qninfo($_SESSION["qn"]);
 
    unset($_POST["nextbtn"]);
       $qn_internal=$_SESSION["qn"]-1;
