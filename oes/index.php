@@ -45,7 +45,7 @@ if(!isset($_SESSION["qn"])){
     $_SESSION["qn"] = 1;
 }
 $sql = "SELECT picurl FROM skymake_qanswers WHERE examid='".$_SESSION["examid"]."' and qn='".$_SESSION["qn"]."'";
-if($result = mysqli_query($linktwo, $sql)){
+if($result = mysqli_query($link, $sql)){
     if(mysqli_num_rows($result) == 1){
         while($row = mysqli_fetch_array($result)){
             $picurl = $row["picurl"];
@@ -55,9 +55,9 @@ if($result = mysqli_query($linktwo, $sql)){
        $picurl = "https://www.publicdomainpictures.net/pictures/280000/nahled/not-found-image-15383864787lu.jpg";
     }
 } else{
-    die("ERROR: Could not able to execute $sql. " . mysqli_error($linktwo));
+    die("ERROR: Could not able to execute $sql. " . mysqli_error($link));
 }
-mysqli_close($linktwo);
+mysqli_close($link);
 function getRemoteIPAddress() {
     if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
         return $_SERVER['HTTP_CLIENT_IP'];
