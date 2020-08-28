@@ -91,29 +91,29 @@ if (isset($_POST["nextbtn"])){
 $sql = "INSERT INTO skymake_answer (id, qn, answer,uniq,examid)
 VALUES ('".$_SESSION["id"]."', '".$qn_internal."', '".$_SESSION["lastanswer"]."','".$uniq."','".$_SESSION["examid"]."')";
 
-if (mysqli_query($link, $sql)) {
+if (mysqli_query($linktwo, $sql)) {
     echo "SQL Query Succeeded:".$sql;
 } else {
     $sql = "DELETE FROM skymake_answer WHERE uniq='".$uniq."';";
-    if (mysqli_query($link, $sql)){
+    if (mysqli_query($linktwo, $sql)){
  $sql = "INSERT INTO skymake_answer (id, qn, answer,uniq)
 VALUES ('".$_SESSION["id"]."', '".$qn_internal."', '".$_SESSION["lastanswer"]."','".$uniq."','".$_SESSION["examid"]."')";
 
-    if (mysqli_query($link, $sql)) {
+    if (mysqli_query($linktwo, $sql)) {
     echo "SQL Query Succeeded:".$sql;
     }
         else{
-          echo "Type 2 Error: " . $sql . "<br>" . mysqli_error($link);
+          echo "Type 2 Error: " . $sql . "<br>" . mysqli_error($linktwo);
         }
     }
     else {
-    echo "Error: " . $sql . "<br>" . mysqli_error($link);
+    echo "Error: " . $sql . "<br>" . mysqli_error($linktwo);
 }}
       }else {
           echo "Invalid radiobutton value:".$_SESSION["lastanswer"];
       }
 
-mysqli_close($link);  }
+mysqli_close($linktwo);  }
 }
 }
 if (isset($_POST["backbtn"])){
