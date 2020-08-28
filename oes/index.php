@@ -73,7 +73,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 if (isset($_POST["killsession"])){
     header("location: sessionkill.php");
 }
-if($_SESSION["qn"]==$examdata["exam_qcount"]){
+/*if($_SESSION["qn"]==$examdata["exam_qcount"]){
     ?>
     <!-- Modal CSS -->
     <style>
@@ -187,7 +187,7 @@ if($_SESSION["qn"]==$examdata["exam_qcount"]){
         });
     </script>
     <?php
-}
+}*/
 if (isset($_POST["nextbtn"])){
     if($_SESSION["qn"]!=$examdata["exam_qcount"] + 1){
  if(empty($_POST['ANSWER'])){
