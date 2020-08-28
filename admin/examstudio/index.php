@@ -233,7 +233,7 @@ if (!empty($_POST)){
       }
 }
 if (isset($_POST["backbtn"])){
- $_SESSION["qn"]=0;
+ $_SESSION["qn"]=1;
     unset($_POST["backbtn"]);
 }
 mysqli_close($link);
