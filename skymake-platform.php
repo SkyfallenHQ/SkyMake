@@ -263,8 +263,9 @@ if($user_role == "teacher") {
     }
 }
 if($user_role == "admin") {
-   if($request == "upload"){
+   if($request == "upload" or $request == "upload/"){
       include "upload.php";
+      exit;
    }
 }
 if($requestsuccess == false){
