@@ -58,7 +58,7 @@ if($result = mysqli_query($link, $sql)){
 }
 }
 ?>
-    <form action="/upload" method="post" enctype="multipart/form-data">
+    <form method="post" enctype="multipart/form-data">
         <h2>Upload File</h2>
         <label for="fileSelect">Filename:</label>
         <input type="file" name="docUpload" id="fileSelect">
