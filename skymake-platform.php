@@ -265,10 +265,6 @@ if($user_role == "teacher") {
     }
 }
 if($user_role == "admin") {
-   if($request == "upload" or $request == "upload/"){
-       $requestsuccess == true;
-       include "upload.php";
-   }
    if($request == "home" or $request == "home/"){
        include_once "nps/widgets/dash.php";
        $requestsuccess = true;
