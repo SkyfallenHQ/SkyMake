@@ -645,7 +645,6 @@ if($result = mysqli_query($link, $sql)){
 }else {
     die("There was an SQL Error. SQL Server (".dbHost.") Returned: ".mysqli_error($link)." for SQL Query ".$sql);
 }
-}
 ?>
 <form method="post" enctype="multipart/form-data">
     <h2>Upload File</h2>
@@ -659,6 +658,7 @@ if($result = mysqli_query($link, $sql)){
     <input type="submit" name="submit" value="Upload">
     <p><strong>Note:</strong> Only .jpg, .jpeg, .gif, .png .zip .pdf .docx formats allowed to a max size of 5 MB.</p>
 </form>
+<?php
  }
 if($requestsuccess == false){
     include "nps/notfound.html";
