@@ -29,7 +29,7 @@ if($result = mysqli_query($link, $sql)){
 } else{
     die("ERROR: Could not able to execute $sql. " . mysqli_error($link));
 }
-if (new DateTime() > new DateTime(strtotime($examdata["exam_end"]))) {
+if (new DateTime() > new DateTime($examdata["exam_end"].":00")) {
    echo "Your time is over. \n";
    echo "Your answer was discarded.\n";
 }
