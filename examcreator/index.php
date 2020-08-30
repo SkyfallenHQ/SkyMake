@@ -14,6 +14,9 @@ if(isset($_GET["examid"])){
     header("location: /");
     }
 }
+if($_SESSION["user_role"] != "admin"){
+    header("location: /dash");
+}
 $sql = "SELECT exam_name,exam_start,exam_end,exam_qcount,exam_type FROM skymake_examdata WHERE examid='".$_SESSION["examid"]."'";
 if($result = mysqli_query($link, $sql)){
     if(mysqli_num_rows($result) == 1){
@@ -33,28 +36,8 @@ if($result = mysqli_query($link, $sql)){
 } else{
     die("ERROR: Could not able to execute $sql. " . mysqli_error($link));
 }
-if (new DateTime() > new DateTime($examdata["exam_end"])) {
-   echo "Your time is over. \n";
-   echo "Your answer was discarded.\n";
-   echo "Redirecting in 10 seconds \n";
-   sleep(10);
-   header("location: /");
-}
 if(!isset($_SESSION["qn"])){
     $_SESSION["qn"] = 1;
-}
-$sql = "SELECT picurl FROM skymake_qanswers WHERE examid='".$_SESSION["examid"]."' and qn='".$_SESSION["qn"]."'";
-if($result = mysqli_query($link, $sql)){
-    if(mysqli_num_rows($result) == 1){
-        while($row = mysqli_fetch_array($result)){
-            $picurl = $row["picurl"];
-        }
-        mysqli_free_result($result);
-    } else{
-       $picurl = "https://www.publicdomainpictures.net/pictures/280000/nahled/not-found-image-15383864787lu.jpg";
-    }
-} else{
-    die("ERROR: Could not able to execute $sql. " . mysqli_error($link));
 }
 function getRemoteIPAddress() {
     if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
@@ -202,15 +185,15 @@ if (isset($_POST["nextbtn"])){
       $qn_internal=$_SESSION["qn"]-1;
       $uniq = $_SESSION["id"]."uniq".$qn_internal."uniq".$_SESSION["examid"];
       if($_SESSION["lastanswer"] == "Q_A" or $_SESSION["lastanswer"] == "Q_B" or $_SESSION["lastanswer"] == "Q_C" or $_SESSION["lastanswer"] == "Q_D" or $_SESSION["lastanswer"] == "Q_EMPTY"){
-$sql = "INSERT INTO skymake_answer (id, qn, answer,uniq,examid)
-VALUES ('".$_SESSION["id"]."', '".$qn_internal."', '".$_SESSION["lastanswer"]."','".$uniq."','".$_SESSION["examid"]."')";
+$sql = "INSERT INTO skymake_qanswers (examid,qn,answer,picurl)
+VALUES ('".$_SESSION["examid"]."', '".$qn_internal."', '".$_SESSION["lastanswer"]."','".$_POST["picurl"]."')";
 if (mysqli_query($linktwo, $sql)) {
     echo "SQL Query Succeeded:".$sql;
 } else {
-    $sql = "DELETE FROM skymake_answer WHERE uniq='".$uniq."';";
+    $sql = "DELETE FROM skymake_qanswers WHERE examid='".$_SESSION["examid"]."' and qn='".$qn_internal."';";
     if (mysqli_query($linktwo, $sql)){
- $sql = "INSERT INTO skymake_answer (id, qn, answer,uniq,examid)
-VALUES ('".$_SESSION["id"]."', '".$qn_internal."', '".$_SESSION["lastanswer"]."','".$uniq."','".$_SESSION["examid"]."')";
+        $sql = "INSERT INTO skymake_qanswers (examid,qn,answer,picurl)
+VALUES ('".$_SESSION["examid"]."', '".$qn_internal."', '".$_SESSION["lastanswer"]."','".$_POST["picurl"]."')";
 
     if (mysqli_query($linktwo, $sql)) {
     echo "SQL Query Succeeded:".$sql;
@@ -243,14 +226,21 @@ if($_SESSION["qn"] > $examdata["exam_qcount"]) {
         body{ font: 14px sans-serif; text-align: center; }
     </style>
     <div class="page-header">
-        <h1>Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. Please enter your answers for <?php echo $examdata["exam_name"]; ?>.</h1>
+        <h1>Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. Please enter the answer key for <?php echo $examdata["exam_name"]; ?>.</h1>
         <h6>From <?php echo $examdata["exam_start"]." to ".$examdata["exam_end"]; ?></h6>
     </div>
     <form method="post">
-        <img src="<?php echo $picurl; ?>"><br>
+
      <?php echo "Question Number:".$_SESSION["qn"]." Out of: ".$examdata["exam_qcount"]; ?><br>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Question URL</span>
+            </div>
+            <input type="text" class="form-control" name="picurl" placeholder="Question Image URL" aria-label="Pic URL" aria-describedby="basic-addon1">
+        </div>
+        <br>
             <input name="backbtn" type="submit" class="btn btn-primary" value="Don't Submit and Go Back">
-     Your answer:
+     Correct answer:
     <input type="radio" id="Q_A" name="ANSWER" value="Q_A">
     <label for="Q_A">A</label>
         <input type="radio" id="Q_B" name="ANSWER" value="Q_B">
@@ -259,51 +249,8 @@ if($_SESSION["qn"] > $examdata["exam_qcount"]) {
         <label for="Q_C">C</label>
             <input type="radio" id="Q_D" name="ANSWER" value="Q_D">
     <label for="Q_D">D</label>
-        <input type="radio" id="Q_EMPTY" name="ANSWER" value="Q_EMPTY">
-    <label for="Q_EMPTY">Leave Empty</label>
     <input id="nextbtn" name="nextbtn" type="submit" class="btn btn-primary" value="Submit and Continue"><br>
-        <input name="killsession" type="submit" class="btn btn-primary" value="Kill Session"><br>
-         <p id="timer" name="timer"></p>
         </form>
 </body>
-    <script>
-    // Set the date we're counting down to
-    // 1. JavaScript
-    // var countDownDate = new Date("Sep , 2018 15:37:25").getTime();
-    // 2. PHP
-    var countDownDate = <?php echo strtotime($examdata["exam_end"]) ?> * 1000;
-    var now = <?php echo time() ?> * 1000;
 
-    // Update the count down every 1 second
-    var x = setInterval(function() {
-
-        // Get todays date and time
-        // 1. JavaScript
-        // var now = new Date().getTime();
-        // 2. PHP
-        now = now + 1000;
-
-        // Find the distance between now an the count down date
-        var distance = countDownDate - now;
-
-        // Time calculations for days, hours, minutes and seconds
-        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        // Output the result in an element with id="demo"
-        document.getElementById("timer").innerHTML = hours + "h " +
-            minutes + "m " + seconds + "s ";
-
-        // If the count down is over, write some text
-        if (distance < 0) {
-            clearInterval(x);
-            document.getElementById("timer").innerHTML = "EXAM TIMEOUT";
-            document.getElementById("nextbtn").disabled = true;
-            setTimeout(function(){
-            window.location.href = '/';
-         }, 5000);
-        }
-    }, 1000);
-    </script>
 </html>
