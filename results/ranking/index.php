@@ -14,7 +14,7 @@ if(!isset($_SESSION["examid"])){
     header("location: /");
 }
 
-$sql = "SELECT * FROM result WHERE examid='".$_SESSION["examid"]."'";
+$sql = "SELECT * FROM skymake_result WHERE examid='".$_SESSION["examid"]."'";
 if($result = mysqli_query($link, $sql)){
     if(mysqli_num_rows($result) > 0){
         echo "<table id=\"table_rank\">";
