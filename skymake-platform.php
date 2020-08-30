@@ -442,13 +442,16 @@ if ($res = mysqli_query($link, $sql)) {
 if (substr($request, 0, 10) === "editgroup/") {
     $requestsuccess = true;
     include "nps/widgets/dash.php";
-    $ce_len = strlen($request);
-    $gid = substr($request, 10, $ce_len);
+    $gid_len = strlen($request);
+    $gid = substr($request, 10, $gid_len);
     $gid = str_replace("/", "", $gid);
+    $gname = "";
     $sql = "SELECT * FROM skymake_classes WHERE classid='".$gid."'";
     if ($res = mysqli_query($link, $sql)) {
         if (mysqli_num_rows($res) == 1) {
-            echo("");
+            while($row = mysqli_fetch_row($result)){
+                $gname = $row["classname"];
+            }
         }else{
             die("There is no such group.");
         }
@@ -474,6 +477,7 @@ if (substr($request, 0, 10) === "editgroup/") {
     }
     ?>
     <div style="text-align: center; padding-top: 100px; border-bottom-width: thin; border-bottom-color: #4e555b; border-bottom-style: solid;">
+        <h2>Editing Group: <?php echo $gname; ?></h2>
         <form method="post" style="width:800px; text-align: center; margin-right:auto; margin-left: auto; padding-bottom:10px;">
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
