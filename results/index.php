@@ -45,7 +45,7 @@ if($result = mysqli_query($link, $sql)){
         }
         mysqli_free_result($result);
     } else{
-        echo "Exam invalid.";
+        echo "Exam invalid. $sql";
         die("<a href='/'>Home Page</a>");
     }
 } else{
