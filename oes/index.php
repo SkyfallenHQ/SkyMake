@@ -31,7 +31,7 @@ if($result = mysqli_query($link, $sql)){
 }
 if (time() > strtotime($examdata["exam_end"])) {
    echo "Your time is over. \n";
-   die "Your answer was discarded.\n";
+   die("Your answer was discarded.\n");
 }
 if(!isset($_SESSION["qn"])){
     $_SESSION["qn"] = 1;
