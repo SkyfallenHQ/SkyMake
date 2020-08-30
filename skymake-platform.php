@@ -456,6 +456,36 @@ if (substr($request, 0, 10) === "editgroup/") {
     }else{
         die("There was an error with MySQL. Error:".mysqli_error($link));
     }
+    if(isset($_GET["delUser"])){
+        $sql = "DELETE FROM skymake_class_assigned WHERE classid='".$gid."' and username='".$_GET["delUser"]."'";
+        if (mysqli_query($link, $sql)) {
+            echo "Success";
+        }else{
+            echo "Failed while deleting. MySQL has encountered an error: ".mysqli_error($link);
+        }
+    }
+    if(isset($_POST["addUser"])){
+        $sql = "INSERT INTO skymake_class_assigned (classid,username) VALUES ('".$gid."','".$_POST["username"]."')";
+        if (mysqli_query($link, $sql)) {
+            echo "Success";
+        }else{
+            echo "Failed while deleting. MySQL has encountered an error: ".mysqli_error($link);
+        }
+    }
+    ?>
+    <div style="text-align: center; padding-top: 100px; border-bottom-width: thin; border-bottom-color: #4e555b; border-bottom-style: solid;">
+        <form method="post" style="width:800px; text-align: center; margin-right:auto; margin-left: auto; padding-bottom:10px;">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">@</span>
+                </div>
+                <input type="text" class="form-control" placeholder="Username" name="usernamee" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+            <button type="submit" name="addUser" class="btn btn-outline-dark" style="margin-top: 20px;">Add User</button>
+    </div>
+    </form>
+    </div>
+<?php
     $sql = "SELECT * FROM skymake_class_assigned WHERE classid='".$gid."'";
     if ($res = mysqli_query($link, $sql)) {
         if (mysqli_num_rows($res) > 0) {
