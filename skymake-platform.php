@@ -381,13 +381,13 @@ if($request == "groups" or $request == "groups/"){
                     <span class="input-group-text" id="basic-addon1">G@Name</span>
                 </div>
                 <input type="text" class="form-control" placeholder="Group Name" name="groupname" aria-label="groupname" aria-describedby="basic-addon1">
-                <button type="submit" name="delGroup" class="btn btn-outline-dark" style="margin-top: 20px;">Create Group</button>
             </div>
+            <button type="submit" name="addGroup" class="btn btn-outline-dark" style="margin-top: 20px;">Create Group</button>
     </div>
     </form>
     </div>
 <?php
-$sql = "SELECT username FROM skymake_users";
+$sql = "SELECT * FROM skymake_classes";
 if ($res = mysqli_query($link, $sql)) {
         if (mysqli_num_rows($res) > 0) {
             echo '<div style="text-align: center;">';
