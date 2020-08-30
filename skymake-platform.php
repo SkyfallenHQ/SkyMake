@@ -1,6 +1,8 @@
 <?php
 $request = $_GET["request"];
 $requestsuccess = false;
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 if(substr($request ,0 ,1)=="/"){
  $request = substr($request,1,strlen($request)-1);
 }
