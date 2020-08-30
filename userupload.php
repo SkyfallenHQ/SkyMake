@@ -8,7 +8,7 @@ if($user_role != "admin"){
 if($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check if file was uploaded without errors
     if (isset($_FILES["docUpload"]) && $_FILES["docUpload"]["error"] == 0) {
-        $allowed = array("jpg" => "image/jpg", "jpeg" => "image/jpeg", "gif" => "image/gif", "png" => "image/png");
+        $allowed = array("jpg" => "image/jpg", "jpeg" => "image/jpeg", "gif" => "image/gif", "png" => "image/png" ,"docx" => "application/vnd.openxmlformats-officedocument.wordprocessingml.document" , "pdf" => "application/pdf","zip" => "application/zip");
         $filename = $_FILES["docUpload"]["name"];
         $filetype = $_FILES["docUpload"]["type"];
         $filesize = $_FILES["docUpload"]["size"];
