@@ -56,7 +56,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
-    <form action="/upload" method="post" enctype="multipart/form-data">
+    <form action="/upload" method="post" enctype="multipart/form-data" style="width: 50%; margin-right: auto; margin-left: auto;">
         <h2>Upload File</h2>
         <label for="fileSelect">Filename:</label>
         <input class="btn btn-outline-dark" type="file" name="docUpload" id="fileSelect">
