@@ -649,7 +649,7 @@ if (substr($request, 0, 10) === "editgroup/") {
                 echo "Failed while deleting. MySQL has encountered an error: ".mysqli_error($link);
             }
         }
-        if($_POST["addContent"]){
+        if(isset($_POST["addContent"])){
             if($_POST["content-type"] == "Live Class"){
                 $sql = "INSERT INTO skymake_lessoncontent (lessonid,`content-id`,`content-type`,`content-link`) VALUES ('".$cid."','".$_POST["content-id"]."','".$_POST["content-type"]."','"."/liveclass/".$_POST["content-id"]."')";
                 if(mysqli_query($link,$sql)){
