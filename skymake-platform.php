@@ -514,6 +514,7 @@ if (substr($request, 0, 10) === "editgroup/") {
     }
 }
 if($request == "examcreate" or $request == "examcreate/"){
+    include "nps/widgets/dash.php";
     $requestsuccess = true;
     if(isset($_POST["createExam"])){
         $sql = "INSERT INTO skymake_examdata (examid,exam_name,exam_start,exam_end,exam_qcount,exam_type,exam_creator) VALUES ('".$_POST["exam-id"]."','".$_POST["exam-name"]."','".$_POST["exam-date"]." ".$_POST["exam-start"]."','".$_POST["exam-date"]." ".$_POST["exam-end"]."','".$_POST["exam-qcount"]."','standard','no-one')";
