@@ -276,6 +276,24 @@ if($user_role == "admin") {
    if($request == "users" or $request == "users/"){
        include_once "nps/widgets/dash.php";
        $requestsuccess = true;
+       if(isset($_POST["deluser"])){
+           $sql = "DELETE FROM skymake_users WHERE username='".$_POST["username"]."'";
+           if($result = mysqli_query($link, $sql)){
+               $sql = "DELETE FROM skymake_roles WHERE username='".$_POST["username"]."'";
+               if($result = mysqli_query($link, $sql)){
+                    echo "Success!";
+               }
+               else{
+                   echo("ERROR: Could not able to execute on step two: $sql. " . mysqli_error($link));
+               }
+           }
+           else{
+               echo("ERROR: Could not able to execute $sql. " . mysqli_error($link));
+           }
+       }
+       if(isset($_POST["setRole"])){
+           setRole($link,$_POST["username"],$_POST["newRole"]);
+       }
        ?>
        <div style="text-align: center; padding-top: 100px; border-bottom-width: thin; border-bottom-color: #4e555b; border-bottom-style: solid;">
         <form method="post" style="width:800px; text-align: center; margin-right:auto; margin-left: auto; padding-bottom:10px;">
@@ -286,7 +304,7 @@ if($user_role == "admin") {
                 <input type="text" class="form-control" placeholder="Username" name="username" aria-label="Username" aria-describedby="basic-addon1">
             </div>
             <div class="input-group">
-                <select class="custom-select" id="inputGroupSelect04">
+                <select class="custom-select" id="inputGroupSelect04" name="newRole">
                     <option selected>Choose a new role to set...</option>
                     <option value="admin">Administrator</option>
                     <option value="student">Student</option>
@@ -296,10 +314,36 @@ if($user_role == "admin") {
                     <button class="btn btn-outline-secondary" type="submit" name="setRole">Set Role</button>
                 </div>
             </div>
-            <button type="submit" name="deluser" class="btn btn-outline-dark" style="padding-top: 20px;">Delete User</button>
+            <button type="submit" name="deluser" class="btn btn-outline-dark" style="margin-top: 20px;">Delete User</button>
         </form>
        </div>
 <?php
+$link2 = $linktwo;
+$sql2 = "SELECT role FROM skymake_roles";
+$sql = "SELECT username FROM skymake_users";
+if ($res = mysqli_query($link, $sql)) {
+    if ($res2 = mysqli_query($link2, $sql2)) {
+        if (mysqli_num_rows($res) > 0 and mysqli_num_rows($res2) > 0) {
+            echo "<table class='table'>";
+            echo "<thead>";
+            echo "<tr>";
+            echo "<th scope='col'>Username</th>";
+            echo "<th scope='col'>User Role</th>";
+            echo "</tr>";
+            echo "</thead>";
+            echo "<tbody>";
+            while ($row = mysqli_fetch_array($res)) {
+                $row2 = mysqli_fetch_array($res2);
+                echo "<tr>";
+                echo "<td>" . $row['username'] . "</td>";
+                echo "<td>" . $row2['role'] . "</td>";
+                echo "</tr>";
+            }
+            echo "</tbody>";
+            echo "</table></div>";
+        }
+    }
+}
    }
 }
 if($requestsuccess == false){
