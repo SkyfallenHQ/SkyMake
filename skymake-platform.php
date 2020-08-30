@@ -275,7 +275,9 @@ if($user_role == "admin") {
    }
    if($request == "users" or $request == "users/"){
        include_once "nps/widgets/dash.php";
+       $requestsuccess = true;
        ?>
+       <div class="centered-container">
         <form method="post" style="width:800px; text-align: center;">
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
@@ -296,7 +298,7 @@ if($user_role == "admin") {
             </div>
             <button type="submit" name="deluser" class="btn btn-outline-dark">Delete User</button>
         </form>
-
+       </div>
 <?php
    }
 }
