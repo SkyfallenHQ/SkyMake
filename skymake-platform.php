@@ -483,7 +483,7 @@ if (substr($request, 0, 10) === "editgroup/") {
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">@</span>
                 </div>
-                <input type="text" class="form-control" placeholder="Username" name="usernamee" aria-label="Username" aria-describedby="basic-addon1">
+                <input type="text" class="form-control" placeholder="Username" name="username" aria-label="Username" aria-describedby="basic-addon1">
             </div>
             <button type="submit" name="addUser" class="btn btn-outline-dark" style="margin-top: 20px;">Add User</button>
     </div>
