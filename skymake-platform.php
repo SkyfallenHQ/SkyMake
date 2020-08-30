@@ -334,7 +334,7 @@ if ($res = mysqli_query($link, $sql)) {
             while ($row = mysqli_fetch_array($res)) {
                 echo "<tr>";
                 echo "<td>" . $row['username'] . "</td>";
-                $rolefromdb = "none";
+                $rolefromdb = "unverified";
                 $sql = "SELECT role FROM skymake_roles WHERE username='".$row["username"]."'";
                 if($result2 = mysqli_query($link2, $sql)){
                     if(mysqli_num_rows($result2) == 1){

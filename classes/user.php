@@ -31,7 +31,6 @@
         else{
             die("ERROR: Could not able to execute $sql. " . mysqli_error($link));
         }
-        mysqli_close($link);
         if($isroleadded) {
             $sql = "DELETE FROM skymake_roles WHERE username=\"" . $username . "\";";
             if ($result = mysqli_query($link, $sql)) {
@@ -40,7 +39,6 @@
                 die("SQL Failure.Traceback:" . $sql . " Detailed info:" . mysqli_error($link));
             }
         }
-        mysqli_close($link);
         $sql = "INSERT INTO skymake_roles (username,role) VALUES ('".$username."','".$newrole."');";
             if ($result = mysqli_query($link, $sql)) {
                 return true;
