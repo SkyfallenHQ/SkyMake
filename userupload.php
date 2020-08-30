@@ -38,7 +38,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     $contentid = $_POST["contentid"];
     $lessonid = $_POST["lessonid"];
-    $uploadlink = "/UserUploads/" . $filename;
+    $uploadlink = "UserUploads/" . $filename;
     $sql = "INSERT INTO skymake_useruploads (upload_id,uploadlink) VALUES ('" . $contentid . "','" . $uploadlink . "')";
     if ($result = mysqli_query($link, $sql)) {
         echo "SQL Query successfully executed.";
