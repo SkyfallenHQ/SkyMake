@@ -360,7 +360,35 @@ if ($res = mysqli_query($link, $sql)) {
 if($request == "groups" or $request == "groups/"){
        include_once "nps/widgets/dash.php";
        $requestsuccess = true;
-
+        if(isset($_POST["delGroup"])){
+            $sql = "DELETE FROM skymake_classes WHERE classid='".$_POST['groupid']."'";
+            if(mysqli_query($link,$sql)){
+                $sql = "DELETE FROM skymake_class_assigned WHERE classid='".$_POST['groupid']."'";
+                if(mysqli_query($link,$sql)){
+                    $sql = "DELETE FROM skymake_assignments WHERE classid='".$_POST['groupid']."'";
+                    if(mysqli_query($link,$sql)){
+                        echo "Success!";
+                    }
+                    else {
+                        echo "ERROR. At step three MySQL encountered an error:".mysqli_error($link);
+                    }
+                }
+                else {
+                    echo "ERROR. At step two MySQL encountered an error:".mysqli_error($link);
+                }
+            }
+            else {
+                echo "ERROR. At step one MySQL encountered an error:".mysqli_error($link);
+            }
+        }
+        if(isset($_POST["addGroup"])){
+            $sql = "INSERT INTO skymake_classes(classname) VALUES ('".$_POST["groupname"]."')";
+            if(mysqli_query($link,$sql)){
+                echo "Success!";
+            }else {
+                echo "MySQL has encountered an error while creating group. ".mysqli_error($link);
+            }
+        }
        ?>
        <div style="text-align: center; padding-top: 100px; border-bottom-width: thin; border-bottom-color: #4e555b; border-bottom-style: solid;">
         <form method="post" style="width:800px; text-align: center; margin-right:auto; margin-left: auto; padding-bottom:10px;">
