@@ -1,6 +1,6 @@
 <?php
 include_once "nps/widgets/dash.php";
-$_SESSION["user_role"] = $user_role = getRole($link,$_SESSION["username"]);
+$_SESSION["user_role"] = $user_role = SMUser::getRole($link,$_SESSION["username"]);
 if($user_role != "admin"){
   header('location: /');
 }
