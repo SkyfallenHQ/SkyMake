@@ -357,7 +357,7 @@ if ($res = mysqli_query($link, $sql)) {
     }
    }
 }
-if($request == "classes" or $request == "classes/"){
+if($request == "groups" or $request == "groups/"){
        include_once "nps/widgets/dash.php";
        $requestsuccess = true;
 
@@ -366,24 +366,26 @@ if($request == "classes" or $request == "classes/"){
         <form method="post" style="width:800px; text-align: center; margin-right:auto; margin-left: auto; padding-bottom:10px;">
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1">@</span>
+                    <span class="input-group-text" id="basic-addon1">G@ID</span>
                 </div>
-                <input type="text" class="form-control" placeholder="Username" name="username" aria-label="Username" aria-describedby="basic-addon1">
+                <input type="text" class="form-control" placeholder="Group ID" name="groupid" aria-label="groupid" aria-describedby="basic-addon1">
             </div>
-            <div class="input-group">
-                <select class="custom-select" id="inputGroupSelect04" name="newRole">
-                    <option selected>Choose a new role to set...</option>
-                    <option value="admin">Administrator</option>
-                    <option value="student">Student</option>
-                    <option value="teacher">Teacher</option>
-                </select>
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="submit" name="setRole">Set Role</button>
-                </div>
             </div>
-            <button type="submit" name="deluser" class="btn btn-outline-dark" style="margin-top: 20px;">Delete User</button>
+            <button type="submit" name="delGroup" class="btn btn-outline-dark" style="margin-top: 20px;">Delete Group</button>
         </form>
        </div>
+    <div style="text-align: center; padding-top: 100px; border-bottom-width: thin; border-bottom-color: #4e555b; border-bottom-style: solid;">
+        <form method="post" style="width:800px; text-align: center; margin-right:auto; margin-left: auto; padding-bottom:10px;">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">G@Name</span>
+                </div>
+                <input type="text" class="form-control" placeholder="Group Name" name="groupname" aria-label="groupname" aria-describedby="basic-addon1">
+            </div>
+    </div>
+    <button type="submit" name="delGroup" class="btn btn-outline-dark" style="margin-top: 20px;">Create Group</button>
+    </form>
+    </div>
 <?php
 $sql = "SELECT username FROM skymake_users";
 if ($res = mysqli_query($link, $sql)) {
@@ -392,8 +394,8 @@ if ($res = mysqli_query($link, $sql)) {
             echo "<table class='table' style='width:80%; margin-right: auto; margin-left: auto;'>";
             echo "<thead>";
             echo "<tr>";
-            echo "<th scope='col'>Class ID</th>";
-            echo "<th scope='col'>Class Name</th>";
+            echo "<th scope='col'>Group ID</th>";
+            echo "<th scope='col'>Group Name</th>";
             echo "</tr>";
             echo "</thead>";
             echo "<tbody>";
