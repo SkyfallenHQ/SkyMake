@@ -278,7 +278,7 @@ if($user_role == "admin") {
        $requestsuccess = true;
        ?>
        <div style="text-align: center; padding-top: 100px; border-bottom-width: thick; border-bottom-color: #4e555b; border-bottom-style: solid;">
-        <form method="post" style="width:800px; text-align: center;">
+        <form method="post" style="width:800px; text-align: center; margin-right:auto; margin-left: auto;">
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">@</span>
