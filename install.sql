@@ -53,7 +53,6 @@ CREATE TABLE `skymake_assignments` (
   `unit` varchar(255) NOT NULL,
   `bgurl` varchar(255) NOT NULL,
   `classid` varchar(255) NOT NULL,
-  `createdate` date NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
