@@ -56,6 +56,9 @@ if (new DateTime() < new DateTime($examdata["exam_end"])) {
     echo "Your results won't be shown..\n";
     die("<a href='/'>Home Page</a>");
 }
+if($_SESSION["user_role"] == "admin"){
+    header("Location: /results/ranking/");
+}
 $_SESSION["examid"] = $_GET["examid"];
 $link2 = $linktwo;
 $sql = "SELECT qn,answer FROM skymake_answer WHERE id=".$_SESSION["id"]." and examid='".$_SESSION["examid"]."'";
