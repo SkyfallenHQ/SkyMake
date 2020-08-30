@@ -45,7 +45,7 @@ if($result = mysqli_query($link, $sql)){
         }
         mysqli_free_result($result);
     } else{
-        echo "Exam invalid. $sql";
+        echo "Exam invalid.";
         die("<a href='/'>Home Page</a>");
     }
 } else{
@@ -67,7 +67,7 @@ if ($res = mysqli_query($link, $sql)) {
 <div style="text-align: center;">
     <h1><?php echo $examdata["exam_name"]; ?></h1>
     <h4><?php echo "From ".$examdata["exam_start"]." to ".$examdata["exam_end"]." ".$examdata["exam_qcount"]." Questions"; ?></h4>
-    <h6>Created by: <?php echo $examdata["creator"]; ?></h6>
+    <h6>Created by: <?php echo $examdata["exam_creator"]; ?></h6>
         <?php
         echo "<table class='table'>";
         echo "<thead>";
@@ -92,7 +92,7 @@ if ($res = mysqli_query($link, $sql)) {
             echo "<td>".$row2['answer']."</td>";
             echo "</tr>";
             $examtype = $examdata["exam_type"];
-            if($examtype="90withMSL") {
+            /*if($examtype="90withMSL") {
                 if ($row['answer'] != $row2['answer']) {
                     if ($row['answer'] == "Q_EMPTY") {
                         if (x < 51 and x > 20) {
@@ -111,7 +111,7 @@ if ($res = mysqli_query($link, $sql)) {
                     }
                 }
                 $points = 500-($m1+($m1-$e1)/3+($m2-$e2)/3*4+$m2*4);
-            }else{
+            }else{ */
                 if ($row['answer'] != $row2['answer']) {
                     if ($row['answer'] == "Q_EMPTY") {
                         $points = $points;
@@ -121,7 +121,7 @@ if ($res = mysqli_query($link, $sql)) {
                 }else{
                     $points = $points + 20;
                 }
-            }
+            //}
         }
         echo "</tbody>";
         echo "</table><p>".$points."</p></div>";
