@@ -649,6 +649,43 @@ if (substr($request, 0, 10) === "editgroup/") {
                 echo "Failed while deleting. MySQL has encountered an error: ".mysqli_error($link);
             }
         }
+        if($_POST["addContent"]){
+            if($_POST["content-type"] == "Live Class"){
+                $sql = "INSERT INTO skymake_lessoncontent (lessonid,`content-id`,`content-type`,`content-link`) VALUES ('".$cid."','".$_POST["content-id"]."','".$_POST["content-type"]."','"."/liveclass/".$_POST["content-id"]."')";
+                if(mysqli_query($link,$sql)){
+                    echo "Success!";
+                }else{
+                    echo "Error. ".mysqli_error($link);
+                }
+            }
+            if($_POST["content-type"] == "Online Exam"){
+                $sql = "INSERT INTO skymake_lessoncontent (lessonid,`content-id`,`content-type`,`content-link`) VALUES ('".$cid."','".$_POST["content-id"]."','".$_POST["content-type"]."','"."/oes/?examid=".$_POST["content-id"]."')";
+                if(mysqli_query($link,$sql)){
+                    echo "Success!";
+                }else{
+                    echo "Error. ".mysqli_error($link);
+                }
+            }
+            if($_POST["content-type"] == "Document"){
+                $sql = "SELECT uploadlink FROM skymake_useruploads WHERE `upload_id`='".$_POST["content-id"]."'";
+                $c_link = "";
+                if ($res = mysqli_query($link, $sql)) {
+                    if(mysqli_num_rows($res) == 1){
+                        while($row = mysqli_fetch_array($res)){
+                            $c_link = $row["uploadlink"];
+                        }
+                    }else{
+                        die("No such upload.");
+                    }
+                }
+                $sql = "INSERT INTO skymake_lessoncontent (lessonid,`content-id`,`content-type`,`content-link`) VALUES ('".$cid."','".$_POST["content-id"]."','".$_POST["content-type"]."','".$c_link."')";
+                if(mysqli_query($link,$sql)){
+                    echo "Success!";
+                }else{
+                    echo "Error. ".mysqli_error($link);
+                }
+            }
+        }
         ?>
         <div style="text-align: center; padding-top: 100px; border-bottom-width: thin; border-bottom-color: #4e555b; border-bottom-style: solid;">
             <h2>Editing Course: <?php echo $cid; ?></h2>
