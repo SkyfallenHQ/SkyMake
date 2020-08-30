@@ -449,7 +449,7 @@ if (substr($request, 0, 10) === "editgroup/") {
     $sql = "SELECT * FROM skymake_classes WHERE classid='".$gid."'";
     if ($res = mysqli_query($link, $sql)) {
         if (mysqli_num_rows($res) == 1) {
-            while($row = mysqli_fetch_row($result)){
+            while($row = mysqli_fetch_row($res)){
                 $gname = $row["classname"];
             }
         }else{
