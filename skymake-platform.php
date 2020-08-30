@@ -516,7 +516,15 @@ if (substr($request, 0, 10) === "editgroup/") {
     if($request == "courses" or $request == "courses/"){
         include_once "nps/widgets/dash.php";
         $requestsuccess = true;
-        if(isset($_POST["addCourse"])){
+        if(isset($_POST["delCourse"])){
+            $sql = "DELETE FROM skymake_assignments WHERE lessonid='".$_POST["courseid"]."'";
+            if(mysqli_query($link,$sql)){
+                echo "Success!";
+            }else {
+                echo "MySQL has encountered an error while creating group. ".mysqli_error($link);
+            }
+        }
+        if(isset($_POST["createCourse"])){
             $sql = "INSERT INTO skymake_assignments(lessonid,lesson,teacher,teacheruser,time,topic,unit,bgurl,classid) VALUES ('".$_POST["lessonid"]."','".$_POST["lesson"]."','".$_POST["teacher"]."','".$_POST["teacheruser"]."','".$_POST["date"]." ".$_POST["hour"]."','".$_POST["topic"]."','".$_POST["unit"]."','".$_POST["bgurl"]."','".$_POST["classid"]."')";
             if(mysqli_query($link,$sql)){
                 echo "Success!";
@@ -533,7 +541,7 @@ if (substr($request, 0, 10) === "editgroup/") {
                     </div>
                     <input type="text" class="form-control" placeholder="Course ID" name="courseid" aria-label="courseid" aria-describedby="basic-addon1">
                 </div>
-                <button type="submit" name="delGroup" class="btn btn-outline-dark" style="margin-top: 20px;">Delete Group</button>
+                <button type="submit" name="delCourse" class="btn btn-outline-dark" style="margin-top: 20px;">Delete Course</button>
         </div>
         </form>
         </div>
@@ -590,30 +598,36 @@ if (substr($request, 0, 10) === "editgroup/") {
                 <label for="exam-date">Course Date:</label>
                 <input type="date" id="date" name="date">
                 <label for="exam-start">Course Time:</label>
-                <input type="time" id="hour" name="hour" value="15:16:00">
-                <button type="submit" name="createGroup" class="btn btn-outline-dark" style="margin-top: 20px;">Create Group</button>
+                <input type="time" id="hour" name="hour" value="15:16:00"><br>
+                <button type="submit" name="createCourse" class="btn btn-outline-dark" style="margin-top: 20px;">Create Course</button>
         </div>
         </form>
         </div>
         <?php
-        $sql = "SELECT * FROM skymake_classes";
+        $sql = "SELECT * FROM skymake_assignments";
         if ($res = mysqli_query($link, $sql)) {
             if (mysqli_num_rows($res) > 0) {
                 echo '<div style="text-align: center;">';
                 echo "<table class='table' style='width:80%; margin-right: auto; margin-left: auto;'>";
                 echo "<thead>";
                 echo "<tr>";
-                echo "<th scope='col'>Group ID</th>";
-                echo "<th scope='col'>Group Name</th>";
-                echo "<th scope='col'>Edit Users</th>";
+                echo "<th scope='col'>Course ID</th>";
+                echo "<th scope='col'>Lesson Name</th>";
+                echo "<th scope='col'>Teacher</th>";
+                echo "<th scope='col'>Topic</th>";
+                echo "<th scope='col'>Assigned Class ID</th>";
+                echo "<th scope='col'>Edit</th>";
                 echo "</tr>";
                 echo "</thead>";
                 echo "<tbody>";
                 while ($row = mysqli_fetch_array($res)) {
                     echo "<tr>";
+                    echo "<td>" . $row['lessonid'] . "</td>";
+                    echo "<td>" . $row['lesson'] . "</td>";
+                    echo "<td>" . $row['teacher'] . "</td>";
+                    echo "<td>" . $row['topic'] . "</td>";
                     echo "<td>" . $row['classid'] . "</td>";
-                    echo "<td>" . $row['classname'] . "</td>";
-                    echo "<td><a href='/editgroup/".$row["classid"]."'>Edit</a></td>";
+                    echo "<td><a href='/lessoncontent/".$row["lessonid"]."'>Edit</a></td>";
                     echo "</tr>";
                 }
                 echo "</tbody>";
@@ -621,36 +635,14 @@ if (substr($request, 0, 10) === "editgroup/") {
             }
         }
     }
-    if (substr($request, 0, 10) === "editgroup/") {
+    if (substr($request, 0, 14) === "lessoncontent/") {
         $requestsuccess = true;
         include "nps/widgets/dash.php";
-        $gid_len = strlen($request);
-        $gid = substr($request, 10, $gid_len);
-        $gid = str_replace("/", "", $gid);
-        $gname = "";
-        $sql = "SELECT * FROM skymake_classes WHERE classid='".$gid."'";
-        if ($res = mysqli_query($link, $sql)) {
-            if (mysqli_num_rows($res) == 1) {
-                while($row = mysqli_fetch_array($res)){
-                    $gname = $row["classname"];
-                }
-            }else{
-                die("There is no such group.");
-            }
-
-        }else{
-            die("There was an error with MySQL. Error:".mysqli_error($link));
-        }
-        if(isset($_GET["deluser"])){
-            $sql = "DELETE FROM skymake_class_assigned WHERE classid='".$gid."' and username='".$_GET["deluser"]."'";
-            if (mysqli_query($link, $sql)) {
-                echo "Success";
-            }else{
-                echo "Failed while deleting. MySQL has encountered an error: ".mysqli_error($link);
-            }
-        }
-        if(isset($_POST["addUser"])){
-            $sql = "INSERT INTO skymake_class_assigned (classid,username) VALUES ('".$gid."','".$_POST["username"]."')";
+        $cid_len = strlen($request);
+        $cid = substr($request, 10, $cid_len);
+        $cid = str_replace("/", "", $gid);
+        if(isset($_GET["delcontent"])){
+            $sql = "DELETE FROM skymake_lessoncontent WHERE `content-id`='".$_GET["delcontent"]."'";
             if (mysqli_query($link, $sql)) {
                 echo "Success";
             }else{
@@ -659,11 +651,11 @@ if (substr($request, 0, 10) === "editgroup/") {
         }
         ?>
         <div style="text-align: center; padding-top: 100px; border-bottom-width: thin; border-bottom-color: #4e555b; border-bottom-style: solid;">
-            <h2>Editing Group: <?php echo $gname; ?></h2>
+            <h2>Editing Course: <?php echo $cid; ?></h2>
             <form method="post" style="width:800px; text-align: center; margin-right:auto; margin-left: auto; padding-bottom:10px;">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">@</span>
+                        <span class="input-group-text" id="basic-addon1"></span>
                     </div>
                     <input type="text" class="form-control" placeholder="Username" name="username" aria-label="Username" aria-describedby="basic-addon1">
                 </div>
@@ -679,15 +671,17 @@ if (substr($request, 0, 10) === "editgroup/") {
                 echo "<table class='table' style='width:80%; margin-right: auto; margin-left: auto;'>";
                 echo "<thead>";
                 echo "<tr>";
-                echo "<th scope='col'>Username</th>";
-                echo "<th scope='col'>Delete Users</th>";
+                echo "<th scope='col'>Content ID</th>";
+                echo "<th scope='col'>Content Type</th>";
+                echo "<th scope='col'>Delete</th>";
                 echo "</tr>";
                 echo "</thead>";
                 echo "<tbody>";
                 while ($row = mysqli_fetch_array($res)) {
                     echo "<tr>";
-                    echo "<td>" . $row['username'] . "</td>";
-                    echo "<td><a href='?deluser=".$row["username"]."'>Delete</a></td>";
+                    echo "<td>" . $row['content-id'] . "</td>";
+                    echo "<td>" . $row['content-type'] . "</td>";
+                    echo "<td><a href='?delcontent=".$row["content-id"]."'>Delete</a></td>";
                     echo "</tr>";
                 }
                 echo "</tbody>";
