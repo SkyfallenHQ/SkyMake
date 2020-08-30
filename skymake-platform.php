@@ -266,8 +266,37 @@ if($user_role == "teacher") {
 }
 if($user_role == "admin") {
    if($request == "upload" or $request == "upload/"){
-      include "upload.php";
-      exit;
+       $requestsuccess == true;
+       include "upload.php";
+   }
+   if($request == "home" or $request == "home/"){
+       include_once "nps/widgets/dash.php";
+   }
+   if($request == "users" or $request == "users/"){
+       include_once "nps/widgets/dash.php";
+       ?>
+        <form method="post" style="width:800px; text-align: center;">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">@</span>
+                </div>
+                <input type="text" class="form-control" placeholder="Username" name="username" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group">
+                <select class="custom-select" id="inputGroupSelect04">
+                    <option selected>Choose a new role to set...</option>
+                    <option value="admin">Administrator</option>
+                    <option value="student">Student</option>
+                    <option value="teacher">Teacher</option>
+                </select>
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="submit" name="setRole">Set Role</button>
+                </div>
+            </div>
+            <button type="submit" name="deluser" class="btn btn-outline-dark">Delete User</button>
+        </form>
+
+<?php
    }
 }
 if($requestsuccess == false){
