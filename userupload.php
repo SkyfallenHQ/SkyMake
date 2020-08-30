@@ -62,9 +62,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         <input class="btn btn-outline-dark" type="file" name="docUpload" id="fileSelect">
         <p>Add as lessoncontent<p>
         <input type="radio" name="aasc" id="aasc-yes" value="yes"><label for="aasc-yes">Yes</label>
-        <input type="radio" name="aasc" id="aasc-no" value="no"><label for="aasc-no">No</label>
-        <input type="text" name="lessonid" placeholder="Lesson ID to assign if you said yes."><br>
-        <input type="text" name="contentid" placeholder="Content ID to assign."><br>
-        <input type="submit" name="submit" value="Upload">
+        <input type="radio" name="aasc" id="aasc-no" value="no"><label for="aasc-no">No</label><br>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Lesson ID</span>
+            </div>
+            <input type="text" class="form-control" placeholder="Lesson ID" name="lessonid" aria-label="Lesson ID" aria-describedby="basic-addon1">
+        </div>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Content ID" aria-label="Content ID Here" name="contentid" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="submit">Upload</button>
+            </div>
+        </div>
         <p><strong>Note:</strong> Only .jpg, .jpeg, .gif, .png .zip .pdf .docx formats allowed to a max size of 5 MB.</p>
     </form>
