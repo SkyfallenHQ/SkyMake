@@ -190,7 +190,7 @@ function doublewidget($lesson,$teacher,$time,$topic,$unit,$backgorundimage,$less
                       <li class="nav-item" role="presentation"><a class="nav-link" href="/results">Results</a></li>
                       <li class="nav-item" role="presentation"><a class="nav-link" href="/upload">Upload</a></li>
                       <li class="nav-item" role="presentation"><a class="nav-link" href="/examcreate">Create an Exam</a></li>
-                      <li class="nav-item" role="presentation"><a class="nav-link" href="/createlc">Create a Live Class</a></li>
+                      <li class="nav-item" role="presentation"><a class="nav-link" href="/courses">Courses and Lesson Contents</a></li>
                     <?php } //<li class="nav-item" role="presentation"><a class="nav-link" href="/search"><i class="fa fa-search"></i></a></li>
                     ?>
                     <li class="nav-item" role="presentation"></li>
