@@ -513,6 +513,188 @@ if (substr($request, 0, 10) === "editgroup/") {
         }
     }
 }
+    if($request == "courses" or $request == "courses/"){
+        include_once "nps/widgets/dash.php";
+        $requestsuccess = true;
+        if(isset($_POST["addCourse"])){
+            $sql = "INSERT INTO skymake_assignments(lessonid,lesson,teacher,teacheruser,time,topic,unit,bgurl,classid) VALUES ('".$_POST["lessonid"]."','".$_POST["lesson"]."','".$_POST["teacher"]."','".$_POST["teacheruser"]."','".$_POST["date"]." ".$_POST["hour"]."','".$_POST["topic"]."','".$_POST["unit"]."','".$_POST["bgurl"]."','".$_POST["classid"]."')";
+            if(mysqli_query($link,$sql)){
+                echo "Success!";
+            }else {
+                echo "MySQL has encountered an error while creating group. ".mysqli_error($link);
+            }
+        }
+        ?>
+        <div style="text-align: center; padding-top: 100px; border-bottom-width: thin; border-bottom-color: #4e555b; border-bottom-style: solid;">
+            <form method="post" style="width:800px; text-align: center; margin-right:auto; margin-left: auto; padding-bottom:10px;">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">C@ID</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Course ID" name="courseid" aria-label="courseid" aria-describedby="basic-addon1">
+                </div>
+                <button type="submit" name="delGroup" class="btn btn-outline-dark" style="margin-top: 20px;">Delete Group</button>
+        </div>
+        </form>
+        </div>
+        <div style="text-align: center; padding-top: 100px; border-bottom-width: thin; border-bottom-color: #4e555b; border-bottom-style: solid;">
+            <form method="post" style="width:800px; text-align: center; margin-right:auto; margin-left: auto; padding-bottom:10px;">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">C@ID</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Course ID" name="courseid" aria-label="courseid" aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">Lesson</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Lesson Name" name="lesson" aria-label="lesson" aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">Teacher</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="teacher" name="teacher" aria-label="teacher" aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">Teacher Username</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Teacher Username" name="teacheruser" aria-label="teacheruser" aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">Topic</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Topic" name="topic" aria-label="topic" aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">Unit</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Unit" name="unit" aria-label="unit" aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">BG Image</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Background Image" name="bgurl" aria-label="bgimage" aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">Class ID</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Class ID" name="classid" aria-label="classid" aria-describedby="basic-addon1">
+                </div>
+                <label for="exam-date">Course Date:</label>
+                <input type="date" id="date" name="date">
+                <label for="exam-start">Course Time:</label>
+                <input type="time" id="hour" name="hour" value="15:16:00">
+                <button type="submit" name="createGroup" class="btn btn-outline-dark" style="margin-top: 20px;">Create Group</button>
+        </div>
+        </form>
+        </div>
+        <?php
+        $sql = "SELECT * FROM skymake_classes";
+        if ($res = mysqli_query($link, $sql)) {
+            if (mysqli_num_rows($res) > 0) {
+                echo '<div style="text-align: center;">';
+                echo "<table class='table' style='width:80%; margin-right: auto; margin-left: auto;'>";
+                echo "<thead>";
+                echo "<tr>";
+                echo "<th scope='col'>Group ID</th>";
+                echo "<th scope='col'>Group Name</th>";
+                echo "<th scope='col'>Edit Users</th>";
+                echo "</tr>";
+                echo "</thead>";
+                echo "<tbody>";
+                while ($row = mysqli_fetch_array($res)) {
+                    echo "<tr>";
+                    echo "<td>" . $row['classid'] . "</td>";
+                    echo "<td>" . $row['classname'] . "</td>";
+                    echo "<td><a href='/editgroup/".$row["classid"]."'>Edit</a></td>";
+                    echo "</tr>";
+                }
+                echo "</tbody>";
+                echo "</table></div>";
+            }
+        }
+    }
+    if (substr($request, 0, 10) === "editgroup/") {
+        $requestsuccess = true;
+        include "nps/widgets/dash.php";
+        $gid_len = strlen($request);
+        $gid = substr($request, 10, $gid_len);
+        $gid = str_replace("/", "", $gid);
+        $gname = "";
+        $sql = "SELECT * FROM skymake_classes WHERE classid='".$gid."'";
+        if ($res = mysqli_query($link, $sql)) {
+            if (mysqli_num_rows($res) == 1) {
+                while($row = mysqli_fetch_array($res)){
+                    $gname = $row["classname"];
+                }
+            }else{
+                die("There is no such group.");
+            }
+
+        }else{
+            die("There was an error with MySQL. Error:".mysqli_error($link));
+        }
+        if(isset($_GET["deluser"])){
+            $sql = "DELETE FROM skymake_class_assigned WHERE classid='".$gid."' and username='".$_GET["deluser"]."'";
+            if (mysqli_query($link, $sql)) {
+                echo "Success";
+            }else{
+                echo "Failed while deleting. MySQL has encountered an error: ".mysqli_error($link);
+            }
+        }
+        if(isset($_POST["addUser"])){
+            $sql = "INSERT INTO skymake_class_assigned (classid,username) VALUES ('".$gid."','".$_POST["username"]."')";
+            if (mysqli_query($link, $sql)) {
+                echo "Success";
+            }else{
+                echo "Failed while deleting. MySQL has encountered an error: ".mysqli_error($link);
+            }
+        }
+        ?>
+        <div style="text-align: center; padding-top: 100px; border-bottom-width: thin; border-bottom-color: #4e555b; border-bottom-style: solid;">
+            <h2>Editing Group: <?php echo $gname; ?></h2>
+            <form method="post" style="width:800px; text-align: center; margin-right:auto; margin-left: auto; padding-bottom:10px;">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">@</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Username" name="username" aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+                <button type="submit" name="addUser" class="btn btn-outline-dark" style="margin-top: 20px;">Add User</button>
+        </div>
+        </form>
+        </div>
+        <?php
+        $sql = "SELECT * FROM skymake_class_assigned WHERE classid='".$gid."'";
+        if ($res = mysqli_query($link, $sql)) {
+            if (mysqli_num_rows($res) > 0) {
+                echo '<div style="text-align: center;">';
+                echo "<table class='table' style='width:80%; margin-right: auto; margin-left: auto;'>";
+                echo "<thead>";
+                echo "<tr>";
+                echo "<th scope='col'>Username</th>";
+                echo "<th scope='col'>Delete Users</th>";
+                echo "</tr>";
+                echo "</thead>";
+                echo "<tbody>";
+                while ($row = mysqli_fetch_array($res)) {
+                    echo "<tr>";
+                    echo "<td>" . $row['username'] . "</td>";
+                    echo "<td><a href='?deluser=".$row["username"]."'>Delete</a></td>";
+                    echo "</tr>";
+                }
+                echo "</tbody>";
+                echo "</table></div>";
+            }
+        }
+    }
 if($request == "examcreate" or $request == "examcreate/"){
     include "nps/widgets/dash.php";
     $requestsuccess = true;
