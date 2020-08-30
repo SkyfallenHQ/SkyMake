@@ -232,7 +232,7 @@ if($_SESSION["qn"] > $examdata["exam_qcount"]) {
     <form method="post">
 
      <?php echo "Question Number:".$_SESSION["qn"]." Out of: ".$examdata["exam_qcount"]; ?><br>
-        <div class="input-group mb-3">
+        <div class="input-group mb-3" style="width: 60%; margin-left: auto; margin-right: auto;">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">Question URL</span>
             </div>
