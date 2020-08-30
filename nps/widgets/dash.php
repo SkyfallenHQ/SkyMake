@@ -177,7 +177,7 @@ function doublewidget($lesson,$teacher,$time,$topic,$unit,$backgorundimage,$less
         <div class="container"><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="nav navbar-nav flex-grow-1 justify-content-between">
-                  <?php if($_SESSION["user_role"] != "admin"){
+                  <?php if($_SESSION["user_role"] != "admin"){ ?>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="#"><img src="/nps/widgets/assets/img/SkyfallenLogoSmallWhiteOnly.png" height="20"></a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/dash">Courses Dashboard</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/results">Results</a></li>
