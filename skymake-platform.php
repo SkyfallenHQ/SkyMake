@@ -322,7 +322,8 @@ $link2 = $linktwo;
 $sql = "SELECT username FROM skymake_users";
 if ($res = mysqli_query($link, $sql)) {
         if (mysqli_num_rows($res) > 0) {
-            echo "<table class='table' style='width:80%'>";
+            echo '<div style="text-align: center;">';
+            echo "<table class='table' style='width:80%; margin-right: auto; margin-left: auto;'>";
             echo "<thead>";
             echo "<tr>";
             echo "<th scope='col'>Username</th>";
