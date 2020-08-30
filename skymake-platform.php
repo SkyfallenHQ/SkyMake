@@ -271,6 +271,7 @@ if($user_role == "admin") {
    }
    if($request == "home" or $request == "home/"){
        include_once "nps/widgets/dash.php";
+       $requestsuccess = true;
    }
    if($request == "users" or $request == "users/"){
        include_once "nps/widgets/dash.php";
