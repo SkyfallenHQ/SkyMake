@@ -459,8 +459,8 @@ if (substr($request, 0, 10) === "editgroup/") {
     }else{
         die("There was an error with MySQL. Error:".mysqli_error($link));
     }
-    if(isset($_GET["delUser"])){
-        $sql = "DELETE FROM skymake_class_assigned WHERE classid='".$gid."' and username='".$_GET["delUser"]."'";
+    if(isset($_GET["deluser"])){
+        $sql = "DELETE FROM skymake_class_assigned WHERE classid='".$gid."' and username='".$_GET["deluser"]."'";
         if (mysqli_query($link, $sql)) {
             echo "Success";
         }else{
