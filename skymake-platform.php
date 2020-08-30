@@ -356,7 +356,6 @@ if ($res = mysqli_query($link, $sql)) {
         }
     }
    }
-}
 if($request == "groups" or $request == "groups/"){
        include_once "nps/widgets/dash.php";
        $requestsuccess = true;
@@ -439,7 +438,47 @@ if ($res = mysqli_query($link, $sql)) {
             echo "</table></div>";
         }
     }
+}
+if (substr($request, 0, 10) === "editgroup/") {
+    $requestsuccess = true;
+    include "nps/widgets/dash.php";
+    $ce_len = strlen($request);
+    $gid = substr($request, 10, $ce_len);
+    $gid = str_replace("/", "", $gid);
+    $sql = "SELECT * FROM skymake_classes WHERE classid='".$gid."'";
+    if ($res = mysqli_query($link, $sql)) {
+        if (mysqli_num_rows($res) == 1) {
+            echo("");
+        }else{
+            die("There is no such group.");
+        }
 
+    }else{
+        die("There was an error with MySQL. Error:".mysqli_error($link));
+    }
+    $sql = "SELECT * FROM skymake_class_assigned WHERE classid='".$gid."'";
+    if ($res = mysqli_query($link, $sql)) {
+        if (mysqli_num_rows($res) > 0) {
+            echo '<div style="text-align: center;">';
+            echo "<table class='table' style='width:80%; margin-right: auto; margin-left: auto;'>";
+            echo "<thead>";
+            echo "<tr>";
+            echo "<th scope='col'>Username</th>";
+            echo "<th scope='col'>Delete Users</th>";
+            echo "</tr>";
+            echo "</thead>";
+            echo "<tbody>";
+            while ($row = mysqli_fetch_array($res)) {
+                echo "<tr>";
+                echo "<td>" . $row['username'] . "</td>";
+                echo "<td><a href='?deluser=".$row["username"]."'>Delete</a></td>";
+                echo "</tr>";
+            }
+            echo "</tbody>";
+            echo "</table></div>";
+        }
+    }
+}
 }
 if($requestsuccess == false){
     include "nps/notfound.html";
