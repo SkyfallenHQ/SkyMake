@@ -277,8 +277,8 @@ if($user_role == "admin") {
        include_once "nps/widgets/dash.php";
        $requestsuccess = true;
        ?>
-       <div style="text-align: center; padding-top: 100px; border-bottom-width: thick; border-bottom-color: #4e555b; border-bottom-style: solid;">
-        <form method="post" style="width:800px; text-align: center; margin-right:auto; margin-left: auto;">
+       <div style="text-align: center; padding-top: 100px; border-bottom-width: thin; border-bottom-color: #4e555b; border-bottom-style: solid;">
+        <form method="post" style="width:800px; text-align: center; margin-right:auto; margin-left: auto; padding-bottom:10px;">
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">@</span>
