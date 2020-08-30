@@ -515,6 +515,22 @@ if (substr($request, 0, 10) === "editgroup/") {
 }
 if($request == "examcreate" or $request == "examcreate/"){
     $requestsuccess = true;
+    if(isset($_POST["createExam"])){
+        $sql = "INSERT INTO skymake_examdata (examid,exam_name,exam_start,exam_end,exam_qcount,exam_type,exam_creator) VALUES ('".$_POST["exam-id"]."','".$_POST["exam-name"]."','".$_POST["exam-date"]." ".$_POST["exam-start"]."','".$_POST["exam-date"]." ".$_POST["exam-end"]."','".$_POST["exam-qcount"]."','standard','no-one')";
+        if(mysqli_query($link,$sql)){
+            echo "Success!";
+        }else {
+            echo "Error $sql".mysqli_error($link);
+        }
+    }
+    if(isset($_GET["delexam"])){
+        $sql = "DELETE FROM skymake_examdata WHERE examid='".$_GET["delexam"]."'";
+        if(mysqli_query($link,$sql)){
+            echo "Success!";
+        }else {
+            echo "Error $sql".mysqli_error($link);
+        }
+    }
     ?>
     <div style="text-align: center; padding-top: 100px; border-bottom-width: thin; border-bottom-color: #4e555b; border-bottom-style: solid;">
         <form method="post" style="width:800px; text-align: center; margin-right:auto; margin-left: auto; padding-bottom:10px;">
@@ -559,6 +575,8 @@ if($request == "examcreate" or $request == "examcreate/"){
             echo "<th scope='col'>Start</th>";
             echo "<th scope='col'>End</th>";
             echo "<th scope='col'>Questions</th>";
+            echo "<th scope='col'>Edit</th>";
+            echo "<th scope='col'>Delete</th>";
             echo "</tr>";
             echo "</thead>";
             echo "<tbody>";
@@ -569,6 +587,8 @@ if($request == "examcreate" or $request == "examcreate/"){
                 echo "<td>" . $row['exam_start'] . "</td>";
                 echo "<td>" . $row['exam_end'] . "</td>";
                 echo "<td>" . $row['exam_qcount'] . "</td>";
+                echo "<td><a href='/examcreator/?examid=" . $row['examid'] . "'>Edit</a></td>";
+                echo "<td><a href='?delexam=" . $row['examid'] . "'>Delete</a></td>";
                 echo "</tr>";
             }
             echo "</tbody>";
