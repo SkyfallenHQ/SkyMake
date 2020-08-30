@@ -292,7 +292,7 @@ if($user_role == "admin") {
            }
        }
        if(isset($_POST["setRole"])){
-           setRole($link,$_POST["username"],$_POST["newRole"]);
+           SMUser::setRole($link,$_POST["username"],$_POST["newRole"]);
        }
        ?>
        <div style="text-align: center; padding-top: 100px; border-bottom-width: thin; border-bottom-color: #4e555b; border-bottom-style: solid;">
