@@ -432,7 +432,7 @@ if ($res = mysqli_query($link, $sql)) {
                 echo "<tr>";
                 echo "<td>" . $row['classid'] . "</td>";
                 echo "<td>" . $row['classname'] . "</td>";
-                echo "<td><a href='/editgroup/".$row["classid"]."'><span class=\"glyphicon glyphicon-pencil\"></span></a></td>"
+                echo "<td><a href='/editgroup/".$row["classid"]."'><span class=\"glyphicon glyphicon-pencil\"></span></a></td>";
                 echo "</tr>";
             }
             echo "</tbody>";
