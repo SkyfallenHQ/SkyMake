@@ -296,7 +296,7 @@ if($user_role == "admin") {
                     <button class="btn btn-outline-secondary" type="submit" name="setRole">Set Role</button>
                 </div>
             </div>
-            <button type="submit" name="deluser" class="btn btn-outline-dark">Delete User</button>
+            <button type="submit" name="deluser" class="btn btn-outline-dark" style="padding-top: 20px;">Delete User</button>
         </form>
        </div>
 <?php
