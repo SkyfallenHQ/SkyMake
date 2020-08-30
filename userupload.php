@@ -59,14 +59,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     <form action="/upload" method="post" enctype="multipart/form-data">
         <h2>Upload File</h2>
         <label for="fileSelect">Filename:</label>
-        <input type="file" name="docUpload" id="fileSelect">
+        <input class="btn btn-outline-dark" type="file" name="docUpload" id="fileSelect">
         <p>Add as lessoncontent<p>
-        <input type="radio" name="aasc" value="yes"><p>Yes</p>
-        <input type="radio" name="aasc" value="no"><p>No</p>
+        <input type="radio" name="aasc" id="aasc-yes" value="yes"><label for="aasc-yes">Yes</label>
+        <input type="radio" name="aasc" id="aasc-no" value="no"><label for="aasc-no">No</label>
         <input type="text" name="lessonid" placeholder="Lesson ID to assign if you said yes."><br>
         <input type="text" name="contentid" placeholder="Content ID to assign."><br>
         <input type="submit" name="submit" value="Upload">
         <p><strong>Note:</strong> Only .jpg, .jpeg, .gif, .png .zip .pdf .docx formats allowed to a max size of 5 MB.</p>
     </form>
-</body>
-</html>

@@ -266,7 +266,7 @@ if($user_role == "teacher") {
 }
 if($user_role == "admin") {
    if($request == "upload" or $request == "upload/"){
-       $requestsuccess == true;
+       $requestsuccess = true;
        include "userupload.php";
    }
    if($request == "home" or $request == "home/"){
