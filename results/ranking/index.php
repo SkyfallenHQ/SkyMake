@@ -1,5 +1,5 @@
 <?php
-require_once "../config.php";
+require_once "../../SkyMakeDatabaseConnector/SkyMakeDBconfig.php";
 $_SESSION["examid"] = $_GET["examid"];
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
