@@ -29,9 +29,9 @@ if($result = mysqli_query($link, $sql)){
 } else{
     die("ERROR: Could not able to execute $sql. " . mysqli_error($link));
 }
-if (new DateTime() > new DateTime($examdata["exam_end"].":00")) {
+if (time() > strotime($examdata["exam_end"])) {
    echo "Your time is over. \n";
-   echo "Your answer was discarded.\n";
+   die "Your answer was discarded.\n";
 }
 if(!isset($_SESSION["qn"])){
     $_SESSION["qn"] = 1;
