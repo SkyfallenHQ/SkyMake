@@ -1,5 +1,6 @@
 <?php
 require_once "../../SkyMakeDatabaseConnector/SkyMakeDBconfig.php";
+include "../../nps/widgets/dash.php";
 $_SESSION["examid"] = $_GET["examid"];
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -17,11 +18,15 @@ if(!isset($_SESSION["examid"])){
 $sql = "SELECT * FROM skymake_result WHERE examid='".$_SESSION["examid"]."'";
 if($result = mysqli_query($link, $sql)){
     if(mysqli_num_rows($result) > 0){
-        echo "<table id=\"table_rank\">";
-            echo "<tr>";
-                echo "<th>Points</th>";
-                echo "<th>Username</th>";
-            echo "</tr>";
+        echo '<div style="text-align: center;">';
+        echo "<table class='table' id='table_rank' style='width:80%; margin-right: auto; margin-left: auto;'>";
+        echo "<thead>";
+        echo "<tr>";
+        echo "<th scope='col'>Username</th>";
+        echo "<th scope='col'>Points</th>";
+        echo "</tr>";
+        echo "</thead>";
+        echo "<tbody>";
         while($row = mysqli_fetch_array($result)){
             echo "<tr>";
                 echo "<td>" . $row['p'] . "</td>";
@@ -29,7 +34,7 @@ if($result = mysqli_query($link, $sql)){
             echo "</tr>";
         }
         echo "</table>";
-        echo "<p><button onclick=\"sortTable()\">Sort</button></p>
+        echo "<p><button class='btn btn-dark' onclick=\"sortTable()\">Sort</button></p>
         <script>
 function sortTable() {
   var table, rows, switching, i, x, y, shouldSwitch;
