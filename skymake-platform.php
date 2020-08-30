@@ -513,6 +513,69 @@ if (substr($request, 0, 10) === "editgroup/") {
         }
     }
 }
+if($request == "examcreate" or $request == "examcreate/"){
+    $requestsuccess = true;
+    ?>
+    <div style="text-align: center; padding-top: 100px; border-bottom-width: thin; border-bottom-color: #4e555b; border-bottom-style: solid;">
+        <form method="post" style="width:800px; text-align: center; margin-right:auto; margin-left: auto; padding-bottom:10px;">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Name</span>
+                </div>
+                <input type="text" class="form-control" placeholder="Exam Name" name="exam-name" aria-label="Exam Name" aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Exam ID</span>
+                </div>
+                <input type="text" class="form-control" placeholder="Exam ID" name="exam-id" aria-label="Exam ID" aria-describedby="basic-addon1" value="OES<?php echo  mt_rand(1000,9999); ?>">
+            </div>
+            <label for="exam-date">Exam Date:</label>
+            <input type="date" id="exam-date" name="exam-date">
+            <label for="exam-start">Exam Start:</label
+            <input type="time" id="exam-start" value="15:16:17">
+            <label for="exam-end">Exam End:</label
+            <input type="time" id="exam-end" value="15:16:17">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Exam Question Count</span>
+                </div>
+                <input type="text" class="form-control" placeholder="Exam QCount" name="exam-qcount" aria-label="Exam Question Count" aria-describedby="basic-addon1">
+            </div>
+            <button type="submit" name="createExam" class="btn btn-outline-dark" style="margin-top: 20px;">Create Exam</button>
+    </div>
+    </form>
+    </div>
+<?php
+    $sql = "SELECT * FROM skymake_examdata";
+    if ($res = mysqli_query($link, $sql)) {
+        if (mysqli_num_rows($res) > 0) {
+            echo '<div style="text-align: center;">';
+            echo "<table class='table' style='width:80%; margin-right: auto; margin-left: auto;'>";
+            echo "<thead>";
+            echo "<tr>";
+            echo "<th scope='col'>Exam ID</th>";
+            echo "<th scope='col'>Exam Name</th>";
+            echo "<th scope='col'>Start</th>";
+            echo "<th scope='col'>End</th>";
+            echo "<th scope='col'>Questions</th>";
+            echo "</tr>";
+            echo "</thead>";
+            echo "<tbody>";
+            while ($row = mysqli_fetch_array($res)) {
+                echo "<tr>";
+                echo "<td>" . $row['examid'] . "</td>";
+                echo "<td>" . $row['exam_name'] . "</td>";
+                echo "<td>" . $row['exam_start'] . "</td>";
+                echo "<td>" . $row['exam_end'] . "</td>";
+                echo "<td>" . $row['exam_qcount'] . "</td>";
+                echo "</tr>";
+            }
+            echo "</tbody>";
+            echo "</table></div>";
+        }
+    }
+}
 }
 if($requestsuccess == false){
     include "nps/notfound.html";
