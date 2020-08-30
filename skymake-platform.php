@@ -319,11 +319,9 @@ if($user_role == "admin") {
        </div>
 <?php
 $link2 = $linktwo;
-$sql2 = "SELECT role FROM skymake_roles";
 $sql = "SELECT username FROM skymake_users";
 if ($res = mysqli_query($link, $sql)) {
-    if ($res2 = mysqli_query($link2, $sql2)) {
-        if (mysqli_num_rows($res) > 0 and mysqli_num_rows($res2) > 0) {
+        if (mysqli_num_rows($res) > 0) {
             echo "<table class='table'>";
             echo "<thead>";
             echo "<tr>";
@@ -333,17 +331,29 @@ if ($res = mysqli_query($link, $sql)) {
             echo "</thead>";
             echo "<tbody>";
             while ($row = mysqli_fetch_array($res)) {
-                $row2 = mysqli_fetch_array($res2);
                 echo "<tr>";
                 echo "<td>" . $row['username'] . "</td>";
-                echo "<td>" . $row2['role'] . "</td>";
+                $rolefromdb = "none";
+                $sql = "SELECT role FROM skymake_roles WHERE username='".$row["username"]."'";
+                if($result2 = mysqli_query($link2, $sql)){
+                    if(mysqli_num_rows($result2) == 1){
+                        while($rowrole = mysqli_fetch_array($result2)){
+                            $rolefromdb = $rowrole['role'];
+                            mysqli_free_result($result2);
+                        }
+                    }
+
+                }
+                else{
+                    die("ERROR: Could not able to execute $sql. " . mysqli_error($link));
+                }
+                echo "<td>" . $rolefromdb . "</td>";
                 echo "</tr>";
             }
             echo "</tbody>";
             echo "</table></div>";
         }
     }
-}
    }
 }
 if($requestsuccess == false){
