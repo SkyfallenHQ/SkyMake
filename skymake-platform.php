@@ -639,7 +639,7 @@ if (substr($request, 0, 10) === "editgroup/") {
         $requestsuccess = true;
         include "nps/widgets/dash.php";
         $cid_len = strlen($request);
-        $cid = substr($request, 10, $cid_len);
+        $cid = substr($request, 14, $cid_len);
         $cid = str_replace("/", "", $cid);
         if(isset($_GET["delcontent"])){
             $sql = "DELETE FROM skymake_lessoncontent WHERE `content-id`='".$_GET["delcontent"]."'";
