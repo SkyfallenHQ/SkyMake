@@ -3,10 +3,11 @@ require_once "../../SkyMakeDatabaseConnector/SkyMakeDBconfig.php";
 $_SESSION["examid"] = $_GET["examid"];
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+session_name("SkyMakeSessionStorage");
 session_start();
 // Check if the user is logged in, if not then redirect him to login page
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-    header("location: index.php");
+    header("location: /");
     exit;
 }
 if(!isset($_SESSION["examid"])){
