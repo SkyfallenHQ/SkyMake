@@ -9,9 +9,7 @@ if(isset($_GET["examid"])){
     $_SESSION["examid"] = $examid;
 }else {
     if(!isset($_SESSION["examid"])){
-    echo "Exam not specified. You will be redirected in 3 seconds";
-    sleep(3);
-    header("location: /");
+    echo "Exam not specified.";
     }
 }
 $sql = "SELECT exam_name,exam_start,exam_end,exam_qcount,exam_type FROM skymake_examdata WHERE examid='".$_SESSION["examid"]."'";
@@ -26,9 +24,7 @@ if($result = mysqli_query($link, $sql)){
         }
         mysqli_free_result($result);
     } else{
-            echo "Exam invalid. You will be redirected in 3 seconds";
-            sleep(3);
-            header("location: /");
+            echo "Exam invalid.";
     }
 } else{
     die("ERROR: Could not able to execute $sql. " . mysqli_error($link));
@@ -36,9 +32,6 @@ if($result = mysqli_query($link, $sql)){
 if (new DateTime() > new DateTime($examdata["exam_end"])) {
    echo "Your time is over. \n";
    echo "Your answer was discarded.\n";
-   echo "Redirecting in 10 seconds \n";
-   sleep(10);
-   header("location: /");
 }
 if(!isset($_SESSION["qn"])){
     $_SESSION["qn"] = 1;
