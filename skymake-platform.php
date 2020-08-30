@@ -550,9 +550,9 @@ if($request == "examcreate" or $request == "examcreate/"){
             <label for="exam-date">Exam Date:</label>
             <input type="date" id="exam-date" name="exam-date">
             <label for="exam-start">Exam Start:</label>
-            <input type="time" id="exam-start" value="15:16:00">
+            <input type="time" id="exam-start" name="exam-start" value="15:16:00">
             <label for="exam-end">Exam End:</label>
-            <input type="time" id="exam-end" value="15:16:00">
+            <input type="time" id="exam-end" name="exam-end" value="15:16:00">
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">Exam Question Count</span>
