@@ -370,8 +370,8 @@ if($request == "groups" or $request == "groups/"){
                 </div>
                 <input type="text" class="form-control" placeholder="Group ID" name="groupid" aria-label="groupid" aria-describedby="basic-addon1">
             </div>
-            </div>
             <button type="submit" name="delGroup" class="btn btn-outline-dark" style="margin-top: 20px;">Delete Group</button>
+            </div>
         </form>
        </div>
     <div style="text-align: center; padding-top: 100px; border-bottom-width: thin; border-bottom-color: #4e555b; border-bottom-style: solid;">
@@ -381,9 +381,9 @@ if($request == "groups" or $request == "groups/"){
                     <span class="input-group-text" id="basic-addon1">G@Name</span>
                 </div>
                 <input type="text" class="form-control" placeholder="Group Name" name="groupname" aria-label="groupname" aria-describedby="basic-addon1">
+                <button type="submit" name="delGroup" class="btn btn-outline-dark" style="margin-top: 20px;">Create Group</button>
             </div>
     </div>
-    <button type="submit" name="delGroup" class="btn btn-outline-dark" style="margin-top: 20px;">Create Group</button>
     </form>
     </div>
 <?php
