@@ -640,7 +640,7 @@ if (substr($request, 0, 10) === "editgroup/") {
         include "nps/widgets/dash.php";
         $cid_len = strlen($request);
         $cid = substr($request, 10, $cid_len);
-        $cid = str_replace("/", "", $gid);
+        $cid = str_replace("/", "", $cid);
         if(isset($_GET["delcontent"])){
             $sql = "DELETE FROM skymake_lessoncontent WHERE `content-id`='".$_GET["delcontent"]."'";
             if (mysqli_query($link, $sql)) {
@@ -655,16 +655,26 @@ if (substr($request, 0, 10) === "editgroup/") {
             <form method="post" style="width:800px; text-align: center; margin-right:auto; margin-left: auto; padding-bottom:10px;">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1"></span>
+                        <span class="input-group-text" id="basic-addon1">Content ID</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Username" name="username" aria-label="Username" aria-describedby="basic-addon1">
+                    <input type="text" class="form-control" placeholder="Content ID" aria-label="Content ID" name="content-id" aria-describedby="basic-addon1">
                 </div>
-                <button type="submit" name="addUser" class="btn btn-outline-dark" style="margin-top: 20px;">Add User</button>
+                <div class="input-group">
+                    <select class="custom-select" id="inputGroupSelect04" name="content-type">
+                        <option selected>Choose...</option>
+                        <option value="Live Class">Live Class</option>
+                        <option value="Online Exam">Online Exam</option>
+                        <option value="Document">Document</option>
+                    </select>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit" name="addContent">Add Content</button>
+                    </div>
+                </div>
         </div>
         </form>
         </div>
         <?php
-        $sql = "SELECT * FROM skymake_class_assigned WHERE classid='".$gid."'";
+        $sql = "SELECT * FROM skymake_lessoncontent WHERE lessonid='".$cid."'";
         if ($res = mysqli_query($link, $sql)) {
             if (mysqli_num_rows($res) > 0) {
                 echo '<div style="text-align: center;">';
