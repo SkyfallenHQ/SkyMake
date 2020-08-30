@@ -1,5 +1,5 @@
 <?php
-require_once "config.php";
+require_once "../config.php";
 $_SESSION["examid"] = $_GET["examid"];
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -28,8 +28,7 @@ if($result = mysqli_query($link, $sql)){
             echo "</tr>";
         }
         echo "</table>";
-        // Free result set
-        /*echo "<p><button onclick=\"sortTable()\">Sort</button></p>
+        echo "<p><button onclick=\"sortTable()\">Sort</button></p>
         <script>
 function sortTable() {
   var table, rows, switching, i, x, y, shouldSwitch;
@@ -53,7 +52,7 @@ function sortTable() {
     }
   }
 }
-</script>"; */
+</script>";
         mysqli_free_result($result);
     } else{
         echo "No records matching your query were found.";
