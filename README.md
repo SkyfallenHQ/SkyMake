@@ -1,32 +1,24 @@
 # SkyMake Version 4
 The Official SkyMake Repository for SkyMake Version 4
-Other SkyMake Versions Available at thesf.me/l/SkyMake3/ /-/ theskyfallen.com/SkyMake/VersionHistory/
-
-# Work is still in progress.
-
-# SkyMake Version 4 Documentation
+SkyMake Version 2 Available on: github.com/TheSkyfallenCompany/SkyMakeV2
 
 # What is SkyMake?
 SkyMake is free and Open-Source Learning Management System that includes a Online Examination System, a Live Lesson System and many more features!
 
 # Prequisites
-a server running SkyMake Server-Side Software
+Nginx Web Server, MySQL Server, SkyfallenLiveConnect Server (Can be on a seperate server or can also be skipped if you don't mind your live lesson hosted outside) -- These are configured automatically with a script called SkyMake Server Side
 
 # What does SkyMake Server-Side Do?
-It includes Nginx Web Server, a MySQL Server,  Skyfallen LiveConnect SkyMake Build for live lessons, SkyMake 4 itself, and a Control Panel.
+It includes Nginx Web Server, a MySQL Server,  Skyfallen LiveConnect SkyMake Build for live lessons, SkyMake 4 itself.
 
 # Where Can I Get SkyMake Server-Side Software?
 theskyfallen.com/SkyMake/serversidesoftware/ When first beta release is ready.
 
 # Legal Info
-The Skyfallen Foundation and The Skyfallen Company - (C) All Rights Reserved
-Skyfallen Service ID: SFS-1VDW42C
+2016-2017 (C) KucukRobotcuk - 2017-2018 (C) deducated - 2018-2020 (C) The Skyfallen Company
 
 # Privacy
-Your Privacy is important to us: All Applications Subject to The Skyfallen Privacy Policy - thesf.me/l/KB-PRIVACY/ref/skymake /-/ theskyfallen.com/privacy
-
-# Skyfallen Common Code Library
-Skyfallen Common Frameworks and Common Code : commoncode.theskyfallen.com/SkyMake/v4/Beta/frameworks/
+Your Privacy is important to us: All Applications Subject to The Skyfallen Privacy Policy - theskyfallen.company/privacy
 
 # Open Source @ Skyfallen
 https://opensource.theskyfallen.com/
@@ -34,9 +26,6 @@ https://opensource.theskyfallen.com/
 
 # Skyfallen Open Source Licence
 https://opensource.theskyfallen.com/licence
-
-# Software Used:
-PhpStorm by JetBrains // jetbrains.com/phpstorm
 
 # Contribute
 contribute.theskyfallen.com/skymake/
@@ -48,11 +37,4 @@ contribute.theskyfallen.com/skymake/
 
 [Skyfallen Open Source](https://opensource.theskyfallen.com)
 
-[Skyfallen Help Center](https://help.theskyfallen.com)
-
-[Bug Report](https://help.theskyfallen.com/index.php?category=15&a=add)
-
-[Requesting your data](https://help.theskyfallen.com/knowledgebase.php?article=3)
-
-Skyfallen Service ID: SFS-1VDW42C
-
+[Running Instance (Demo)](https://tr-ist01.wwwapp.deducated.com) user: demo - password: demo
