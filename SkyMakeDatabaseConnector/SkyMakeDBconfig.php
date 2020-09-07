@@ -2,10 +2,10 @@
 // this value is checked in order to make sure we have access to this file
 define("SkyMakeOnDBConfigConnect", "DBCONFCONNOK");
 //begin editing
-define("dbHost","");
-define("dbName","");
-define("dbUser","");
-define("dbPassword","");
+define("dbHost","localhost");
+define("dbName","exampledb");
+define("dbUser","dbuser");
+define("dbPassword","dbpassword");
 //stop editing
 //Only MySQL is supported
 //SkyMake4 uses MySQLi (MySQL Enchanced)
