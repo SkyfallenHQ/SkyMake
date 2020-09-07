@@ -409,7 +409,20 @@ if($request == "groups" or $request == "groups/"){
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">G@ID</span>
                 </div>
-                <input type="text" class="form-control" placeholder="Group ID" name="groupid" aria-label="groupid" aria-describedby="basic-addon1">
+                <select class="custom-select" id="inputGroupSelect04" name="content-type" name="groupid">
+                <?php
+                $sql = "SELECT * FROM skymake_classes";
+                if($result = mysqli_query($link,$sql)){
+                    if (mysqli_num_rows($result) > 0) {
+                        while ($row = mysqli_fetch_array($result)) {
+                            echo "<option>".$row["classid"]."</option>";
+                        }
+                    }
+                }else {
+                    echo "SQL Error: $sql . ".mysqli_error($link);
+                }
+                ?>
+                </select>
             </div>
             <button type="submit" name="delGroup" class="btn btn-outline-dark" style="margin-top: 20px;">Delete Group</button>
             </div>
