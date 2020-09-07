@@ -302,7 +302,25 @@ if($user_role == "admin") {
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">@</span>
                 </div>
-                <input type="text" class="form-control" placeholder="Username" name="username" aria-label="Username" aria-describedby="basic-addon1">
+                <div class="input-group">
+                    <select class="custom-select" id="inputGroupSelect04" aria-label="Select User">
+                        <?php
+                        $sql = "SELECT * FROM skymake_users";
+                        if($result = mysqli_query($link,$sql)){
+                            if (mysqli_num_rows($result) > 0) {
+                                while ($row = mysqli_fetch_array($res)) {
+                                    echo "<option>".$row["username"]."</option>";
+                                }
+                            }
+                        }else {
+                            echo "SQL Error: $sql . ".mysqli_error($link);
+                        }
+                        ?>
+                    </select>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button">Button</button>
+                    </div>
+                </div>
             </div>
             <div class="input-group">
                 <select class="custom-select" id="inputGroupSelect04" name="newRole">
