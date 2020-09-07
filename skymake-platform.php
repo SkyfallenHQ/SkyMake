@@ -415,7 +415,7 @@ if($request == "groups" or $request == "groups/"){
                 if($result = mysqli_query($link,$sql)){
                     if (mysqli_num_rows($result) > 0) {
                         while ($row = mysqli_fetch_array($result)) {
-                            echo "<option>".$row["classid"]."</option>";
+                            echo "<option value='".$row["classid"]."'>".$row["classname"]."</option>";
                         }
                     }
                 }else {
