@@ -10,6 +10,7 @@ include "SkyMakeFunctionSet/Operation-Requirements/MainFunctions.php";
 include "SkyMakeDatabaseConnector/SkyMakeDBconfig.php";
 include "classes/user.php";
 include "SkyMakeDatabaseConnector/db-class.php";
+include "SkyMakeConfiguration.php";
 session_name('SkyMakeSessionStorage');
 session_start();
 if(!$_SESSION["loggedin"]){
