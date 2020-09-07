@@ -19,7 +19,7 @@ if(!isset($_GET["examid"])){
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">SkyMake Exam ID</span>
             </div>
-            <select class="custom-select" id="inputGroupSelect04" aria-label="Select User" name="username">
+            <select class="custom-select" id="inputGroupSelect04" aria-label="Select User" name="examid">
                 <?php
                 $sql = "SELECT * FROM skymake_examdata";
                 if($result = mysqli_query($link,$sql)){
