@@ -298,17 +298,13 @@ if($user_role == "admin") {
        ?>
        <div style="text-align: center; padding-top: 100px; border-bottom-width: thin; border-bottom-color: #4e555b; border-bottom-style: solid;">
         <form method="post" style="width:800px; text-align: center; margin-right:auto; margin-left: auto; padding-bottom:10px;">
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1">@</span>
-                </div>
                 <div class="input-group">
                     <select class="custom-select" id="inputGroupSelect04" aria-label="Select User">
                         <?php
                         $sql = "SELECT * FROM skymake_users";
                         if($result = mysqli_query($link,$sql)){
                             if (mysqli_num_rows($result) > 0) {
-                                while ($row = mysqli_fetch_array($res)) {
+                                while ($row = mysqli_fetch_array($result)) {
                                     echo "<option>".$row["username"]."</option>";
                                 }
                             }
@@ -318,10 +314,9 @@ if($user_role == "admin") {
                         ?>
                     </select>
                     <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button">Button</button>
+                        <button class="btn btn-outline-secondary" type="submit" name="deluser" >Delete User</button>
                     </div>
                 </div>
-            </div>
             <div class="input-group">
                 <select class="custom-select" id="inputGroupSelect04" name="newRole">
                     <option selected>Choose a new role to set...</option>
