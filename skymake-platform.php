@@ -299,7 +299,7 @@ if($user_role == "admin") {
        <div style="text-align: center; padding-top: 100px; border-bottom-width: thin; border-bottom-color: #4e555b; border-bottom-style: solid;">
         <form method="post" style="width:800px; text-align: center; margin-right:auto; margin-left: auto; padding-bottom:10px;">
                 <div class="input-group">
-                    <select style="padding-bottom: 30px;" class="custom-select" id="inputGroupSelect04" aria-label="Select User" name="username">
+                    <select style="margin-bottom: 30px;" class="custom-select" id="inputGroupSelect04" aria-label="Select User" name="username">
                         <?php
                         $sql = "SELECT * FROM skymake_users";
                         if($result = mysqli_query($link,$sql)){
@@ -314,7 +314,7 @@ if($user_role == "admin") {
                         ?>
                     </select>
                     <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="submit" name="deluser" >Delete User</button>
+                        <button style="margin-bottom: 30px;" class="btn btn-outline-secondary" type="submit" name="deluser" >Delete User</button>
                     </div>
                 </div>
             <div class="input-group">
