@@ -48,9 +48,9 @@ if($user_role == "student") {
         $lctoken = getLiveClassToken($link, $cenroller, $_SESSION["classid"]);
         if (isContentValid($link, $cenroller) == true and !($lctoken == false)) {
             echo("<div class='text-center'><h1>Live Class | SkyfallenLiveConnect ID:" . $cenroller . "</h1></div>");
-            echo("<script src='https://muzlupasta.theskyfallen.com/external_api.js'></script>
+            echo("<script src='https://".SFLC_HOST."/external_api.js'></script>
         <script>
-        const domain = 'muzlupasta.theskyfallen.com';
+        const domain = '".SFLC_HOST."';
         const options = {
             roomName: 'SkyMake4/LiveClasses/" . $cenroller . "/" . $lctoken[0] . "',
             width: self.innerWidth,
@@ -152,9 +152,9 @@ if($user_role == "teacher") {
         $lctoken = getLiveClassToken($link, $cenroller, $_SESSION["classid"],false);
         if (isContentValid($link, $cenroller) == true and !($lctoken == false)) {
             echo("<div class='text-center'><h1>Live Class | SkyfallenLiveConnect ID:" . $cenroller . "</h1></div>");
-            echo("<script src='https://muzlupasta.theskyfallen.com/external_api.js'></script>
+            echo("<script src='https://".SFLC_HOST."/external_api.js'></script>
         <script>
-        const domain = 'muzlupasta.theskyfallen.com';
+        const domain = '".SFLC_HOST."';
         const options = {
             roomName: 'SkyMake4/LiveClasses/" . $cenroller . "/" . $lctoken[0] . "',
             width: self.innerWidth,
