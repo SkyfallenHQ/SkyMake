@@ -566,7 +566,26 @@ if (substr($request, 0, 10) === "editgroup/") {
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">C@ID</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Course ID" name="courseid" aria-label="courseid" aria-describedby="basic-addon1">
+                    <select class="custom-select" id="inputGroupSelect04" name="courseid">
+                        <option selected>Choose a Course to Delete...</option>
+                        <?php
+                        $sql = "SELECT * FROM skymake_assignments";
+                        if($result = mysqli_query($link,$sql)){
+                            if(mysqli_num_rows($result) > 0){
+                                while($row = mysqli_fetch_array($result)){
+                                    $sql1 = "SELECT * FROM skymake_classes WHERE classid='".$row["classid"]."'";
+                                    if($result1 = mysqli_query($linktwo,$sql1)){
+                                        if(mysqli_num_rows($result1) == 0){
+                                            while($row1 = mysqli_fetch_array($result1)){
+                                                echo "<option value='".$row["lessonid"]."'>".$row["lessonid"]." | ".$row["lesson"]." - ".$row["topic"]." | ".$row["teacher"]." - ".$row1["classname"]."</option>";
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        ?>
+                    </select>
                 </div>
                 <button type="submit" name="delCourse" class="btn btn-outline-dark" style="margin-top: 20px;">Delete Course</button>
         </div>
