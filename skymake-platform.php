@@ -273,6 +273,89 @@ if($user_role == "admin") {
    if($request == "home" or $request == "home/"){
        include_once "nps/widgets/dash.php";
        $requestsuccess = true;
+       ?>
+
+       <div class="row" style="padding-top: 30px; width: 70%; text-align: left; margin-right: auto; margin-left: auto;">
+           <div class="col-sm-6">
+               <div class="card">
+                   <div class="card-body">
+                       <h5 class="card-title">Users</h5>
+                       <p class="card-text">You can change user roles here</p>
+                       <a href="/users" class="btn btn-outline-dark">Users</a>
+                   </div>
+               </div>
+           </div>
+           <div class="col-sm-6">
+               <div class="card">
+                   <div class="card-body">
+                       <h5 class="card-title">Classes</h5>
+                       <p class="card-text">You can create,delete or edit groups here</p>
+                       <a href="/groups" class="btn btn-outline-dark">Groups</a>
+                   </div>
+               </div>
+           </div>
+       </div>
+       <div class="row" style="padding-top: 30px; width: 70%; text-align: left; margin-right: auto; margin-left: auto;">
+           <div class="col-sm-6">
+               <div class="card">
+                   <div class="card-body">
+                       <h5 class="card-title">Results</h5>
+                       <p class="card-text">You can view your students' results here</p>
+                       <a href="/results" class="btn btn-outline-dark">Results</a>
+                   </div>
+               </div>
+           </div>
+           <div class="col-sm-6">
+               <div class="card">
+                   <div class="card-body">
+                       <h5 class="card-title">Upload</h5>
+                       <p class="card-text">You can upload documents or files here</p>
+                       <a href="/upload" class="btn btn-outline-dark">Upload</a>
+                   </div>
+               </div>
+           </div>
+       </div>
+       <div class="row" style="padding-top: 30px; width: 70%; text-align: left; margin-right: auto; margin-left: auto;">
+           <div class="col-sm-6">
+               <div class="card">
+                   <div class="card-body">
+                       <h5 class="card-title">Create an Exam</h5>
+                       <p class="card-text">You can create,schedule and edit online exams here</p>
+                       <a href="/examcreate" class="btn btn-outline-dark">Create an Exam</a>
+                   </div>
+               </div>
+           </div>
+           <div class="col-sm-6">
+               <div class="card">
+                   <div class="card-body">
+                       <h5 class="card-title">Courses and Lesson Contents</h5>
+                       <p class="card-text">You can create or assign courses,live lessons,uploads and online exams here</p>
+                       <a href="/courses" class="btn btn-outline-dark">Courses and Lesson Contents</a>
+                   </div>
+               </div>
+           </div>
+       </div>
+       <div class="row" style="padding-top: 30px; width: 70%; text-align: left; margin-right: auto; margin-left: auto;">
+           <div class="col-sm-6">
+               <div class="card">
+                   <div class="card-body">
+                       <h5 class="card-title">Get Support</h5>
+                       <p class="card-text">Get Support for SkyMake from official Skyfallen Support</p>
+                       <a href="https://help.theskyfallen.com" class="btn btn-outline-dark">Support</a>
+                   </div>
+               </div>
+           </div>
+           <div class="col-sm-6">
+               <div class="card">
+                   <div class="card-body">
+                       <h5 class="card-title">About & Licence</h5>
+                       <p class="card-text">You can get more info about this SkyMake install.</p>
+                       <a href="/courses" class="btn btn-outline-dark">About this Install</a>
+                   </div>
+               </div>
+           </div>
+       </div>
+           <?php
    }
    if($request == "users" or $request == "users/"){
        include_once "nps/widgets/dash.php";
