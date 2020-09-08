@@ -28,9 +28,6 @@ https://opensource.theskyfallen.com/
 # Skyfallen Open Source Licence
 https://opensource.theskyfallen.com/licence
 
-# Contribute
-contribute.theskyfallen.com/skymake/
-
 # SkyMake Version 4 Links
 [The Skyfallen Productions Company](https://www.theskyfallen.company)
 
