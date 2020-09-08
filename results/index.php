@@ -25,7 +25,7 @@ if(!isset($_GET["examid"])){
                 if($result = mysqli_query($link,$sql)){
                     if (mysqli_num_rows($result) > 0) {
                         while ($row = mysqli_fetch_array($result)) {
-                            echo "<option>".$row["examid"]."</option>";
+                            echo "<option value='".$row["examid"]."'>".$row["examid"]." - ".$row["exam_name"]."</option>";
                         }
                     }
                 }else {

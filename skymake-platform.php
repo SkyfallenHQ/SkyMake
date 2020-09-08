@@ -380,7 +380,7 @@ if($request == "groups" or $request == "groups/"){
                 if(mysqli_query($link,$sql)){
                     $sql = "DELETE FROM skymake_assignments WHERE classid='".$_POST['groupid']."'";
                     if(mysqli_query($link,$sql)){
-                        echo "Success!";
+                        echo "Success! ".$_POST["groupid"].".";
                     }
                     else {
                         echo "ERROR. At step three MySQL encountered an error:".mysqli_error($link);
@@ -409,7 +409,7 @@ if($request == "groups" or $request == "groups/"){
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">G@ID</span>
                 </div>
-                <select class="custom-select" id="inputGroupSelect04" name="content-type" name="groupid">
+                <select class="custom-select" id="inputGroupSelect04" name="groupid">
                 <?php
                 $sql = "SELECT * FROM skymake_classes";
                 if($result = mysqli_query($link,$sql)){
@@ -719,16 +719,28 @@ if (substr($request, 0, 10) === "editgroup/") {
             <form method="post" style="width:800px; text-align: center; margin-right:auto; margin-left: auto; padding-bottom:10px;">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">Content ID</span>
+                        <span class="input-group-text" id="basic-addon1">Live Lesson</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Content ID" aria-label="Content ID" name="content-id" aria-describedby="basic-addon1">
+                    <input type="text" class="form-control" placeholder="Content ID" aria-label="Content ID" name="llcid" aria-describedby="basic-addon1">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" name="addLC" type="submit">Create Live Lesson</button>
+                    </div>
                 </div>
                 <div class="input-group">
                     <select class="custom-select" id="inputGroupSelect04" name="content-type">
-                        <option selected>Choose...</option>
-                        <option value="Live Class">Live Class</option>
-                        <option value="Online Exam">Online Exam</option>
-                        <option value="Document">Document</option>
+                        <option selected>Choose an Online Exam To Add...</option>
+                        <?php
+                        $sql = "SELECT * FROM skymake_examdata";
+                        if($result = mysqli_query($link,$sql)){
+                            if(mysqli_num_rows($result )>0){
+                                while($row = mysqli_fetch_row($result)){
+                                    echo "<option value='".$row["examid"]."'>".$row["examid"]." - ".$row["examname"]."</option>";
+                                }
+                            }
+                        }else{
+                            echo "Could not list exams. SQL Error.";
+                        }
+                        ?>
                     </select>
                     <div class="input-group-append">
                         <button class="btn btn-outline-secondary" type="submit" name="addContent">Add Content</button>
