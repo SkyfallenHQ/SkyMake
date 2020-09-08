@@ -753,7 +753,7 @@ if (substr($request, 0, 10) === "editgroup/") {
                         if($result = mysqli_query($link,$sql)){
                             if(mysqli_num_rows($result) > 0){
                                 while($row = mysqli_fetch_array($result)){
-                                    echo "<option value='".$row["uploadlink"]."'>".$row["upload_id"]."</option>";
+                                    echo "<option value='".$row["upload_id"]."'>".$row["uploadlink"]." - ".$row["upload_id"]."</option>";
                                 }
                             }
                         }else{
