@@ -1,4 +1,7 @@
 <?php
+if(file_exists("install.php")){
+    unlink("install.php");
+}
 $request = $_GET["request"];
 $requestsuccess = false;
 error_reporting(E_ALL);
