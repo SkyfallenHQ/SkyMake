@@ -350,11 +350,37 @@ if($user_role == "admin") {
                    <div class="card-body">
                        <h5 class="card-title">About & Licence</h5>
                        <p class="card-text">You can get more info about this SkyMake install.</p>
-                       <a href="/courses" class="btn btn-outline-dark">About this Install</a>
+                       <a href="/about" class="btn btn-outline-dark">About this Install</a>
                    </div>
                </div>
            </div>
        </div>
+           <?php
+   }
+   if($request == "about" or $request == "about/"){
+     $requestsuccess = true;
+     include_once "nps/widgets/dash.php";
+     ?>
+       <div class="card-group">
+           <div class="card">
+               <img class="card-img-top" src="https://www.theskyfallen.com/content/images/size/w1000/2020/08/SkyfallenLogoVector.png" alt="SFLogo">
+               <div class="card-body">
+                   <h5 class="card-title">Card title</h5>
+                   <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                   <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+               </div>
+           </div>
+           <div class="card">
+               <img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Channel_4_logo_2015.svg" alt="Card image cap">
+               <div class="card-body">
+               </div>
+           </div>
+       </div>
+       <style>
+           html{
+               overflow: hidden;
+           }
+       </style>
            <?php
    }
    if($request == "users" or $request == "users/"){
