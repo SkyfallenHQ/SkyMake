@@ -639,7 +639,26 @@ if (substr($request, 0, 10) === "editgroup/") {
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">Class ID</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Class ID" name="classid" aria-label="classid" aria-describedby="basic-addon1">
+                    <select class="custom-select" id="inputGroupSelect04" name="classid">
+                        <option selected>Choose a Class</option>
+                        <?php
+                        $sql = "SELECT * FROM skymake_classes";
+                        if($result = mysqli_query($link,$sql)){
+                            if(mysqli_num_rows($result) > 0){
+                                while($row = mysqli_fetch_array($result)){
+                                    $sql1 = "SELECT * FROM skymake_classes WHERE classid='".$row["classid"]."'";
+                                    if($result1 = mysqli_query($linktwo,$sql1)){
+                                        if(mysqli_num_rows($result1) == 0){
+                                            while($row1 = mysqli_fetch_array($result1)){
+                                                echo "<option value='".$row["classid"]."'>".$row["classname"]."</option>";
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        ?>
+                    </select>
                 </div>
                 <label for="exam-date">Course Date:</label>
                 <input type="date" id="date" name="date">
