@@ -370,7 +370,7 @@ if($user_role == "admin") {
                    <h5 class="card-text">&copy; 2016-2020 The Skyfallen Company | &copy; 2018-2020 SkyMake Project <br>
                        This application is subject to Skyfallen Open Source Licence and Skyfallen Privacy.</h5>
                    <h6 class="card-text">September 8, 2020 - Public Distribution Release</h6>
-                   <h6 class="card-text"><small>SFR-204382</small></h6>
+                   <h6 class="card-text"><small>SFR-204382 - This install was not registed with Skyfallen</small></h6>
                </div>
            </div>
            <div class="card">
