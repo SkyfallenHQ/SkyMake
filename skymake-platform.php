@@ -366,8 +366,8 @@ if($user_role == "admin") {
                <img class="card-img-top" src="https://www.theskyfallen.com/content/images/size/w1000/2020/08/SkyfallenLogoVector.png" alt="SFLogo">
                <div class="card-body">
                    <h1 class="card-title">SkyMake 4 by Skyfallen</h1>
-                   <h5 class="card-title">Version 4.2 A</h5>
-                   <h3 class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</h3>
+                   <h5 class="card-title">Version 4.2 Aurora Borealis</h5>
+                   <h3 class="card-text"></h3>
                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                </div>
            </div>
