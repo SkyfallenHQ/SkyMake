@@ -729,7 +729,7 @@ if (substr($request, 0, 10) === "editgroup/") {
                     <select class="custom-select" id="inputGroupSelect04" name="examid">
                         <option selected>Choose an Online Exam To Add...</option>
                         <?php
-                        $sql = "SELECT * FROM skymake_useruploads";
+                        $sql = "SELECT * FROM skymake_examdata";
                         if($result = mysqli_query($link,$sql)){
                             if(mysqli_num_rows($result) > 0){
                                 while($row = mysqli_fetch_array($result)){
@@ -749,7 +749,7 @@ if (substr($request, 0, 10) === "editgroup/") {
                     <select class="custom-select" id="inputGroupSelect04" name="uploadid">
                         <option selected>Choose an Upload To Add...</option>
                         <?php
-                        $sql = "SELECT * FROM skymake_examdata";
+                        $sql = "SELECT * FROM skymake_useruploads";
                         if($result = mysqli_query($link,$sql)){
                             if(mysqli_num_rows($result) > 0){
                                 while($row = mysqli_fetch_array($result)){
