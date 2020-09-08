@@ -676,7 +676,7 @@ if (substr($request, 0, 10) === "editgroup/") {
                 echo "Failed while deleting. MySQL has encountered an error: ".mysqli_error($link);
             }
         }
-            if($_POST["addLC"]){
+            if(isset($_POST["addLC"])){
                 $sql = "INSERT INTO skymake_lessoncontent (lessonid,`content-id`,`content-type`,`content-link`) VALUES ('".$cid."','".$_POST["llcid"]."','"."Live Class"."','"."/liveclass/".$_POST["llcid"]."')";
                 if(mysqli_query($link,$sql)){
                     echo "Success!";
@@ -684,7 +684,7 @@ if (substr($request, 0, 10) === "editgroup/") {
                     echo "Error. ".mysqli_error($link);
                 }
             }
-            if($_POST["addExam"]){
+            if(isset($_POST["addExam"])){
                 $sql = "INSERT INTO skymake_lessoncontent (lessonid,`content-id`,`content-type`,`content-link`) VALUES ('".$cid."','".$_POST["examid"]."','"."Online Exam"."','"."/oes/?examid=".$_POST["examid"]."')";
                 if(mysqli_query($link,$sql)){
                     echo "Success!";
@@ -692,7 +692,7 @@ if (substr($request, 0, 10) === "editgroup/") {
                     echo "Error. ".mysqli_error($link);
                 }
             }
-            if($_POST["addUpload"]){
+            if(isset($_POST["addUpload"])){
                 $sql = "SELECT uploadlink FROM skymake_useruploads WHERE `upload_id`='".$_POST["uploadid"]."'";
                 $c_link = "";
                 if ($res = mysqli_query($link, $sql)) {
