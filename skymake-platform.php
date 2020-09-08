@@ -575,7 +575,7 @@ if (substr($request, 0, 10) === "editgroup/") {
                                 while($row = mysqli_fetch_array($result)){
                                     $sql1 = "SELECT * FROM skymake_classes WHERE classid='".$row["classid"]."'";
                                     if($result1 = mysqli_query($linktwo,$sql1)){
-                                        if(mysqli_num_rows($result1) == 0){
+                                        if(mysqli_num_rows($result1) == 1){
                                             while($row1 = mysqli_fetch_array($result1)){
                                                 echo "<option value='".$row["lessonid"]."'>".$row["lessonid"]." | ".$row["lesson"]." - ".$row["topic"]." | ".$row["teacher"]." - ".$row1["classname"]."</option>";
                                             }
@@ -648,9 +648,9 @@ if (substr($request, 0, 10) === "editgroup/") {
                                 while($row = mysqli_fetch_array($result)){
                                     $sql1 = "SELECT * FROM skymake_classes WHERE classid='".$row["classid"]."'";
                                     if($result1 = mysqli_query($linktwo,$sql1)){
-                                        if(mysqli_num_rows($result1) == 0){
+                                        if(mysqli_num_rows($result1) == 1){
                                             while($row1 = mysqli_fetch_array($result1)){
-                                                echo "<option value='".$row["classid"]."'>".$row["classname"]."</option>";
+                                                echo "<option value='".$row["classid"]."'>".$row1["classname"]."</option>";
                                             }
                                         }
                                     }
