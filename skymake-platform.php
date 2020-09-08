@@ -727,14 +727,14 @@ if (substr($request, 0, 10) === "editgroup/") {
                     </div>
                 </div>
                 <div class="input-group">
-                    <select class="custom-select" id="inputGroupSelect04" name="content-type">
+                    <select class="custom-select" id="inputGroupSelect04" name="examid">
                         <option selected>Choose an Online Exam To Add...</option>
                         <?php
                         $sql = "SELECT * FROM skymake_examdata";
                         if($result = mysqli_query($link,$sql)){
-                            if(mysqli_num_rows($result )>0){
-                                while($row = mysqli_fetch_row($result)){
-                                    echo "<option value='".$row["examid"]."'>".$row["examid"]." - ".$row["examname"]."</option>";
+                            if(mysqli_num_rows($result) > 0){
+                                while($row = mysqli_fetch_array($result)){
+                                    echo "<option value='".$row["examid"]."'>".$row["examid"]." - ".$row["exam_name"]."</option>";
                                 }
                             }
                         }else{
@@ -743,7 +743,27 @@ if (substr($request, 0, 10) === "editgroup/") {
                         ?>
                     </select>
                     <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="submit" name="addContent">Add Content</button>
+                        <button class="btn btn-outline-secondary" type="submit" name="addExam">Add Exam</button>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <select class="custom-select" id="inputGroupSelect04" name="uploadid">
+                        <option selected>Choose an Upload To Add...</option>
+                        <?php
+                        $sql = "SELECT * FROM skymake_examdata";
+                        if($result = mysqli_query($link,$sql)){
+                            if(mysqli_num_rows($result) > 0){
+                                while($row = mysqli_fetch_array($result)){
+                                    echo "<option value='".$row["uploadlink"]."'>".$row["upload_id"]."</option>";
+                                }
+                            }
+                        }else{
+                            echo "Could not list exams. SQL Error.";
+                        }
+                        ?>
+                    </select>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit" name="addExam">Add Exam</button>
                     </div>
                 </div>
         </div>
