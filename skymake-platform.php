@@ -676,25 +676,24 @@ if (substr($request, 0, 10) === "editgroup/") {
                 echo "Failed while deleting. MySQL has encountered an error: ".mysqli_error($link);
             }
         }
-        if(isset($_POST["addContent"])){
-            if($_POST["content-type"] == "Live Class"){
-                $sql = "INSERT INTO skymake_lessoncontent (lessonid,`content-id`,`content-type`,`content-link`) VALUES ('".$cid."','".$_POST["content-id"]."','".$_POST["content-type"]."','"."/liveclass/".$_POST["content-id"]."')";
+            if($_POST["addLC"]){
+                $sql = "INSERT INTO skymake_lessoncontent (lessonid,`content-id`,`content-type`,`content-link`) VALUES ('".$cid."','".$_POST["llcid"]."','"."Live Class"."','"."/liveclass/".$_POST["llcid"]."')";
                 if(mysqli_query($link,$sql)){
                     echo "Success!";
                 }else{
                     echo "Error. ".mysqli_error($link);
                 }
             }
-            if($_POST["content-type"] == "Online Exam"){
-                $sql = "INSERT INTO skymake_lessoncontent (lessonid,`content-id`,`content-type`,`content-link`) VALUES ('".$cid."','".$_POST["content-id"]."','".$_POST["content-type"]."','"."/oes/?examid=".$_POST["content-id"]."')";
+            if($_POST["addExam"]){
+                $sql = "INSERT INTO skymake_lessoncontent (lessonid,`content-id`,`content-type`,`content-link`) VALUES ('".$cid."','".$_POST["examid"]."','"."Online Exam"."','"."/oes/?examid=".$_POST["examid"]."')";
                 if(mysqli_query($link,$sql)){
                     echo "Success!";
                 }else{
                     echo "Error. ".mysqli_error($link);
                 }
             }
-            if($_POST["content-type"] == "Document"){
-                $sql = "SELECT uploadlink FROM skymake_useruploads WHERE `upload_id`='".$_POST["content-id"]."'";
+            if($_POST["addUpload"]){
+                $sql = "SELECT uploadlink FROM skymake_useruploads WHERE `upload_id`='".$_POST["uploadid"]."'";
                 $c_link = "";
                 if ($res = mysqli_query($link, $sql)) {
                     if(mysqli_num_rows($res) == 1){
@@ -705,14 +704,14 @@ if (substr($request, 0, 10) === "editgroup/") {
                         die("No such upload.");
                     }
                 }
-                $sql = "INSERT INTO skymake_lessoncontent (lessonid,`content-id`,`content-type`,`content-link`) VALUES ('".$cid."','".$_POST["content-id"]."','".$_POST["content-type"]."','".$c_link."')";
+                $sql = "INSERT INTO skymake_lessoncontent (lessonid,`content-id`,`content-type`,`content-link`) VALUES ('".$cid."','".$_POST["uploadid"]."','"."Document"."','".$c_link."')";
                 if(mysqli_query($link,$sql)){
                     echo "Success!";
                 }else{
                     echo "Error. ".mysqli_error($link);
                 }
             }
-        }
+
         ?>
         <div style="text-align: center; padding-top: 100px; border-bottom-width: thin; border-bottom-color: #4e555b; border-bottom-style: solid;">
             <h2>Editing Course: <?php echo $cid; ?></h2>
@@ -746,7 +745,7 @@ if (substr($request, 0, 10) === "editgroup/") {
                         <button class="btn btn-outline-secondary" type="submit" name="addExam">Add Exam</button>
                     </div>
                 </div>
-                <div class="input-group">
+                <div class="input-group" style="padding-top: 15px;">
                     <select class="custom-select" id="inputGroupSelect04" name="uploadid">
                         <option selected>Choose an Upload To Add...</option>
                         <?php
@@ -758,12 +757,12 @@ if (substr($request, 0, 10) === "editgroup/") {
                                 }
                             }
                         }else{
-                            echo "Could not list exams. SQL Error.";
+                            echo "Could not list uploads. SQL Error.";
                         }
                         ?>
                     </select>
                     <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="submit" name="addExam">Add Exam</button>
+                        <button class="btn btn-outline-secondary" type="submit" name="addUpload">Add Upload</button>
                     </div>
                 </div>
         </div>
