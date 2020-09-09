@@ -1,8 +1,0 @@
-{
-    "name": "SkyMake Theme",
-    "version": "1.0",
-    "description": "SkyMake Theme for phpMyAdmin SkyMake Edition",
-    "author": "The Skyfallen Company",
-    "url": "https://theskyfallen.company/",
-    "supports": ["5.0"]
-}
