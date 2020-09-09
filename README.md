@@ -1,3 +1,4 @@
+![img](https://img.shields.io/badge/latest_version-Aurora_Borealis-blueviolet "img") ![img](https://img.shields.io/badge/release_number-SFR204382-blue "img")
 # SkyMake Version 4
 The Official SkyMake Repository for SkyMake Version 4
 SkyMake Version 2 Available on: github.com/TheSkyfallenCompany/SkyMakeV2
@@ -27,9 +28,6 @@ https://opensource.theskyfallen.com/
 # Skyfallen Open Source Licence
 https://opensource.theskyfallen.com/licence
 
-# Contribute
-contribute.theskyfallen.com/skymake/
-
 # SkyMake Version 4 Links
 [The Skyfallen Productions Company](https://www.theskyfallen.company)
 
@@ -38,3 +36,6 @@ contribute.theskyfallen.com/skymake/
 [Skyfallen Open Source](https://opensource.theskyfallen.com)
 
 [Running Instance (Demo)](https://tr-ist01.wwwapp.deducated.com) user: demo - password: demo
+
+# Mirrored Download
+[Skyfallen App Distribution](https://distribution.theskyfallen.com) - US
