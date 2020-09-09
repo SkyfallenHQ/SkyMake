@@ -1,8 +1,6 @@
 <?php
 $request = $_GET["request"];
 $requestsuccess = false;
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
 if(substr($request ,0 ,1)=="/"){
  $request = substr($request,1,strlen($request)-1);
 }
@@ -53,7 +51,7 @@ if($user_role == "student") {
         <script>
         const domain = '".SFLC_HOST."';
         const options = {
-            roomName: 'SkyMake4/LiveClasses/" . $cenroller . "/" . $lctoken[0] . "',
+            roomName: 'SkyMake4/" . $lctoken[0] . "',
             width: self.innerWidth,
             height: self.innerHeight,
             parentNode: undefined
@@ -157,7 +155,7 @@ if($user_role == "teacher") {
         <script>
         const domain = '".SFLC_HOST."';
         const options = {
-            roomName: 'SkyMake4/LiveClasses/" . $cenroller . "/" . $lctoken[0] . "',
+            roomName: 'SkyMake4/" . $lctoken[0] . "',
             width: self.innerWidth,
             height: self.innerHeight,
             parentNode: undefined
