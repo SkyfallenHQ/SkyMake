@@ -28,7 +28,13 @@ $i++;
 /* Authentication type */
 $cfg['Servers'][$i]['auth_type'] = 'cookie';
 /* Server parameters */
-$cfg['Servers'][$i]['host'] = 'localhost';
+include_once "../SkyMakeDatabaseConnector/SkyMakeDBconfig.php";
+if(!($_SESSION["user_role"] == "admin")){
+    header("location: /");
+    die();
+}
+include_once "../nps/widgets/dash.php";
+$cfg['Servers'][$i]['host'] = dbHost;
 $cfg['Servers'][$i]['compress'] = false;
 $cfg['Servers'][$i]['AllowNoPassword'] = false;
 
