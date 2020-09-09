@@ -178,12 +178,12 @@ function doublewidget($lesson,$teacher,$time,$topic,$unit,$backgorundimage,$less
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="nav navbar-nav flex-grow-1 justify-content-between">
                   <?php if($_SESSION["user_role"] != "admin"){ ?>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="#"><img src="/nps/widgets/assets/img/SkyfallenLogoSmallWhiteOnly.png" height="20"></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="/"><img src="/nps/widgets/assets/img/SkyfallenLogoSmallWhiteOnly.png" height="20"></a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/dash">Courses Dashboard</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/results">Results</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/profile">My Profile</a></li>
                     <?php if($_SESSION["user_role"] == "teacher"){ ?> <li class="nav-item" role="presentation"><a class="nav-link" href="/mystudents">My Students</a></li> <?php }}else{ ?>
-                      <li class="nav-item" role="presentation"><a class="nav-link" href="#"><img src="/nps/widgets/assets/img/SkyfallenLogoSmallWhiteOnly.png" height="20"></a></li>
+                      <li class="nav-item" role="presentation"><a class="nav-link" href="/"><img src="/nps/widgets/assets/img/SkyfallenLogoSmallWhiteOnly.png" height="20"></a></li>
                       <li class="nav-item" role="presentation"><a class="nav-link" href="/home">Home</a></li>
                       <li class="nav-item" role="presentation"><a class="nav-link" href="/users">Users</a></li>
                       <li class="nav-item" role="presentation"><a class="nav-link" href="/groups">Classes</a></li>
