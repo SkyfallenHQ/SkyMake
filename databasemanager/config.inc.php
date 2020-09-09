@@ -15,7 +15,7 @@ declare(strict_types=1);
  * This is needed for cookie based authentication to encrypt password in
  * cookie. Needs to be 32 chars long.
  */
-$cfg['blowfish_secret'] = ''; /* YOU MUST FILL IN THIS FOR COOKIE AUTH! */
+$cfg['blowfish_secret'] = '38873fyche3we3wdedfcsmdcbh456qwxapczmcc433879622vnsjrkscds'; /* YOU MUST FILL IN THIS FOR COOKIE AUTH! */
 
 /**
  * Servers configuration
@@ -29,15 +29,9 @@ $i++;
 $cfg['Servers'][$i]['auth_type'] = 'cookie';
 /* Server parameters */
 include_once "../SkyMakeDatabaseConnector/SkyMakeDBconfig.php";
-if(!($_SESSION["user_role"] == "admin")){
-    header("location: /");
-    die();
-}
-include_once "../nps/widgets/dash.php";
 $cfg['Servers'][$i]['host'] = dbHost;
 $cfg['Servers'][$i]['compress'] = false;
 $cfg['Servers'][$i]['AllowNoPassword'] = false;
-
 /**
  * phpMyAdmin configuration storage settings.
  */
@@ -119,7 +113,7 @@ $cfg['SaveDir'] = '';
  * uncomment the desired line:
  * default = 'en'
  */
-//$cfg['DefaultLang'] = 'en';
+$cfg['DefaultLang'] = 'en';
 //$cfg['DefaultLang'] = 'de';
 
 /**
@@ -158,3 +152,4 @@ $cfg['SaveDir'] = '';
  * You can find more configuration options in the documentation
  * in the doc/ folder or at <https://docs.phpmyadmin.net/>.
  */
+$cfg['ThemeDefault'] = 'SkyMakeTheme';
