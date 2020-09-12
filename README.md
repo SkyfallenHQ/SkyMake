@@ -34,11 +34,11 @@ https://opensource.theskyfallen.com/licence
 [The Skyfallen Website](https://www.theskyfallen.com)
 
 [Skyfallen Open Source](https://opensource.theskyfallen.com)
-
-[Running Instance (Demo)](https://application-testing-platform.apps.deducated.com) 
-Username -- Password
-student - password
-teacher - password
-admin - password
+# Demo
+[Running Instance (Demo)](https://application-testing-platform.apps.deducated.com)  
+Username -- Password   
+student - password  
+teacher - password  
+admin - password  
 # Mirrored Download
 [Skyfallen App Distribution](https://distribution.theskyfallen.com) - US
