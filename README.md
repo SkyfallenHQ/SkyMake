@@ -35,7 +35,10 @@ https://opensource.theskyfallen.com/licence
 
 [Skyfallen Open Source](https://opensource.theskyfallen.com)
 
-[Running Instance (Demo)](https://tr-ist01.wwwapp.deducated.com) user: demo - password: demo
-
+[Running Instance (Demo)](https://application-testing-platform.apps.deducated.com) 
+Username -- Password
+student - password
+teacher - password
+admin - password
 # Mirrored Download
 [Skyfallen App Distribution](https://distribution.theskyfallen.com) - US
