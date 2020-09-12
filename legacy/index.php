@@ -11,9 +11,9 @@
 // No deprecated functions are used so it will probably be compatible with a few next major release of PHP.
 
 //Include config file
-include_once "SkyMakeDatabaseConnector/SkyMakeDBconfig.php";
-include_once "SkyMakeFunctionSet/Operation-Requirements/MainFunctions.php";
-include "classes/user.php";
+include_once "../SkyMakeDatabaseConnector/SkyMakeDBconfig.php";
+include_once "../SkyMakeFunctionSet/Operation-Requirements/MainFunctions.php";
+include "../classes/user.php";
 $l = getsetting($link,"link");
 // Check if act is equal to signup
 if($_GET["act"] == "signup"){
@@ -210,209 +210,50 @@ if($optget != "signup") {
             mysqli_close($link);
         }
     }
-$bg = rand(0,2);
-?>
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-        <title>Skyfallen:SkyMake <?php if($optget == "signin"){
-                echo "Sign in";
-            } else {
-                echo "Sign up";
-            } ?></title>
-        <style type="text/css">
-            <?php
-              if($bg == 0){
-                  echo "body{ font: 14px sans-serif; background :radial-gradient(#000 2px, transparent 3px); background-size : 20px 20px;}       .content {
-                    background-color:rgba(255,255,255,.99);
-                    border-radius:.25em;
-                    box-shadow:0 0 .25em rgba(0,0,0,.25);
-                    box-sizing:border-box;
-                    left:50%;
-                    padding:20px;
-                    position:fixed;
-                    text-align:center;
-                    top:50%;
-                    transform:translate(-50%, -50%);
-                    width: 350px;
-                  }";}
-                  elseif($bg == 1) {
-              echo "body {
-            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-            background-size: 400% 400%;
-            animation: gradient 15s ease infinite;
-        }
-        
-        @keyframes gradient {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-        .content{ margin-top:100px;background: White;padding:20px; border:2px solid Black; border-radius:30px 1px 30px 1px; margin-right:auto; margin-left: auto; width: 350px;}";
-        }
-        elseif($bg == 2){
-        echo "html {
-            height:100%;
-          }
-          
-          body {
-            margin:0;
-          }
-          
-          .bg {
-            animation:slide 3s ease-in-out infinite alternate;
-            background-image: linear-gradient(-60deg, #6c3 50%, #09f 50%);
-            bottom:0;
-            left:-50%;
-            opacity:.5;
-            position:fixed;
-            right:-50%;
-            top:0;
-            z-index:-1;
-          }
-          
-          .bg2 {
-            animation-direction:alternate-reverse;
-            animation-duration:4s;
-          }
-          
-          .bg3 {
-            animation-duration:5s;
-          }
-          
-          
-          h1 {
-            font-family:monospace;
-          }
-          
-          @keyframes slide {
-            0% {
-              transform:translateX(-25%);
-            }
-            100% {
-              transform:translateX(25%);
-            }
-          }
-          .content {
-            background-color:rgba(255,255,255,.99);
-            border-radius:.25em;
-            box-shadow:0 0 .25em rgba(0,0,0,.25);
-            box-sizing:border-box;
-            left:50%;
-            padding:20px;
-            position:fixed;
-            text-align:center;
-            top:50%;
-            transform:translate(-50%, -50%);
-            width: 350px;
-          }";
-        }
-            ?>
 
-            .footer {
-                position: fixed;
-                left: 0;
-                bottom: 0;
-                width: 100%;
-                background-color: white;
-                color: black;
-                text-align: center;
-            }
-            .top-bar {
-                position: fixed;
-                left: 0;
-                top: 0;
-                width: 100%;
-                background-color: white;
-                color: black;
-                height:40px;
-            }
-            .sflogo1{
-                margin-top:3px;
-                margin-bottom:5px;
-                margin-left:20px;
-                margin-right:10px;
-                text-align: left;
-            }
-            .deducatedlogo1{
-                margin-top:1px;
-                margin-bottom:5px;
-                margin-left:9px;
-                margin-right:20px;
-                text-align:left;
-            }
-            .seperatortype1{
-                color:White;
-                font-size:25px;
-            }
-            .seperatortype1:hover{
-                color:White;
-            }
-            @keyframes sweep {
-                0%    {opacity: 0; margin-top: -100px;}
-                100%  {opacity: 1; margin-top: 0px;}
-            }
-        </style>
-    </head>
-    <body>
-    <div class="top-bar">
-        <a href="https://theskyfallen.company"><img src="SkyMakeVersionAssets/logo/SkyfallenLogoRB.png" height=30 class="sflogo1"></a>
-    </div>
-    <?php
-    if($bg==2){
-        echo "<div class=\"bg\"></div>
-<div class=\"bg bg2\"></div>
-<div class=\"bg bg3\"></div>";
-    } ?>
-    <div class="content">
-        <h2>SkyMake - <?php if($optget == "signin"){
+?>
+<html>
+<head>
+    <link type="text/css" rel="stylesheet" href="/SkyMakeVersionAssets/include/login-page.css">
+    <title><?php if($optget == "signin"){
+        echo "Sign in";
+        } else {
+        echo "Sign up";
+        } ?> - Skyfallen:SkyMake</title>
+</head>
+<body style="background-image: url('/SkyMakeVersionAssets/include/img/loginbackground.jpg')">
+<div class="background-div">
+<div class="loginform">
+    <form method="post">
+        <h3><?php if($optget == "signin"){
                 echo "Sign in";
             } else {
                 echo "Sign up";
-            } ?></h2>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-            <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
-                <label>Username</label>
-                <input type="text" name="skymake-un" class="form-control" value="<?php echo $username; ?>">
-                <span class="help-block"><?php echo $username_err; ?></span>
-            </div>
-            <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-                <label>Password</label>
-                <input type="password" name="skymake-pw" class="form-control">
-                <span class="help-block"><?php echo $password_err; ?></span>
-            </div>
-            <?php if($optget == "signup"){
-                ?>
-                <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-                    <label>Confirm Password</label>
-                    <input type="password" name="skymake-pwconfirm" class="form-control">
-                    <span class="help-block"><?php echo $password_err; ?></span>
-                </div>
-            <?php
-            } echo $confirm_password_err; ?><br>
-            <div class="form-group">
-            <input class="btn btn-outline-dark" style="margin-bottom: 20px;" type="submit" value="<?php if($optget == "signin"){
-                echo "Sign in";
-            } else {
-                echo "Sign up";
-            } ?>">
-            </div>
-            <?php if($optget == "signin"){
-                echo "<a href='/?act=signup' class='actswitch'>Don't have an account?</a>";
-            } else {
-                echo "<a href='/?act=signin' class='actswitch'>Have an account?</a>";
-            } ?>
-        </form>
-    </div>
-    </body>
+            } ?> to SkyMake</h3>
+        <input class="loginform-username" name="skymake-un" placeholder="Username"><br>
+        <?php echo $username_err; ?><br>
+        <input class="loginform-password" type="password" name="skymake-pw" placeholder="Password"><br>
+        <?php echo $password_err; ?><br>
+        <?php if($optget == "signup"){
+            echo "<input class=\"loginform-password\" type=\"password\" name=\"skymake-pwconfirm\" placeholder=\"Confirm Password\"><br>";
+        } echo $confirm_password_err; ?><br>
+        <input class="loginform-submit" style="margin-bottom: 20px;" type="submit" value="<?php if($optget == "signin"){
+            echo "Sign in";
+        } else {
+            echo "Sign up";
+        } ?>">
+        <?php if($optget == "signin"){
+            echo "<a href='/?act=signup' class='actswitch'>Don't have an account?</a>";
+        } else {
+            echo "<a href='/?act=signin' class='actswitch'>Have an account?</a>";
+        } ?>
+    </form>
+</div>
     <div class="footer">
-        <p>SkyMake Version 4 : &copy; Copyright 2016-2020 | The Skyfallen Company<br><a href="/legacy/" style="padding-top: 5px;">Use Legacy Login</div>
-    </html>
+        <div class="footer-logocontainer">
+            <img src="/SkyMakeVersionAssets/logo/SkyfallenLogoRB.png" height="30" style="padding-top: 5px; padding-bottom: 5px;">
+        </div>
+    </div>
+</div>
+</body>
+</html>
