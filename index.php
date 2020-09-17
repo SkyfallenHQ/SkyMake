@@ -378,7 +378,7 @@ $bg = rand(0,2);
             } else {
                 echo "Sign up";
             } ?></h2>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+        <form method="post">
             <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
                 <label>Username</label>
                 <input type="text" name="skymake-un" class="form-control" value="<?php echo $username; ?>">
