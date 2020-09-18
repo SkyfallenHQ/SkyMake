@@ -2,3 +2,5 @@
 .DS_Store
 dotSkyfallen
 root.pem
+logs/SkyMakeLog
+logs/SkyMakeCrashes
