@@ -7,7 +7,7 @@ class MCS
         if(file_exists("../../logs/SkyMakeCrashes")) {
             $fp = fopen('../../logs/SkyMakeCrashes', 'a');
         } else {
-            $fp = fopen('../../logs/SkyMakeCrashes', 'w');
+            $fp = fopen('../../logs/SkyMakeCrashes', 'w') or die("SkyMake has crashed. Can't create crashlog file.");
         }
             fwrite($fp, date("D M d, Y G:i") . " - " . $crashdata . " - " . $crashfile . " - " . $reason);
             fclose($fp);
@@ -19,7 +19,7 @@ class MCS
         if(file_exists("../../logs/SkyMakeLogs")) {
             $fp = fopen('../../logs/SkyMakeLogs', 'a');
         } else {
-            $fp = fopen('../../logs/SkyMakeLogs', 'w');
+            $fp = fopen('../../logs/SkyMakeLogs', 'w') or die("SkyMake has crashed. Can't create log file");
         }
         fwrite($fp, date("D M d, Y G:i")." - ".$data);
         fclose($fp);
