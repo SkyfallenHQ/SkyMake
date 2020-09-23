@@ -239,7 +239,7 @@ if($_POST['elm1']!='') {
     $sContent.= 'alt="TinyMCE button"/>This rover has crossed over</p>';
 }
 ?>
-        <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+        <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5.4.2-90/tinymce.min.js" referrerpolicy="origin"></script>
 <script language="javascript" type="text/javascript">
     tinyMCE.init({
         theme : "advanced",
