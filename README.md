@@ -12,6 +12,9 @@ Nginx Web Server, MySQL Server, SkyfallenLiveConnect Server (Can be on a seperat
 # What does SkyMake Server-Side Do?
 It includes Nginx Web Server, a MySQL Server,  Skyfallen LiveConnect SkyMake Build for live lessons, SkyMake 4 itself.
 
+# Docs
+https://docs.theskyfallen.com/v/skymake
+
 # Where Can I Get SkyMake Server-Side Software?
 theskyfallen.com/SkyMake/serversidesoftware/ When first beta release is ready.
 
