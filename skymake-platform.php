@@ -228,8 +228,7 @@ if($user_role == "teacher") {
         include "nps/widgets/dash.php";
 $allowedTags='<p><strong><em><u><h1><h2><h3><h4><h5><h6><img>';
 $allowedTags.='<li><ol><ul><span><div><br><ins><del>';
-// Should use some proper HTML filtering here.
-if($_POST['elm1']!='') {
+if($_POST['posttoboard']!='') {
     $sHeader = '<h1>Ah, content is king.</h1>';
     $sContent = strip_tags(stripslashes($_POST['elm1']),$allowedTags);
 } else {
