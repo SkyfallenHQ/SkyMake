@@ -230,7 +230,7 @@ $allowedTags='<p><strong><em><u><h1><h2><h3><h4><h5><h6><img>';
 $allowedTags.='<li><ol><ul><span><div><br><ins><del>';
 if($_POST['posttoboard']!='') {
     $sHeader = '<h1>Ah, content is king.</h1>';
-    $sContent = strip_tags(stripslashes($_POST['elm1']),$allowedTags);
+    $sContent = strip_tags(stripslashes($_POST['posttoboard']),$allowedTags);
 } else {
     $sHeader = '<h1>Nothing submitted yet</h1>';
     $sContent = '<p>Start typing...</p>';
