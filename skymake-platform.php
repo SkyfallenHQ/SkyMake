@@ -393,6 +393,14 @@ if($user_role == "admin") {
                    </div>
                </div>
            </div>
+           <div class="col-sm-6">
+               <div class="card">
+                   <div class="card-body">
+                       <h5 class="card-title">Skyfallen</h5>
+                       <p class="card-text">&copy; 2018-2020 SkyMake by Skyfallen. All Rights Reserved.</p>
+                   </div>
+               </div>
+           </div>
        </div>
        </div>
            <?php
