@@ -17,6 +17,7 @@ if(!$_SESSION["loggedin"]){
 //get user role
 $_SESSION["user_role"] = $user_role = SMUser::getRole($link,$_SESSION["username"]);
 
+
 if($user_role == "unverified"){
     include "nps/widgets/dash.php";
     include "nps/errors/notapproved.html";
@@ -382,6 +383,17 @@ if($user_role == "admin") {
                    </div>
                </div>
            </div>
+       <div class="row" style="padding-top: 30px; width: 70%; text-align: left; margin-right: auto; margin-left: auto;">
+           <div class="col-sm-6">
+               <div class="card">
+                   <div class="card-body">
+                       <h5 class="card-title">Updates</h5>
+                       <p class="card-text">You can update your installation here.</p>
+                       <a href="/updates" class="btn btn-outline-dark">SkyMake Updates</a>
+                   </div>
+               </div>
+           </div>
+       </div>
        </div>
            <?php
    }
@@ -434,7 +446,7 @@ if($user_role == "admin") {
                     <?php
                     if (THIS_VERSION != $new_vname){
                         if($_GET["install"] == "start"){
-                            $_SESSION["UPDATE_AUTHORIZED"] = "TRUE";
+                            $_SESSION["UPDATE_AUTHORIZED"] = true;
                             header("location: updater.php");
                         } else {
                         ?>

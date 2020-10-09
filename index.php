@@ -86,6 +86,9 @@ if($optget != "signup") {
                                     // Password is correct, so start a new session
                                     session_start();
 
+                                    //prevent unathorized updates
+                                    $_SESSION["UPDATE_AUTHORIZED"] = false;
+
                                     // Store data in session variables
                                     $_SESSION["loggedin"] = true;
                                     $_SESSION["id"] = $id;
