@@ -433,8 +433,8 @@ if($user_role == "admin") {
                     <h6 class="card-title">Version 4.2 Aurora Borealis - Build 2</h6>
                     <?php
                     if (THIS_VERSION != $new_vname){
-                        if($_GET["install"]="start"){
-                            $ret = \SkyfallenCodeLibrary\UpdatesConsoleConnector::downloadLatestVersion(UPDATES_PROVIDER_APP_ID,UPDATE_SEED,UPDATES_PROVIDER_URL);
+                        if($_GET["install"]=="start"){
+                            $ret = \SkyfallenCodeLibrary\UpdatesConsoleConnector::downloadLatestVersion(UPDATES_PROVIDER_APP_ID,UPDATE_SEED,UPDATES_PROVIDER_URL,"");
                             if($ret["success"]) {
                                 if(\SkyfallenCodeLibrary\UpdatesConsoleConnector::installUpdate($ret["path"])){
                                     echo "Updated Successfully";
