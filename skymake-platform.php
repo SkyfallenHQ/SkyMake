@@ -388,15 +388,17 @@ if($user_role == "admin") {
    if($request == "about" or $request == "about/"){
      $requestsuccess = true;
      include_once "nps/widgets/dash.php";
+
      ?>
        <div class="card-group">
            <div class="card">
-               <img class="card-img-top" src="https://www.theskyfallen.com/content/images/size/w1000/2020/08/SkyfallenLogoVector.png" alt="SFLogo">
+               <img class="card-img-top" src="https://theskyfallen.company/wp-content/uploads/2020/07/IMG_0183.png" alt="SFLogo">
                <div class="card-body">
                    <h1 class="card-title">SkyMake 4 by Skyfallen</h1>
                    <h6 class="card-title">Version 4.2 Aurora Borealis - Build 2</h6>
-                   <h5 class="card-text">&copy; 2016-2020 The Skyfallen Company | &copy; 2018-2020 SkyMake Project <br>
+                   <h5 class="card-text">&copy; 2016-2020 The Skyfallen Company | &copy; 2018-2020 The SkyMake Project <br>
                        This application is subject to Skyfallen Open Source Licence and Skyfallen Privacy.</h5>
+                   <h4>Updates for this SkyMake Installation are managed externally by </h4>
                    <h6 class="card-text">September 8, 2020 - Public Distribution Release</h6>
                    <h6 class="card-text"><small>SFR-204382 - This install was not registed with Skyfallen</small></h6>
                </div>
