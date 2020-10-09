@@ -385,37 +385,94 @@ if($user_role == "admin") {
        </div>
            <?php
    }
-   if($request == "about" or $request == "about/"){
-     $requestsuccess = true;
-     include_once "nps/widgets/dash.php";
+    if($request == "about" or $request == "about/"){
+        $requestsuccess = true;
+        include_once "nps/widgets/dash.php";
+        $provider_info = \SkyfallenCodeLibrary\UpdatesConsoleConnector::getProviderData(UPDATES_PROVIDER_URL);
+        ?>
+        <div class="card-group">
+            <div class="card">
+                <img class="card-img-top" src="https://theskyfallen.company/wp-content/uploads/2020/07/IMG_0183.png" alt="SFLogo">
+                <div class="card-body">
+                    <h1 class="card-title">SkyMake 4 by Skyfallen</h1>
+                    <h6 class="card-title">Version 4.2 Aurora Borealis - Build 2</h6>
+                    <h5 class="card-text">&copy; 2016-2020 The Skyfallen Company | &copy; 2018-2020 The SkyMake Project <br>
+                        This application is subject to Skyfallen Open Source Licence and Skyfallen Privacy.</h5>
+                    <br>
+                    <br>
+                    <h4>Updates for this SkyMake Installation are managed externally by <br> <a href="<?php echo $provider_info["url"] ?>"><?php echo $provider_info["name"]; ?></a></h4>
+                    <h5><?php echo $provider_info["location"]; ?> | <?php echo $provider_info["ounit"]; ?></h5>
+                    <h5><?php echo $provider_info["info"]; ?> | <?php echo $provider_info["type"]; ?></h5>
+                    <h3>For Support</h3>
+                    <h5><?php echo $provider_info["contact"]; ?> | <?php echo $provider_info["contact_email"]; ?>
+                        <br> <a href="<?php echo $provider_info["contact_url"]; ?>"><?php echo $provider_info["contact_url"]; ?></a></h5>
+                    <h6 class="card-text">September 8, 2020 - Public Distribution Release</h6>
+                    <h6 class="card-text"><small><?php echo THIS_VERSION; ?> - This install was registed with <?php echo VERSION_PROVIDER; ?></small></h6>
+                </div>
+            </div>
+            <div class="card">
+                <img class="card-img-top" src="/SkyMakeVersionAssets/logo/SkyMake4AboutPage.svg" alt="SM4-FOUR">
+                <div class="card-body">
+                </div>
+            </div>
+        </div>
+        <?php
+    }
+    if($request == "updates" or $request == "updates/"){
+        $requestsuccess = true;
+        include_once "nps/widgets/dash.php";
+        $provider_info = \SkyfallenCodeLibrary\UpdatesConsoleConnector::getProviderData(UPDATES_PROVIDER_URL);
+        $new_vname = \SkyfallenCodeLibrary\UpdatesConsoleConnector::getLatestVersion(UPDATES_PROVIDER_APP_ID,UPDATE_SEED,UPDATES_PROVIDER_URL);
+        $new_version_data = \SkyfallenCodeLibrary\UpdatesConsoleConnector::getLatestVersionData(UPDATES_PROVIDER_APP_ID,UPDATE_SEED,UPDATES_PROVIDER_URL);
+        ?>
+        <div class="card-group">
+            <div class="card">
+                <img class="card-img-top" src="https://theskyfallen.company/wp-content/uploads/2020/07/IMG_0183.png" alt="SFLogo">
+                <div class="card-body">
+                    <h1 class="card-title">SkyMake 4 by Skyfallen</h1>
+                    <h6 class="card-title">Version 4.2 Aurora Borealis - Build 2</h6>
+                    <?php
+                    if (THIS_VERSION != $new_vname){
+                        if($_GET["install"]="start"){
+                            $ret = \SkyfallenCodeLibrary\UpdatesConsoleConnector::downloadLatestVersion(UPDATES_PROVIDER_APP_ID,UPDATE_SEED,UPDATES_PROVIDER_URL);
+                            if($ret["success"]) {
+                                if(\SkyfallenCodeLibrary\UpdatesConsoleConnector::installUpdate($ret["path"])){
+                                    echo "Updated Successfully";
+                                }else
+                                {
+                                    echo "Failed to unpack update.";
+                                }
+                            }else {
+                                echo "Failed to download update from the server.";
+                            }
+                        } else {
+                        ?>
+                        <h6>A New Version is available</h6>
+                        <h5><?php echo $new_version_data["title"]; ?> (<?php echo $new_version_data["version"]; ?>) </h5>
+                        <h5>Release Date: <?php echo $new_version_data["releasedate"]; ?></h5>
+                        <h6>Description: <br><?php echo $new_version_data["description"]; ?></h6>
 
-     ?>
-       <div class="card-group">
-           <div class="card">
-               <img class="card-img-top" src="https://theskyfallen.company/wp-content/uploads/2020/07/IMG_0183.png" alt="SFLogo">
-               <div class="card-body">
-                   <h1 class="card-title">SkyMake 4 by Skyfallen</h1>
-                   <h6 class="card-title">Version 4.2 Aurora Borealis - Build 2</h6>
-                   <h5 class="card-text">&copy; 2016-2020 The Skyfallen Company | &copy; 2018-2020 The SkyMake Project <br>
-                       This application is subject to Skyfallen Open Source Licence and Skyfallen Privacy.</h5>
-                   <h4>Updates for this SkyMake Installation are managed externally by </h4>
-                   <h6 class="card-text">September 8, 2020 - Public Distribution Release</h6>
-                   <h6 class="card-text"><small>SFR-204382 - This install was not registed with Skyfallen</small></h6>
-               </div>
-           </div>
-           <div class="card">
-               <img class="card-img-top" src="/SkyMakeVersionAssets/logo/SkyMake4AboutPage.svg" alt="Card image cap">
-               <div class="card-body">
-               </div>
-           </div>
-       </div>
-       <style>
-           html{
-               overflow: hidden;
-           }
-       </style>
-           <?php
-   }
+                        <a href="?install=start" class="btn btn-dark">Install Now.</a>
+                            <?php
+
+                        }
+                    }
+                    else {
+                        echo "Your installation is up to date.";
+                    }
+                    ?>
+                    <h4>Updates for this SkyMake Installation are managed externally by <br> <a href="<?php echo $provider_info["url"] ?>"><?php echo $provider_info["name"]; ?></a></h4>
+                    <h6 class="card-text"><small><?php echo THIS_VERSION; ?> - This install was registed with <?php echo VERSION_PROVIDER; ?></small></h6>
+                </div>
+            </div>
+            <div class="card">
+                <img class="card-img-top" src="/SkyMakeVersionAssets/logo/SkyMake4AboutPage.svg" alt="SM4-FOUR">
+                <div class="card-body">
+                </div>
+            </div>
+        </div>
+        <?php
+    }
    if($request == "users" or $request == "users/"){
        include_once "nps/widgets/dash.php";
        $requestsuccess = true;
