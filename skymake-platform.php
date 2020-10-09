@@ -383,25 +383,6 @@ if($user_role == "admin") {
                    </div>
                </div>
            </div>
-       <div class="row" style="padding-top: 30px; width: 70%; text-align: left; margin-right: auto; margin-left: auto;">
-           <div class="col-sm-6">
-               <div class="card">
-                   <div class="card-body">
-                       <h5 class="card-title">Updates</h5>
-                       <p class="card-text">You can update your installation here.</p>
-                       <a href="/updates" class="btn btn-outline-dark">SkyMake Updates</a>
-                   </div>
-               </div>
-           </div>
-           <div class="col-sm-6">
-               <div class="card">
-                   <div class="card-body">
-                       <h5 class="card-title">Skyfallen</h5>
-                       <p class="card-text">&copy; 2018-2020 SkyMake by Skyfallen. All Rights Reserved.</p>
-                   </div>
-               </div>
-           </div>
-       </div>
        </div>
            <?php
    }
@@ -416,6 +397,7 @@ if($user_role == "admin") {
                 <div class="card-body">
                     <h1 class="card-title">SkyMake 4 by Skyfallen</h1>
                     <h6 class="card-title">Version 4.2 Aurora Borealis - Build 2</h6>
+                 <h5><a href="/updates">Check for Updates</a</h5>
                     <h5 class="card-text">&copy; 2016-2020 The Skyfallen Company | &copy; 2018-2020 The SkyMake Project <br>
                         This application is subject to Skyfallen Open Source Licence and Skyfallen Privacy.</h5>
                     <br>
