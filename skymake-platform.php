@@ -396,8 +396,8 @@ if($user_role == "admin") {
                 <img class="card-img-top" src="https://theskyfallen.company/wp-content/uploads/2020/07/IMG_0183.png" alt="SFLogo">
                 <div class="card-body">
                     <h1 class="card-title">SkyMake 4 by Skyfallen</h1>
-                    <h6 class="card-title">Version 4.2 Aurora Borealis - Build 2</h6>
-                 <h5><a href="/updates">Check for Updates</a</h5>
+                    <h6 class="card-title">Version 4.2 Aurora Borealis</h6>
+                 <h5><a href="/updates" class="btn btn-danger">Check for Updates</a></h5>
                     <h5 class="card-text">&copy; 2016-2020 The Skyfallen Company | &copy; 2018-2020 The SkyMake Project <br>
                         This application is subject to Skyfallen Open Source Licence and Skyfallen Privacy.</h5>
                     <br>
@@ -409,7 +409,7 @@ if($user_role == "admin") {
                     <h5><?php echo $provider_info["contact"]; ?> | <?php echo $provider_info["contact_email"]; ?>
                         <br> <a href="<?php echo $provider_info["contact_url"]; ?>"><?php echo $provider_info["contact_url"]; ?></a></h5>
                     <h6 class="card-text">September 8, 2020 - Public Distribution Release</h6>
-                    <h6 class="card-text"><small><?php echo THIS_VERSION; ?> - This install was registed with <?php echo VERSION_PROVIDER; ?></small></h6>
+                    <h6 class="card-text"><small><?php echo THIS_VERSION; ?> - This install was registered with <?php echo VERSION_PROVIDER; ?></small></h6>
                 </div>
             </div>
             <div class="card">

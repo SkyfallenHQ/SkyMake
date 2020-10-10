@@ -1,8 +1,6 @@
 <?php
-//Edit for your own updates server
-define("UPDATES_PROVIDER_URL","https://swupdate.theskyfallen.com");
-define("UPDATES_PROVIDER_APP_ID","541a2fb0429491f158f100ce7dcb0b86");
-define("UPDATE_SEED","Stable");
+
+require_once "SkyMakeConfiguration.php";
 
 session_name("SkyMakeSessionStorage");
 session_start();
@@ -15,7 +13,7 @@ function rrmdir($dir,$rmitself = true) {
     if (is_dir($dir)) {
         $objects = scandir($dir);
         foreach ($objects as $object) {
-            if ($object != "." && $object != "..") {
+            if ($object != "." && $object != ".." && $object != "UserUploads") {
                 if (is_dir($dir. DIRECTORY_SEPARATOR .$object) && !is_link($dir."/".$object))
                     rrmdir($dir. DIRECTORY_SEPARATOR .$object);
                 else
