@@ -124,15 +124,22 @@ if(isset($_SESSION["UPDATE_AUTHORIZED"]) and $_SESSION["UPDATE_AUTHORIZED"]) {
      $ret = \SkyfallenCodeLibrary\UpdatesConsoleConnector::downloadLatestVersion(UPDATES_PROVIDER_APP_ID,UPDATE_SEED,UPDATES_PROVIDER_URL,"");
     if($ret["success"]) {
         if(\SkyfallenCodeLibrary\UpdatesConsoleConnector::installUpdate($ret["path"],getcwd())){
-            echo "Updated Successfully";
-            unlink($ret["path"]);
-            $_SESSION["UPDATE_AUTHORIZED"] = false;
-            ob_end_flush();
             if(file_exists("onupdate.php")){
                 include_once "onupdate.php";
                 unlink("onupdate.php");
             }
-            header("location: /");
+            echo "Updated Successfully.  Redirecting...";
+            ?>
+            <script>
+                window.setTimeout(function(){
+                    window.location.href = "/";
+
+                }, 5000);
+            </script>
+            <?php
+            unlink($ret["path"]);
+            $_SESSION["UPDATE_AUTHORIZED"] = false;
+            ob_end_flush();
         }else
         {
             ob_end_flush();

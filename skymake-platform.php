@@ -79,7 +79,33 @@ if($user_role == "student") {
         session_destroy();
         header("Location: /");
     }
-
+    if ($request == "board" or $request == "board/") {
+        $requestsuccess = true;
+        include "nps/widgets/dash.php";
+        ?>
+        <link rel="stylesheet" type="text/css" href="js/quill/quill.min.js">
+        <div id="maincontainer">
+        <div id="quillmain">
+        </div>
+        </div>
+        <script>
+            var quill = new Quill('#quillmain', {
+                modules: {
+                    toolbar: [
+                        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                        ['bold', 'italic', 'underline', 'strike'],
+                        ['link'],
+                        [{ 'script': 'sub'}, { 'script': 'super' }],
+                        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                        ['clean']
+                    ]
+                },
+                placeholder: 'Compose an epic...',
+                theme: 'snow'
+            });
+        </script>
+            <?php
+    }
     if ($request == "home" or $request == "dash" or $request == "course" or $request == "oes" or $request == "liveclass" or $request == "grades" or $request == "home/" or $request == "dash/" or $request == "course/" or $request == "oes/" or $request == "liveclass/" or $request == "grades/") {
         if (!($request == "dash" or $request == "dash/")) {
             header("Location: /dash");
