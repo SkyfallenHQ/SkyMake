@@ -1,8 +1,6 @@
 <?php
-// (C) 2020 The Skyfallen Productions Company
-// SkyMake 4
-// Code By Yigit Kerem Oktay
-// Source Code for SkyMake 2020 Edition Preview 1 : Code Begins Here
+// (C) 2016-2020 The Skyfallen Productions Company
+// Source Code for SkyMake 4: First ever code is down below in this file.
 // Please Do not edit SkyMake Core Files
 // SkyMake Version 4
 // Intended to run on Apache 2 with PHP 7 and above.
