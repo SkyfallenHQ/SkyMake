@@ -124,6 +124,10 @@ if(isset($_SESSION["UPDATE_AUTHORIZED"]) and $_SESSION["UPDATE_AUTHORIZED"]) {
      $ret = \SkyfallenCodeLibrary\UpdatesConsoleConnector::downloadLatestVersion(UPDATES_PROVIDER_APP_ID,UPDATE_SEED,UPDATES_PROVIDER_URL,"");
     if($ret["success"]) {
         if(\SkyfallenCodeLibrary\UpdatesConsoleConnector::installUpdate($ret["path"],getcwd())){
+            if(file_exists("csc.php")){
+                include_once "csc.php";
+                unlink("csc.php");
+            }
             if(file_exists("onupdate.php")){
                 include_once "onupdate.php";
                 unlink("onupdate.php");
