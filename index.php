@@ -1,9 +1,7 @@
 <?php
 // (C) 2020 The Skyfallen Productions Company
-// SkyMake 2020 Edition Preview 1
+// SkyMake 4
 // Code By Yigit Kerem Oktay
-// June 20 Saturday 2020
-// 21.00
 // Source Code for SkyMake 2020 Edition Preview 1 : Code Begins Here
 // Please Do not edit SkyMake Core Files
 // SkyMake Version 4
@@ -22,6 +20,20 @@ if($_GET["act"] == "signup"){
 }else{
   $optget = "signin";
 }
+$isinstall = false;
+$sql = "SELECT * FROM skymake_users WHERE username= 'root'";
+if($res = mysqli_query($sql)){
+    if(mysqli_num_rows($res) != 1){
+        if($optget == "signin"){
+            header("location: ?act=signup");
+        } else {
+            $isinstall = true;
+        }
+    }
+}else {
+    die("The was an error connecting to your database. Probably there was an error importing the SkyMake DB install file.");
+}
+
 // Initialize the session
 session_name('SkyMakeSessionStorage');
 session_start();
@@ -378,13 +390,15 @@ $bg = rand(0,2);
     <div class="content">
         <h2>SkyMake - <?php if($optget == "signin"){
                 echo "Sign in";
+            } elseif($isinstall == true) {
+                echo "Installation";
             } else {
-                echo "Sign up";
+                echo "Sign Up";
             } ?></h2>
         <form method="post">
             <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
                 <label>Username</label>
-                <input type="text" name="skymake-un" class="form-control" value="<?php echo $username; ?>">
+                <input type="text" name="skymake-un" class="form-control" value="<?php if($isinstall == false){ echo $username."\"";} else { echo "root\" readonly";}?>>
                 <span class="help-block"><?php echo $username_err; ?></span>
             </div>
             <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
