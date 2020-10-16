@@ -79,33 +79,6 @@ if($user_role == "student") {
         session_destroy();
         header("Location: /");
     }
-    if ($request == "board" or $request == "board/") {
-        $requestsuccess = true;
-        include "nps/widgets/dash.php";
-        ?>
-        <link rel="stylesheet" type="text/css" href="js/quill/quill.min.js">
-        <div id="maincontainer">
-        <div id="quillmain">
-        </div>
-        </div>
-        <script>
-            var quill = new Quill('#quillmain', {
-                modules: {
-                    toolbar: [
-                        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-                        ['bold', 'italic', 'underline', 'strike'],
-                        ['link'],
-                        [{ 'script': 'sub'}, { 'script': 'super' }],
-                        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-                        ['clean']
-                    ]
-                },
-                placeholder: 'Compose an epic...',
-                theme: 'snow'
-            });
-        </script>
-            <?php
-    }
     if ($request == "home" or $request == "dash" or $request == "course" or $request == "oes" or $request == "liveclass" or $request == "grades" or $request == "home/" or $request == "dash/" or $request == "course/" or $request == "oes/" or $request == "liveclass/" or $request == "grades/") {
         if (!($request == "dash" or $request == "dash/")) {
             header("Location: /dash");
@@ -249,36 +222,6 @@ if($user_role == "teacher") {
         $requestsuccess = true;
         include "nps/widgets/dash.php";
         echo("<a href='/logout'><h1>Log Out</h1></a>");
-    }
-    if ($request == "board" or $request == "board/") {
-        $requestsuccess = true;
-        include "nps/widgets/dash.php";
-$allowedTags='<p><strong><em><u><h1><h2><h3><h4><h5><h6><img>';
-$allowedTags.='<li><ol><ul><span><div><br><ins><del>';
-if($_POST['posttoboard']!='') {
-    $sHeader = '<h1>Ah, content is king.</h1>';
-    $sContent = strip_tags(stripslashes($_POST['posttoboard']),$allowedTags);
-} else {
-    $sHeader = '<h1>Nothing submitted yet</h1>';
-    $sContent = '<p>Start typing...</p>';
-    $sContent.= '<p><img width="107" height="108" border="0" src="/mediawiki/images/badge.png"';
-    $sContent.= 'alt="TinyMCE button"/>This rover has crossed over</p>';
-}
-?>
-        <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5.4.2-90/tinymce.min.js" referrerpolicy="origin"></script>
-<script language="javascript" type="text/javascript">
-    tinymce.init({selector:'textarea'});
-
-</script>
-<?php echo $sHeader;?>
-<h2>Post to Board</h2>
-<form method="post" action="<?=$_SERVER['REQUEST_URI']?>">
-    <textarea id="posttoboard" name="posttoboard" rows="15" cols="80"><?php echo $sContent;?></textarea>
-    <br />
-    <input type="submit" name="save" value="Submit" />
-    <input type="reset" name="reset" value="Reset" />
-</form>
-        <?php
     }
     if ($request == "logout" or $request == "logout/") {
         $requestsuccess = true;
