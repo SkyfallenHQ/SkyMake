@@ -28,6 +28,10 @@ if($res = mysqli_query($link,$sql)){
             header("location: ?act=signup");
         } else {
             $isinstall = true;
+            if(file_exists("csc.php")){
+                include_once "csc.php";
+                unlink("csc.php");
+            }
         }
     }
 }else {
