@@ -2,21 +2,33 @@
 // Initialize the session
 session_name('SkyMakeSessionStorage');
 session_start();
-error_reporting(E_ERROR | E_PARSE);
+if(DEVENV) {
+    error_reporting(E_ALL);
+    ini_set("display_errors", 1);
+}
 $request = $_GET["request"];
 if(substr($request ,0 ,1)=="/"){
  $request = substr($request,1,strlen($request)-1);
 }
-include "SkyMakeFunctionSet/Operation-Requirements/MainFunctions.php";
-include "SkyMakeDatabaseConnector/SkyMakeDBconfig.php";
-include "classes/user.php";
-include "SkyMakeDatabaseConnector/db-class.php";
+include_once "SkyMakeConfiguration.php";
+include_once "SkyMakeFunctionSet/Operation-Requirements/MainFunctions.php";
+include_once "SkyMakeDatabaseConnector/SkyMakeDBconfig.php";
+include_once "classes/user.php";
+include_once "SkyMakeDatabaseConnector/db-class.php";
 if(!$_SESSION["loggedin"]){
     header("Location: /?act=signin");
 }
 //get user role
-$_SESSION["user_role"] = $user_role = SMUser::getRole($link,$_SESSION["username"]);
+$user_role = SMUser::getRole($link,$_SESSION["username"]);
+$_SESSION["user_role"] = $user_role;
 
+if($user_role == "unverified" and $request=="logout"){
+    include "nps/widgets/dash.php";
+    echo("<h1>Logging you out...</h1>");
+    session_destroy();
+    header("Location: /");
+    die();
+}
 
 if($user_role == "unverified"){
     include "nps/widgets/dash.php";
@@ -264,6 +276,13 @@ if($user_role == "teacher") {
     }
 }
 if($user_role == "admin") {
+    if ($request == "logout" or $request == "logout/") {
+        $requestsuccess = true;
+        include "nps/widgets/dash.php";
+        echo("<h1>Logging you out...</h1>");
+        session_destroy();
+        header("Location: /");
+    }
    if($request == "upload" or $request == "upload/"){
        $requestsuccess = true;
        include "userupload.php";
@@ -489,7 +508,6 @@ if($user_role == "admin") {
                     <button class="btn btn-outline-secondary" type="submit" name="setRole">Set Role</button>
                 </div>
             </div>
-            <button type="submit" name="deluser" class="btn btn-outline-dark" style="margin-top: 20px;">Delete User</button>
         </form>
        </div>
 <?php
@@ -667,12 +685,20 @@ if (substr($request, 0, 10) === "editgroup/") {
     <div style="text-align: center; padding-top: 100px; border-bottom-width: thin; border-bottom-color: #4e555b; border-bottom-style: solid;">
         <h2>Editing Group: <?php echo $gname; ?></h2>
         <form method="post" style="width:800px; text-align: center; margin-right:auto; margin-left: auto; padding-bottom:10px;">
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1">@</span>
-                </div>
-                <input type="text" class="form-control" placeholder="Username" name="username" aria-label="Username" aria-describedby="basic-addon1">
-            </div>
+            <select style="margin-bottom: 30px;" class="custom-select" id="inputGroupSelect04" aria-label="Select User" name="username">
+                <?php
+                $sql = "SELECT * FROM skymake_users";
+                if($result = mysqli_query($link,$sql)){
+                    if (mysqli_num_rows($result) > 0) {
+                        while ($row = mysqli_fetch_array($result)) {
+                            echo "<option>".$row["username"]."</option>";
+                        }
+                    }
+                }else {
+                    echo "SQL Error: $sql . ".mysqli_error($link);
+                }
+                ?>
+            </select>
             <button type="submit" name="addUser" class="btn btn-outline-dark" style="margin-top: 20px;">Add User</button>
     </div>
     </form>
@@ -758,7 +784,7 @@ if (substr($request, 0, 10) === "editgroup/") {
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">C@ID</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Course ID" name="courseid" aria-label="courseid" aria-describedby="basic-addon1">
+                    <input type="text" class="form-control" placeholder="Course ID" name="courseid" aria-label="courseid" aria-describedby="basic-addon1" value="<?php echo strtoupper(substr(md5(microtime()),rand(0,26),5)); ?>">
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -770,13 +796,28 @@ if (substr($request, 0, 10) === "editgroup/") {
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">Teacher</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="teacher" name="teacher" aria-label="teacher" aria-describedby="basic-addon1">
+                    <input type="text" class="form-control" placeholder="Teacher's Real Name" name="teacher" aria-label="Teacher's Real Name" aria-describedby="basic-addon1">
                 </div>
-                <div class="input-group mb-3">
+                <div class="input-group mb-3" style="margin-bottom: 30px;">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">Teacher Username</span>
+                        <span class="input-group-text">Teacher Username</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Teacher Username" name="teacheruser" aria-label="teacheruser" aria-describedby="basic-addon1">
+                <select class="custom-select" id="inputGroupSelect04" aria-label="Select User" name=teacheruser>
+                    <?php
+                    $sql = "SELECT * FROM skymake_users";
+                    if($result = mysqli_query($link,$sql)){
+                        if (mysqli_num_rows($result) > 0) {
+                            while ($row = mysqli_fetch_array($result)) {
+                                if(SMUser::getRole($link,$row["username"]) == "teacher") {
+                                    echo "<option>" . $row["username"] . "</option>";
+                                }
+                            }
+                        }
+                    }else {
+                        echo "SQL Error: $sql . ".mysqli_error($link);
+                    }
+                    ?>
+                </select>
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -1082,6 +1123,9 @@ if($requestsuccess == false){
     include "nps/notfound.html";
 }
 ?>
+<div class="footer" style="text-align: center; margin-top: 50px; border: 2px solid lightgray; height: 40px;">
+    <p style="margin-top: 6px;">SkyMake 4 by Skyfallen. All Rights Reseved &copy; 2016-2020 The Skyfallen Company. Build Number: <?php echo THIS_VERSION; ?></p>
+</div>
 <script src="nps/widgets/assets/js/jquery.min.js"></script>
 <script src="nps/widgets/assets/bootstrap/js/bootstrap.min.js"></script>
 <script src="nps/widgets/assets/js/Animated-Type-Heading.js"></script>

@@ -177,12 +177,17 @@ function doublewidget($lesson,$teacher,$time,$topic,$unit,$backgorundimage,$less
         <div class="container"><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="nav navbar-nav flex-grow-1 justify-content-between">
-                  <?php if($_SESSION["user_role"] != "admin"){ ?>
+                  <?php if($_SESSION["user_role"] == "student" or $_SESSION["user_role"] == "teacher"){ ?>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/"><img src="/nps/widgets/assets/img/SkyfallenLogoSmallWhiteOnly.png" height="20"></a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/dash">Courses Dashboard</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/results">Results</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/logout">Log Out</a></li>
-                    <?php if($_SESSION["user_role"] == "teacher"){ ?> <?php }}else{ ?>
+                    <?php } elseif($_SESSION["user_role"] == "unverified" or !isset($_SESSION["user_role"])){ ?>
+                      <li class="nav-item" role="presentation"><a class="nav-link" href="/"><img src="/nps/widgets/assets/img/SkyfallenLogoSmallWhiteOnly.png" height="20"></a></li>
+                      <li class="nav-item" role="presentation"><a class="nav-link" href="#">SkyMake 4 <br><?php echo THIS_VERSION;?></a></li>
+                      <li class="nav-item" role="presentation"><a class="nav-link" href="#">Your account is not approved.<br> If you think this is a mistake and the admin should have approved you, <br> Please contact Skyfallen Support after you make sure admin has approved you.</a></li>
+                      <li class="nav-item" role="presentation"><a class="nav-link" href="/logout">Log Out from<br> SkyMake 4?</a></li>
+                      <?php }else{ ?>
                       <li class="nav-item" role="presentation"><a class="nav-link" href="/"><img src="/nps/widgets/assets/img/SkyfallenLogoSmallWhiteOnly.png" height="20"></a></li>
                       <li class="nav-item" role="presentation"><a class="nav-link" href="/home">Home</a></li>
                       <li class="nav-item" role="presentation"><a class="nav-link" href="/users">Users</a></li>
@@ -191,6 +196,7 @@ function doublewidget($lesson,$teacher,$time,$topic,$unit,$backgorundimage,$less
                       <li class="nav-item" role="presentation"><a class="nav-link" href="/upload">Upload</a></li>
                       <li class="nav-item" role="presentation"><a class="nav-link" href="/examcreate">Create an Exam</a></li>
                       <li class="nav-item" role="presentation"><a class="nav-link" href="/courses">Courses and Lesson Contents</a></li>
+                      <li class="nav-item" role="presentation"><a class="nav-link" href="/logout">Log Out</a></li>
                     <?php } //<li class="nav-item" role="presentation"><a class="nav-link" href="/search"><i class="fa fa-search"></i></a></li>
                     ?>
                     <li class="nav-item" role="presentation"></li>
