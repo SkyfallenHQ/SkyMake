@@ -5,8 +5,10 @@
 // SkyMake Version 4
 // Intended to run on Apache 2 with PHP 7 and above.
 // No deprecated functions are used so it will probably be compatible with a few next major release of PHP.
-
 //Include config file
+// Initialize the session
+session_name('SkyMakeSessionStorage');
+session_start();
 include_once "SkyMakeDatabaseConnector/SkyMakeDBconfig.php";
 include_once "SkyMakeConfiguration.php";
 include_once "SkyMakeFunctionSet/Operation-Requirements/MainFunctions.php";
@@ -27,27 +29,22 @@ if($res = mysqli_query($link,$sql)){
             header("location: ?act=signup");
         } else {
             $isinstall = true;
-            if(file_exists("csc.php")){
-                include_once "csc.php";
-                if(DEVENV == false) {
-                    unlink("csc.php");
-                    unlink("ApacheHtaccess");
-                }
-            }
         }
     }
 }else {
     die("The was an error connecting to your database. Probably there was an error importing the SkyMake DB install file.");
 }
-
-// Initialize the session
-session_name('SkyMakeSessionStorage');
-session_start();
+if(file_exists("csc.php")){
+    include_once "csc.php";
+    if(DEVENV == false) {
+        unlink("csc.php");
+        unlink("ApacheHtaccess");
+    }
+}
 // check if this is sign in
 if($optget != "signup") {
 // Check if the user is already logged in, if yes then redirect him to user page
     if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
-        //this is not yet ready
         header("Location: /home");
     }
     $confirm_password_err = "";

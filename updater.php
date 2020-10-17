@@ -1,14 +1,14 @@
 <?php
 
 require_once "SkyMakeConfiguration.php";
-
-session_name("SkyMakeSessionStorage");
-session_start();
-
-if(!$_SESSION["loggedin"]){
-    header("Location: /?act=signin");
+if(session_status() == PHP_SESSION_NONE) {
+    session_name("SkyMakeSessionStorage");
+    session_start();
+} else {
+    if (!$_SESSION["loggedin"] and isset($_SESSION["UPDATE_AUTHORIZED"]) and $_SESSION["UPDATE_AUTHORIZED"] == "TRUE") {
+        header("Location: /home");
+    }
 }
-
 function rrmdir($dir,$rmitself = true) {
     if (is_dir($dir)) {
         $objects = scandir($dir);
@@ -28,7 +28,7 @@ function rrmdir($dir,$rmitself = true) {
     }
 }
 
-if(isset($_SESSION["UPDATE_AUTHORIZED"]) and $_SESSION["UPDATE_AUTHORIZED"]) {
+if(isset($_SESSION["UPDATE_AUTHORIZED"]) and $_SESSION["UPDATE_AUTHORIZED"] == "TRUE") {
     include_once "SkyfallenCodeLib/UpdatesConsoleConnector.php";
     rrmdir(getcwd(),false);
     ob_start();

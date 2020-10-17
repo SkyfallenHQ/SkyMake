@@ -1,6 +1,9 @@
 <?php
+// Initialize the session
+session_name('SkyMakeSessionStorage');
+session_start();
+
 $request = $_GET["request"];
-$requestsuccess = false;
 if(substr($request ,0 ,1)=="/"){
  $request = substr($request,1,strlen($request)-1);
 }
@@ -8,8 +11,6 @@ include "SkyMakeFunctionSet/Operation-Requirements/MainFunctions.php";
 include "SkyMakeDatabaseConnector/SkyMakeDBconfig.php";
 include "classes/user.php";
 include "SkyMakeDatabaseConnector/db-class.php";
-session_name("SkyMakeSessionStorage");
-session_start();
 if(!$_SESSION["loggedin"]){
     header("Location: /?act=signin");
 }
