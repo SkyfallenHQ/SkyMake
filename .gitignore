@@ -4,3 +4,4 @@ dotSkyfallen
 root.pem
 logs/SkyMakeLog
 logs/SkyMakeCrashes
+.htaccess

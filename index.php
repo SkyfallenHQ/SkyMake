@@ -8,6 +8,7 @@
 
 //Include config file
 include_once "SkyMakeDatabaseConnector/SkyMakeDBconfig.php";
+include_once "SkyMakeConfiguration.php";
 include_once "SkyMakeFunctionSet/Operation-Requirements/MainFunctions.php";
 include "classes/user.php";
 $l = getsetting($link,"link");
@@ -28,7 +29,10 @@ if($res = mysqli_query($link,$sql)){
             $isinstall = true;
             if(file_exists("csc.php")){
                 include_once "csc.php";
-                unlink("csc.php");
+                if(DEVENV == false) {
+                    unlink("csc.php");
+                    unlink("ApacheHtaccess");
+                }
             }
         }
     }
