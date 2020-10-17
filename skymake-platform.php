@@ -2,7 +2,6 @@
 // Initialize the session
 session_name('SkyMakeSessionStorage');
 session_start();
-error_reporting(E_ERROR | E_PARSE);
 $request = $_GET["request"];
 if(substr($request ,0 ,1)=="/"){
  $request = substr($request,1,strlen($request)-1);
