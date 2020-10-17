@@ -423,10 +423,12 @@ if($user_role == "admin") {
                     <h6 class="card-title">Version 4.2 Aurora Borealis - Build 2</h6>
                     <?php
                     if (THIS_VERSION != $new_vname){
-                        if($_GET["install"] == "start"){
-                            $_SESSION["UPDATE_AUTHORIZED"] = true;
-                            header("location: updater.php");
-                        } else {
+                        if(isset($_GET["install"])) {
+                            if ($_GET["install"] == "start") {
+                                $_SESSION["UPDATE_AUTHORIZED"] = true;
+                                header("location: updater.php");
+                            }
+                        }
                         ?>
                         <h6>A New Version is available</h6>
                         <h5><?php echo $new_version_data["title"]; ?> (<?php echo $new_version_data["version"]; ?>) </h5>
@@ -436,7 +438,7 @@ if($user_role == "admin") {
                         <a href="?install=start" class="btn btn-dark">Install Now.</a>
                             <?php
 
-                        }
+
                     }
                     else {
                         echo "Your installation is up to date.";
