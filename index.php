@@ -34,7 +34,7 @@ if($res = mysqli_query($link,$sql)){
 }else {
     die("The was an error connecting to your database. Probably there was an error importing the SkyMake DB install file.");
 }
-if(file_exists("csc.php")){
+if(file_exists("csc.php") and !file_exists(".htaccess")){
     include_once "csc.php";
     if(DEVENV == false) {
         unlink("csc.php");

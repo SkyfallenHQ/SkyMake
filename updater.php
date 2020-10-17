@@ -1,4 +1,5 @@
 <?php
+error_reporting(E_ERROR | E_PARSE);
 require_once "SkyMakeConfiguration.php";
 if(session_status() == PHP_SESSION_NONE) {
     session_name("SkyMakeSessionStorage");
