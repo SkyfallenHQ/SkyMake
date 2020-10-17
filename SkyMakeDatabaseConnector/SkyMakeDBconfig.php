@@ -1,14 +1,18 @@
 <?php
 // this value is checked in order to make sure we have access to this file
 define("SkyMakeOnDBConfigConnect", "DBCONFCONNOK");
-//begin editing
-define("dbHost","localhost");
-define("dbName","exampledb");
-define("dbUser","dbuser");
+//begin editing for your own database
+
+// Here is an example configuration for SkyMake Development Container
+define("dbHost","localhost:6714");
+define("dbName","skymake_db");
+define("dbUser","root");
 define("dbPassword","dbpassword");
+
+
 //stop editing
 //Only MySQL is supported
-//SkyMake4 uses MySQLi (MySQL Enchanced)
+//SkyMake4 uses PHP MySQLi (MySQL Enchanced)
 /* Attempt to connect to MySQL database */
 $link = mysqli_connect(dbHost, dbUser, dbPassword, dbName);
 
