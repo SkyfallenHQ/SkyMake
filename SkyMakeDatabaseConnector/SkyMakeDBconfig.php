@@ -4,7 +4,7 @@ define("SkyMakeOnDBConfigConnect", "DBCONFCONNOK");
 //begin editing for your own database
 
 // Here is an example configuration for SkyMake Development Container
-define("dbHost","localhost:6714");
+define("dbHost","dbserver");
 define("dbName","skymake_db");
 define("dbUser","root");
 define("dbPassword","dbpassword");
