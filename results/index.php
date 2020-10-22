@@ -35,7 +35,7 @@ if(!isset($_GET["examid"])){
                 ?>
             </select>
         </div>
-        <button type="submit" class="btn btn-light">Submit</button>
+        <button type="submit" class="btn btn-light"><?= _("Submit") ?></button>
     </form>
     </div>
 <?php
@@ -59,16 +59,16 @@ if($result = mysqli_query($link, $sql)){
         }
         mysqli_free_result($result);
     } else{
-        echo "Exam invalid.";
-        die("<a href='/'>Home Page</a>");
+        echo _("Exam invalid.");
+        die("<a href='/'>"._("Home Page")."</a>");
     }
 } else{
     die("ERROR: Could not able to execute $sql. " . mysqli_error($link));
 }
 if (new DateTime() < new DateTime($examdata["exam_end"])) {
-    echo "Your time is not over. \n";
-    echo "Your results won't be shown..\n";
-    die("<a href='/'>Home Page</a>");
+    echo _("Your time is not over. \n");
+    echo _("Your results won't be shown..\n");
+    die("<a href='/'>"._("Home Page")."</a>");
 }
 if($_SESSION["user_role"] == "admin"){
     header("Location: /results/ranking/");
@@ -84,14 +84,14 @@ if ($res = mysqli_query($link, $sql)) {
 <div style="text-align: center;">
     <h1><?php echo $examdata["exam_name"]; ?></h1>
     <h4><?php echo "From ".$examdata["exam_start"]." to ".$examdata["exam_end"]." ".$examdata["exam_qcount"]." Questions"; ?></h4>
-    <h6>Created by: <?php echo $examdata["exam_creator"]; ?></h6>
+    <h6><?= _("Created by:") ?> <?php echo $examdata["exam_creator"]; ?></h6>
         <?php
         echo "<table class='table'>";
         echo "<thead>";
         echo "<tr>"; 
-        echo "<th scope='col'>Question Nr.</th>";
-        echo "<th scope='col'>Your Answer</th>";
-        echo "<th scope='col'>Right Answer</th>";
+        echo "<th scope='col'>#</th>";
+        echo "<th scope='col'>"._("Your Answer")."</th>";
+        echo "<th scope='col'>"._("Answer Key")."</th>";
         echo "</tr>";
         echo "</thead>";
         echo "<tbody>";
@@ -144,18 +144,18 @@ if ($res = mysqli_query($link, $sql)) {
         echo "</table><p>".$points."</p></div>";
                 $sql = "INSERT INTO skymake_result (un, p, examid) VALUES ('".$_SESSION["username"]."','".$points."','".$_SESSION["examid"]."');";
         if (mysqli_query($link, $sql)) { 
-       echo "<p>We've successfully added your data to the database.</p>";
-       echo "<p><a href=\"/results/ranking\">Show ranking.</a></p>";
+       echo "<p>"._("We've successfully added your data to the database.")."</p>";
+       echo "<p><a href=\"/results/ranking\">"._("Show ranking.")."</a></p>";
      }else {
             $sql = "INSERT INTO skymake_result (un, p, examid) VALUES ('" . $_SESSION["username"] . "','" . $points . "','" . $_SESSION["examid"] . "');";
             if (mysqli_query($link, $sql)) {
-                echo "<p>We've updated your results in the database.</p>";
-                echo "<p><a href=\"/results/ranking/\">Show ranking.</a></p>";
+                echo "<p>"._("We've updated your results in the database.")."</p>";
+                echo "<p><a href=\"/results/ranking/\">"._("Show ranking")."</a></p>";
             } else
-                echo "<p>Sorry. We could not update the database.</p>";
+                echo "<p>"._("Sorry. We could not update the database.")."</p>";
         }
         }else {
-        echo "<p>You have not entered or finished this exam. Exam Answer Key Has".mysqli_num_rows($res)." Exam Data Has ".$examdata["exam_qcount"]." And You Have ".mysqli_num_rows($res2)." Answers</p>";
+        echo "<p>"._("You have not entered or finished this exam. Exam Answer Key Has").mysqli_num_rows($res)._(" Exam Data Has ").$examdata["exam_qcount"]._(" And You Have ").mysqli_num_rows($res2)._(" Answers")."</p>";
         }
         mysqli_free_result($res);
         mysqli_free_result($res2);

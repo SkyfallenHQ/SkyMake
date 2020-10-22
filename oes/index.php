@@ -7,7 +7,7 @@ if(isset($_GET["examid"])){
     $_SESSION["examid"] = $examid;
 }else {
     if(!isset($_SESSION["examid"])){
-    echo "Exam not specified.";
+    echo _("Exam not specified.");
     }
 }
 $sql = "SELECT exam_name,exam_start,exam_end,exam_qcount,exam_type FROM skymake_examdata WHERE examid='".$_SESSION["examid"]."'";
@@ -22,14 +22,14 @@ if($result = mysqli_query($link, $sql)){
         }
         mysqli_free_result($result);
     } else{
-            echo "Exam invalid.";
+            echo _("Exam invalid.");
     }
 } else{
     die("ERROR: Could not able to execute $sql. " . mysqli_error($link));
 }
 if (time() > strtotime($examdata["exam_end"])) {
-   echo "Your time is over. \n";
-   die("Your answer was discarded.\n");
+   echo _("Your time is over. \n");
+   die(_("Your answer was discarded.\n"));
 }
 if(!isset($_SESSION["qn"])){
     $_SESSION["qn"] = 1;
@@ -182,7 +182,7 @@ if (isset($_POST["killsession"])){
 if (isset($_POST["nextbtn"])){
     if($_SESSION["qn"]!=$examdata["exam_qcount"] + 1){
  if(empty($_POST['ANSWER'])){
-   echo "Please select one";
+   echo _("Please select one");
    }
   elseif(isset($_POST['ANSWER'])){
    $answer = $_POST['ANSWER'];
@@ -214,7 +214,7 @@ VALUES ('".$_SESSION["id"]."', '".$qn_internal."', '".$_SESSION["lastanswer"]."'
     echo "Error: " . $sql . "<br>" . mysqli_error($linktwo);
 }}
       }else {
-          echo "Invalid radiobutton value:".$_SESSION["lastanswer"];
+          echo _("Invalid radiobutton value:").$_SESSION["lastanswer"];
       }
  }
 }
@@ -234,14 +234,14 @@ if($_SESSION["qn"] > $examdata["exam_qcount"]) {
         body{ font: 14px sans-serif; text-align: center; }
     </style>
     <div class="page-header">
-        <h1>Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. Please enter your answers for <?php echo $examdata["exam_name"]; ?>.</h1>
-        <h6>From <?php echo $examdata["exam_start"]." to ".$examdata["exam_end"]; ?></h6>
+        <h1><?= _("Hi") ?>, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. Please enter your answers for <?php echo $examdata["exam_name"]; ?>.</h1>
+        <h6><?= _("Exam Schedule:") ?> <?php echo $examdata["exam_start"]." to ".$examdata["exam_end"]; ?></h6>
     </div>
     <form method="post">
         <img src="<?php echo $picurl; ?>"><br>
-     <?php echo "Question Number:".$_SESSION["qn"]." Out of: ".$examdata["exam_qcount"]; ?><br>
-            <input name="backbtn" type="submit" class="btn btn-primary" value="Don't Submit and Go Back">
-     Your answer:
+     <?php echo _("Question Number:").$_SESSION["qn"]." Out of: ".$examdata["exam_qcount"]; ?><br>
+            <input name="backbtn" type="submit" class="btn btn-primary" value="<?= _("Don't Submit and Go Back") ?>">
+        <?= _("Your Answer") ?>
     <input type="radio" id="Q_A" name="ANSWER" value="Q_A">
     <label for="Q_A">A</label>
         <input type="radio" id="Q_B" name="ANSWER" value="Q_B">
@@ -251,9 +251,9 @@ if($_SESSION["qn"] > $examdata["exam_qcount"]) {
             <input type="radio" id="Q_D" name="ANSWER" value="Q_D">
     <label for="Q_D">D</label>
         <input type="radio" id="Q_EMPTY" name="ANSWER" value="Q_EMPTY">
-    <label for="Q_EMPTY">Leave Empty</label>
-    <input id="nextbtn" name="nextbtn" type="submit" class="btn btn-primary" value="Submit and Continue"><br>
-        <input name="killsession" type="submit" class="btn btn-primary" value="Kill Session"><br>
+    <label for="Q_EMPTY"><?= _("Leave Empty") ?></label>
+    <input id="nextbtn" name="nextbtn" type="submit" class="btn btn-primary" value="<?= _("Submit and Continue") ?>"><br>
+        <input name="killsession" type="submit" class="btn btn-primary" value="<?= _("Kill Session") ?>"><br>
          <p id="timer" name="timer"></p>
         </form>
 </body>
