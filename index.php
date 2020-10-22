@@ -394,25 +394,25 @@ if($bg==2){
     <h2>SkyMake - <?php if($optget == "signin"){
             echo "Sign in";
         } elseif($isinstall == true) {
-            echo "Installation";
+            echo _("Installation");
         } else {
-            echo "Sign Up";
+            echo _("Sign Up");
         } ?></h2>
     <form method="post">
         <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
-            <label>Username</label>
+            <label><?= _("Username") ?></label>
             <input type="text" name="skymake-un" class="form-control" value="<?php if($isinstall == false){ echo $username."\"";} else { echo "root\" readonly";}?>>
                 <span class="help-block"><?php echo $username_err; ?></span>
         </div>
         <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-            <label>Password</label>
+            <label><?= _("Password") ?></label>
             <input type="password" name="skymake-pw" class="form-control">
             <span class="help-block"><?php echo $password_err; ?></span>
         </div>
         <?php if($optget == "signup"){
             ?>
             <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-                <label>Confirm Password</label>
+                <label><?= _("Confirm Password") ?></label>
                 <input type="password" name="skymake-pwconfirm" class="form-control">
                 <span class="help-block"><?php echo $password_err; ?></span>
             </div>
@@ -420,15 +420,15 @@ if($bg==2){
         } echo $confirm_password_err; ?><br>
         <div class="form-group">
             <input class="btn btn-outline-dark" style="margin-bottom: 20px;" type="submit" value="<?php if($optget == "signin"){
-                echo "Sign in";
+                echo _("Sign in");
             } else {
-                echo "Sign up";
+                echo _("Sign up");
             } ?>">
         </div>
         <?php if($optget == "signin"){
-            echo "<a href='/?act=signup' class='actswitch'>Don't have an account?</a>";
+            echo "<a href='/?act=signup' class='actswitch'>"._("Don't have an account?")."</a>";
         } else {
-            echo "<a href='/?act=signin' class='actswitch'>Have an account?</a>";
+            echo "<a href='/?act=signin' class='actswitch'>"._("Have an account?")."</a>";
         } ?>
     </form>
 </div>

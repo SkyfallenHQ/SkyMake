@@ -31,7 +31,7 @@ return "<!--Begin single SkyMake Widget-->
 			  <li>
 				<span class=\"date\">".$topic."</span>
 				<span class=\"lnr lnr-cloud condition\">
-				  <span class=\"temp\"><a href='/lesson/".$lessonid."'>Visit lesson</a></span>
+				  <span class=\"temp\"><a href='/lesson/".$lessonid."'>"._("Visit Lesson")."</a></span>
 				</span>
 			  </li>
 			</ul>
@@ -109,7 +109,7 @@ function doublewidget($lesson,$teacher,$time,$topic,$unit,$backgorundimage,$less
 							 <li>
 								 <span class=\"date\">".$topic."</span>
 								 <span class=\"lnr lnr-cloud condition\">
-									 <span class=\"temp\"><a href='/lesson/".$lessonid."'>Visit lesson</a></span>
+									 <span class=\"temp\"><a href='/lesson/".$lessonid."'>"._("Visit lesson")."</a></span>
 								 </span>
 							 </li>
 						 </ul>
@@ -145,7 +145,7 @@ function doublewidget($lesson,$teacher,$time,$topic,$unit,$backgorundimage,$less
 							 <li>
 								 <span class=\"date\">".$topic1."</span>
 								 <span class=\"lnr lnr-cloud condition\">
-									 <span class=\"temp\"><a href='/lesson/".$lessonid1."'>Visit lesson</a></span>
+									 <span class=\"temp\"><a href='/lesson/".$lessonid1."'>"._("Visit lesson")."</a></span>
 								 </span>
 								 </li>
 							 </ul>
@@ -178,25 +178,25 @@ function doublewidget($lesson,$teacher,$time,$topic,$unit,$backgorundimage,$less
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="nav navbar-nav flex-grow-1 justify-content-between">
                   <?php if($_SESSION["user_role"] == "student" or $_SESSION["user_role"] == "teacher"){ ?>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="/"><img src="/nps/widgets/assets/img/SkyfallenLogoSmallWhiteOnly.png" height="20"></a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="/dash">Courses Dashboard</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="/results">Results</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="/logout">Log Out</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="/"><img src="/SkyMakeVersionAssets/logo/SkyfallenLogoRB.png" height="20"></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="/dash"><?= _("Home") ?></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="/results"><?= _("Results") ?></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="/logout"><?= _("Log Out") ?></a></li>
                     <?php } elseif($_SESSION["user_role"] == "unverified" or !isset($_SESSION["user_role"])){ ?>
-                      <li class="nav-item" role="presentation"><a class="nav-link" href="/"><img src="/nps/widgets/assets/img/SkyfallenLogoSmallWhiteOnly.png" height="20"></a></li>
+                      <li class="nav-item" role="presentation"><a class="nav-link" href="/"><img src="/SkyMakeVersionAssets/logo/SkyfallenLogoRB.png" height="20"></a></li>
                       <li class="nav-item" role="presentation"><a class="nav-link" href="#">SkyMake 4 <br><?php echo THIS_VERSION;?></a></li>
-                      <li class="nav-item" role="presentation"><a class="nav-link" href="#">Your account is not approved.<br> If you think this is a mistake and the admin should have approved you, <br> Please contact Skyfallen Support after you make sure admin has approved you.</a></li>
-                      <li class="nav-item" role="presentation"><a class="nav-link" href="/logout">Log Out from<br> SkyMake 4?</a></li>
+                      <li class="nav-item" role="presentation"><a class="nav-link" href="#"><?= _("Your account is not approved.<br> If you think this is a mistake and the admin should have approved you, <br> Please contact Skyfallen Support after you make sure admin has approved you.") ?></a></li>
+                      <li class="nav-item" role="presentation"><a class="nav-link" href="/logout"><?= _("Log Out from<br> SkyMake 4?") ?></a></li>
                       <?php }else{ ?>
-                      <li class="nav-item" role="presentation"><a class="nav-link" href="/"><img src="/nps/widgets/assets/img/SkyfallenLogoSmallWhiteOnly.png" height="20"></a></li>
-                      <li class="nav-item" role="presentation"><a class="nav-link" href="/home">Home</a></li>
-                      <li class="nav-item" role="presentation"><a class="nav-link" href="/users">Users</a></li>
-                      <li class="nav-item" role="presentation"><a class="nav-link" href="/groups">Classes</a></li>
-                      <li class="nav-item" role="presentation"><a class="nav-link" href="/results">Results</a></li>
-                      <li class="nav-item" role="presentation"><a class="nav-link" href="/upload">Upload</a></li>
-                      <li class="nav-item" role="presentation"><a class="nav-link" href="/examcreate">Create an Exam</a></li>
-                      <li class="nav-item" role="presentation"><a class="nav-link" href="/courses">Courses and Lesson Contents</a></li>
-                      <li class="nav-item" role="presentation"><a class="nav-link" href="/logout">Log Out</a></li>
+                      <li class="nav-item" role="presentation"><a class="nav-link" href="/"><img src="/SkyMakeVersionAssets/logo/SkyfallenLogoRB.png" height="20"></a></li>
+                      <li class="nav-item" role="presentation"><a class="nav-link" href="/home"><?= _("Home") ?></a></li>
+                      <li class="nav-item" role="presentation"><a class="nav-link" href="/users"><?= _("Users") ?></a></li>
+                      <li class="nav-item" role="presentation"><a class="nav-link" href="/groups"><?= _("Classes") ?></a></li>
+                      <li class="nav-item" role="presentation"><a class="nav-link" href="/results"><?= _("Results") ?></a></li>
+                      <li class="nav-item" role="presentation"><a class="nav-link" href="/upload"><?= _("Upload") ?></a></li>
+                      <li class="nav-item" role="presentation"><a class="nav-link" href="/examcreate"><?= _("Create an Exam") ?></a></li>
+                      <li class="nav-item" role="presentation"><a class="nav-link" href="/courses"><?= _("Courses and Lesson Contents") ?></a></li>
+                      <li class="nav-item" role="presentation"><a class="nav-link" href="/logout"><?= _("Log Out") ?></a></li>
                     <?php } //<li class="nav-item" role="presentation"><a class="nav-link" href="/search"><i class="fa fa-search"></i></a></li>
                     ?>
                     <li class="nav-item" role="presentation"></li>

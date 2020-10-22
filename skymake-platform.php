@@ -10,6 +10,27 @@ $request = $_GET["request"];
 if(substr($request ,0 ,1)=="/"){
  $request = substr($request,1,strlen($request)-1);
 }
+if (isset($_GET["lang"])) {
+    $locale = $_GET["lang"].".UTF-8";
+    $_SESSION["locale"] = $locale;
+}
+else if (isset($_SESSION["locale"])) {
+    $locale  = $_SESSION["locale"];
+}
+else {
+    $locale = "en_US";
+    $_SESSION["locale"] = $locale;
+}
+
+$txtd = "skymake";
+textdomain($txtd);
+bindtextdomain($txtd,"locale");
+bind_textdomain_codeset($txtd,"UTF-8");
+
+putenv("LANG=".$_SESSION["locale"]);
+putenv("LANGUAGE=".$_SESSION["locale"]);
+
+$results = setlocale(LC_ALL,$_SESSION["locale"]);
 include_once "SkyMakeConfiguration.php";
 include_once "SkyMakeFunctionSet/Operation-Requirements/MainFunctions.php";
 include_once "SkyMakeDatabaseConnector/SkyMakeDBconfig.php";
@@ -24,7 +45,7 @@ $_SESSION["user_role"] = $user_role;
 
 if($user_role == "unverified" and $request=="logout"){
     include "nps/widgets/dash.php";
-    echo("<h1>Logging you out...</h1>");
+    echo("<h1>"._("Logging you out...")."</h1>");
     session_destroy();
     header("Location: /");
     die();
@@ -48,7 +69,7 @@ if($user_role == "student") {
             echo("<div class='text-center'><h1>Lesson Details | " . $lessonname . "</h1></div>");
             echo(overview(getassignedlessons($link)[$n], getassignedteachers($link)[$n], getassignedtimes($link)[$n], getassignedtopics($link)[$n], getassignedunits($link)[$n], getassignedbgurls($link)[$n], getassignedids($link)[$n], getlessoncontents($link, $cenroller)));
         } else {
-            echo("<div class='text-center'><h1>This lesson does not exist. Please access your course by dashbboard.</h1></div>");
+            echo("<div class='text-center'><h1>"._("This lesson does not exist. Please access your course by dashbboard.")."</h1></div>");
         }
     }
     if (substr($request, 0, 10) === "liveclass/") {
@@ -59,7 +80,7 @@ if($user_role == "student") {
         $cenroller = str_replace("/", "", $cenroller);
         $lctoken = getLiveClassToken($link, $cenroller, $_SESSION["classid"]);
         if (isContentValid($link, $cenroller) == true and !($lctoken == false)) {
-            echo("<div class='text-center'><h1>Live Class | SkyfallenLiveConnect ID:" . $cenroller . "</h1></div>");
+            echo("<div class='text-center'><h1>"._("Live Class")." | SkyfallenLiveConnect ID:" . $cenroller . "</h1></div>");
             echo("<script src='https://".SFLC_HOST."/external_api.js'></script>
         <script>
         const domain = '".SFLC_HOST."';
@@ -73,21 +94,21 @@ if($user_role == "student") {
         </script>");
         } else {
             if (!isContentValid($link, $cenroller)) {
-                echo("<div class='text-center'><h1>This lesson does not exist. Please access your course by your own dashboard.</h1></div>");
+                echo("<div class='text-center'><h1>"._("This lesson does not exist. Please access your course by your own dashboard.")."</h1></div>");
             } else {
-                echo("<div class='text-center'><h1>This meeting has not started.</h1></div>");
+                echo("<div class='text-center'><h1>"._("This meeting has not started.")."</h1></div>");
             }
         }
     }
     if ($request == "profile" or $request == "profile/") {
         $requestsuccess = true;
         include "nps/widgets/dash.php";
-        echo("<a href='/logout'><h1>Log Out</h1></a>");
+        echo("<a href='/logout'><h1>"._("Log Out")."</h1></a>");
     }
     if ($request == "logout" or $request == "logout/") {
         $requestsuccess = true;
         include "nps/widgets/dash.php";
-        echo("<h1>Logging you out...</h1>");
+        echo("<h1>"._("Logging you out...")."</h1>");
         session_destroy();
         header("Location: /");
     }
@@ -98,7 +119,7 @@ if($user_role == "student") {
         }
         $requestsuccess = true;
         include "nps/widgets/dash.php";
-        echo("<div class=\"caption v-middle text-center\"><h1 class=\"cd-headline clip\"><span class=\"blc\">Welcome to the new dashboard.</span><br><span class=\"cd-words-wrapper\"><b class=\"is-visible\">Here are your courses.</b><b>Here are your grades.</b><b>Here are your online exams.</b></span></h1> </div>");
+        //echo("<div class=\"caption v-middle text-center\"><h1 class=\"cd-headline clip\"><span class=\"blc\">Welcome to the new dashboard.</span><br><span class=\"cd-words-wrapper\"><b class=\"is-visible\">Here are your courses.</b><b>Here are your grades.</b><b>Here are your online exams.</b></span></h1> </div>");
         $lessoncount = count(getassignedlessons($link));
         if (getassignedlessons($link)[0] != "n") {
             if (is_odd($lessoncount)) {
@@ -118,7 +139,7 @@ if($user_role == "student") {
                 }
             }
         } else {
-            echo("<div class=\"text-center\"><h1>You have no active courses.</h1></div>");
+            echo("<div class=\"text-center\"><h1>"._("You have no active courses.")."</h1></div>");
         }
 
     }
@@ -133,7 +154,7 @@ if($user_role == "student") {
                 echo("<br>");
             }
         } else {
-            echo("<div class=\"text-center\"><h1>You have no active courses.</h1></div>");
+            echo("<div class=\"text-center\"><h1>"._("You have no active courses.")."</h1></div>");
         }
     }
 }
@@ -148,10 +169,10 @@ if($user_role == "teacher") {
         $n = getassignedlessonqueryteacher($linktwo, $cenroller);
         $lessonname = getassignedlessonsteacher($link)[$n];
         if (!($lessonname == "n")) {
-            echo("<div class='text-center'><h1>Lesson Details | " . $lessonname . "</h1></div>");
+            echo("<div class='text-center'><h1>"._("Course Details")." | " . $lessonname . "</h1></div>");
             echo(overview(getassignedlessonsteacher($link)[$n], "Assigned to me", getassignedtimesteacher($link)[$n], getassignedtopicsteacher($link)[$n], getassignedunitsteacher($link)[$n], getassignedbgurlsteacher($link)[$n], getassignedidsteacher($link)[$n], getlessoncontents($link, $cenroller)));
         } else {
-            echo("<div class='text-center'><h1>This lesson does not exist. Please access your course by dashbboard.</h1></div>");
+            echo("<div class='text-center'><h1>"._("This lesson does not exist. Please access your course by your own dashboard.")."</h1></div>");
         }
     }
     if (substr($request, 0, 10) === "liveclass/") {
@@ -162,7 +183,7 @@ if($user_role == "teacher") {
         $cenroller = str_replace("/", "", $cenroller);
         $lctoken = getLiveClassToken($link, $cenroller, $_SESSION["classid"],false);
         if (isContentValid($link, $cenroller) == true and !($lctoken == false)) {
-            echo("<div class='text-center'><h1>Live Class | SkyfallenLiveConnect ID:" . $cenroller . "</h1></div>");
+            echo("<div class='text-center'><h1>"._("Live Class")." | SkyfallenLiveConnect ID:" . $cenroller . "</h1></div>");
             echo("<script src='https://".SFLC_HOST."/external_api.js'></script>
         <script>
         const domain = '".SFLC_HOST."';
@@ -176,7 +197,7 @@ if($user_role == "teacher") {
         </script>");
         } else {
             if (!isContentValid($link, $cenroller)) {
-                echo("<div class='text-center'><h1>This lesson does not exist. Please access your course by your own dashboard.</h1></div>");
+                echo("<div class='text-center'><h1>"._("This lesson does not exist. Please access your course by your own dashboard.")."</h1></div>");
             } else {
                 $includedcourses = array();
                 $sql = "SELECT * FROM skymake_lessoncontent WHERE `content-id`='".$cenroller."'";
@@ -188,7 +209,7 @@ if($user_role == "teacher") {
                         // Free result set
                         mysqli_free_result($result);
                     } else{
-                        die("This content was not assigned to any course!");
+                        die(_("This content was not assigned to any course!"));
                     }
                 } else{
                     die("ERROR: Could not able to execute for course  $sql. " . mysqli_error($link));
@@ -207,7 +228,7 @@ if($user_role == "teacher") {
                             // Free result set
                             mysqli_free_result($result);
                         } else{
-                            die("This content was not assigned to any course!");
+                            die(_("This content was not assigned to any course!"));
                         }
                     } else{
                         die("ERROR: Could not able to execute $sql. " . mysqli_error($linktwo));
@@ -219,7 +240,7 @@ if($user_role == "teacher") {
             foreach ($includedgroups as $oneofgroups){
                 $ret = setLiveClassToken($linktwo, $cenroller, $oneofgroups, $newtoken);
                 if(!$ret){
-                    die("An error occured.");
+                    die(_("An error occured."));
                 } if($ret) {
                     $exitret = true;
                 }
@@ -233,12 +254,12 @@ if($user_role == "teacher") {
     if ($request == "profile" or $request == "profile/") {
         $requestsuccess = true;
         include "nps/widgets/dash.php";
-        echo("<a href='/logout'><h1>Log Out</h1></a>");
+        echo("<a href='/logout'><h1>"._("Log Out")."</h1></a>");
     }
     if ($request == "logout" or $request == "logout/") {
         $requestsuccess = true;
         include "nps/widgets/dash.php";
-        echo("<h1>Logging you out...</h1>");
+        echo("<h1>"._("Logging you out...")."</h1>");
         session_destroy();
         header("Location: /");
     }
@@ -270,7 +291,7 @@ if($user_role == "teacher") {
                 }
             }
         } else {
-            echo("<div class=\"text-center\"><h1>You are free for now.</h1></div>");
+            echo("<div class=\"text-center\"><h1>"._("You are free for now.")."</h1></div>");
         }
 
     }
@@ -279,7 +300,7 @@ if($user_role == "admin") {
     if ($request == "logout" or $request == "logout/") {
         $requestsuccess = true;
         include "nps/widgets/dash.php";
-        echo("<h1>Logging you out...</h1>");
+        echo("<h1>"._("Logging you out...")."</h1>");
         session_destroy();
         header("Location: /");
     }
@@ -296,38 +317,18 @@ if($user_role == "admin") {
            <div class="col-sm-6">
                <div class="card">
                    <div class="card-body">
-                       <h5 class="card-title">Users</h5>
-                       <p class="card-text">You can change user roles here</p>
-                       <a href="/users" class="btn btn-outline-dark">Users</a>
+                       <h5 class="card-title"><?php echo(_("Users")); ?></h5>
+                       <p class="card-text"><?php echo(_("You can change user roles here")); ?></p>
+                       <a href="/users" class="btn btn-outline-dark"><?php echo(_("Users")); ?></a>
                    </div>
                </div>
            </div>
            <div class="col-sm-6">
                <div class="card">
                    <div class="card-body">
-                       <h5 class="card-title">Classes</h5>
-                       <p class="card-text">You can create,delete or edit groups here</p>
-                       <a href="/groups" class="btn btn-outline-dark">Groups</a>
-                   </div>
-               </div>
-           </div>
-       </div>
-       <div class="row" style="padding-top: 30px; width: 70%; text-align: left; margin-right: auto; margin-left: auto;">
-           <div class="col-sm-6">
-               <div class="card">
-                   <div class="card-body">
-                       <h5 class="card-title">Results</h5>
-                       <p class="card-text">You can view your students' results here</p>
-                       <a href="/results" class="btn btn-outline-dark">Results</a>
-                   </div>
-               </div>
-           </div>
-           <div class="col-sm-6">
-               <div class="card">
-                   <div class="card-body">
-                       <h5 class="card-title">Upload</h5>
-                       <p class="card-text">You can upload documents or files here</p>
-                       <a href="/upload" class="btn btn-outline-dark">Upload</a>
+                       <h5 class="card-title"><?php echo(_("Classes")); ?></h5>
+                       <p class="card-text"><?php echo(_("You can create,delete or edit groups here")); ?></p>
+                       <a href="/groups" class="btn btn-outline-dark"><?php echo(_("Classes")); ?></a>
                    </div>
                </div>
            </div>
@@ -336,18 +337,18 @@ if($user_role == "admin") {
            <div class="col-sm-6">
                <div class="card">
                    <div class="card-body">
-                       <h5 class="card-title">Create an Exam</h5>
-                       <p class="card-text">You can create,schedule and edit online exams here</p>
-                       <a href="/examcreate" class="btn btn-outline-dark">Create an Exam</a>
+                       <h5 class="card-title"><?php echo(_("Results")); ?></h5>
+                       <p class="card-text"><?php echo(_("You can view your students' results here")); ?></p>
+                       <a href="/results" class="btn btn-outline-dark"><?php echo(_("Results")); ?></a>
                    </div>
                </div>
            </div>
            <div class="col-sm-6">
                <div class="card">
                    <div class="card-body">
-                       <h5 class="card-title">Courses and Lesson Contents</h5>
-                       <p class="card-text">You can create or assign courses,live lessons,uploads and online exams here</p>
-                       <a href="/courses" class="btn btn-outline-dark">Courses and Lesson Contents</a>
+                       <h5 class="card-title"><?php echo(_("Upload")); ?></h5>
+                       <p class="card-text"><?php echo(_("You can upload documents or files here")); ?></p>
+                       <a href="/upload" class="btn btn-outline-dark"><?php echo(_("Upload")); ?></a>
                    </div>
                </div>
            </div>
@@ -356,18 +357,38 @@ if($user_role == "admin") {
            <div class="col-sm-6">
                <div class="card">
                    <div class="card-body">
-                       <h5 class="card-title">Get Support</h5>
-                       <p class="card-text">Get Support for SkyMake from official Skyfallen Support</p>
-                       <a href="https://help.theskyfallen.com" class="btn btn-outline-dark">Support</a>
+                       <h5 class="card-title"><?php echo(_("Create an Exam")); ?></h5>
+                       <p class="card-text"><?php echo(_("You can create,schedule and edit online exams here")); ?></p>
+                       <a href="/examcreate" class="btn btn-outline-dark"><?php echo(_("Create an Exam")); ?></a>
                    </div>
                </div>
            </div>
            <div class="col-sm-6">
                <div class="card">
                    <div class="card-body">
-                       <h5 class="card-title">About & Licence</h5>
-                       <p class="card-text">You can get more info about this SkyMake install.</p>
-                       <a href="/about" class="btn btn-outline-dark">About this Install</a>
+                       <h5 class="card-title"><?php echo(_("Courses and Lesson Contents")); ?></h5>
+                       <p class="card-text"><?php echo(_("You can create or assign courses,live lessons,uploads and online exams here")); ?></p>
+                       <a href="/courses" class="btn btn-outline-dark"><?php echo(_("Courses and Lesson Contents")); ?></a>
+                   </div>
+               </div>
+           </div>
+       </div>
+       <div class="row" style="padding-top: 30px; width: 70%; text-align: left; margin-right: auto; margin-left: auto;">
+           <div class="col-sm-6">
+               <div class="card">
+                   <div class="card-body">
+                       <h5 class="card-title"><?php echo(_("Get Support")); ?></h5>
+                       <p class="card-text"><?php echo(_("Get Support for SkyMake from official Skyfallen Support")); ?></p>
+                       <a href="https://help.theskyfallen.com" class="btn btn-outline-dark"><?php echo(_("Get Support")); ?></a>
+                   </div>
+               </div>
+           </div>
+           <div class="col-sm-6">
+               <div class="card">
+                   <div class="card-body">
+                       <h5 class="card-title"><?php echo(_("About & Licence")); ?></h5>
+                       <p class="card-text"><?php echo(_("You can get more info about this SkyMake install.")); ?></p>
+                       <a href="/about" class="btn btn-outline-dark"><?php echo(_("About this Install")); ?></a>
                    </div>
                </div>
            </div>
@@ -385,15 +406,15 @@ if($user_role == "admin") {
                 <div class="card-body">
                     <h1 class="card-title">SkyMake 4 by Skyfallen</h1>
                     <h6 class="card-title">Version 4.2 Aurora Borealis</h6>
-                 <h5><a href="/updates" class="btn btn-danger">Check for Updates</a></h5>
+                 <h5><a href="/updates" class="btn btn-danger"><?php echo _("Check for Updates"); ?></a></h5>
                     <h5 class="card-text">&copy; 2016-2020 The Skyfallen Company | &copy; 2018-2020 The SkyMake Project <br>
                         This application is subject to Skyfallen Open Source Licence and Skyfallen Privacy.</h5>
                     <br>
                     <br>
-                    <h4>Updates for this SkyMake Installation are managed externally by <br> <a href="<?php echo $provider_info["url"] ?>"><?php echo $provider_info["name"]; ?></a></h4>
+                    <h4><?= _("Updates for this SkyMake Installation are managed externally by") ?> <br> <a href="<?php echo $provider_info["url"] ?>"><?php echo $provider_info["name"]; ?></a></h4>
                     <h5><?php echo $provider_info["location"]; ?> | <?php echo $provider_info["ounit"]; ?></h5>
                     <h5><?php echo $provider_info["info"]; ?> | <?php echo $provider_info["type"]; ?></h5>
-                    <h3>For Support</h3>
+                    <h3><?= _("For Support") ?>></h3>
                     <h5><?php echo $provider_info["contact"]; ?> | <?php echo $provider_info["contact_email"]; ?>
                         <br> <a href="<?php echo $provider_info["contact_url"]; ?>"><?php echo $provider_info["contact_url"]; ?></a></h5>
                     <h6 class="card-text">September 8, 2020 - Public Distribution Release</h6>
@@ -430,22 +451,22 @@ if($user_role == "admin") {
                             }
                         }
                         ?>
-                        <h6>A New Version is available</h6>
+                        <h6><?= _("A New Version is available") ?></h6>
                         <h5><?php echo $new_version_data["title"]; ?> (<?php echo $new_version_data["version"]; ?>) </h5>
-                        <h5>Release Date: <?php echo $new_version_data["releasedate"]; ?></h5>
-                        <h6>Description: <br><?php echo $new_version_data["description"]; ?></h6>
+                        <h5><?= _("Release Date:") ?> <?php echo $new_version_data["releasedate"]; ?></h5>
+                        <h6><?= _("Description:") ?> <br><?php echo $new_version_data["description"]; ?></h6>
 
-                        <a href="?install=start" class="btn btn-dark">Install Now.</a>
+                        <a href="?install=start" class="btn btn-dark"><?= _("Install Now.") ?></a>
                             <?php
 
 
                     }
                     else {
-                        echo "Your installation is up to date.";
+                        echo _("Your installation is up to date.");
                     }
                     ?>
-                    <h4>Updates for this SkyMake Installation are managed externally by <br> <a href="<?php echo $provider_info["url"] ?>"><?php echo $provider_info["name"]; ?></a></h4>
-                    <h6 class="card-text"><small><?php echo THIS_VERSION; ?> - This install was registed with <?php echo VERSION_PROVIDER; ?></small></h6>
+                    <h4><?= _("Updates for this SkyMake Installation are managed externally by") ?> <br> <a href="<?php echo $provider_info["url"] ?>"><?php echo $provider_info["name"]; ?></a></h4>
+                    <h6 class="card-text"><small><?php echo THIS_VERSION; ?> - <?php echo _("This install was registered with ").VERSION_PROVIDER; ?></small></h6>
                 </div>
             </div>
             <div class="card">
@@ -464,7 +485,7 @@ if($user_role == "admin") {
            if($result = mysqli_query($link, $sql)){
                $sql = "DELETE FROM skymake_roles WHERE username='".$_POST["username"]."'";
                if($result = mysqli_query($link, $sql)){
-                    echo "Success!";
+                    echo _("Success!");
                }
                else{
                    echo("ERROR: Could not able to execute on step two: $sql. " . mysqli_error($link));
@@ -496,18 +517,18 @@ if($user_role == "admin") {
                         ?>
                     </select>
                     <div class="input-group-append">
-                        <button style="margin-bottom: 30px;" class="btn btn-outline-secondary" type="submit" name="deluser" >Delete User</button>
+                        <button style="margin-bottom: 30px;" class="btn btn-outline-secondary" type="submit" name="deluser" ><?= _("Delete User") ?></button>
                     </div>
                 </div>
             <div class="input-group">
                 <select class="custom-select" id="inputGroupSelect04" name="newRole">
-                    <option selected>Choose a new role to set...</option>
-                    <option value="admin">Administrator</option>
-                    <option value="student">Student</option>
-                    <option value="teacher">Teacher</option>
+                    <option selected><?= _("Choose a new role to set...") ?></option>
+                    <option value="admin"><?= _("Administrator") ?></option>
+                    <option value="student"><?= _("Student") ?></option>
+                    <option value="teacher"><?= _("Teacher") ?></option>
                 </select>
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="submit" name="setRole">Set Role</button>
+                    <button class="btn btn-outline-secondary" type="submit" name="setRole"><?= _("Set Role") ?></button>
                 </div>
             </div>
         </form>
@@ -521,8 +542,8 @@ if ($res = mysqli_query($link, $sql)) {
             echo "<table class='table' style='width:80%; margin-right: auto; margin-left: auto;'>";
             echo "<thead>";
             echo "<tr>";
-            echo "<th scope='col'>Username</th>";
-            echo "<th scope='col'>User Role</th>";
+            echo "<th scope='col'>"._("Username")."</th>";
+            echo "<th scope='col'>"._("User Role")."</th>";
             echo "</tr>";
             echo "</thead>";
             echo "<tbody>";
@@ -561,26 +582,26 @@ if($request == "groups" or $request == "groups/"){
                 if(mysqli_query($link,$sql)){
                     $sql = "DELETE FROM skymake_assignments WHERE classid='".$_POST['groupid']."'";
                     if(mysqli_query($link,$sql)){
-                        echo "Success! ".$_POST["groupid"].".";
+                        echo _("Success!");
                     }
                     else {
-                        echo "ERROR. At step three MySQL encountered an error:".mysqli_error($link);
+                        echo _("ERROR. At step three MySQL encountered an error:").mysqli_error($link);
                     }
                 }
                 else {
-                    echo "ERROR. At step two MySQL encountered an error:".mysqli_error($link);
+                    echo _("ERROR. At step two MySQL encountered an error:").mysqli_error($link);
                 }
             }
             else {
-                echo "ERROR. At step one MySQL encountered an error:".mysqli_error($link);
+                echo _("ERROR. At step one MySQL encountered an error:").mysqli_error($link);
             }
         }
         if(isset($_POST["addGroup"])){
             $sql = "INSERT INTO skymake_classes(classname) VALUES ('".$_POST["groupname"]."')";
             if(mysqli_query($link,$sql)){
-                echo "Success!";
+                echo _("Success!");
             }else {
-                echo "MySQL has encountered an error while creating group. ".mysqli_error($link);
+                echo _("MySQL has encountered an error while creating group. ").mysqli_error($link);
             }
         }
        ?>
@@ -600,12 +621,12 @@ if($request == "groups" or $request == "groups/"){
                         }
                     }
                 }else {
-                    echo "SQL Error: $sql . ".mysqli_error($link);
+                    echo _("SQL Error:").$sql.mysqli_error($link);
                 }
                 ?>
                 </select>
             </div>
-            <button type="submit" name="delGroup" class="btn btn-outline-dark" style="margin-top: 20px;">Delete Group</button>
+            <button type="submit" name="delGroup" class="btn btn-outline-dark" style="margin-top: 20px;"><?= _("Delete Group") ?></button>
             </div>
         </form>
        </div>
@@ -613,11 +634,11 @@ if($request == "groups" or $request == "groups/"){
         <form method="post" style="width:800px; text-align: center; margin-right:auto; margin-left: auto; padding-bottom:10px;">
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1">G@Name</span>
+                    <span class="input-group-text" id="basic-addon1"><?= _("Group Name") ?></span>
                 </div>
-                <input type="text" class="form-control" placeholder="Group Name" name="groupname" aria-label="groupname" aria-describedby="basic-addon1">
+                <input type="text" class="form-control" placeholder="<?= _("Group Name") ?>" name="groupname" aria-label="groupname" aria-describedby="basic-addon1">
             </div>
-            <button type="submit" name="addGroup" class="btn btn-outline-dark" style="margin-top: 20px;">Create Group</button>
+            <button type="submit" name="addGroup" class="btn btn-outline-dark" style="margin-top: 20px;"><?= _("Create") ?></button>
     </div>
     </form>
     </div>
@@ -629,9 +650,9 @@ if ($res = mysqli_query($link, $sql)) {
             echo "<table class='table' style='width:80%; margin-right: auto; margin-left: auto;'>";
             echo "<thead>";
             echo "<tr>";
-            echo "<th scope='col'>Group ID</th>";
-            echo "<th scope='col'>Group Name</th>";
-            echo "<th scope='col'>Edit Users</th>";
+            echo "<th scope='col'>"._("Group ID")."</th>";
+            echo "<th scope='col'>"._("Group Name")."</th>";
+            echo "<th scope='col'>"._("Edit Users")."</th>";
             echo "</tr>";
             echo "</thead>";
             echo "<tbody>";
@@ -639,7 +660,7 @@ if ($res = mysqli_query($link, $sql)) {
                 echo "<tr>";
                 echo "<td>" . $row['classid'] . "</td>";
                 echo "<td>" . $row['classname'] . "</td>";
-                echo "<td><a href='/editgroup/".$row["classid"]."'>Edit</a></td>";
+                echo "<td><a href='/editgroup/".$row["classid"]."'>"._("Edit")."</a></td>";
                 echo "</tr>";
             }
             echo "</tbody>";
@@ -670,22 +691,22 @@ if (substr($request, 0, 10) === "editgroup/") {
     if(isset($_GET["deluser"])){
         $sql = "DELETE FROM skymake_class_assigned WHERE classid='".$gid."' and username='".$_GET["deluser"]."'";
         if (mysqli_query($link, $sql)) {
-            echo "Success";
+            echo _("Success");
         }else{
-            echo "Failed while deleting. MySQL has encountered an error: ".mysqli_error($link);
+            echo _("Failed while deleting. MySQL has encountered an error: ").mysqli_error($link);
         }
     }
     if(isset($_POST["addUser"])){
         $sql = "INSERT INTO skymake_class_assigned (classid,username) VALUES ('".$gid."','".$_POST["username"]."')";
         if (mysqli_query($link, $sql)) {
-            echo "Success";
+            echo _("Success");
         }else{
-            echo "Failed while deleting. MySQL has encountered an error: ".mysqli_error($link);
+            echo _("Failed while deleting. MySQL has encountered an error: ").mysqli_error($link);
         }
     }
     ?>
     <div style="text-align: center; padding-top: 100px; border-bottom-width: thin; border-bottom-color: #4e555b; border-bottom-style: solid;">
-        <h2>Editing Group: <?php echo $gname; ?></h2>
+        <h2><?= _("Editing Group:") ?> <?php echo $gname; ?></h2>
         <form method="post" style="width:800px; text-align: center; margin-right:auto; margin-left: auto; padding-bottom:10px;">
             <select style="margin-bottom: 30px;" class="custom-select" id="inputGroupSelect04" aria-label="Select User" name="username">
                 <?php
@@ -697,11 +718,11 @@ if (substr($request, 0, 10) === "editgroup/") {
                         }
                     }
                 }else {
-                    echo "SQL Error: $sql . ".mysqli_error($link);
+                    echo _("SQL Error:").mysqli_error($link);
                 }
                 ?>
             </select>
-            <button type="submit" name="addUser" class="btn btn-outline-dark" style="margin-top: 20px;">Add User</button>
+            <button type="submit" name="addUser" class="btn btn-outline-dark" style="margin-top: 20px;"><?= _("Add User") ?></button>
     </div>
     </form>
     </div>
@@ -713,15 +734,15 @@ if (substr($request, 0, 10) === "editgroup/") {
             echo "<table class='table' style='width:80%; margin-right: auto; margin-left: auto;'>";
             echo "<thead>";
             echo "<tr>";
-            echo "<th scope='col'>Username</th>";
-            echo "<th scope='col'>Delete Users</th>";
+            echo "<th scope='col'>"._("Username")."</th>";
+            echo "<th scope='col'>"._("Delete Users")."</th>";
             echo "</tr>";
             echo "</thead>";
             echo "<tbody>";
             while ($row = mysqli_fetch_array($res)) {
                 echo "<tr>";
                 echo "<td>" . $row['username'] . "</td>";
-                echo "<td><a href='?deluser=".$row["username"]."'>Delete</a></td>";
+                echo "<td><a href='?deluser=".$row["username"]."'>"._("Delete")."</a></td>";
                 echo "</tr>";
             }
             echo "</tbody>";
@@ -735,15 +756,15 @@ if (substr($request, 0, 10) === "editgroup/") {
         if(isset($_POST["delCourse"])){
             $sql = "DELETE FROM skymake_assignments WHERE lessonid='".$_POST["courseid"]."'";
             if(mysqli_query($link,$sql)){
-                echo "Success!";
+                echo _("Success!");
             }else {
-                echo "MySQL has encountered an error while creating group. ".mysqli_error($link);
+                echo _("MySQL has encountered an error while creating group. ").mysqli_error($link);
             }
         }
         if(isset($_POST["createCourse"])){
             $sql = "INSERT INTO skymake_assignments(lessonid,lesson,teacher,teacheruser,time,topic,unit,bgurl,classid) VALUES ('".$_POST["courseid"]."','".$_POST["lesson"]."','".$_POST["teacher"]."','".$_POST["teacheruser"]."','".$_POST["date"]." ".$_POST["hour"]."','".$_POST["topic"]."','".$_POST["unit"]."','".$_POST["bgurl"]."','".$_POST["classid"]."')";
             if(mysqli_query($link,$sql)){
-                echo "Success!";
+                echo _("Success!");
             }else {
                 echo "MySQL has encountered an error while creating group. ".mysqli_error($link);
             }
@@ -753,10 +774,10 @@ if (substr($request, 0, 10) === "editgroup/") {
             <form method="post" style="width:800px; text-align: center; margin-right:auto; margin-left: auto; padding-bottom:10px;">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">C@ID</span>
+                        <span class="input-group-text" id="basic-addon1"><?= _("Course ID") ?></span>
                     </div>
                     <select class="custom-select" id="inputGroupSelect04" name="courseid">
-                        <option selected>Choose a Course to Delete...</option>
+                        <option selected><?= _("Choose Course to Delete") ?></option>
                         <?php
                         $sql = "SELECT * FROM skymake_assignments";
                         if($result = mysqli_query($link,$sql)){
@@ -776,7 +797,7 @@ if (substr($request, 0, 10) === "editgroup/") {
                         ?>
                     </select>
                 </div>
-                <button type="submit" name="delCourse" class="btn btn-outline-dark" style="margin-top: 20px;">Delete Course</button>
+                <button type="submit" name="delCourse" class="btn btn-outline-dark" style="margin-top: 20px;"><?= _("Delete Course") ?></button>
         </div>
         </form>
         </div>
@@ -784,25 +805,25 @@ if (substr($request, 0, 10) === "editgroup/") {
             <form method="post" style="width:800px; text-align: center; margin-right:auto; margin-left: auto; padding-bottom:10px;">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">C@ID</span>
+                        <span class="input-group-text" id="basic-addon1"><?= _("Course ID") ?></span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Course ID" name="courseid" aria-label="courseid" aria-describedby="basic-addon1" value="<?php echo strtoupper(substr(md5(microtime()),rand(0,26),5)); ?>">
+                    <input type="text" class="form-control" placeholder="<?= _("Course ID") ?>" name="courseid" aria-label="courseid" aria-describedby="basic-addon1" value="<?php echo strtoupper(substr(md5(microtime()),rand(0,26),5)); ?>">
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">Lesson</span>
+                        <span class="input-group-text" id="basic-addon1"><?= _("Lesson") ?></span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Lesson Name" name="lesson" aria-label="lesson" aria-describedby="basic-addon1">
+                    <input type="text" class="form-control" placeholder="<?= _("Lesson Name") ?>" name="lesson" aria-label="lesson" aria-describedby="basic-addon1">
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">Teacher</span>
+                        <span class="input-group-text" id="basic-addon1"><?= _("Teacher") ?></span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Teacher's Real Name" name="teacher" aria-label="Teacher's Real Name" aria-describedby="basic-addon1">
+                    <input type="text" class="form-control" placeholder="<?= _("Teacher's Real Name") ?>" name="teacher" aria-label="Teacher's Real Name" aria-describedby="basic-addon1">
                 </div>
                 <div class="input-group mb-3" style="margin-bottom: 30px;">
                     <div class="input-group-prepend">
-                        <span class="input-group-text">Teacher Username</span>
+                        <span class="input-group-text"><?= _("Teacher's Username") ?></span>
                     </div>
                 <select class="custom-select" id="inputGroupSelect04" aria-label="Select User" name=teacheruser>
                     <?php
@@ -816,35 +837,35 @@ if (substr($request, 0, 10) === "editgroup/") {
                             }
                         }
                     }else {
-                        echo "SQL Error: $sql . ".mysqli_error($link);
+                        echo _("SQL Error:") .$sql .mysqli_error($link);
                     }
                     ?>
                 </select>
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">Topic</span>
+                        <span class="input-group-text" id="basic-addon1"><?= _("Topic") ?></span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Topic" name="topic" aria-label="topic" aria-describedby="basic-addon1">
+                    <input type="text" class="form-control" placeholder="<?= _("Topic") ?>" name="topic" aria-label="topic" aria-describedby="basic-addon1">
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">Unit</span>
+                        <span class="input-group-text" id="basic-addon1"><?= _("Unit") ?></span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Unit" name="unit" aria-label="unit" aria-describedby="basic-addon1">
+                    <input type="text" class="form-control" placeholder="<?= _("Unit") ?>" name="unit" aria-label="unit" aria-describedby="basic-addon1">
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">BG Image</span>
+                        <span class="input-group-text" id="basic-addon1"><?= _("Cover Image URL") ?></span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Background Image" name="bgurl" aria-label="bgimage" aria-describedby="basic-addon1">
+                    <input type="text" class="form-control" placeholder="<?= _("Cover Image URL") ?>" name="bgurl" aria-label="bgimage" aria-describedby="basic-addon1">
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">Class ID</span>
+                        <span class="input-group-text" id="basic-addon1"><?= _("Class ID") ?></span>
                     </div>
                     <select class="custom-select" id="inputGroupSelect04" name="classid">
-                        <option selected>Choose a Class</option>
+                        <option selected><?= _("Chose a Class") ?></option>
                         <?php
                         $sql = "SELECT * FROM skymake_classes";
                         if($result = mysqli_query($link,$sql)){
@@ -864,11 +885,11 @@ if (substr($request, 0, 10) === "editgroup/") {
                         ?>
                     </select>
                 </div>
-                <label for="exam-date">Course Date:</label>
+                <label for="exam-date"><?= _("Course Date:") ?></label>
                 <input type="date" id="date" name="date">
-                <label for="exam-start">Course Time:</label>
+                <label for="exam-start"><?= _("Course Time:") ?></label>
                 <input type="time" id="hour" name="hour" value="15:16:00"><br>
-                <button type="submit" name="createCourse" class="btn btn-outline-dark" style="margin-top: 20px;">Create Course</button>
+                <button type="submit" name="createCourse" class="btn btn-outline-dark" style="margin-top: 20px;"><?= _("Create Course") ?></button>
         </div>
         </form>
         </div>
@@ -880,12 +901,12 @@ if (substr($request, 0, 10) === "editgroup/") {
                 echo "<table class='table' style='width:80%; margin-right: auto; margin-left: auto;'>";
                 echo "<thead>";
                 echo "<tr>";
-                echo "<th scope='col'>Course ID</th>";
-                echo "<th scope='col'>Lesson Name</th>";
-                echo "<th scope='col'>Teacher</th>";
-                echo "<th scope='col'>Topic</th>";
-                echo "<th scope='col'>Assigned Class ID</th>";
-                echo "<th scope='col'>Edit</th>";
+                echo "<th scope='col'>"._("Course ID")."</th>";
+                echo "<th scope='col'>"._("Lesson Name")."</th>";
+                echo "<th scope='col'>"._("Teacher")."</th>";
+                echo "<th scope='col'>"._("Topic")."</th>";
+                echo "<th scope='col'>"._("Assigned Class ID")."</th>";
+                echo "<th scope='col'>"._("Edit")."</th>";
                 echo "</tr>";
                 echo "</thead>";
                 echo "<tbody>";
@@ -896,7 +917,7 @@ if (substr($request, 0, 10) === "editgroup/") {
                     echo "<td>" . $row['teacher'] . "</td>";
                     echo "<td>" . $row['topic'] . "</td>";
                     echo "<td>" . $row['classid'] . "</td>";
-                    echo "<td><a href='/lessoncontent/".$row["lessonid"]."'>Edit</a></td>";
+                    echo "<td><a href='/lessoncontent/".$row["lessonid"]."'>"._("Edit")."</a></td>";
                     echo "</tr>";
                 }
                 echo "</tbody>";
@@ -913,25 +934,25 @@ if (substr($request, 0, 10) === "editgroup/") {
         if(isset($_GET["delcontent"])){
             $sql = "DELETE FROM skymake_lessoncontent WHERE `content-id`='".$_GET["delcontent"]."'";
             if (mysqli_query($link, $sql)) {
-                echo "Success";
+                echo _("Success");
             }else{
-                echo "Failed while deleting. MySQL has encountered an error: ".mysqli_error($link);
+                echo _("Failed while deleting. MySQL has encountered an error: ").mysqli_error($link);
             }
         }
             if(isset($_POST["addLC"])){
                 $sql = "INSERT INTO skymake_lessoncontent (lessonid,`content-id`,`content-type`,`content-link`) VALUES ('".$cid."','".$_POST["llcid"]."','"."Live Class"."','"."/liveclass/".$_POST["llcid"]."')";
                 if(mysqli_query($link,$sql)){
-                    echo "Success!";
+                    echo _("Success!");
                 }else{
-                    echo "Error. ".mysqli_error($link);
+                    echo _("Error. ").mysqli_error($link);
                 }
             }
             if(isset($_POST["addExam"])){
                 $sql = "INSERT INTO skymake_lessoncontent (lessonid,`content-id`,`content-type`,`content-link`) VALUES ('".$cid."','".$_POST["examid"]."','"."Online Exam"."','"."/oes/?examid=".$_POST["examid"]."')";
                 if(mysqli_query($link,$sql)){
-                    echo "Success!";
+                    echo _("Success!");
                 }else{
-                    echo "Error. ".mysqli_error($link);
+                    echo _("Error. ").mysqli_error($link);
                 }
             }
             if(isset($_POST["addUpload"])){
@@ -943,33 +964,33 @@ if (substr($request, 0, 10) === "editgroup/") {
                             $c_link = $row["uploadlink"];
                         }
                     }else{
-                        die("No such upload.");
+                        die(_("No such upload."));
                     }
                 }
                 $sql = "INSERT INTO skymake_lessoncontent (lessonid,`content-id`,`content-type`,`content-link`) VALUES ('".$cid."','".$_POST["uploadid"]."','"."Document"."','".$c_link."')";
                 if(mysqli_query($link,$sql)){
-                    echo "Success!";
+                    echo _("Success!");
                 }else{
-                    echo "Error. ".mysqli_error($link);
+                    echo _("Error. ").mysqli_error($link);
                 }
             }
 
         ?>
         <div style="text-align: center; padding-top: 100px; border-bottom-width: thin; border-bottom-color: #4e555b; border-bottom-style: solid;">
-            <h2>Editing Course: <?php echo $cid; ?></h2>
+            <h2><?= _("Editing Course:") ?> <?php echo $cid; ?></h2>
             <form method="post" style="width:800px; text-align: center; margin-right:auto; margin-left: auto; padding-bottom:10px;">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">Live Lesson</span>
+                        <span class="input-group-text" id="basic-addon1"><?= _("Live Class") ?></span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Content ID" aria-label="Content ID" name="llcid" aria-describedby="basic-addon1">
+                    <input type="text" class="form-control" placeholder="<?= _("Content ID") ?>" aria-label="Content ID" name="llcid" aria-describedby="basic-addon1">
                     <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" name="addLC" type="submit">Create Live Lesson</button>
+                        <button class="btn btn-outline-secondary" name="addLC" type="submit"><?= _("Create Live Class") ?></button>
                     </div>
                 </div>
                 <div class="input-group">
                     <select class="custom-select" id="inputGroupSelect04" name="examid">
-                        <option selected>Choose an Online Exam To Add...</option>
+                        <option selected><?= _("Choose an online exam to assign") ?></option>
                         <?php
                         $sql = "SELECT * FROM skymake_examdata";
                         if($result = mysqli_query($link,$sql)){
@@ -979,17 +1000,17 @@ if (substr($request, 0, 10) === "editgroup/") {
                                 }
                             }
                         }else{
-                            echo "Could not list exams. SQL Error.";
+                            echo _("Could not list exams. SQL Error.");
                         }
                         ?>
                     </select>
                     <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="submit" name="addExam">Add Exam</button>
+                        <button class="btn btn-outline-secondary" type="submit" name="addExam"><?= _("Add Exam") ?></button>
                     </div>
                 </div>
                 <div class="input-group" style="padding-top: 15px;">
                     <select class="custom-select" id="inputGroupSelect04" name="uploadid">
-                        <option selected>Choose an Upload To Add...</option>
+                        <option selected><?= _("Choose an upload to assign") ?></option>
                         <?php
                         $sql = "SELECT * FROM skymake_useruploads";
                         if($result = mysqli_query($link,$sql)){
@@ -999,12 +1020,12 @@ if (substr($request, 0, 10) === "editgroup/") {
                                 }
                             }
                         }else{
-                            echo "Could not list uploads. SQL Error.";
+                            echo _("Could not list uploads. SQL Error.");
                         }
                         ?>
                     </select>
                     <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="submit" name="addUpload">Add Upload</button>
+                        <button class="btn btn-outline-secondary" type="submit" name="addUpload"><?= _("Assign Upload") ?></button>
                     </div>
                 </div>
         </div>
@@ -1018,9 +1039,9 @@ if (substr($request, 0, 10) === "editgroup/") {
                 echo "<table class='table' style='width:80%; margin-right: auto; margin-left: auto;'>";
                 echo "<thead>";
                 echo "<tr>";
-                echo "<th scope='col'>Content ID</th>";
-                echo "<th scope='col'>Content Type</th>";
-                echo "<th scope='col'>Delete</th>";
+                echo "<th scope='col'>"._("Content ID")."</th>";
+                echo "<th scope='col'>"._("Content Type")."</th>";
+                echo "<th scope='col'>"._("Delete")."</th>";
                 echo "</tr>";
                 echo "</thead>";
                 echo "<tbody>";
@@ -1028,7 +1049,7 @@ if (substr($request, 0, 10) === "editgroup/") {
                     echo "<tr>";
                     echo "<td>" . $row['content-id'] . "</td>";
                     echo "<td>" . $row['content-type'] . "</td>";
-                    echo "<td><a href='?delcontent=".$row["content-id"]."'>Delete</a></td>";
+                    echo "<td><a href='?delcontent=".$row["content-id"]."'>"._("Delete")."</a></td>";
                     echo "</tr>";
                 }
                 echo "</tbody>";
@@ -1042,17 +1063,17 @@ if($request == "examcreate" or $request == "examcreate/"){
     if(isset($_POST["createExam"])){
         $sql = "INSERT INTO skymake_examdata (examid,exam_name,exam_start,exam_end,exam_qcount,exam_type,exam_creator) VALUES ('".$_POST["exam-id"]."','".$_POST["exam-name"]."','".$_POST["exam-date"]." ".$_POST["exam-start"]."','".$_POST["exam-date"]." ".$_POST["exam-end"]."','".$_POST["exam-qcount"]."','standard','no-one')";
         if(mysqli_query($link,$sql)){
-            echo "Success!";
+            echo _("Success!");
         }else {
-            echo "Error $sql".mysqli_error($link);
+            echo _("Error").$sql.mysqli_error($link);
         }
     }
     if(isset($_GET["delexam"])){
         $sql = "DELETE FROM skymake_examdata WHERE examid='".$_GET["delexam"]."'";
         if(mysqli_query($link,$sql)){
-            echo "Success!";
+            echo _("Success!");
         }else {
-            echo "Error $sql".mysqli_error($link);
+            echo _("Error ").$sql.mysqli_error($link);
         }
     }
     ?>
@@ -1060,29 +1081,29 @@ if($request == "examcreate" or $request == "examcreate/"){
         <form method="post" style="width:800px; text-align: center; margin-right:auto; margin-left: auto; padding-bottom:10px;">
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1">Name</span>
+                    <span class="input-group-text" id="basic-addon1"><?= _("Name") ?></span>
                 </div>
-                <input type="text" class="form-control" placeholder="Exam Name" name="exam-name" aria-label="Exam Name" aria-describedby="basic-addon1">
+                <input type="text" class="form-control" placeholder="<?= _("Exam Name") ?>" name="exam-name" aria-label="Exam Name" aria-describedby="basic-addon1">
             </div>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1">Exam ID</span>
+                    <span class="input-group-text" id="basic-addon1"><?= _("Exam ID") ?></span>
                 </div>
-                <input type="text" class="form-control" placeholder="Exam ID" name="exam-id" aria-label="Exam ID" aria-describedby="basic-addon1" value="OES<?php echo  mt_rand(1000,9999); ?>">
+                <input type="text" class="form-control" placeholder="<?= _("Exam ID") ?>" name="exam-id" aria-label="Exam ID" aria-describedby="basic-addon1" value="OES<?php echo  mt_rand(1000,9999); ?>">
             </div>
-            <label for="exam-date">Exam Date:</label>
+            <label for="exam-date"><?= _("Exam Date:") ?></label>
             <input type="date" id="exam-date" name="exam-date">
-            <label for="exam-start">Exam Start:</label>
+            <label for="exam-start"><?= _("Exam Start:") ?></label>
             <input type="time" id="exam-start" name="exam-start" value="15:16:00">
-            <label for="exam-end">Exam End:</label>
+            <label for="exam-end"><?= _("Exam End:") ?></label>
             <input type="time" id="exam-end" name="exam-end" value="15:16:00">
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1">Exam Question Count</span>
+                    <span class="input-group-text" id="basic-addon1"><?= _("Number of Questions") ?></span>
                 </div>
-                <input type="text" class="form-control" placeholder="Exam QCount" name="exam-qcount" aria-label="Exam Question Count" aria-describedby="basic-addon1">
+                <input type="text" class="form-control" placeholder="<?= _("Number of Questions") ?>" name="exam-qcount" aria-label="Exam Question Count" aria-describedby="basic-addon1">
             </div>
-            <button type="submit" name="createExam" class="btn btn-outline-dark" style="margin-top: 20px;">Create Exam</button>
+            <button type="submit" name="createExam" class="btn btn-outline-dark" style="margin-top: 20px;"><?= _("Create Exam") ?></button>
     </div>
     </form>
     </div>
@@ -1094,13 +1115,13 @@ if($request == "examcreate" or $request == "examcreate/"){
             echo "<table class='table' style='width:80%; margin-right: auto; margin-left: auto;'>";
             echo "<thead>";
             echo "<tr>";
-            echo "<th scope='col'>Exam ID</th>";
-            echo "<th scope='col'>Exam Name</th>";
-            echo "<th scope='col'>Start</th>";
-            echo "<th scope='col'>End</th>";
-            echo "<th scope='col'>Questions</th>";
-            echo "<th scope='col'>Edit</th>";
-            echo "<th scope='col'>Delete</th>";
+            echo "<th scope='col'>"._("Exam ID")."</th>";
+            echo "<th scope='col'>"._("Exam Name")."</th>";
+            echo "<th scope='col'>"._("Start")."</th>";
+            echo "<th scope='col'>"._("End")."</th>";
+            echo "<th scope='col'>"._("Questions")."</th>";
+            echo "<th scope='col'>"._("Edit")."</th>";
+            echo "<th scope='col'>"._("Delete")."</th>";
             echo "</tr>";
             echo "</thead>";
             echo "<tbody>";
@@ -1111,8 +1132,8 @@ if($request == "examcreate" or $request == "examcreate/"){
                 echo "<td>" . $row['exam_start'] . "</td>";
                 echo "<td>" . $row['exam_end'] . "</td>";
                 echo "<td>" . $row['exam_qcount'] . "</td>";
-                echo "<td><a href='/examcreator/?examid=" . $row['examid'] . "'>Edit</a></td>";
-                echo "<td><a href='?delexam=" . $row['examid'] . "'>Delete</a></td>";
+                echo "<td><a href='/examcreator/?examid=" . $row['examid'] . "'>"._("Edit")."</a></td>";
+                echo "<td><a href='?delexam=" . $row['examid'] . "'>"._("Delete")."</a></td>";
                 echo "</tr>";
             }
             echo "</tbody>";
@@ -1126,7 +1147,7 @@ if($requestsuccess == false){
 }
 ?>
 <div class="footer" style="text-align: center; margin-top: 50px; border: 2px solid lightgray; height: 40px;">
-    <p style="margin-top: 6px;">SkyMake 4 by Skyfallen. All Rights Reseved &copy; 2016-2020 The Skyfallen Company. Build Number: <?php echo THIS_VERSION; ?></p>
+    <p style="margin-top: 6px;">SkyMake 4 by Skyfallen. All Rights Reseved &copy; 2016-2020 The Skyfallen Company.<?php echo _("Build Number:").THIS_VERSION; ?></p>
 </div>
 <script src="nps/widgets/assets/js/jquery.min.js"></script>
 <script src="nps/widgets/assets/bootstrap/js/bootstrap.min.js"></script>
