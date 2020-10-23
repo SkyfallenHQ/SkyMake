@@ -588,3 +588,18 @@ msgstr "SkyMake Sunucu Yazılımı"
 
 msgid "(TM) SkyMake developed by Skyfallen as an open source project and distributed under Skyfallen Licence - SkyMake can only be used with required attribution"
 msgstr "SkyMake Skyfallen tarafından açık kaynaklı olarak geliştirilmiş ve Skyfallen Lisansı altında dağıtılmaktadır. - SkyMake sadece gerekli referanslar bulunduğu sürece kullanılabilir."
+
+msgid "No account found with that username."
+msgstr "Böyle bir kullanıcı adı sisteme kayıtlı değil."
+
+msgid "The password you entered was not valid."
+msgstr "Hatalı bir şifre girdiniz."
+
+msgid "This username is already taken."
+msgstr "Bu kullanıcı adı zaten kayıtlı."
+
+msgid "Password must have atleast 6 characters."
+msgstr "Şifre en az altı karakterden oluşmalıdır."
+
+msgid "Password did not match."
+msgstr "Şifreler uyuşmadı."
