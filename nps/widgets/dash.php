@@ -224,16 +224,49 @@ function doublewidget($lesson,$teacher,$time,$topic,$unit,$backgorundimage,$less
                           <?php } else { ?>
                       <li class="nav-item" role="presentation"><a class="nav-link" href="?dm=off"><div class="fa fa-sun-o"></div></a></li>
                     <?php } ?>
+                      <li class="nav-item" role="presentation">
+                          <select class="custom-select nav-link" style="background-color: <?php if($_SESSION["dm"] == "on") { echo "black"; } else { echo "white"; } ?>; width: 150px;" onchange="this.options[this.selectedIndex].value && (window.location = '?lang='.concat(this.options[this.selectedIndex].value));">
+                              <?php if($_SESSION["locale"] == "tr_TR.UTF-8"){ ?>
+                                  <option value="tr_TR">Türkçe (Türkiye)</option>
+                                  <option value="en_US">English (US)</option>
+                              <?php } else { ?>
+                                  <option value="en_US">English (US)</option>
+                                  <option value="tr_TR">Türkçe (Türkiye)</option>
+                              <?php } ?>
+                          </select>
+                      </li>
                     <?php } elseif($_SESSION["user_role"] == "unverified" or !isset($_SESSION["user_role"])){ ?>
                       <li class="nav-item" role="presentation"><a class="nav-link" href="/"><img src="<?php if($_SESSION["dm"] == "off"){ echo "/SkyMakeVersionAssets/logo/SkyfallenLogoSmallWhiteOnly.png"; } else { echo "/SkyMakeVersionAssets/logo/SkyfallenLogoSmallWhiteOnly.png"; } ?>" height="20"></a></li>
                       <li class="nav-item" role="presentation"><a class="nav-link" href="#">SkyMake 4 <br><?php echo THIS_VERSION;?></a></li>
                       <li class="nav-item" role="presentation"><a class="nav-link" href="#"><?= _("Your account is not approved.<br> If you think this is a mistake and the admin should have approved you, <br> Please contact Skyfallen Support after you make sure admin has approved you.") ?></a></li>
                       <li class="nav-item" role="presentation"><a class="nav-link" href="/logout"><?= _("Log Out from<br> SkyMake 4?") ?></a></li>
+                      <li class="nav-item" role="presentation">
+                          <select class="custom-select nav-link" style="background-color: <?php if($_SESSION["dm"] == "on") { echo "black"; } else { echo "white"; } ?>; width: 150px;" onchange="this.options[this.selectedIndex].value && (window.location = '?lang='.concat(this.options[this.selectedIndex].value));">
+                              <?php if($_SESSION["locale"] == "tr_TR.UTF-8"){ ?>
+                                  <option value="tr_TR">Türkçe (Türkiye)</option>
+                                  <option value="en_US">English (US)</option>
+                              <?php } else { ?>
+                                  <option value="en_US">English (US)</option>
+                                  <option value="tr_TR">Türkçe (Türkiye)</option>
+                              <?php } ?>
+                          </select>
+                      </li>
                       <?php if($_SESSION["dm"] == "off") { ?>
                           <li class="nav-item" role="presentation"><a class="nav-link" href="?dm=on"><div class="fa fa-moon-o"></div></a></li>
                       <?php } else { ?>
                           <li class="nav-item" role="presentation"><a class="nav-link" href="?dm=off"><div class="fa fa-sun-o"></div></a></li>
                       <?php } ?>
+                      <li class="nav-item" role="presentation">
+                          <select class="custom-select nav-link" style="background-color: black; width: 150px;" onchange="this.options[this.selectedIndex].value && (window.location = '?lang='.concat(this.options[this.selectedIndex].value));">
+                              <?php if($_SESSION["locale"] == "tr_TR.UTF-8"){ ?>
+                                  <option value="tr_TR">Türkçe (Türkiye)</option>
+                                  <option value="en_US">English (US)</option>
+                              <?php } else { ?>
+                                  <option value="en_US">English (US)</option>
+                                  <option value="tr_TR">Türkçe (Türkiye)</option>
+                              <?php } ?>
+                          </select>
+                      </li>
                       <?php }else{ ?>
                       <li class="nav-item" role="presentation"><a class="nav-link" href="/"><img src="<?php if($_SESSION["dm"] == "off"){ echo "/SkyMakeVersionAssets/logo/SkyfallenLogoRB.png"; } else { echo "/SkyMakeVersionAssets/logo/SkyfallenLogoSmallWhiteOnly.png"; } ?>" height="20"></a></li>
                       <li class="nav-item" role="presentation"><a class="nav-link" href="/home"><?= _("Home") ?></a></li>
@@ -249,9 +282,19 @@ function doublewidget($lesson,$teacher,$time,$topic,$unit,$backgorundimage,$less
                       <?php } else { ?>
                           <li class="nav-item" role="presentation"><a class="nav-link" href="?dm=off"><div class="fa fa-sun-o"></div></a></li>
                       <?php } ?>
+                      <li class="nav-item" role="presentation">
+                          <select class="custom-select nav-link" style="background-color: <?php if($_SESSION["dm"] == "on") { echo "black"; } else { echo "white"; } ?>; width: 150px;" onchange="this.options[this.selectedIndex].value && (window.location = '?lang='.concat(this.options[this.selectedIndex].value));">
+                                  <?php if($_SESSION["locale"] == "tr_TR.UTF-8"){ ?>
+                                      <option value="tr_TR">Türkçe (Türkiye)</option>
+                                      <option value="en_US">English (US)</option>
+                              <?php } else { ?>
+                                      <option value="en_US">English (US)</option>
+                                      <option value="tr_TR">Türkçe (Türkiye)</option>
+                              <?php } ?>
+                              </select>
+                      </li>
                     <?php } //<li class="nav-item" role="presentation"><a class="nav-link" href="/search"><i class="fa fa-search"></i></a></li>
                     ?>
-                    <li class="nav-item" role="presentation"></li>
                 </ul>
             </div>
         </div>
