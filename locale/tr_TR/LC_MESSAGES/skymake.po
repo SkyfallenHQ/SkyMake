@@ -553,28 +553,8 @@ msgid "Your account is not approved.<br> If you think this is a mistake and the 
 "admin should have approved you, <br> Please contact Skyfallen Support after "
 "you make sure admin has approved you."
 msgstr "Hesabınız henüz onaylanmamış. <br> Bunun bir hata olduğunu ve yöneticinin sizi onaylamış "
-        "olması gerektiğinden eminseniz. <br> Yönetici ile iletişime geçerek Skyfallen'dan destek almasını sağlayın."
+        "olması gerektiğinden eminseniz, lütfen <br> Yönetici ile iletişime geçerek Skyfallen'dan destek almasını sağlayın."
 
 #: dash.php:189
 msgid "Log Out from<br> SkyMake 4?"
 msgstr "SkyMake 4'ten <br> Çıkış Yap"
-
-#: dash.php:193
-#msgid "Users"
-#msgstr "Kullanıcılar"
-
-#: dash.php:194
-#msgid "Classes"
-#msgstr "Sınıflar"
-
-#: dash.php:196
-#msgid "Upload"
-#msgstr "Kaşıya Yükle"
-
-#: dash.php:197
-#msgid "Create an Exam"
-#msgstr "Sınav Oluştur"
-
-#: dash.php:198
-#msgid "Courses and Lesson Contents"
-#msgstr "Kurslar"

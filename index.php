@@ -9,6 +9,28 @@
 // Initialize the session
 session_name('SkyMakeSessionStorage');
 session_start();
+if (isset($_GET["lang"])) {
+    $locale = $_GET["lang"].".UTF-8";
+    $_SESSION["locale"] = $locale;
+}
+else if (isset($_SESSION["locale"])) {
+    $locale  = $_SESSION["locale"];
+}
+else {
+    $locale = "en_US";
+    $_SESSION["locale"] = $locale;
+}
+
+$txtd = "skymake";
+textdomain($txtd);
+bindtextdomain($txtd,"locale");
+bind_textdomain_codeset($txtd,"UTF-8");
+
+putenv("LANG=".$_SESSION["locale"]);
+putenv("LANGUAGE=".$_SESSION["locale"]);
+
+$results = setlocale(LC_ALL,$_SESSION["locale"]);
+
 include_once "SkyMakeDatabaseConnector/SkyMakeDBconfig.php";
 include_once "SkyMakeConfiguration.php";
 include_once "SkyMakeFunctionSet/Operation-Requirements/MainFunctions.php";
@@ -147,7 +169,7 @@ if($optget == "signup"){
 
         // Validate username
         if (empty(trim($_POST["skymake-un"]))) {
-            $username_err = "Please enter a username.";
+            $username_err = _("Please enter a username.");
         } else {
             // Prepare a select statement
             $sql = "SELECT id FROM skymake_users WHERE username = ?";
@@ -165,12 +187,12 @@ if($optget == "signup"){
                     mysqli_stmt_store_result($stmt);
 
                     if (mysqli_stmt_num_rows($stmt) == 1) {
-                        $username_err = "This username is already taken.";
+                        $username_err = _("This username is already taken.");
                     } else {
                         $username = trim($_POST["skymake-un"]);
                     }
                 } else {
-                    die("Oops! Something went wrong. Please try again later.");
+                    die(_("Oops! Something went wrong. Please try again later."));
                 }
 
                 // Close statement
@@ -180,20 +202,20 @@ if($optget == "signup"){
 
         // Validate password
         if (empty(trim($_POST["skymake-pw"]))) {
-            $password_err = "Please enter a password.";
+            $password_err = _("Please enter a password.");
         } elseif (strlen(trim($_POST["skymake-pw"])) < 6) {
-            $password_err = "Password must have atleast 6 characters.";
+            $password_err = _("Password must have atleast 6 characters.");
         } else {
             $password = trim($_POST["skymake-pw"]);
         }
 
         // Validate confirm password
         if (empty(trim($_POST["skymake-pwconfirm"]))) {
-            $confirm_password_err = "Please confirm password.";
+            $confirm_password_err = _("Please confirm password.");
         } else {
             $confirm_password = trim($_POST["skymake-pwconfirm"]);
             if (empty($password_err) && ($password != $confirm_password)) {
-                $confirm_password_err = "Password did not match.";
+                $confirm_password_err = _("Password did not match.");
             }
         }
 
@@ -236,9 +258,9 @@ $bg = rand(0,2);
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <title>Skyfallen:SkyMake <?php if($optget == "signin"){
-            echo "Sign in";
+            echo _("Sign in");
         } else {
-            echo "Sign up";
+            echo _("Sign up");
         } ?></title>
     <style type="text/css">
         <?php
