@@ -268,6 +268,7 @@ $bg = rand(0,2);
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="/nps/widgets/assets/fonts/font-awesome.min.css">
     <title>Skyfallen:SkyMake <?php if($optget == "signin"){
             echo _("Sign in");
         } else {
@@ -410,6 +411,11 @@ $bg = rand(0,2);
 <body>
 <div class="top-bar">
     <a href="https://theskyfallen.company"><img src="SkyMakeVersionAssets/logo/SkyfallenLogoRB.png" height=30 class="sflogo1"></a>
+    <?php if($_SESSION["dm"] == "off") { ?>
+        <a class="nav-link" href="?dm=on" style="margin-right: 20px;right:0; float:right;"><div class="fa fa-moon-o"></div></a>
+    <?php } else { ?>
+        <a class="nav-link" href="?dm=off" style="margin-right: 20px;right:0; float:right;"><div class="fa fa-sun-o"></div></a>
+    <?php } ?>
     <select class="custom-select nav-link" style="height:30px; font-size: xx-small; margin-top: 5px; margin-right: 20px;right:0; float:right; background-color: <?php if($_SESSION["dm"] == "on") { echo "black"; } else { echo "white"; } ?>; width: 100px;" onchange="this.options[this.selectedIndex].value && (window.location = '?lang='.concat(this.options[this.selectedIndex].value));">
         <?php if($_SESSION["locale"] == "tr_TR.UTF-8"){ ?>
             <option value="tr_TR">Türkçe (Türkiye)</option>
