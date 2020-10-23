@@ -31,6 +31,18 @@ putenv("LANG=".$_SESSION["locale"]);
 putenv("LANGUAGE=".$_SESSION["locale"]);
 
 $results = setlocale(LC_ALL,$_SESSION["locale"]);
+
+if (isset($_GET["dm"])) {
+    $dm = $_GET["dm"];
+    $_SESSION["dm"] = $dm;
+}
+else if (isset($_SESSION["dm"])) {
+    $dm  = $_SESSION["dm"];
+}
+else {
+    $dm = "no";
+    $_SESSION["dm"] = $dm;
+}
 include_once "SkyMakeConfiguration.php";
 include_once "SkyMakeFunctionSet/Operation-Requirements/MainFunctions.php";
 include_once "SkyMakeDatabaseConnector/SkyMakeDBconfig.php";
@@ -66,7 +78,7 @@ if($user_role == "student") {
         $n = getassignedlessonquery($linktwo, $cenroller);
         $lessonname = getassignedlessons($link)[$n];
         if (!($lessonname == "n")) {
-            echo("<div class='text-center'><h1>Lesson Details | " . $lessonname . "</h1></div>");
+            echo("<div class='text-center'><h1>"._("Lesson Details")." | " . $lessonname . "</h1></div>");
             echo(overview(getassignedlessons($link)[$n], getassignedteachers($link)[$n], getassignedtimes($link)[$n], getassignedtopics($link)[$n], getassignedunits($link)[$n], getassignedbgurls($link)[$n], getassignedids($link)[$n], getlessoncontents($link, $cenroller)));
         } else {
             echo("<div class='text-center'><h1>"._("This lesson does not exist. Please access your course by dashbboard.")."</h1></div>");
@@ -1146,7 +1158,7 @@ if($requestsuccess == false){
     include "nps/notfound.html";
 }
 ?>
-<div class="footer" style="text-align: center; margin-top: 50px; border: 2px solid lightgray; height: 40px;">
+<div class="footer" style="<?php if($dm == "off"){ echo "text-align: center; margin-top: 50px; border: 2px solid lightgray; height: 40px;"; } else { echo "text-align: center; margin-top: 50px; border: 2px solid black; height: 40px; color:white;"; }?>" >
     <p style="margin-top: 6px;">SkyMake 4 by Skyfallen. All Rights Reseved &copy; 2016-2020 The Skyfallen Company.<?php echo _("Build Number:").THIS_VERSION; ?></p>
 </div>
 <script src="nps/widgets/assets/js/jquery.min.js"></script>

@@ -2,6 +2,39 @@
 require_once "config.php";
 include_once "../nps/widgets/dash.php";
 session_start();
+if (isset($_GET["lang"])) {
+    $locale = $_GET["lang"].".UTF-8";
+    $_SESSION["locale"] = $locale;
+}
+else if (isset($_SESSION["locale"])) {
+    $locale  = $_SESSION["locale"];
+}
+else {
+    $locale = "en_US";
+    $_SESSION["locale"] = $locale;
+}
+
+$txtd = "skymake";
+textdomain($txtd);
+bindtextdomain($txtd,"locale");
+bind_textdomain_codeset($txtd,"UTF-8");
+
+putenv("LANG=".$_SESSION["locale"]);
+putenv("LANGUAGE=".$_SESSION["locale"]);
+
+$results = setlocale(LC_ALL,$_SESSION["locale"]);
+if (isset($_GET["dm"])) {
+    $dm = $_GET["dm"];
+    $_SESSION["dm"] = $dm;
+}
+else if (isset($_SESSION["dm"])) {
+    $dm  = $_SESSION["dm"];
+}
+else {
+    $dm = "no";
+    $_SESSION["dm"] = $dm;
+}
+
 if(isset($_GET["examid"])){
     $examid = $_GET["examid"];
     $_SESSION["examid"] = $examid;

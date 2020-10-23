@@ -1,6 +1,38 @@
 <?php
 session_name("SkyMakeSessionStorage");
 session_start();
+if (isset($_GET["lang"])) {
+    $locale = $_GET["lang"].".UTF-8";
+    $_SESSION["locale"] = $locale;
+}
+else if (isset($_SESSION["locale"])) {
+    $locale  = $_SESSION["locale"];
+}
+else {
+    $locale = "en_US";
+    $_SESSION["locale"] = $locale;
+}
+
+$txtd = "skymake";
+textdomain($txtd);
+bindtextdomain($txtd,"locale");
+bind_textdomain_codeset($txtd,"UTF-8");
+
+putenv("LANG=".$_SESSION["locale"]);
+putenv("LANGUAGE=".$_SESSION["locale"]);
+
+$results = setlocale(LC_ALL,$_SESSION["locale"]);
+if (isset($_GET["dm"])) {
+    $dm = $_GET["dm"];
+    $_SESSION["dm"] = $dm;
+}
+else if (isset($_SESSION["dm"])) {
+    $dm  = $_SESSION["dm"];
+}
+else {
+    $dm = "no";
+    $_SESSION["dm"] = $dm;
+}
 require_once "config.php";
 include "../nps/widgets/dash.php";
 // Check if the user is logged in, if not then redirect him to login page
@@ -14,13 +46,13 @@ if(!isset($_GET["examid"])){
             text-align: center;
         }</style>
     <div style="width: 100%; text-align: center; align-content: center; margin-top: 50px;">
-        <h2>SkyMake Exam Results</h2>
+        <h2><?= _("SkyMake Exam Results") ?></h2>
     <form method="get" style="text-align: center; width: 500px; margin-right: auto; margin-left: auto; display: inline-block;">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">SkyMake Exam ID</span>
+                <span class="input-group-text" id="basic-addon1"><?= _("SkyMake Exam ID") ?></span>
             </div>
-            <select class="custom-select" id="inputGroupSelect04" aria-label="Select User" name="examid">
+            <select class="custom-select" id="inputGroupSelect04" aria-label="Exam ID" name="examid">
                 <?php
                 $sql = "SELECT * FROM skymake_examdata";
                 if($result = mysqli_query($link,$sql)){

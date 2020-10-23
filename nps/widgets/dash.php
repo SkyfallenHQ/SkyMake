@@ -44,6 +44,7 @@ return "<!--Begin single SkyMake Widget-->
 <!--End single SkyMake Widget-->";
 }
 function overview($lesson,$teacher,$time,$topic,$unit,$backgorundimage,$lessonid,$content){
+    if($_SESSION["dm"] == "off") {
     return "<!--End single SkyMake Widget-->
 <div class=\"container centered-container\">
   <div class=\"row\">
@@ -76,7 +77,43 @@ function overview($lesson,$teacher,$time,$topic,$unit,$backgorundimage,$lessonid
   </div>
 </div>
 <!--End single SkyMake Widget-->";
+} else {
+        return "<!--End single SkyMake Widget-->
+<div class=\"container centered-container\">
+  <div class=\"row\">
+	<div class=\"col\">
+	  <div class=\"lesson-card\" style=\" background: url('".$backgorundimage."') no-repeat;\">
+	  </div>
+	</div>
+	<div class=\"col\">
+	  <div class=\"lesson-card\" style='background-color: #63635f;'>
+	  <div style='margin: 35px;'>
+			<h1>".$lesson."</h1>
+			<h3>".$teacher."</h3>
+			<h4>".$time."</h4>
+	  </div>
+		<div class=\"bottom\">
+		  <div class=\"wrapper\">
+			<ul class=\"forecast\">
+			  <a href=\"javascript:;\"><span class=\"lnr lnr-chevron-up go-up\"></span></a>
+			  <li>
+				<span class=\"date\">".$topic."</span>
+			  </li>
+			</ul>
+		  </div>
+		</div>
+		<div style='margin: 35px;'>
+			    ".$content."
+        </div>
+	  </div>
+	</div>
+  </div>
+</div>
+<!--End single SkyMake Widget-->";
+    }
+
 }
+
 function doublewidget($lesson,$teacher,$time,$topic,$unit,$backgorundimage,$lessonid,$lesson1,$teacher1,$time1,$topic1,$unit1,$backgorundimage1,$lessonid1){
  return "<!--Begin double SkyMake Widgets-->
  <div class=\"container\">
@@ -167,9 +204,9 @@ function doublewidget($lesson,$teacher,$time,$topic,$unit,$backgorundimage,$less
     <title>Skyfallen:SkyMake - Platform</title>
     <link rel="stylesheet" href="/nps/widgets/assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/nps/widgets/assets/fonts/font-awesome.min.css">
-    <link rel="stylesheet" href="/nps/widgets/assets/css/Animated-Type-Heading.css">
-    <link rel="stylesheet" href="/nps/widgets/assets/css/styles.css">
-    <link rel="stylesheet" href="/nps/widgets/assets/css/Widgets.css">
+    <link rel="stylesheet" href="/nps/widgets/assets/css/<?php if($_SESSION["dm"] == "on"){ echo "dark/"; } ?>Animated-Type-Heading.css">
+    <link rel="stylesheet" href="/nps/widgets/assets/css/<?php if($_SESSION["dm"] == "on"){ echo "dark/"; } ?>styles.css">
+    <link rel="stylesheet" href="/nps/widgets/assets/css/<?php if($_SESSION["dm"] == "on"){ echo "dark/"; } ?>Widgets.css">
 </head>
 
 <body>
@@ -178,17 +215,27 @@ function doublewidget($lesson,$teacher,$time,$topic,$unit,$backgorundimage,$less
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="nav navbar-nav flex-grow-1 justify-content-between">
                   <?php if($_SESSION["user_role"] == "student" or $_SESSION["user_role"] == "teacher"){ ?>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="/"><img src="/SkyMakeVersionAssets/logo/SkyfallenLogoRB.png" height="20"></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="/"><img src="<?php if($_SESSION["dm"] == "off"){ echo "/SkyMakeVersionAssets/logo/SkyfallenLogoRB.png"; } else { echo "/SkyMakeVersionAssets/logo/SkyfallenLogoSmallWhiteOnly.png"; } ?>" height="20"></a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/dash"><?= _("Home") ?></a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/results"><?= _("Results") ?></a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/logout"><?= _("Log Out") ?></a></li>
+                      <?php if($_SESSION["dm"] == "off") { ?>
+                      <li class="nav-item" role="presentation"><a class="nav-link" href="?dm=on"><div class="fa fa-moon-o"></div></a></li>
+                          <?php } else { ?>
+                      <li class="nav-item" role="presentation"><a class="nav-link" href="?dm=off"><div class="fa fa-sun-o"></div></a></li>
+                    <?php } ?>
                     <?php } elseif($_SESSION["user_role"] == "unverified" or !isset($_SESSION["user_role"])){ ?>
-                      <li class="nav-item" role="presentation"><a class="nav-link" href="/"><img src="/SkyMakeVersionAssets/logo/SkyfallenLogoRB.png" height="20"></a></li>
+                      <li class="nav-item" role="presentation"><a class="nav-link" href="/"><img src="<?php if($_SESSION["dm"] == "off"){ echo "/SkyMakeVersionAssets/logo/SkyfallenLogoSmallWhiteOnly.png"; } else { echo "/SkyMakeVersionAssets/logo/SkyfallenLogoSmallWhiteOnly.png"; } ?>" height="20"></a></li>
                       <li class="nav-item" role="presentation"><a class="nav-link" href="#">SkyMake 4 <br><?php echo THIS_VERSION;?></a></li>
                       <li class="nav-item" role="presentation"><a class="nav-link" href="#"><?= _("Your account is not approved.<br> If you think this is a mistake and the admin should have approved you, <br> Please contact Skyfallen Support after you make sure admin has approved you.") ?></a></li>
                       <li class="nav-item" role="presentation"><a class="nav-link" href="/logout"><?= _("Log Out from<br> SkyMake 4?") ?></a></li>
+                      <?php if($_SESSION["dm"] == "off") { ?>
+                          <li class="nav-item" role="presentation"><a class="nav-link" href="?dm=on"><div class="fa fa-moon-o"></div></a></li>
+                      <?php } else { ?>
+                          <li class="nav-item" role="presentation"><a class="nav-link" href="?dm=off"><div class="fa fa-sun-o"></div></a></li>
+                      <?php } ?>
                       <?php }else{ ?>
-                      <li class="nav-item" role="presentation"><a class="nav-link" href="/"><img src="/SkyMakeVersionAssets/logo/SkyfallenLogoRB.png" height="20"></a></li>
+                      <li class="nav-item" role="presentation"><a class="nav-link" href="/"><img src="<?php if($_SESSION["dm"] == "off"){ echo "/SkyMakeVersionAssets/logo/SkyfallenLogoRB.png"; } else { echo "/SkyMakeVersionAssets/logo/SkyfallenLogoSmallWhiteOnly.png"; } ?>" height="20"></a></li>
                       <li class="nav-item" role="presentation"><a class="nav-link" href="/home"><?= _("Home") ?></a></li>
                       <li class="nav-item" role="presentation"><a class="nav-link" href="/users"><?= _("Users") ?></a></li>
                       <li class="nav-item" role="presentation"><a class="nav-link" href="/groups"><?= _("Classes") ?></a></li>
@@ -197,6 +244,11 @@ function doublewidget($lesson,$teacher,$time,$topic,$unit,$backgorundimage,$less
                       <li class="nav-item" role="presentation"><a class="nav-link" href="/examcreate"><?= _("Create an Exam") ?></a></li>
                       <li class="nav-item" role="presentation"><a class="nav-link" href="/courses"><?= _("Courses and Lesson Contents") ?></a></li>
                       <li class="nav-item" role="presentation"><a class="nav-link" href="/logout"><?= _("Log Out") ?></a></li>
+                      <?php if($_SESSION["dm"] == "off") { ?>
+                          <li class="nav-item" role="presentation"><a class="nav-link" href="?dm=on"><div class="fa fa-moon-o"></div></a></li>
+                      <?php } else { ?>
+                          <li class="nav-item" role="presentation"><a class="nav-link" href="?dm=off"><div class="fa fa-sun-o"></div></a></li>
+                      <?php } ?>
                     <?php } //<li class="nav-item" role="presentation"><a class="nav-link" href="/search"><i class="fa fa-search"></i></a></li>
                     ?>
                     <li class="nav-item" role="presentation"></li>

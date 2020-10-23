@@ -1,9 +1,31 @@
 <?php
 require_once "../../SkyMakeDatabaseConnector/SkyMakeDBconfig.php";
-include "../../nps/widgets/dash.php";
-$_SESSION["examid"] = $_GET["examid"];
 session_name("SkyMakeSessionStorage");
 session_start();
+if (isset($_GET["lang"])) {
+    $locale = $_GET["lang"].".UTF-8";
+    $_SESSION["locale"] = $locale;
+}
+else if (isset($_SESSION["locale"])) {
+    $locale  = $_SESSION["locale"];
+}
+else {
+    $locale = "en_US";
+    $_SESSION["locale"] = $locale;
+}
+
+$txtd = "skymake";
+textdomain($txtd);
+bindtextdomain($txtd,"locale");
+bind_textdomain_codeset($txtd,"UTF-8");
+
+putenv("LANG=".$_SESSION["locale"]);
+putenv("LANGUAGE=".$_SESSION["locale"]);
+
+$results = setlocale(LC_ALL,$_SESSION["locale"]);
+
+include "../../nps/widgets/dash.php";
+$_SESSION["examid"] = $_GET["examid"];
 // Check if the user is logged in, if not then redirect him to login page
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: /");
