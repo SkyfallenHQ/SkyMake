@@ -262,14 +262,4 @@ function doublewidget($lesson,$teacher,$time,$topic,$unit,$backgorundimage,$less
             padding:8px;
             text-align:center;
         }
-        .footercustom{
-            position: fixed;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            background-color: lightgray;
-            color: white;
-            text-align: center;
-            padding: 3px;
-        }
     </style>

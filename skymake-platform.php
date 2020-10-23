@@ -356,7 +356,7 @@ if($user_role == "admin") {
                </div>
            </div>
            <div class="col-sm-6">
-               <div class="card">
+               <div class="card" <?php if($_SESSION["dm"] == "on"){ echo "style='background-color: darkgrey;'"; } ?>>
                    <div class="card-body">
                        <h5 class="card-title"><?php echo(_("Upload")); ?></h5>
                        <p class="card-text"><?php echo(_("You can upload documents or files here")); ?></p>
@@ -367,7 +367,7 @@ if($user_role == "admin") {
        </div>
        <div class="row" style="padding-top: 30px; width: 70%; text-align: left; margin-right: auto; margin-left: auto;">
            <div class="col-sm-6">
-               <div class="card">
+               <div class="card" <?php if($_SESSION["dm"] == "on"){ echo "style='background-color: darkgrey;'"; } ?>>
                    <div class="card-body">
                        <h5 class="card-title"><?php echo(_("Create an Exam")); ?></h5>
                        <p class="card-text"><?php echo(_("You can create,schedule and edit online exams here")); ?></p>
@@ -376,7 +376,7 @@ if($user_role == "admin") {
                </div>
            </div>
            <div class="col-sm-6">
-               <div class="card">
+               <div class="card" <?php if($_SESSION["dm"] == "on"){ echo "style='background-color: darkgrey;'"; } ?>>
                    <div class="card-body">
                        <h5 class="card-title"><?php echo(_("Courses and Lesson Contents")); ?></h5>
                        <p class="card-text"><?php echo(_("You can create or assign courses,live lessons,uploads and online exams here")); ?></p>
@@ -387,7 +387,7 @@ if($user_role == "admin") {
        </div>
        <div class="row" style="padding-top: 30px; width: 70%; text-align: left; margin-right: auto; margin-left: auto;">
            <div class="col-sm-6">
-               <div class="card">
+               <div class="card" <?php if($_SESSION["dm"] == "on"){ echo "style='background-color: darkgrey;'"; } ?>>
                    <div class="card-body">
                        <h5 class="card-title"><?php echo(_("Get Support")); ?></h5>
                        <p class="card-text"><?php echo(_("Get Support for SkyMake from official Skyfallen Support")); ?></p>
@@ -396,7 +396,7 @@ if($user_role == "admin") {
                </div>
            </div>
            <div class="col-sm-6">
-               <div class="card">
+               <div class="card" <?php if($_SESSION["dm"] == "on"){ echo "style='background-color: darkgrey;'"; } ?>>
                    <div class="card-body">
                        <h5 class="card-title"><?php echo(_("About & Licence")); ?></h5>
                        <p class="card-text"><?php echo(_("You can get more info about this SkyMake install.")); ?></p>
