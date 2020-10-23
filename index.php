@@ -405,6 +405,15 @@ $bg = rand(0,2);
 <body>
 <div class="top-bar">
     <a href="https://theskyfallen.company"><img src="SkyMakeVersionAssets/logo/SkyfallenLogoRB.png" height=30 class="sflogo1"></a>
+    <select class="custom-select nav-link" style="height:30px; font-size: xx-small; margin-top: 5px; margin-right: 20px;right:0; float:right; background-color: <?php if($_SESSION["dm"] == "on") { echo "black"; } else { echo "white"; } ?>; width: 100px;" onchange="this.options[this.selectedIndex].value && (window.location = '?lang='.concat(this.options[this.selectedIndex].value));">
+        <?php if($_SESSION["locale"] == "tr_TR.UTF-8"){ ?>
+            <option value="tr_TR">Türkçe (Türkiye)</option>
+            <option value="en_US">English (US)</option>
+        <?php } else { ?>
+            <option value="en_US">English (US)</option>
+            <option value="tr_TR">Türkçe (Türkiye)</option>
+        <?php } ?>
+    </select>
 </div>
 <?php
 if($bg==2){
