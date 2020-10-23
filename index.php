@@ -414,7 +414,7 @@ if($bg==2){
 } ?>
 <div class="content">
     <h2>SkyMake - <?php if($optget == "signin"){
-            echo "Sign in";
+            echo _("Sign in");
         } elseif($isinstall == true) {
             echo _("Installation");
         } else {
