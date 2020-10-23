@@ -327,7 +327,7 @@ if($user_role == "admin") {
 
        <div class="row" style="padding-top: 30px; width: 70%; text-align: left; margin-right: auto; margin-left: auto;">
            <div class="col-sm-6">
-               <div class="card">
+               <div class="card" <?php if($_SESSION["dm"] == "on"){ echo "style='background-color: darkgrey;'"; } ?>>
                    <div class="card-body">
                        <h5 class="card-title"><?php echo(_("Users")); ?></h5>
                        <p class="card-text"><?php echo(_("You can change user roles here")); ?></p>
@@ -336,7 +336,7 @@ if($user_role == "admin") {
                </div>
            </div>
            <div class="col-sm-6">
-               <div class="card">
+               <div class="card" <?php if($_SESSION["dm"] == "on"){ echo "style='background-color: darkgrey;'"; } ?>>
                    <div class="card-body">
                        <h5 class="card-title"><?php echo(_("Classes")); ?></h5>
                        <p class="card-text"><?php echo(_("You can create,delete or edit groups here")); ?></p>
@@ -347,7 +347,7 @@ if($user_role == "admin") {
        </div>
        <div class="row" style="padding-top: 30px; width: 70%; text-align: left; margin-right: auto; margin-left: auto;">
            <div class="col-sm-6">
-               <div class="card">
+               <div class="card" <?php if($_SESSION["dm"] == "on"){ echo "style='background-color: darkgrey;'"; } ?>>
                    <div class="card-body">
                        <h5 class="card-title"><?php echo(_("Results")); ?></h5>
                        <p class="card-text"><?php echo(_("You can view your students' results here")); ?></p>
@@ -413,7 +413,7 @@ if($user_role == "admin") {
         $provider_info = \SkyfallenCodeLibrary\UpdatesConsoleConnector::getProviderData(UPDATES_PROVIDER_URL);
         ?>
         <div class="card-group">
-            <div class="card">
+            <div class="card" <?php if($_SESSION["dm"] == "on"){ echo "style='background-color: #4c4747;'"; } ?>>
                 <img class="card-img-top" src="https://theskyfallen.company/wp-content/uploads/2020/07/IMG_0183.png" alt="SFLogo">
                 <div class="card-body">
                     <h1 class="card-title">SkyMake 4 by Skyfallen</h1>
@@ -426,14 +426,14 @@ if($user_role == "admin") {
                     <h4><?= _("Updates for this SkyMake Installation are managed externally by") ?> <br> <a href="<?php echo $provider_info["url"] ?>"><?php echo $provider_info["name"]; ?></a></h4>
                     <h5><?php echo $provider_info["location"]; ?> | <?php echo $provider_info["ounit"]; ?></h5>
                     <h5><?php echo $provider_info["info"]; ?> | <?php echo $provider_info["type"]; ?></h5>
-                    <h3><?= _("For Support") ?>></h3>
+                    <h3><?= _("For Support") ?></h3>
                     <h5><?php echo $provider_info["contact"]; ?> | <?php echo $provider_info["contact_email"]; ?>
                         <br> <a href="<?php echo $provider_info["contact_url"]; ?>"><?php echo $provider_info["contact_url"]; ?></a></h5>
                     <h6 class="card-text">September 8, 2020 - Public Distribution Release</h6>
                     <h6 class="card-text"><small><?php echo THIS_VERSION; ?> - This install was registered with <?php echo VERSION_PROVIDER; ?></small></h6>
                 </div>
             </div>
-            <div class="card">
+            <div class="card" <?php if($_SESSION["dm"] == "on"){ echo "style='background-color: #4c4747;'"; } ?>>
                 <img class="card-img-top" src="/SkyMakeVersionAssets/logo/SkyMake4AboutPage.svg" alt="SM4-FOUR">
                 <div class="card-body">
                 </div>
@@ -449,7 +449,7 @@ if($user_role == "admin") {
         $new_version_data = \SkyfallenCodeLibrary\UpdatesConsoleConnector::getLatestVersionData(UPDATES_PROVIDER_APP_ID,UPDATE_SEED,UPDATES_PROVIDER_URL);
         ?>
         <div class="card-group">
-            <div class="card">
+            <div class="card" <?php if($_SESSION["dm"] == "on"){ echo "style='background-color: #4c4747;'"; } ?>>
                 <img class="card-img-top" src="https://theskyfallen.company/wp-content/uploads/2020/07/IMG_0183.png" alt="SFLogo">
                 <div class="card-body">
                     <h1 class="card-title">SkyMake 4 by Skyfallen</h1>
@@ -481,7 +481,7 @@ if($user_role == "admin") {
                     <h6 class="card-text"><small><?php echo THIS_VERSION; ?> - <?php echo _("This install was registered with ").VERSION_PROVIDER; ?></small></h6>
                 </div>
             </div>
-            <div class="card">
+            <div class="card" <?php if($_SESSION["dm"] == "on"){ echo "style='background-color: #4c4747;'"; } ?>>
                 <img class="card-img-top" src="/SkyMakeVersionAssets/logo/SkyMake4AboutPage.svg" alt="SM4-FOUR">
                 <div class="card-body">
                 </div>
