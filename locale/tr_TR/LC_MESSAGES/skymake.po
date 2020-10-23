@@ -570,3 +570,21 @@ msgstr "SkyMake Sınav Sonuçları"
 
 msgid "Lesson Details"
 msgstr "Kurs Detayları"
+
+msgid "Your account is not yet approved."
+msgstr "Hesabınız henüz onaylanmamış."
+
+msgid "Your account needs to be approved and assigned to a classroom before you can use it."
+msgstr "Hesabınızı kullanabilmeniz için bir yönetici tarafından onaylanıp bir sınıfa atanması gerekli."
+
+msgid "Not found."
+msgstr "Dosya ya da klasör bulunamadı."
+
+msgid "This file was not found."
+msgstr "Dosya ya da klasör bulunamadı."
+
+msgid "SkyMake Server Side Software"
+msgstr "SkyMake Sunucu Yazılımı"
+
+msgid "(TM) SkyMake developed by Skyfallen as an open source project and distributed under Skyfallen Licence - SkyMake can only be used with required attribution"
+msgstr "SkyMake Skyfallen tarafından açık kaynaklı olarak geliştirilmiş ve Skyfallen Lisansı altında dağıtılmaktadır. - SkyMake sadece gerekli referanslar bulunduğu sürece kullanılabilir."

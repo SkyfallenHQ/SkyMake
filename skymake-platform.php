@@ -65,7 +65,7 @@ if($user_role == "unverified" and $request=="logout"){
 
 if($user_role == "unverified"){
     include "nps/widgets/dash.php";
-    include "nps/errors/notapproved.html";
+    include "nps/notapproved.php";
     die();
 }
 if($user_role == "student") {
@@ -1155,7 +1155,7 @@ if($request == "examcreate" or $request == "examcreate/"){
 }
 }
 if($requestsuccess == false){
-    include "nps/notfound.html";
+    include "nps/notfound.php";
 }
 if($requestsuccess){
 ?>
