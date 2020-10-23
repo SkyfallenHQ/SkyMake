@@ -7,8 +7,8 @@ margin: 0;
   left: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);">
-<h1 style="text-align: center;">Your account is not yet approved.</h1>
-<h3 style="text-align: center;">Your account needs to be approved and assigned to a classroom before you can use it.</h3>
+<h1 style="text-align: center;"><?= _("Your account is not yet approved.")?></h1>
+<h3 style="text-align: center;"><?= _("Your account needs to be approved and assigned to a classroom before you can use it.") ?></h3>
 </div>
 </body>
 </html>
