@@ -30,7 +30,17 @@ putenv("LANG=".$_SESSION["locale"]);
 putenv("LANGUAGE=".$_SESSION["locale"]);
 
 $results = setlocale(LC_ALL,$_SESSION["locale"]);
-
+if (isset($_GET["dm"])) {
+    $dm = $_GET["dm"];
+    $_SESSION["dm"] = $dm;
+}
+else if (isset($_SESSION["dm"])) {
+    $dm  = $_SESSION["dm"];
+}
+else {
+    $dm = "no";
+    $_SESSION["dm"] = $dm;
+}
 include_once "SkyMakeDatabaseConnector/SkyMakeDBconfig.php";
 include_once "SkyMakeConfiguration.php";
 include_once "SkyMakeFunctionSet/Operation-Requirements/MainFunctions.php";
@@ -252,6 +262,7 @@ if($optget == "signup"){
 }
 $bg = rand(0,2);
 ?>
+<?php if($_SESSION["dm"] == "on"){ $clr = "#373535"; } else { $clr = "white"; } ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -266,7 +277,7 @@ $bg = rand(0,2);
         <?php
           if($bg == 0){
               echo "body{ font: 14px sans-serif; background :radial-gradient(#000 2px, transparent 3px); background-size : 20px 20px;}       .content {
-                background-color:rgba(255,255,255,.99);
+                background-color:".$clr.";
                 border-radius:.25em;
                 box-shadow:0 0 .25em rgba(0,0,0,.25);
                 box-sizing:border-box;
@@ -296,7 +307,7 @@ $bg = rand(0,2);
             background-position: 0% 50%;
         }
     }
-    .content{ margin-top:100px;background: White;padding:20px; border:2px solid Black; border-radius:30px 1px 30px 1px; margin-right:auto; margin-left: auto; width: 350px;}";
+    .content{ margin-top:100px;background: ".$clr.";padding:20px; border:2px solid Black; border-radius:30px 1px 30px 1px; margin-right:auto; margin-left: auto; width: 350px;}";
     }
     elseif($bg == 2){
     echo "html {
@@ -342,7 +353,7 @@ $bg = rand(0,2);
         }
       }
       .content {
-        background-color:rgba(255,255,255,.99);
+        background-color:".$clr.";
         border-radius:.25em;
         box-shadow:0 0 .25em rgba(0,0,0,.25);
         box-sizing:border-box;
@@ -362,7 +373,7 @@ $bg = rand(0,2);
             left: 0;
             bottom: 0;
             width: 100%;
-            background-color: white;
+            background-color: <?= $clr ?>;
             color: black;
             text-align: center;
         }
@@ -371,7 +382,7 @@ $bg = rand(0,2);
             left: 0;
             top: 0;
             width: 100%;
-            background-color: white;
+            background-color: <?= $clr ?>;
             color: black;
             height:40px;
         }
@@ -382,24 +393,18 @@ $bg = rand(0,2);
             margin-right:10px;
             text-align: left;
         }
-        .deducatedlogo1{
-            margin-top:1px;
-            margin-bottom:5px;
-            margin-left:9px;
-            margin-right:20px;
-            text-align:left;
-        }
-        .seperatortype1{
-            color:White;
-            font-size:25px;
-        }
-        .seperatortype1:hover{
-            color:White;
-        }
         @keyframes sweep {
             0%    {opacity: 0; margin-top: -100px;}
             100%  {opacity: 1; margin-top: 0px;}
         }
+        <?php if($_SESSION["dm"] == "on"){ ?>
+        h2 {
+            color: white;
+        }
+        label {
+            color: white;
+        }
+        <?php } ?>
     </style>
 </head>
 <body>
@@ -450,7 +455,7 @@ if($bg==2){
             <?php
         } echo $confirm_password_err; ?><br>
         <div class="form-group">
-            <input class="btn btn-outline-dark" style="margin-bottom: 20px;" type="submit" value="<?php if($optget == "signin"){
+            <input class="btn btn-dark" style="margin-bottom: 20px;" type="submit" value="<?php if($optget == "signin"){
                 echo _("Sign in");
             } else {
                 echo _("Sign up");
