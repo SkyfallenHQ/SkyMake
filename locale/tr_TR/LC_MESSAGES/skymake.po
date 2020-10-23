@@ -558,3 +558,15 @@ msgstr "Hesabınız henüz onaylanmamış. <br> Bunun bir hata olduğunu ve yön
 #: dash.php:189
 msgid "Log Out from<br> SkyMake 4?"
 msgstr "SkyMake 4'ten <br> Çıkış Yap"
+
+msgid "Submit"
+msgstr "Gönder"
+
+msgid "SkyMake Exam ID"
+msgstr "SkyMake Sınav Numarası"
+
+msgid "SkyMake Exam Results"
+msgstr "SkyMake Sınav Sonuçları"
+
+msgid "Lesson Details"
+msgstr "Kurs Detayları"
