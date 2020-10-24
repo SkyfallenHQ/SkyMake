@@ -568,7 +568,6 @@ if ($res = mysqli_query($link, $sql)) {
                     if(mysqli_num_rows($result2) == 1){
                         while($rowrole = mysqli_fetch_array($result2)){
                             $rolefromdb = $rowrole['role'];
-                            mysqli_free_result($result2);
                         }
                     }
 
