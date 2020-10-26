@@ -603,3 +603,6 @@ msgstr "Şifre en az altı karakterden oluşmalıdır."
 
 msgid "Password did not match."
 msgstr "Şifreler uyuşmadı."
+
+msgid "Join with app"
+msgstr "Masaüstü Uygulaması ile Katıl"
