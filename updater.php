@@ -30,7 +30,6 @@ function rrmdir($dir,$rmitself = true) {
 if(isset($_SESSION["UPDATE_AUTHORIZED"]) and $_SESSION["UPDATE_AUTHORIZED"] == "TRUE") {
     include_once "SkyfallenCodeLib/UpdatesConsoleConnector.php";
     rrmdir(getcwd(),false);
-    ob_start();
     ?>
     <div class="sys-upgrade-wrap">
         <div class="sys-upgrade-animation">
@@ -131,7 +130,6 @@ if(isset($_SESSION["UPDATE_AUTHORIZED"]) and $_SESSION["UPDATE_AUTHORIZED"] == "
                 include_once "onupdate.php";
                 unlink("onupdate.php");
             }
-            echo "Updated Successfully.  Redirecting...";
             ?>
             <script>
                 window.setTimeout(function(){
@@ -142,14 +140,11 @@ if(isset($_SESSION["UPDATE_AUTHORIZED"]) and $_SESSION["UPDATE_AUTHORIZED"] == "
             <?php
             unlink($ret["path"]);
             $_SESSION["UPDATE_AUTHORIZED"] = false;
-            ob_end_flush();
         }else
         {
-            ob_end_flush();
-            echo "Failed to unpack update.";
+            echo "<p style='text-align: center;'>Failed to unpack update.</p>";
         }
     }else {
-        ob_end_flush();
-        echo "Failed to download update from the server.";
+        echo "<p style='text-align: center;'>Failed to download update from the server.</p>";
     }
     }
