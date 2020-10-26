@@ -429,7 +429,7 @@ if($user_role == "admin") {
                     <h3><?= _("For Support") ?></h3>
                     <h5><?php echo $provider_info["contact"]; ?> | <?php echo $provider_info["contact_email"]; ?>
                         <br> <a href="<?php echo $provider_info["contact_url"]; ?>"><?php echo $provider_info["contact_url"]; ?></a></h5>
-                    <h6 class="card-text">September 8, 2020 - Public Distribution Release</h6>
+                    <h6 class="card-text">October 26, 2020 - Public Distribution Release</h6>
                     <h6 class="card-text"><small><?php echo THIS_VERSION; ?> - This install was registered with <?php echo VERSION_PROVIDER; ?></small></h6>
                 </div>
             </div>
