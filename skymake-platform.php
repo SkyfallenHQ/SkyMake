@@ -92,7 +92,29 @@ if($user_role == "student") {
         $cenroller = str_replace("/", "", $cenroller);
         $lctoken = getLiveClassToken($link, $cenroller, $_SESSION["classid"]);
         if (isContentValid($link, $cenroller) == true and !($lctoken == false)) {
-            echo("<div class='text-center'><h1>"._("Live Class")." | SkyfallenLiveConnect ID:" . $cenroller . "</h1><a href='smdesktop://".SFLC_HOST."/SkyMake4/".$lctoken[0]."' class='btn btn-outline-dark' style='display: inline; margin-bottom: 20px;'>"._("Join with app")."</a></div>");
+            echo("<div class='text-center'><h1 style='display: inline;'>"._("Live Class")." | SkyfallenLiveConnect ID:" . $cenroller . "</h1></div>");
+            ?>
+            <div class="row" style="padding-top: 30px; width: 70%; text-align: left; margin-right: auto; margin-left: auto;">
+                <div class="col-sm-6">
+                    <div class="card" id="boxonetohide" <?php if($_SESSION["dm"] == "on"){ echo "style='background-color: darkgrey;'"; } ?>>
+                        <div class="card-body">
+                            <h5 class="card-title"><?php echo(_("Join from your browser")); ?></h5>
+                            <p class="card-text"><?php echo(_("You don't need any apps of software downloaded.")); ?></p>
+                            <button onclick="loadWebMeeting()" class="btn btn-outline-dark"><?php echo(_("Join from browser")); ?></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card" id="boxtwotohide" <?php if($_SESSION["dm"] == "on"){ echo "style='background-color: darkgrey;'"; } ?>>
+                        <div class="card-body">
+                            <h5 class="card-title"><?php echo(_("Join with app")); ?></h5>
+                            <p class="card-text"><?php echo(_("Join using SkyMake Desktop")); ?></p>
+                            <a href="<?php echo 'smdesktop://'.SFLC_HOST.'/SkyMake4/'.$lctoken[0]; ?>" class="btn btn-outline-dark"><?php echo(_("Join via app")); ?></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php
             echo("<script src='https://".SFLC_HOST."/external_api.js'></script>
         <script>
         const domain = '".SFLC_HOST."';
@@ -102,7 +124,12 @@ if($user_role == "student") {
             height: self.innerHeight,
             parentNode: undefined
         };
-        const api = new JitsiMeetExternalAPI(domain, options);
+        function loadWebMeeting(){
+            document.getElementById(\"boxonetohide\").style.display = 'none';
+            document.getElementById(\"boxtwotohide\").style.display = 'none';
+            document.getElementById(\"mainfooter\").style.display = 'none';
+            const api = new JitsiMeetExternalAPI(domain, options);
+        }
         </script>");
         } else {
             if (!isContentValid($link, $cenroller)) {
@@ -195,7 +222,29 @@ if($user_role == "teacher") {
         $cenroller = str_replace("/", "", $cenroller);
         $lctoken = getLiveClassToken($link, $cenroller, $_SESSION["classid"],false);
         if (isContentValid($link, $cenroller) == true and !($lctoken == false)) {
-            echo("<div class='text-center'><h1>"._("Live Class")." | SkyfallenLiveConnect ID:" . $cenroller . "</h1><a href='smdesktop://".SFLC_HOST."/SkyMake4/".$lctoken[0]."' class='btn btn-outline-dark' style='display: inline; margin-bottom: 20px;'>"._("Join with app")."</a></div>");
+            echo("<div class='text-center'><h1 style='display: inline;'>"._("Live Class")." | SkyfallenLiveConnect ID:" . $cenroller . "</h1></div>");
+            ?>
+            <div class="row" style="padding-top: 30px; width: 70%; text-align: left; margin-right: auto; margin-left: auto;">
+                <div class="col-sm-6">
+                    <div class="card" id="boxonetohide" <?php if($_SESSION["dm"] == "on"){ echo "style='background-color: darkgrey;'"; } ?>>
+                        <div class="card-body">
+                            <h5 class="card-title"><?php echo(_("Join from your browser")); ?></h5>
+                            <p class="card-text"><?php echo(_("You don't need any apps of software downloaded.")); ?></p>
+                            <button onclick="loadWebMeeting()" class="btn btn-outline-dark"><?php echo(_("Join from browser")); ?></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card" id="boxtwotohide" <?php if($_SESSION["dm"] == "on"){ echo "style='background-color: darkgrey;'"; } ?>>
+                        <div class="card-body">
+                            <h5 class="card-title"><?php echo(_("Join with app")); ?></h5>
+                            <p class="card-text"><?php echo(_("Join using SkyMake Desktop")); ?></p>
+                            <a href="<?php echo 'smdesktop://'.SFLC_HOST.'/SkyMake4/'.$lctoken[0]; ?>" class="btn btn-outline-dark"><?php echo(_("Join via app")); ?></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php
             echo("<script src='https://".SFLC_HOST."/external_api.js'></script>
         <script>
         const domain = '".SFLC_HOST."';
@@ -205,7 +254,12 @@ if($user_role == "teacher") {
             height: self.innerHeight,
             parentNode: undefined
         };
-        const api = new JitsiMeetExternalAPI(domain, options);
+        function loadWebMeeting(){
+            document.getElementById(\"boxonetohide\").style.display = 'none';
+            document.getElementById(\"boxtwotohide\").style.display = 'none';
+            document.getElementById(\"mainfooter\").style.display = 'none';
+            const api = new JitsiMeetExternalAPI(domain, options);
+        }
         </script>");
         } else {
             if (!isContentValid($link, $cenroller)) {
@@ -1158,7 +1212,7 @@ if($requestsuccess == false){
 }
 if($requestsuccess){
 ?>
-<div class="footer" style="<?php if($dm == "off"){ echo "text-align: center; margin-top: 50px; border: 2px solid lightgray; height: 40px;"; } else { echo "text-align: center; margin-top: 50px; border: 2px solid black; height: 40px; color:white;"; }?>" >
+<div class="footer" id="mainfooter" style="<?php if($dm == "off"){ echo "text-align: center; margin-top: 50px; border: 2px solid lightgray; height: 40px;"; } else { echo "text-align: center; margin-top: 50px; border: 2px solid black; height: 40px; color:white;"; }?>" >
     <p style="margin-top: 6px;">SkyMake 4 by Skyfallen. All Rights Reseved &copy; 2016-2020 The Skyfallen Company.<?php echo _("Build Number:").THIS_VERSION; ?></p>
 </div>
 <?php } ?>
