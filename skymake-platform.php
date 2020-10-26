@@ -195,7 +195,7 @@ if($user_role == "teacher") {
         $cenroller = str_replace("/", "", $cenroller);
         $lctoken = getLiveClassToken($link, $cenroller, $_SESSION["classid"],false);
         if (isContentValid($link, $cenroller) == true and !($lctoken == false)) {
-            echo("<div class='text-center'><h1>"._("Live Class")." | SkyfallenLiveConnect ID:" . $cenroller . "</h1></div>");
+            echo("<div class='text-center'><h1>"._("Live Class")." | SkyfallenLiveConnect ID:" . $cenroller . "</h1><a href='smdesktop://".SFLC_HOST."/SkyMake4/".$lctoken[0]."' class='btn btn-outline-light' style='display: inline;'>"._("Join with app")."</a></div>");
             echo("<script src='https://".SFLC_HOST."/external_api.js'></script>
         <script>
         const domain = '".SFLC_HOST."';
