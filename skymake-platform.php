@@ -337,7 +337,7 @@ if($user_role == "teacher") {
         }
         $requestsuccess = true;
         include "nps/widgets/dash.php";
-        echo("<div class=\"caption v-middle text-center\"><h1 class=\"cd-headline clip\"><span class=\"blc\">Welcome to the new dashboard.</span><br><span class=\"cd-words-wrapper\"><b class=\"is-visible\">Here are your courses.</b><b>Here are your grades.</b><b>Here are your online exams.</b></span></h1> </div>");
+        //echo("<div class=\"caption v-middle text-center\"><h1 class=\"cd-headline clip\"><span class=\"blc\">Welcome to the new dashboard.</span><br><span class=\"cd-words-wrapper\"><b class=\"is-visible\">Here are your courses.</b><b>Here are your grades.</b><b>Here are your online exams.</b></span></h1> </div>");
         $lessoncount = count(getassignedlessonsteacher($link));
         if (getassignedlessonsteacher($link)[0] != "n") {
             if (is_odd($lessoncount)) {
