@@ -109,7 +109,7 @@ if($user_role == "student") {
                         <div class="card-body">
                             <h5 class="card-title"><?php echo(_("Join with app")); ?></h5>
                             <p class="card-text"><?php echo(_("Join using SkyMake Desktop")); ?></p>
-                            <a href="<?php echo 'smdesktop://'.SFLC_HOST.'/SkyMake4/'.$lctoken[0]; ?>" class="btn btn-outline-dark"><?php echo(_("Join via app")); ?></a>
+                            <a href="<?php echo 'smdesktop://'.SFLC_HOST.'/'.$lctoken[0]; ?>" class="btn btn-outline-dark"><?php echo(_("Join via app")); ?></a>
                         </div>
                     </div>
                 </div>
@@ -119,7 +119,7 @@ if($user_role == "student") {
         <script>
         const domain = '".SFLC_HOST."';
         const options = {
-            roomName: 'SkyMake4/" . $lctoken[0] . "',
+            roomName: '" . $lctoken[0] . "',
             width: self.innerWidth,
             height: self.innerHeight,
             parentNode: undefined
@@ -239,7 +239,7 @@ if($user_role == "teacher") {
                         <div class="card-body">
                             <h5 class="card-title"><?php echo(_("Join with app")); ?></h5>
                             <p class="card-text"><?php echo(_("Join using SkyMake Desktop")); ?></p>
-                            <a href="<?php echo 'smdesktop://'.SFLC_HOST.'/SkyMake4/'.$lctoken[0]; ?>" class="btn btn-outline-dark"><?php echo(_("Join via app")); ?></a>
+                            <a href="<?php echo 'smdesktop://'.SFLC_HOST.'/'.$lctoken[0]; ?>" class="btn btn-outline-dark"><?php echo(_("Join via app")); ?></a>
                         </div>
                     </div>
                 </div>
@@ -249,7 +249,7 @@ if($user_role == "teacher") {
         <script>
         const domain = '".SFLC_HOST."';
         const options = {
-            roomName: 'SkyMake4/" . $lctoken[0] . "',
+            roomName: '" . $lctoken[0] . "',
             width: self.innerWidth,
             height: self.innerHeight,
             parentNode: undefined
