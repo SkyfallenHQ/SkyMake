@@ -616,9 +616,6 @@ msgstr "Herhangi bir yazılım yüklemenize gerek yok."
 msgid "Join from browser"
 msgstr "Tarayıcıdan katıl"
 
-msgid "Join with app"
-msgstr "Uygulama ile katıl"
-
 msgid "Join using SkyMake Desktop"
 msgstr "SkyMake Masaüstü uygulaması ile bağlanın."
 
