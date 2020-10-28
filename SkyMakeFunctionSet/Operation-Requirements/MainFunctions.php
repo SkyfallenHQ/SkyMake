@@ -227,12 +227,12 @@ function getlessoncontents($link,$lessonid){
     if($result = mysqli_query($link, $sql)){
         if(mysqli_num_rows($result) > 0){
             while($row = mysqli_fetch_array($result)){
-                if($row['content-type'] == "DOCUMENT") {
+                if($row['content-type'] == "Document") {
                     $ret = $ret . "<a href='/" . $row['content-link'] . "'><p class='lesson-content'>" . $row['content-type'] . "  (";
-                    $ret = $ret . $row['content-id'] . ")</p</a><br>";
+                    $ret = $ret . $row['content-id'] . ")</p></a><br>";
                 } else {
                     $ret = $ret . "<a href='" . $row['content-link'] . "'><p class='lesson-content'>" . $row['content-type'] . "  (";
-                    $ret = $ret . $row['content-id'] . ")</p</a><br>";
+                    $ret = $ret . $row['content-id'] . ")</p></a><br>";
                 }
             }
             // Free result set
