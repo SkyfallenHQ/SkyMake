@@ -54,6 +54,7 @@ if(!$_SESSION["loggedin"]){
 }
 //get user role
 $user_role = SMUser::getRole($link,$_SESSION["username"]);
+$_SESSION["classid"] = SMUser::getStudentClassID($link,$_SESSION["username"]);
 $_SESSION["user_role"] = $user_role;
 
 if($user_role == "unverified" and $request=="logout"){
