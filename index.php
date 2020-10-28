@@ -142,6 +142,7 @@ if($optget != "signup") {
                                     $_SESSION["username"] = $username;
                                     //get assigned class
                                     $_SESSION["classid"] = SMUser::getStudentClassID($link,$_SESSION["username"]);
+                                    $_SESSION["dm"] = "off";
                                     // Redirect user to welcome page
                                     // Logged in successfully.
                                     header("Location: /home");
