@@ -129,6 +129,11 @@ if($user_role == "student") {
             document.getElementById(\"boxtwotohide\").style.display = 'none';
             document.getElementById(\"mainfooter\").style.display = 'none';
             const api = new JitsiMeetExternalAPI(domain, options);
+            api.executeCommands({
+            email: '".$_SESSION["username"]."@ne.sm.thesf.me',
+            displayName: '".$_SESSION["username"]."'
+            });
+            
         }
         </script>");
         } else {
@@ -259,6 +264,10 @@ if($user_role == "teacher") {
             document.getElementById(\"boxtwotohide\").style.display = 'none';
             document.getElementById(\"mainfooter\").style.display = 'none';
             const api = new JitsiMeetExternalAPI(domain, options);
+            api.executeCommands({
+            email: '".$_SESSION["username"]."@ne.sm.thesf.me',
+            displayName: '".$_SESSION["username"]."'
+            });
         }
         </script>");
         } else {
