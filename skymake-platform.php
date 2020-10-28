@@ -507,7 +507,7 @@ if($user_role == "admin") {
                 <img class="card-img-top" src="https://theskyfallen.company/wp-content/uploads/2020/07/IMG_0183.png" alt="SFLogo">
                 <div class="card-body">
                     <h1 class="card-title">SkyMake 4 by Skyfallen</h1>
-                    <h6 class="card-title">Version 4.2 Aurora Borealis - Build 2</h6>
+                    <h6 class="card-title">Version 4.3 Aegeaeus</h6>
                     <?php
                     if (THIS_VERSION != $new_vname){
                         if(isset($_GET["install"])) {
