@@ -67,6 +67,7 @@ if($user_role == "unverified" and $request=="logout"){
 
 if($user_role == "unverified"){
     include "nps/widgets/dash.php";
+    echo "<meta http-equiv='refresh' content='15' />";
     include "nps/notapproved.php";
     die();
 }
@@ -142,7 +143,7 @@ if($user_role == "student") {
             if (!isContentValid($link, $cenroller)) {
                 echo("<div class='text-center'><h1>"._("This lesson does not exist. Please access your course by your own dashboard.")."</h1></div>");
             } else {
-                echo("<div class='text-center'><h1>"._("This meeting has not started.")."</h1></div>");
+                echo("<div class='text-center'><h1>"._("This meeting has not started.")."</h1></div><meta http-equiv='refresh' content='5' />");
             }
         }
     }
