@@ -36,9 +36,9 @@ else {
 require_once "config.php";
 include "../nps/widgets/dash.php";
 // Check if the user is logged in, if not then redirect him to login page
-if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-    header("location: /");
-    exit;
+if(!$_SESSION["loggedin"]){
+    $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+    header("Location: /?act=signin&redirect_to=".urlencode($actual_link));
 }
 if(!isset($_GET["examid"])){
     ?>

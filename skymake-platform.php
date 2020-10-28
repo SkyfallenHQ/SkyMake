@@ -49,7 +49,8 @@ include_once "SkyMakeDatabaseConnector/SkyMakeDBconfig.php";
 include_once "classes/user.php";
 include_once "SkyMakeDatabaseConnector/db-class.php";
 if(!$_SESSION["loggedin"]){
-    header("Location: /?act=signin");
+    $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+    header("Location: /?act=signin&redirect_to=".urlencode($actual_link));
 }
 //get user role
 $user_role = SMUser::getRole($link,$_SESSION["username"]);

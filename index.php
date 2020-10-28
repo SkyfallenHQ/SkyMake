@@ -28,7 +28,9 @@ bind_textdomain_codeset($txtd,"UTF-8");
 
 putenv("LANG=".$_SESSION["locale"]);
 putenv("LANGUAGE=".$_SESSION["locale"]);
-
+if(isset($_GET["redirect_to"])) {
+   $_SESSION["redirect_to"] = $_GET["redirect_to"];
+}
 $results = setlocale(LC_ALL,$_SESSION["locale"]);
 if (isset($_GET["dm"])) {
     $dm = $_GET["dm"];
@@ -73,12 +75,16 @@ if(file_exists("csc.php") and !file_exists(".htaccess")){
         unlink("ApacheHtaccess");
     }
 }
+if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
+    if(isset($_GET["redirect_to"])) {
+        header("Location: " . $_GET["redirect_to"]);
+    } else {
+        header("Location: /home");
+    }
+}
 // check if this is sign in
 if($optget != "signup") {
 // Check if the user is already logged in, if yes then redirect him to user page
-    if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
-        header("Location: /home");
-    }
     $confirm_password_err = "";
 // Define variables and initialize with empty values
     $username = $password = "";
@@ -145,7 +151,13 @@ if($optget != "signup") {
                                     $_SESSION["dm"] = "off";
                                     // Redirect user to welcome page
                                     // Logged in successfully.
-                                    header("Location: /home");
+                                    if(isset($_SESSION["redirect_to"])) {
+                                        $newlink = $_SESSION["redirect_to"];
+                                        unset($_SESSION["redirect_to"]);
+                                        header("Location: " . $newlink);
+                                    } else {
+                                        header("Location: /home");
+                                    }
                                 } else {
                                     // Display an error message if password is not valid
                                     $password_err = "The password you entered was not valid.";
@@ -441,6 +453,9 @@ if($bg==2){
         } else {
             echo _("Sign Up");
         } ?></h2>
+    <?php
+    //if(isset($_SESSION["redirect_to"])){ echo "<p>You will be redirected to: ".$_SESSION["redirect_to"]."</p>"; }
+    ?>
     <form method="post">
         <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
             <label><?= _("Username") ?></label>
