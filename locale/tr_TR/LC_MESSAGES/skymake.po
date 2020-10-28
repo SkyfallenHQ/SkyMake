@@ -621,3 +621,6 @@ msgstr "SkyMake Masaüstü uygulaması ile bağlanın."
 
 msgid "Join via app"
 msgstr "Uygulama ile katıl"
+
+msgid "Assigned to me"
+msgstr "Bana atanmış"

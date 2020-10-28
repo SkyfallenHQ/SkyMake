@@ -217,7 +217,7 @@ if($user_role == "teacher") {
         $lessonname = getassignedlessonsteacher($link)[$n];
         if (!($lessonname == "n")) {
             echo("<div class='text-center'><h1>"._("Course Details")." | " . $lessonname . "</h1></div>");
-            echo(overview(getassignedlessonsteacher($link)[$n], "Assigned to me", getassignedtimesteacher($link)[$n], getassignedtopicsteacher($link)[$n], getassignedunitsteacher($link)[$n], getassignedbgurlsteacher($link)[$n], getassignedidsteacher($link)[$n], getlessoncontents($link, $cenroller)));
+            echo(overview(getassignedlessonsteacher($link)[$n], _("Assigned to me"), getassignedtimesteacher($link)[$n], getassignedtopicsteacher($link)[$n], getassignedunitsteacher($link)[$n], getassignedbgurlsteacher($link)[$n], getassignedidsteacher($link)[$n], getlessoncontents($link, $cenroller)));
         } else {
             echo("<div class='text-center'><h1>"._("This lesson does not exist. Please access your course by your own dashboard.")."</h1></div>");
         }
