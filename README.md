@@ -37,7 +37,7 @@ https://opensource.theskyfallen.com/licence
 [The Skyfallen Website](https://www.theskyfallen.com)
 
 [Skyfallen Open Source](https://opensource.theskyfallen.com)
-# Demo
+# Demo (Link broken, will be updated soon.)
 [Running Instance (Demo)](https://application-testing-platform.apps.deducated.com)  
 Username -- Password   
 student - password  
