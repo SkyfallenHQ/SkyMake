@@ -378,7 +378,7 @@ if($user_role == "admin") {
     if ($request == "logout" or $request == "logout/") {
         $requestsuccess = true;
         include "nps/widgets/dash.php";
-        echo("<h1>"._("Logging you out...")."</h1>");
+        echo("<h1 style='text-align: center;'>"._("Logging you out...")."</h1>");
         session_destroy();
         ?>
         <script>
@@ -390,6 +390,7 @@ if($user_role == "admin") {
         </script>
         <meta http-equiv="refresh" content="5; URL=/">
         <?php
+        die();
     }
    if($request == "upload" or $request == "upload/"){
        $requestsuccess = true;
