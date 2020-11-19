@@ -380,7 +380,15 @@ if($user_role == "admin") {
         include "nps/widgets/dash.php";
         echo("<h1>"._("Logging you out...")."</h1>");
         session_destroy();
-        header("Location: /");
+        ?>
+        <script>
+        window.setTimeout(function(){
+
+        window.location.href = "/";
+
+        }, 5000);
+        </script>
+        <?php
     }
    if($request == "upload" or $request == "upload/"){
        $requestsuccess = true;
@@ -1219,15 +1227,20 @@ if($request == "examcreate" or $request == "examcreate/"){
     }
 }
 }
-if($requestsuccess == false){
-    include "nps/notfound.php";
-}
+if(isset($requestsuccess)) {
+    if ($requestsuccess == false) {
+        include "nps/notfound.php";
+    }
 if($requestsuccess){
 ?>
 <div class="footer" id="mainfooter" style="<?php if($dm == "off"){ echo "text-align: center; margin-top: 50px; border: 2px solid lightgray; height: 40px;"; } else { echo "text-align: center; margin-top: 50px; border: 2px solid black; height: 40px; color:white;"; }?>" >
     <p style="margin-top: 6px;">SkyMake 4 by Skyfallen. All Rights Reseved &copy; 2016-2020 The Skyfallen Company.<?php echo _("Build Number:").THIS_VERSION; ?></p>
 </div>
-<?php } ?>
+<?php }
+}else{
+    include "nps/notfound.php";
+}
+?>
 <script src="nps/widgets/assets/js/jquery.min.js"></script>
 <script src="nps/widgets/assets/bootstrap/js/bootstrap.min.js"></script>
 <script src="nps/widgets/assets/js/Animated-Type-Heading.js"></script>
