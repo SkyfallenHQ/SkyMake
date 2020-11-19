@@ -386,8 +386,9 @@ if($user_role == "admin") {
 
         window.location.href = "/";
 
-        }, 5000);
+        }, 3000);
         </script>
+        <meta http-equiv="refresh" content="5; URL=/">
         <?php
     }
    if($request == "upload" or $request == "upload/"){
