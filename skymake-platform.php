@@ -361,8 +361,17 @@ if($user_role == "teacher") {
         $requestsuccess = true;
         include "nps/widgets/dash.php";
         echo("<h1>"._("Logging you out...")."</h1>");
-        session_destroy();
-        header("Location: /");
+        ?>
+        <script>
+            window.setTimeout(function(){
+
+                window.location.href = "/";
+
+            }, 3000);
+        </script>
+        <meta http-equiv="refresh" content="5; URL=/">
+        <?php
+        die();
     }
 
     if ($request == "home" or $request == "dash" or $request == "course" or $request == "oes" or $request == "liveclass" or $request == "grades" or $request == "home/" or $request == "dash/" or $request == "course/" or $request == "oes/" or $request == "liveclass/" or $request == "grades/") {
