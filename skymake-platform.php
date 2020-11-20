@@ -186,7 +186,11 @@ if($user_role == "student") {
         $requestsuccess = true;
         include "nps/widgets/dash.php";
         //echo("<div class=\"caption v-middle text-center\"><h1 class=\"cd-headline clip\"><span class=\"blc\">Welcome to the new dashboard.</span><br><span class=\"cd-words-wrapper\"><b class=\"is-visible\">Here are your courses.</b><b>Here are your grades.</b><b>Here are your online exams.</b></span></h1> </div>");
-        $lessoncount = count(getassignedlessons($link));
+        if(is_array(getassignedlessons($link))) {
+            $lessoncount = count(getassignedlessons($link));
+        } else {
+            $lessoncount = 0;
+        }
         if (getassignedlessons($link)[0] != "n") {
             if (is_odd($lessoncount)) {
                 $completed_jobs = array();
@@ -369,7 +373,11 @@ if($user_role == "teacher") {
         $requestsuccess = true;
         include "nps/widgets/dash.php";
         //echo("<div class=\"caption v-middle text-center\"><h1 class=\"cd-headline clip\"><span class=\"blc\">Welcome to the new dashboard.</span><br><span class=\"cd-words-wrapper\"><b class=\"is-visible\">Here are your courses.</b><b>Here are your grades.</b><b>Here are your online exams.</b></span></h1> </div>");
-        $lessoncount = count(getassignedlessonsteacher($link));
+        if(is_array(getassignedlessonsteacher($link))) {
+            $lessoncount = count(getassignedlessonsteacher($link));
+        } else {
+            $lessoncount = 0;
+        }
         if (getassignedlessonsteacher($link)[0] != "n") {
             if (is_odd($lessoncount)) {
                 $completed_jobs = array();
@@ -588,18 +596,20 @@ if($user_role == "admin") {
        include_once "nps/widgets/dash.php";
        $requestsuccess = true;
        if(isset($_POST["deluser"])){
-           $sql = "DELETE FROM skymake_users WHERE username='".$_POST["username"]."'";
-           if($result = mysqli_query($link, $sql)){
-               $sql = "DELETE FROM skymake_roles WHERE username='".$_POST["username"]."'";
-               if($result = mysqli_query($link, $sql)){
-                    echo _("Success!");
+           if($_POST["username"] != "root") {
+               $sql = "DELETE FROM skymake_users WHERE username='" . $_POST["username"] . "'";
+               if ($result = mysqli_query($link, $sql)) {
+                   $sql = "DELETE FROM skymake_roles WHERE username='" . $_POST["username"] . "'";
+                   if ($result = mysqli_query($link, $sql)) {
+                       echo _("Success!");
+                   } else {
+                       echo("ERROR: Could not able to execute on step two: $sql. " . mysqli_error($link));
+                   }
+               } else {
+                   echo("ERROR: Could not able to execute $sql. " . mysqli_error($link));
                }
-               else{
-                   echo("ERROR: Could not able to execute on step two: $sql. " . mysqli_error($link));
-               }
-           }
-           else{
-               echo("ERROR: Could not able to execute $sql. " . mysqli_error($link));
+           } else {
+               echo "You can't delete the user 'root'";
            }
        }
        if(isset($_POST["setRole"])){
