@@ -1,4 +1,4 @@
-![img](https://img.shields.io/badge/latest_version-Aurora_Borealis-blueviolet "img") ![img](https://img.shields.io/badge/release_number-SFR204XXX_RELEASE_OUTDATED-red "img")
+![img](https://img.shields.io/badge/latest_version-Aurora_Borealis-blueviolet "img") ![img](https://img.shields.io/badge/release_number-SFR204514-gray "img")
 # SkyMake Version 4
 The Official SkyMake Repository for SkyMake Version 4
 SkyMake Version 2 Available on: github.com/TheSkyfallenCompany/SkyMakeV2
@@ -7,10 +7,25 @@ SkyMake Version 2 Available on: github.com/TheSkyfallenCompany/SkyMakeV2
 SkyMake is free and Open-Source Learning Management System that includes a Online Examination System, a Live Lesson System and many more features!
 
 # Prequisites
-Nginx Web Server, MySQL Server, SkyfallenLiveConnect Server (Can be on a seperate server or can also be skipped if you don't mind your live lesson hosted outside) -- These are configured automatically with a script called SkyMake Server Side
+Apache or Nginx(requires some manual configuration for the redirect rules) Web Server, MySQL Server, SkyfallenLiveConnect Server (Can be on a seperate server or can also be skipped if you don't mind your live lesson not being hosted on premises as we have a default server)
 
-# What does SkyMake Server-Side Do?
-It includes Nginx Web Server, a MySQL Server,  Skyfallen LiveConnect SkyMake Build for live lessons, SkyMake 4 itself.
+# How do I install?
+1- Clone the files to your web root.
+2- Setup your database in SkyMakeDatabaseConnector/SkyMakeDBconfig.php
+3- Locate to your domain on the internet
+4- Setup the root user
+5- Enjoy!
+
+# How do I update?
+1- Go to About This Install in the admin dashboard.
+2- Click on check for updates
+3- Update if new version is available
+4- Your installation will be automatically updated.
+
+# Requirements
+PHP: 7 and later
+Apapche or Nginx (any version that supports PHP 7 and later is supported)
+MySQL: 5.7
 
 # Docs
 https://docs.theskyfallen.com/v/skymake
