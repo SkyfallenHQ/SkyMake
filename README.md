@@ -15,12 +15,6 @@ It includes Nginx Web Server, a MySQL Server,  Skyfallen LiveConnect SkyMake Bui
 # Docs
 https://docs.theskyfallen.com/v/skymake
 
-# Where Can I Get SkyMake Server-Side Software?
-theskyfallen.com/SkyMake/serversidesoftware/ When first beta release is ready.
-
-# Legal Info
-2016-2017 (C) KucukRobotcuk - 2017-2018 (C) deducated - 2018-2020 (C) The Skyfallen Company
-
 # Privacy
 Your Privacy is important to us: All Applications Subject to The Skyfallen Privacy Policy - theskyfallen.company/privacy
 
@@ -38,10 +32,10 @@ https://opensource.theskyfallen.com/licence
 
 [Skyfallen Open Source](https://opensource.theskyfallen.com)
 # Demo (Link broken, will be updated soon.)
-[Running Instance (Demo)](https://application-testing-platform.apps.deducated.com)  
+[Running Instance (Demo)](https://app.deducated.com)  
 Username -- Password   
 student - password  
 teacher - password  
 admin - password  
-# Mirrored Download
+# Mirrored Download (May be outdated.)
 [Skyfallen App Distribution](https://distribution.theskyfallen.com) - US
