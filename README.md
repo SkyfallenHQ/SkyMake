@@ -11,10 +11,12 @@ Apache or Nginx(requires some manual configuration for the redirect rules) Web S
 
 # How do I install?
 1- Clone the files to your web root.
-2- Setup your database in SkyMakeDatabaseConnector/SkyMakeDBconfig.php
-3- Locate to your domain on the internet
-4- Setup the root user
-5- Enjoy!
+2- Create a blank database
+3- Import the install.sql file
+4- Setup your database in SkyMakeDatabaseConnector/SkyMakeDBconfig.php
+5- Locate to your domain on the internet
+6- Setup the root user
+7- Enjoy!
 
 # How do I update?
 1- Go to About This Install in the admin dashboard.
