@@ -361,6 +361,7 @@ if($user_role == "teacher") {
         $requestsuccess = true;
         include "nps/widgets/dash.php";
         echo("<h1>"._("Logging you out...")."</h1>");
+        session_destroy();
         ?>
         <script>
             window.setTimeout(function(){
