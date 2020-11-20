@@ -60,7 +60,16 @@ if($user_role == "unverified" and $request=="logout"){
     include "nps/widgets/dash.php";
     echo("<h1>"._("Logging you out...")."</h1>");
     session_destroy();
-    header("Location: /");
+    ?>
+    <script>
+        window.setTimeout(function(){
+
+            window.location.href = "/";
+
+        }, 3000);
+    </script>
+    <meta http-equiv="refresh" content="5; URL=/">
+    <?php
     die();
 }
 
@@ -157,7 +166,17 @@ if($user_role == "student") {
         include "nps/widgets/dash.php";
         echo("<h1>"._("Logging you out...")."</h1>");
         session_destroy();
-        header("Location: /");
+        ?>
+        <script>
+            window.setTimeout(function(){
+
+                window.location.href = "/";
+
+            }, 3000);
+        </script>
+        <meta http-equiv="refresh" content="5; URL=/">
+        <?php
+        die();
     }
     if ($request == "home" or $request == "dash" or $request == "course" or $request == "oes" or $request == "liveclass" or $request == "grades" or $request == "home/" or $request == "dash/" or $request == "course/" or $request == "oes/" or $request == "liveclass/" or $request == "grades/") {
         if (!($request == "dash" or $request == "dash/")) {
@@ -584,7 +603,11 @@ if($user_role == "admin") {
            }
        }
        if(isset($_POST["setRole"])){
-           SMUser::setRole($link,$_POST["username"],$_POST["newRole"]);
+           if($_POST["username"] != "root") {
+               SMUser::setRole($link, $_POST["username"], $_POST["newRole"]);
+           } else {
+               echo "You can't change the role of user 'root'.";
+           }
        }
        ?>
        <div style="text-align: center; padding-top: 100px; border-bottom-width: thin; border-bottom-color: #4e555b; border-bottom-style: solid;">
