@@ -1,9 +1,12 @@
 <?php
 require_once "config.php";
-include_once "../nps/widgets/dash.php";
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+require_once "../classes/user.php";
 session_start();
+
+$_SESSION["user_role"] = SMUser::getRole($link,$_SESSION["username"]);
+
+include_once "../nps/widgets/dash.php";
+
 if(isset($_GET["examid"])){
     $examid = $_GET["examid"];
     $_SESSION["examid"] = $examid;
