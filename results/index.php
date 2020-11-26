@@ -173,12 +173,31 @@ if ($res = mysqli_query($link, $sql)) {
             //}
         }
         echo "</tbody>";
-        echo "</table><p>".$points."</p></div>";
-                $sql = "INSERT INTO skymake_result (un, p, examid) VALUES ('".$_SESSION["username"]."','".$points."','".$_SESSION["examid"]."');";
-        if (mysqli_query($link, $sql)) { 
+        echo "</table><p>Your Score(Standard Grading):".$points."</p></div>";
+        $sql = "SELECT * FROM skymake_result WHERE examid='".$_SESSION["examid"]."' AND un='".$_SESSION["username"]."'";
+        if($sqlres = mysqli_query($link,$sql)) {
+            if (mysqli_num_rows($sqlres) > 0) {
+                $delsql = "DELETE FROM skymake_result WHERE examid='".$_SESSION["examid"]."' AND un='".$_SESSION["username"]."'";
+                mysqli_query($link,$delsql);
+            }
+        }else{
+            die("SQL Query Failed. Stopping".mysqli_error($link));
+        }
+        $sql = "INSERT INTO skymake_result (un, p, examid) VALUES ('".$_SESSION["username"]."','".$points."','".$_SESSION["examid"]."');";
+        if (mysqli_query($link, $sql)) {
        echo "<p>"._("We've successfully added your data to the database.")."</p>";
        echo "<p><a href=\"/results/ranking\">"._("Show ranking.")."</a></p>";
      }else {
+            $sql = "SELECT * FROM skymake_result WHERE examid='".$_SESSION["examid"]."' AND un='".$_SESSION["username"]."'";
+            if($sqlres = mysqli_query($link,$sql)) {
+                echo "Checking if your result was saved before...";
+                if (mysqli_num_rows($sqlres) > 0) {
+                    echo "We have found previous records...";
+                    $delsql = "DELETE FROM skymake_result WHERE examid='".$_SESSION["examid"]."' AND un='".$_SESSION["username"]."'";
+                    mysqli_query($link,$delsql);
+                    echo "Previous records deleted.";
+                }
+            }
             $sql = "INSERT INTO skymake_result (un, p, examid) VALUES ('" . $_SESSION["username"] . "','" . $points . "','" . $_SESSION["examid"] . "');";
             if (mysqli_query($link, $sql)) {
                 echo "<p>"._("We've updated your results in the database.")."</p>";

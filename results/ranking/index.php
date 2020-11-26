@@ -25,7 +25,7 @@ putenv("LANGUAGE=".$_SESSION["locale"]);
 $results = setlocale(LC_ALL,$_SESSION["locale"]);
 
 include "../../nps/widgets/dash.php";
-$_SESSION["examid"] = $_GET["examid"];
+//$_SESSION["examid"] = $_GET["examid"];
 // Check if the user is logged in, if not then redirect him to login page
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: /");
