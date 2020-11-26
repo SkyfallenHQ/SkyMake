@@ -1,7 +1,11 @@
 <?php
 require_once "config.php";
-include_once "../nps/widgets/dash.php";
+require_once "../classes/user.php";
 session_start();
+
+$_SESSION["user_role"] = SMUser::getRole($link,$_SESSION["username"]);
+include_once "../nps/widgets/dash.php";
+
 if (isset($_GET["lang"])) {
     $locale = $_GET["lang"].".UTF-8";
     $_SESSION["locale"] = $locale;

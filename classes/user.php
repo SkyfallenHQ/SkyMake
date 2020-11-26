@@ -54,8 +54,8 @@
                 if (mysqli_num_rows($result) == 1) {
                     while ($row = mysqli_fetch_array($result)) {
                         $retval = $row['classid'];
-                        mysqli_free_result($result);
                     }
+                    mysqli_free_result($result);
                 } else {
                     $retval = "unassigned";
                 }
