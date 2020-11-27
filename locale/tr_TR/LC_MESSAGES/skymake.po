@@ -648,3 +648,6 @@ msgstr "Öğretmenlik"
 
 msgid "Saved successfully."
 msgstr "Başarıyla kaydedildi."
+
+msgid "You are using a SkyMake Beta feature: Moderator Role | Skyfallen may not be able to provide support."
+msgstr "SkyMake'in beta özelliklerinden birini kullanıyorsunuz: Moderator Kullanıcı Rolü | Skyfallen size teknik destek sağlayamayabilir."

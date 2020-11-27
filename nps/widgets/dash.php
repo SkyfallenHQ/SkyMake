@@ -292,7 +292,7 @@ function doublewidget($lesson,$teacher,$time,$topic,$unit,$backgorundimage,$less
                       <li class="nav-item" role="presentation"><a class="nav-link" href="/upload"><?= _("Upload") ?></a></li>
                       <li class="nav-item" role="presentation"><a class="nav-link" href="/examcreate"><?= _("Create an Exam") ?></a></li>
                       <li class="nav-item" role="presentation"><a class="nav-link" href="/courses"><?= _("Courses and Lesson Contents") ?></a></li>
-                      <li class="nav-item" role="presentation"><a class="nav-link" href="/courses"><?= _("Teaching") ?></a></li>
+                      <li class="nav-item" role="presentation"><a class="nav-link" href="/teaching"><?= _("Teaching") ?></a></li>
                       <li class="nav-item" role="presentation"><a class="nav-link" href="/logout"><?= _("Log Out") ?></a></li>
                       <?php if($_SESSION["dm"] == "off") { ?>
                           <li class="nav-item" role="presentation"><a class="nav-link" href="?dm=on"><div class="fa fa-moon-o"></div></a></li>

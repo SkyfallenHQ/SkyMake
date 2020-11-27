@@ -102,7 +102,7 @@ if (new DateTime() < new DateTime($examdata["exam_end"])) {
     echo _("Your results won't be shown..\n");
     die("<a href='/'>"._("Home Page")."</a>");
 }
-if($_SESSION["user_role"] == "admin"){
+if($_SESSION["user_role"] == "admin" or $_SESSION["user_role"] == "moderator"){
     header("Location: /results/ranking/");
 }
 $_SESSION["examid"] = $_GET["examid"];
