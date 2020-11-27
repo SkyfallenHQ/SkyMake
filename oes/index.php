@@ -233,7 +233,7 @@ if (isset($_POST["nextbtn"])){
 $sql = "INSERT INTO skymake_answer (id, qn, answer,uniq,examid)
 VALUES ('".$_SESSION["id"]."', '".$qn_internal."', '".$_SESSION["lastanswer"]."','".$uniq."','".$_SESSION["examid"]."')";
 if (mysqli_query($linktwo, $sql)) {
-    echo "SQL Query Succeeded:".$sql;
+    echo _("We've successfully saved your response for question:").$qn_internal;
 } else {
     $sql = "DELETE FROM skymake_answer WHERE uniq='".$uniq."';";
     if (mysqli_query($linktwo, $sql)){
@@ -241,7 +241,7 @@ if (mysqli_query($linktwo, $sql)) {
 VALUES ('".$_SESSION["id"]."', '".$qn_internal."', '".$_SESSION["lastanswer"]."','".$uniq."','".$_SESSION["examid"]."')";
 
     if (mysqli_query($linktwo, $sql)) {
-    echo "SQL Query Succeeded:".$sql;
+    echo _("We've successfully saved your response for question:").$qn_internal;
     }
         else{
           echo "Type 2 Error: " . $sql . "<br>" . mysqli_error($linktwo);
@@ -290,7 +290,6 @@ if($_SESSION["qn"] > $examdata["exam_qcount"]) {
         <input type="radio" id="Q_EMPTY" name="ANSWER" value="Q_EMPTY">
     <label for="Q_EMPTY"><?= _("Leave Empty") ?></label>
     <input id="nextbtn" name="nextbtn" type="submit" class="btn btn-primary" value="<?= _("Submit and Continue") ?>"><br>
-        <input name="killsession" type="submit" class="btn btn-primary" value="<?= _("Kill Session") ?>"><br>
          <p id="timer" name="timer"></p>
         </form>
 </body>

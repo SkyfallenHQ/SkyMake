@@ -624,3 +624,15 @@ msgstr "Uygulama ile katıl"
 
 msgid "Assigned to me"
 msgstr "Bana atanmış"
+
+msgid "You can't change the role of user 'root'."
+msgstr "'root' kullanıcısının rolünü değiştiremezsiniz"
+
+msgid "You can't delete the user 'root'"
+msgstr "'root' kullanıcısını silemezsiniz"
+
+msgid "Moderator"
+msgstr "Moderatör"
+
+msgid "We've successfully saved your response for question:"
+msgstr "Yanıtınızı başarıyla kaydettik. Kaydedilen Soru Numarası:"

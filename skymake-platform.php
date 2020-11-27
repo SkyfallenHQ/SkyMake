@@ -619,14 +619,14 @@ if($user_role == "admin") {
                    echo("ERROR: Could not able to execute $sql. " . mysqli_error($link));
                }
            } else {
-               echo "You can't delete the user 'root'";
+               echo _("You can't delete the user 'root'");
            }
        }
        if(isset($_POST["setRole"])){
            if($_POST["username"] != "root") {
                SMUser::setRole($link, $_POST["username"], $_POST["newRole"]);
            } else {
-               echo "You can't change the role of user 'root'.";
+               echo _("You can't change the role of user 'root'.");
            }
        }
        ?>
@@ -657,6 +657,7 @@ if($user_role == "admin") {
                     <option value="admin"><?= _("Administrator") ?></option>
                     <option value="student"><?= _("Student") ?></option>
                     <option value="teacher"><?= _("Teacher") ?></option>
+                    <option value="moderator"><?= _("Moderator") ?></option>
                 </select>
                 <div class="input-group-append">
                     <button class="btn btn-outline-secondary" type="submit" name="setRole"><?= _("Set Role") ?></button>
