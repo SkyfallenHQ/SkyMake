@@ -256,7 +256,7 @@ function doublewidget($lesson,$teacher,$time,$topic,$unit,$backgorundimage,$less
                       <?php } else { ?>
                           <li class="nav-item" role="presentation"><a class="nav-link" href="?dm=off"><div class="fa fa-sun-o"></div></a></li>
                       <?php } ?>
-                      <?php }else{ ?>
+                      <?php }elseif($_SESSION["user_role"] == "admin"){ ?>
                       <li class="nav-item" role="presentation"><a class="nav-link" href="/"><img src="<?php if($_SESSION["dm"] == "off"){ echo "/SkyMakeVersionAssets/logo/SkyfallenLogoRB.png"; } else { echo "/SkyMakeVersionAssets/logo/SkyfallenLogoSmallWhiteOnly.png"; } ?>" height="20"></a></li>
                       <li class="nav-item" role="presentation"><a class="nav-link" href="/home"><?= _("Home") ?></a></li>
                       <li class="nav-item" role="presentation"><a class="nav-link" href="/users"><?= _("Users") ?></a></li>
@@ -282,7 +282,36 @@ function doublewidget($lesson,$teacher,$time,$topic,$unit,$backgorundimage,$less
                               <?php } ?>
                               </select>
                       </li>
-                    <?php } //<li class="nav-item" role="presentation"><a class="nav-link" href="/search"><i class="fa fa-search"></i></a></li>
+                    <?php }elseif($_SESSION["user_role"] == "moderator"){
+                      ?>
+                      <li class="nav-item" role="presentation"><a class="nav-link" href="/"><img src="<?php if($_SESSION["dm"] == "off"){ echo "/SkyMakeVersionAssets/logo/SkyfallenLogoRB.png"; } else { echo "/SkyMakeVersionAssets/logo/SkyfallenLogoSmallWhiteOnly.png"; } ?>" height="20"></a></li>
+                      <li class="nav-item" role="presentation"><a class="nav-link" href="/home"><?= _("Home") ?></a></li>
+                      <li class="nav-item" role="presentation"><a class="nav-link" href="/users"><?= _("Users") ?></a></li>
+                      <li class="nav-item" role="presentation"><a class="nav-link" href="/groups"><?= _("Classes") ?></a></li>
+                      <li class="nav-item" role="presentation"><a class="nav-link" href="/results"><?= _("Results") ?></a></li>
+                      <li class="nav-item" role="presentation"><a class="nav-link" href="/upload"><?= _("Upload") ?></a></li>
+                      <li class="nav-item" role="presentation"><a class="nav-link" href="/examcreate"><?= _("Create an Exam") ?></a></li>
+                      <li class="nav-item" role="presentation"><a class="nav-link" href="/courses"><?= _("Courses and Lesson Contents") ?></a></li>
+                      <li class="nav-item" role="presentation"><a class="nav-link" href="/courses"><?= _("Teaching") ?></a></li>
+                      <li class="nav-item" role="presentation"><a class="nav-link" href="/logout"><?= _("Log Out") ?></a></li>
+                      <?php if($_SESSION["dm"] == "off") { ?>
+                          <li class="nav-item" role="presentation"><a class="nav-link" href="?dm=on"><div class="fa fa-moon-o"></div></a></li>
+                      <?php } else { ?>
+                          <li class="nav-item" role="presentation"><a class="nav-link" href="?dm=off"><div class="fa fa-sun-o"></div></a></li>
+                      <?php } ?>
+                      <li class="nav-item" role="presentation">
+                          <select class="custom-select nav-link" style="background-color: <?php if($_SESSION["dm"] == "on") { echo "black"; } else { echo "white"; } ?>; width: 150px;" onchange="this.options[this.selectedIndex].value && (window.location = '?lang='.concat(this.options[this.selectedIndex].value));">
+                              <?php if($_SESSION["locale"] == "tr_TR.UTF-8"){ ?>
+                                  <option value="tr_TR">Türkçe (Türkiye)</option>
+                                  <option value="en_US">English (US)</option>
+                              <?php } else { ?>
+                                  <option value="en_US">English (US)</option>
+                                  <option value="tr_TR">Türkçe (Türkiye)</option>
+                              <?php } ?>
+                          </select>
+                      </li>
+                    <?php
+                    } //<li class="nav-item" role="presentation"><a class="nav-link" href="/search"><i class="fa fa-search"></i></a></li>
                     ?>
                 </ul>
             </div>

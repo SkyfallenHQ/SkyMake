@@ -56,9 +56,6 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: index.php");
     exit;
 }
-if (isset($_POST["killsession"])){
-    header("location: sessionkill.php");
-}
 /*if($_SESSION["qn"]==$examdata["exam_qcount"]){
     ?>
     <!-- Modal CSS -->
@@ -191,7 +188,7 @@ if (isset($_POST["nextbtn"])){
 $sql = "INSERT INTO skymake_qanswers (examid,qn,answer,picurl)
 VALUES ('".$_SESSION["examid"]."', '".$qn_internal."', '".$_SESSION["lastanswer"]."','".$_POST["picurl"]."')";
 if (mysqli_query($linktwo, $sql)) {
-    echo "SQL Query Succeeded:".$sql;
+    echo _("Saved successfully.");
 } else {
     $sql = "DELETE FROM skymake_qanswers WHERE examid='".$_SESSION["examid"]."' and qn='".$qn_internal."';";
     if (mysqli_query($linktwo, $sql)){
@@ -199,7 +196,7 @@ if (mysqli_query($linktwo, $sql)) {
 VALUES ('".$_SESSION["examid"]."', '".$qn_internal."', '".$_SESSION["lastanswer"]."','".$_POST["picurl"]."')";
 
     if (mysqli_query($linktwo, $sql)) {
-    echo "SQL Query Succeeded:".$sql;
+    echo _("Saved successfully.");
     }
         else{
           echo "Type 2 Error: " . $sql . "<br>" . mysqli_error($linktwo);

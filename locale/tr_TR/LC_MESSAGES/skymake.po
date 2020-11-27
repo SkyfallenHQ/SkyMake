@@ -636,3 +636,15 @@ msgstr "Moderatör"
 
 msgid "We've successfully saved your response for question:"
 msgstr "Yanıtınızı başarıyla kaydettik. Kaydedilen Soru Numarası:"
+
+msgid "You can't delete users with a higher rank."
+msgstr "Sizden yüksek rütbesi olan kullanıcıları silemezsiniz."
+
+msgid "You can't change the roles of users with a higher rank."
+msgstr "Sizden yüksek rütbesi olan kullanıcılara müdahale edemezsiniz."
+
+msgid "Teaching"
+msgstr "Öğretmenlik"
+
+msgid "Saved successfully."
+msgstr "Başarıyla kaydedildi."
