@@ -530,7 +530,7 @@ if($user_role == "admin") {
                 <img class="card-img-top" src="https://theskyfallen.company/wp-content/uploads/2020/07/IMG_0183.png" alt="SFLogo">
                 <div class="card-body">
                     <h1 class="card-title">SkyMake 4 by Skyfallen</h1>
-                    <h6 class="card-title">Version 4.3 Aegaeus</h6>
+                    <h6 class="card-title">Version 4.4 Accelia</h6>
                  <h5><a href="/updates" class="btn btn-danger"><?php echo _("Check for Updates"); ?></a></h5>
                     <h5 class="card-text">&copy; 2016-2020 The Skyfallen Company | &copy; 2018-2020 The SkyMake Project <br>
                         This application is subject to Skyfallen Open Source Licence and Skyfallen Privacy.</h5>
@@ -962,7 +962,7 @@ if (substr($request, 0, 10) === "editgroup/") {
                     if($result = mysqli_query($link,$sql)){
                         if (mysqli_num_rows($result) > 0) {
                             while ($row = mysqli_fetch_array($result)) {
-                                if(SMUser::getRole($link,$row["username"]) == "teacher") {
+                                if(SMUser::getRole($link,$row["username"]) == "teacher" or SMUser::getRole($link,$row["username"]) == "moderator") {
                                     echo "<option>" . $row["username"] . "</option>";
                                 }
                             }
@@ -1722,7 +1722,7 @@ if($request == "courses" or $request == "courses/"){
                     if($result = mysqli_query($link,$sql)){
                         if (mysqli_num_rows($result) > 0) {
                             while ($row = mysqli_fetch_array($result)) {
-                                if(SMUser::getRole($link,$row["username"]) == "teacher") {
+                                if(SMUser::getRole($link,$row["username"]) == "teacher" or SMUser::getRole($link,$row["username"]) == "moderator") {
                                     echo "<option>" . $row["username"] . "</option>";
                                 }
                             }
