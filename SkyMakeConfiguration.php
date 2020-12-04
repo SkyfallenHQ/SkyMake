@@ -1,7 +1,42 @@
 <?php
 define("SkyMakeOnConfigConnect", "CONFCONNOK");
-//Start editing here!
-define("SFLC_HOST","meet.jit.si");
+$skymakeconfig = array();
+//begin editing for your own settings
+
+/*
+    //Uncomment this if you want to use the install with a single domain.
+    define("ALLOW_MULTICONF",false);
+    $skymakeconfig["default"]["sflc_host"] = "meet.jit.si";
+*/
+/*
+    //Uncomment this if you want  to use multidb
+    //Note: Comment the default part before doing this
+    //Note: Replace parts between ### with your own data.
+    define("ALLOW_MULTICONF",true);
+    //Replace the following part with this when you enable multidb
+    $dbconfig["###yourmaindomainwithouttldordot###"]["sflc_host"] = "###meetserver###";
+    Copy this template for every multidb subdomin
+    $dbconfig["###yoursubdomain###"]["sflc_host"] = "###meetserver###";
+*/
+
+//stop editing
+if(ALLOW_MULTICONF){
+    $url = $_SERVER["HTTP_HOST"];
+    $parsedUrl = parse_url($url);
+    $host = explode('.', $parsedUrl['host']);
+    $subdomain = $host[0];
+    if(isset($skymakeconfig[$subdomain]["sflc_host"])){
+        define("SFLC_HOST",$skymakeconfig[$subdomain]["sflc_host"]);
+    } else {
+        include_once(__DIR__."/../SkyMakeFunctionSet/Mission-Critical-Functions/SMC.php");
+        SMC::displayCrash("There is a problem with this Namespace. It either does not exist or configured improperly. Please check your configuration. ERROR_CODE: MULTIDB_UNKNOWN_DOMAIN","Failed to Load this Namespace","There was a issue in the SkyMake Configuration file.");
+        die();
+    }
+} else {
+        define("SFLC_HOST", $skymakeconfig["default"]["sflc_host"]);
+}
+
+
 // That's all. Now stop.
 include "SkyMakeFunctionSet/includes.php";
 include "SkyfallenCodeLib/UpdatesConsoleConnector.php";
@@ -9,6 +44,7 @@ include "SkyfallenCodeLib/UpdatesConsoleConnector.php";
 define("UPDATES_PROVIDER_URL","https://swupdate.theskyfallen.com");
 define("UPDATES_PROVIDER_APP_ID","541a2fb0429491f158f100ce7dcb0b86");
 define("UPDATE_SEED","Stable");
+
 if(getenv('SKYMAKE_DEVENV') == "YES"){
    define("DEVENV",true);
 } else {

@@ -3,11 +3,17 @@
 
 class SMC
 {
-    public static function displayCrash($reason){
+    public static function displayCrash($reason,$title = "default",$description = "default"){
+        if($title = "default"){
+            $title = "SkyMake has encountered an error.";
+        }
+        if($description = "default"){
+            $description = "It seems like SkyMake has encountered an error and crashed afterwards.";
+        }
         ?>
         <div class="wrapper">
-            <h2>SkyMake has encountered an error.</h2>
-            <p>It seems like SkyMake has encountered an error and crahed afterwards.<br>Details:<br><?php echo $reason; ?></p>
+            <h2><?= $title ?></h2>
+            <p><?= $description ?><br>Details:<br><?php echo $reason; ?></p>
             <div class="buttons"><a href="/">Home</a><a href="https://help.theskyfallen.com">Support</a><br/><span>SkyMake 4 by Skyfallen</span></div>
         </div>
         <div class="space">

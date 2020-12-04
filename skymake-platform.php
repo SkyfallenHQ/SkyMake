@@ -2,6 +2,7 @@
 // Initialize the session
 session_name('SkyMakeSessionStorage');
 session_start();
+include_once "SkyMakeConfiguration.php";
 if(DEVENV) {
     error_reporting(E_ALL);
     ini_set("display_errors", 1);
@@ -43,7 +44,6 @@ else {
     $dm = "no";
     $_SESSION["dm"] = $dm;
 }
-include_once "SkyMakeConfiguration.php";
 include_once "SkyMakeFunctionSet/Operation-Requirements/MainFunctions.php";
 include_once "SkyMakeDatabaseConnector/SkyMakeDBconfig.php";
 include_once "classes/user.php";
