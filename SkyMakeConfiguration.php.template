@@ -1,5 +1,16 @@
 <?php
-
+/*
+* SkyMake 4 Configuration File
+* This file contains settings for the installation
+* other than the database settings.
+* Here is a template for this file.
+* Please setup your LiveClass server and MultiConf
+* If you don't mind using public jitsi meet servers
+* You don't need to change the url.
+* After configuration is over,
+* Please rename this file to "SkyMakeConfiguration.php"
+* (Remove .template extension from the end.)
+*/
 define("SkyMakeOnConfigConnect", "CONFCONNOK");
 $skymakeconfig = array();
 //begin editing for your own settings
