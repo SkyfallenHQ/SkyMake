@@ -5,3 +5,5 @@ root.pem
 logs/SkyMakeLog
 logs/SkyMakeCrashes
 .htaccess
+SkyMakeConfiguration.php
+SkyMakeDatabaseConnector/SkyMakeDBconfig.php
