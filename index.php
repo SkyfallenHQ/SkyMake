@@ -1,12 +1,7 @@
 <?php
-// (C) 2016-2020 The Skyfallen Productions Company
-// Source Code for SkyMake 4: First ever code is down below in this file.
-// Please Do not edit SkyMake Core Files
+// (C) 2016-2020 Skyfallen
 // SkyMake Version 4
 // Intended to run on Apache 2 with PHP 7 and above.
-// No deprecated functions are used so it will probably be compatible with a few next major release of PHP.
-//Include config file
-// Initialize the session
 session_name('SkyMakeSessionStorage');
 session_start();
 if (isset($_GET["lang"])) {

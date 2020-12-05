@@ -1,4 +1,5 @@
 <?php
+
 define("SkyMakeOnConfigConnect", "CONFCONNOK");
 $skymakeconfig = array();
 //begin editing for your own settings
@@ -20,6 +21,11 @@ $skymakeconfig = array();
 */
 
 //stop editing
+if(!defined("ALLOW_MULTICONF")){
+    include_once(__DIR__."/../SkyMakeFunctionSet/Mission-Critical-Functions/SMC.php");
+    SMC::displayCrash("There is a problem with this install. It is configured improperly. Please check your configuration. ERROR_CODE: MULTICONF_NO_CONF","Failed to Load this SkyMake Namespace","There was a issue in the SkyMake Configuration file.");
+    die();
+}
 if(ALLOW_MULTICONF){
     $url = $_SERVER["HTTP_HOST"];
     $parsedUrl = parse_url($url);

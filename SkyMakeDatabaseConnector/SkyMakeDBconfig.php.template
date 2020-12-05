@@ -1,18 +1,28 @@
 <?php
+/*
+* SkyMake 4 Database Configuration File
+* Setup your database and MULTIDB  here.
+* After configuration is complete,
+* rename this file to SkyMakeDBconfig.php
+* (remove .template from the end)
+* SM4CONF V2 - Skyfallen SkyMake 4
+*/
+
+
 // this value is checked in order to make sure we have access to this file
 define("SkyMakeOnDBConfigConnect", "DBCONFCONNOK");
 $dbconfig = array();
 $dbcurrent = array();
 //begin editing for your own database
 
-/*
+
 //Uncomment this if you want to use the install with a single db.
 define("ALLOW_MULTIDB",false);
 $dbconfig["default"]["dbhost"] = "dbserver";
 $dbconfig["default"]["dbname"] = "skymake_db";
 $dbconfig["default"]["dbuser"] = "root";
 $dbconfig["default"]["dbpassword"] = "dbpassword";
-*/
+
 /*
     //Uncomment this if you want  to use multidb
     //Note: Comment the default part before doing this
@@ -30,7 +40,11 @@ $dbconfig["default"]["dbpassword"] = "dbpassword";
     $dbconfig["###yoursubdomain###"]["dbpassword"] = "##dbpassword###";
 */
 //stop editing
-
+if(!defined("ALLOW_MULTIDB")){
+    include_once(__DIR__."/../SkyMakeFunctionSet/Mission-Critical-Functions/SMC.php");
+    SMC::displayCrash("This SkyMake4 instance is not configured. Please check your configuration. ERROR_CODE: SM4_CNFV2_NOCONFIG","Failed to load","There is an issue in the SkyMake Database Configuration file.");
+    die();
+}
 if(ALLOW_MULTIDB){
     $url = $_SERVER["HTTP_HOST"];
     $parsedUrl = parse_url($url);
