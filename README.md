@@ -3,14 +3,6 @@
 The Official SkyMake Repository for SkyMake Version 4
 SkyMake Version 2 Available on: github.com/TheSkyfallenCompany/SkyMakeV2
 
-# Coming Soon
--IOS and iPadOS Apps
--AR Enriched Live Classes
--3rd Party Plugin Support
--New UI
--Event Calendar
--Assignments Support
-
 # What is SkyMake?
 SkyMake is free and Open-Source Learning Management System that includes a Online Examination System, a Live Lesson System and many more features!
 
