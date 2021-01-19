@@ -2218,7 +2218,7 @@ if(isset($requestsuccess)) {
 if($requestsuccess){
 ?>
 <div class="footer" id="mainfooter" style="<?php if($dm == "off"){ echo "text-align: center; margin-top: 50px; border: 2px solid lightgray;"; } else { echo "text-align: center; margin-top: 50px; border: 2px solid black; height: 40px; color:white;"; }?>" >
-    <p style="margin-top: 6px;">SkyMake 4 by Skyfallen. All Rights Reseved &copy; 2016-2020 The Skyfallen Company.<?php echo _("Build Number:").THIS_VERSION; ?><?php if($_SESSION["user_role"] == "moderator"){ echo "<br>"._("You are using a SkyMake Beta feature: Moderator Role | Skyfallen may not be able to provide support."); } ?></p>
+    <p style="margin-top: 6px;">SkyMake 4 by Skyfallen. All Rights Reserved &copy; 2016-2020 The Skyfallen Company.<?php echo _("Build Number:").THIS_VERSION; ?><?php if($_SESSION["user_role"] == "moderator"){ echo "<br>"._("You are using a SkyMake Beta feature: Moderator Role | Skyfallen may not be able to provide support."); } ?></p>
 </div>
 <?php }
 }else{
