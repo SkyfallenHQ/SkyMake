@@ -274,10 +274,22 @@ if($user_role == "teacher") {
                         </div>
                     </div>
                 </div>
+                <div class="col-sm-6" style="margin: auto; margin-top: 50px;">
+                    <div class="card" id="boxthreetohide" <?php if($_SESSION["dm"] == "on"){ echo "style='background-color: darkgrey;'"; } ?>>
+                        <div class="card-body">
+                            <h5 class="card-title"><?php echo(_("AR Dashboard")); ?></h5>
+                            <p class="card-text"><?php echo(_("Manage AR Status for this live class.")); ?></p>
+                            <a href="../../augmentedreality/<?php echo $cenroller; ?>" class="btn btn-outline-dark"><?php echo(_("AR Dashboard")); ?></a
+                        </div>
+                    </div>
+                </div>
             </div>
             <?php
             echo("<script src='https://".SFLC_HOST."/external_api.js'></script>
         <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            document.getElementById(\"mainfooter\").style.display = 'none';
+        })
         const domain = '".SFLC_HOST."';
         const options = {
             roomName: '" . $lctoken[0] . "',
@@ -288,7 +300,7 @@ if($user_role == "teacher") {
         function loadWebMeeting(){
             document.getElementById(\"boxonetohide\").style.display = 'none';
             document.getElementById(\"boxtwotohide\").style.display = 'none';
-            document.getElementById(\"mainfooter\").style.display = 'none';
+            document.getElementById(\"boxthreetohide\").style.display = 'none';
             const api = new JitsiMeetExternalAPI(domain, options);
             api.executeCommands({
             email: '".$_SESSION["username"]."@ne.sm.thesf.me',
