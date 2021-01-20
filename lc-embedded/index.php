@@ -73,28 +73,58 @@ if (empty($username_err) && empty($password_err)) {
 }
 
 $user_role = SMUser::getRole($link,$username);
+if(isset($_GET["checkAR"]) && $_GET["checkAR"] == "yes") {
+    switch ($user_role) {
+        default:
+            die("NoAuth");
+            break;
 
-switch($user_role){
-    default:
-        die("NoAuth");
-        break;
+        case "student":
+            $result["arStatus"] = "error";
+            $cenroller = $_GET["LCID"];
+            $lctoken = getLiveClassToken($link, $cenroller, $_SESSION["classid"]);
+            if (isContentValid($link, $cenroller) == true and !($lctoken == false)) {
+                $sql = "SELECT * FROM skymake_lessoncontent WHERE lessonid='".$cenroller."_AR'";
+                if($res = mysqli_query($link,$sql)){
+                    if(mysqli_num_rows($res) != 0){
+                        while($row = mysqli_fetch_assoc($res)) {
+                            $result["arStatus"]  = $row["content-id"];
+                        }
+                    } else {
+                        $previousQuery = false;
+                        $result["arStatus"] = "DISABLE_AR";
+                    }
+                } else{
+                    echo _("Error. ").mysqli_error($link);
+                }
 
-    case "student":
-        $cenroller = $_GET["LCID"];
-        $lctoken = getLiveClassToken($link, $cenroller, $_SESSION["classid"]);
-        if (isContentValid($link, $cenroller) == true and !($lctoken == false)) {
-            $result["meetServer"] = "https://".SFLC_HOST;
-            $result["meetCode"] = $lctoken[0];
-            echo json_encode($result);
-        } else {
-            if (!isContentValid($link, $cenroller)) {
-                echo("<div class='text-center'><h1>This lesson does not exist. Please access your course by your own dashboard.</h1></div>");
-            } else {
-                $result["error"] = "notstarted";
                 echo json_encode($result);
             }
-        }
-        break;
+            break;
+    }
+}
+else {
+    switch ($user_role) {
+        default:
+            die("NoAuth");
+            break;
+
+        case "student":
+            $cenroller = $_GET["LCID"];
+            $lctoken = getLiveClassToken($link, $cenroller, $_SESSION["classid"]);
+            if (isContentValid($link, $cenroller) == true and !($lctoken == false)) {
+                $result["meetServer"] = "https://" . SFLC_HOST;
+                $result["meetCode"] = $lctoken[0];
+                echo json_encode($result);
+            } else {
+                if (!isContentValid($link, $cenroller)) {
+                    echo("<div class='text-center'><h1>This lesson does not exist. Please access your course by your own dashboard.</h1></div>");
+                } else {
+                    $result["error"] = "notstarted";
+                    echo json_encode($result);
+                }
+            }
+            break;
         /*
     case "teacher":
         $_SESSION["teacheruser"] = $username;
@@ -161,6 +191,6 @@ switch($user_role){
             }
             break;
         */
+    }
 }
-
 ?>
