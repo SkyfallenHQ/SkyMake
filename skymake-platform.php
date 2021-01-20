@@ -474,12 +474,12 @@ if($user_role == "teacher") {
 
                         }
                         ?>
-                        <option value="other" <?php if(!$notOther){ echo "selected"; } ?>>Other (Enter ID)</option>
+                        <option value="other" <?php if(!$notOther && $arModelName != "DISABLE_AR"){ echo "selected"; } ?>>Other (Enter ID)</option>
                     </select>
                 </div>
                 <div class="form-group" id="otherARModelInputGroup">
                     <label for="arModelName">For other AR Models:</label>
-                    <input type="text" class="form-control" id="arModelName" placeholder="Type the AR Model Name" name="arModelName" value="<?php if(!$notOther){ echo $arModelName; } ?>">
+                    <input type="text" class="form-control" id="arModelName" placeholder="Type the AR Model Name" name="arModelName" value="<?php if(!$notOther && $arModelName != "DISABLE_AR"){ echo $arModelName; } ?>">
                 </div>
                 <div class="form-group">
                     <div class="form-check">
