@@ -352,6 +352,138 @@ if($user_role == "teacher") {
 
         }
     }
+    if (substr($request, 0, 17) === "augmentedreality/") {
+
+        $lc_id = str_replace("augmentedreality/","",$request);
+        if(isContentValid($link, $lc_id) && getLiveClassToken($link,$lc_id,$_SESSION["classid"],false) != false){
+
+            $arModelName = "";
+
+            $previousQuery = true;
+
+            $sql = "SELECT * FROM skymake_lessoncontent WHERE lessonid='".$lc_id."_AR'";
+            if($res = mysqli_query($link,$sql)){
+               if(mysqli_num_rows($res) != 0){
+                   while($row = mysqli_fetch_assoc($res)) {
+                       $arModelName = $row["content-id"];
+                   }
+               } else {
+                   $previousQuery = false;
+                   $arModelName = "DISABLE_AR";
+               }
+            } else{
+                echo _("Error. ").mysqli_error($link);
+            }
+
+            $modelsArray = Array("Skeleton","Planets","Pulley","Earth","Animal Cell");
+
+            if(isset($_POST["saveAR"])){
+                $arModelName = "DISABLE_AR";
+                if(isset($_POST["AR_Enable"])){
+                    if($_POST["arModelSelect"] != "other"){
+                        $arModelName = $_POST["arModelSelect"];
+                    } else {
+                        $arModelName = $_POST["arModelName"];
+                    }
+                }
+                if($arModelName == ""){
+                    $arModelName = "DISABLE_AR";
+                }
+
+                if($previousQuery){
+                    $sql = "DELETE FROM skymake_lessoncontent WHERE lessonid='".$lc_id."_AR'";
+                    if(mysqli_query($link,$sql)){
+                        echo _("");
+                    }else{
+                        echo _("Error. ").mysqli_error($link);
+                    }
+                }
+
+                $sql = "INSERT INTO skymake_lessoncontent (lessonid,`content-id`,`content-type`,`content-link`) VALUES ('".$lc_id."_AR','".$arModelName."','"."SkyMakeAR"."','inApp')";
+                if(mysqli_query($link,$sql)){
+                    echo _("");
+                }else{
+                    echo _("Error. ").mysqli_error($link);
+                }
+            }
+
+            $requestsuccess = true;
+            include "nps/widgets/dash.php";
+            if($_SESSION["locale"] == "tr_TR.UTF-8"){
+                ?>
+                <h5 style="text-align: center; padding-top: 30px;">Bu sayfa henüz Türkçeye çevirilemedi. Anlayışınız için teşekkürler. <br>
+                <a href="?lang=en_US">İngilizce devam edin.</a></h5>
+                    <?php
+            } else {
+            ?>
+            <h3 style="text-align: center; padding-top: 30px;">
+                SkyMake Augmented Reality
+            </h3>
+            <h6 style="text-align: center; padding-top: 10px;">Use 3D AR models to give students an invaluable experience. <br> Currently, an iPad running iPadOS 14 or later is required to experience the models.</h6>
+            <script>
+
+                document.addEventListener('DOMContentLoaded', (event) => {
+                    toggleAR()
+                    showOtherInput()
+                })
+                function toggleAR(){
+                    if(document.getElementById("enableAR_CB").checked){
+                        document.getElementById("arModelName").disabled = false;
+                        document.getElementById("ARSelect").disabled = false;
+                    } else {
+                        document.getElementById("arModelName").disabled = true;
+                        document.getElementById("ARSelect").disabled = true;
+                    }
+                }
+
+                function showOtherInput(){
+                    if(document.getElementById("ARSelect").value == "other"){
+                        document.getElementById("otherARModelInputGroup").style.display = "block";
+                    } else {
+                        document.getElementById("otherARModelInputGroup").style.display = "none";
+                    }
+                }
+            </script>
+            <form method="post" style="width: 600px; padding: 50px; margin: auto; border: 1px solid slategray; border-radius: 10px;">
+                <legend>Enable AR Models for Live Class: <?php echo $lc_id; ?></legend>
+                <hr>
+                <div class="form-group">
+                    <label for="ARSelect">Select an AR Model</label>
+                    <select id="ARSelect" class="form-control" onchange="showOtherInput()" name="arModelSelect">
+                        <?php
+                        $notOther = false;
+                        foreach ($modelsArray as $model){
+                            if($model == $arModelName) {
+                                $notOther = true;
+                                echo "<option selected>" . $model . "</option>";
+                            } else {
+                                echo "<option>" . $model . "</option>";
+                            }
+
+                        }
+                        ?>
+                        <option value="other" <?php if(!$notOther){ echo "selected"; } ?>>Other (Enter ID)</option>
+                    </select>
+                </div>
+                <div class="form-group" id="otherARModelInputGroup">
+                    <label for="arModelName">For other AR Models:</label>
+                    <input type="text" class="form-control" id="arModelName" placeholder="Type the AR Model Name" name="arModelName" value="<?php if(!$notOther){ echo $arModelName; } ?>">
+                </div>
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="enableAR_CB" name="AR_Enable" onclick="toggleAR()" <?php if($arModelName != "DISABLE_AR"){ echo "checked"; } ?>>
+                        <label class="form-check-label" for="enableAR_CB">
+                            Enable AR in this live class.
+                        </label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary" name="saveAR">Save</button>
+            </form>
+            <?php
+            }
+        }
+
+    }
     if ($request == "profile" or $request == "profile/") {
         $requestsuccess = true;
         include "nps/widgets/dash.php";
@@ -1071,6 +1203,13 @@ if (substr($request, 0, 10) === "editgroup/") {
             }
         }
             if(isset($_POST["addLC"])){
+                $sql = "INSERT INTO skymake_lessoncontent (lessonid,`content-id`,`content-type`,`content-link`) VALUES ('".$cid."','".$_POST["llcid"]."','"."Live Class"."','"."/liveclass/".$_POST["llcid"]."')";
+                if(mysqli_query($link,$sql)){
+                    echo _("Success!");
+                }else{
+                    echo _("Error. ").mysqli_error($link);
+                }
+            }if(isset($_POST["addLC"])){
                 $sql = "INSERT INTO skymake_lessoncontent (lessonid,`content-id`,`content-type`,`content-link`) VALUES ('".$cid."','".$_POST["llcid"]."','"."Live Class"."','"."/liveclass/".$_POST["llcid"]."')";
                 if(mysqli_query($link,$sql)){
                     echo _("Success!");
