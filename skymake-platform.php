@@ -662,7 +662,7 @@ if($user_role == "admin") {
                 <img class="card-img-top" src="https://theskyfallen.company/wp-content/uploads/2020/07/IMG_0183.png" alt="SFLogo">
                 <div class="card-body">
                     <h1 class="card-title">SkyMake 4 by Skyfallen</h1>
-                    <h6 class="card-title">Version 4.4 Accelia</h6>
+                    <h6 class="card-title">Version 4.5 In Absentia</h6>
                  <h5><a href="/updates" class="btn btn-danger"><?php echo _("Check for Updates"); ?></a></h5>
                     <h5 class="card-text">&copy; 2016-2020 The Skyfallen Company | &copy; 2018-2020 The SkyMake Project <br>
                         This application is subject to Skyfallen Open Source Licence and Skyfallen Privacy.</h5>
@@ -698,7 +698,7 @@ if($user_role == "admin") {
                 <img class="card-img-top" src="https://theskyfallen.company/wp-content/uploads/2020/07/IMG_0183.png" alt="SFLogo">
                 <div class="card-body">
                     <h1 class="card-title">SkyMake 4 by Skyfallen</h1>
-                    <h6 class="card-title">Version 4.3 Aegeaeus</h6>
+                    <h6 class="card-title">Version 4.5 In Absentia</h6>
                     <?php
                     if (THIS_VERSION != $new_vname){
                         if(isset($_GET["install"])) {
