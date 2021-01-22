@@ -1221,14 +1221,8 @@ if (substr($request, 0, 10) === "editgroup/") {
                 }else{
                     echo _("Error. ").mysqli_error($link);
                 }
-            }if(isset($_POST["addLC"])){
-                $sql = "INSERT INTO skymake_lessoncontent (lessonid,`content-id`,`content-type`,`content-link`) VALUES ('".$cid."','".$_POST["llcid"]."','"."Live Class"."','"."/liveclass/".$_POST["llcid"]."')";
-                if(mysqli_query($link,$sql)){
-                    echo _("Success!");
-                }else{
-                    echo _("Error. ").mysqli_error($link);
-                }
             }
+
             if(isset($_POST["addExam"])){
                 $sql = "INSERT INTO skymake_lessoncontent (lessonid,`content-id`,`content-type`,`content-link`) VALUES ('".$cid."','".$_POST["examid"]."','"."Online Exam"."','"."/oes/?examid=".$_POST["examid"]."')";
                 if(mysqli_query($link,$sql)){
